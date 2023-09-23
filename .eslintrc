@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": ["editable"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint","prettier"],
+  "settings": {
+    "next": {
+      "rootDir": ["apps/*/"]
+    }
+  }
+}

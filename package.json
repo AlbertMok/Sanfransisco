@@ -1,0 +1,52 @@
+{
+  "name": "edtiablejs-packages",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "packages/plugins/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --no-cache --parallel --continue",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "prepare": "husky install",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=./packages/* --filter=./packages/plugins/* && pnpm release:only",
+    "release:only": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "0.4.7",
+    "@changesets/cli": "^2.26.2",
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "17.1.0",
+    "all-contributors-cli": "6.24.0",
+    "eslint-config-editable": "workspace:*",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3",
+    "prettier": "latest",
+    "prettier-config": "workspace:*",
+    "tailwind-config": "workspace:*",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "pnpm": ">=7.0.0"
+  },
+  "browserslist": {
+    "production": [
+      "last 3 versions",
+      "Chrome >= 90",
+      "Safari >= 13"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "packageManager": "pnpm@7.18.0"
+}

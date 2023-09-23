@@ -1,0 +1,131 @@
+{
+  "title": "nav.title",
+  "heading": true,
+  "path": "/learn",
+  "routes": [
+    {
+      "heading": true,
+      "path": "",
+      "routes": [
+        {
+          "hasSectionHeader": true,
+          "sectionHeader": "nav.learn.get-started"
+        },
+        {
+          "title": "nav.learn.quick-start",
+          "path": "/learn",
+          "routes": [
+            {
+              "title": "nav.learn.install",
+              "path": "/learn/installation"
+            },
+            {
+              "title": "nav.learn.using-plugins",
+              "path": "/learn/using-plugins"
+            },
+            {
+              "title": "nav.learn.toolbar",
+              "path": "/learn/toolbar"
+            },
+            {
+              "title": "nav.learn.context-menu",
+              "path": "/learn/context-menu"
+            }
+          ]
+        },
+        {
+          "hasSectionHeader": true,
+          "sectionHeader": "nav.learn.plugins.title"
+        },
+        {
+          "title": "nav.learn.plugins.blocks",
+          "group": true,
+          "routes": [
+            {
+              "title": "nav.learn.plugins.heading",
+              "path": "/learn/plugin-heading"
+            },
+            {
+              "title": "nav.learn.plugins.alignment",
+              "path": "/learn/plugin-alignment"
+            },
+            {
+              "title": "nav.learn.plugins.blockquote",
+              "path": "/learn/plugin-blockquote"
+            },
+            {
+              "title": "nav.learn.plugins.code-block",
+              "path": "/learn/plugin-codeblock"
+            },
+            {
+              "title": "nav.learn.plugins.leading",
+              "path": "/learn/plugin-leading"
+            },
+            {
+              "title": "nav.learn.plugins.table",
+              "path": "/learn/plugin-table"
+            },
+            {
+              "title": "nav.learn.plugins.list",
+              "path": "/learn/plugin-list"
+            },
+            {
+              "title": "nav.learn.plugins.hr",
+              "path": "/learn/plugin-hr"
+            },
+            {
+              "title": "nav.learn.plugins.indent",
+              "path": "/learn/plugin-indent"
+            }
+          ]
+        },
+        {
+          "title": "nav.learn.plugins.inlines",
+          "group": true,
+          "routes": [
+            {
+              "title": "nav.learn.plugins.link",
+              "path": "/learn/plugin-link"
+            },
+            {
+              "title": "nav.learn.plugins.image",
+              "path": "/learn/plugin-image"
+            },
+            {
+              "title": "nav.learn.plugins.mention",
+              "path": "/learn/plugin-mention"
+            }
+          ]
+        },
+        {
+          "title": "nav.learn.plugins.marks",
+          "group": true,
+          "routes": [
+            {
+              "title": "nav.learn.plugins.base-marks",
+              "path": "/learn/plugin-mark"
+            },
+            {
+              "title": "nav.learn.plugins.font",
+              "path": "/learn/plugin-font"
+            }
+          ]
+        },
+        {
+          "title": "nav.learn.plugins.others",
+          "group": true,
+          "routes": [
+            {
+              "title": "nav.learn.plugins.history",
+              "path": "/learn/plugin-history"
+            },
+            {
+              "title": "nav.learn.plugins.plugin-title",
+              "path": "/learn/plugin-title"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
