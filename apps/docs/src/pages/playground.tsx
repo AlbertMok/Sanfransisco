@@ -112,8 +112,7 @@ const StyledToolbar = styled(ToolbarComponent)`
 
 // 编辑器容器
 const StyledContainer = styled.div`
-  ${tw`mt-2 md:mt-5 min-h-[80vh] bg-white w-full md:w-[800px] m-auto px-4 py-4 md:px-10 md:py-16 text-base`}
-  line-height: 1.7;
+  ${tw`mt-2 md:mt-5 min-h-[80vh] bg-white w-full md:w-[800px] m-auto px-4 py-4 md:px-10 md:py-16 text-base`}// line-height: 1.7;
 `
 
 const StyledSwitch = styled(Switch)(({ checked }) => {

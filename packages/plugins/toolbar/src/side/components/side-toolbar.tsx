@@ -196,9 +196,9 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
       const [left, top] = Editable.toRelativePosition(
         editor,
         x,
-        isVoid ? y + 4 : y + 15
+        isVoid ? y : y + height / 2
       )
-
+      console.log(isVoid)
       clearDelayHideTimer()
 
       setCapturedData(editor, {
@@ -451,10 +451,10 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
           onSelect={handleMenuSelect}
           side="left"
           container={{
-            x: rect.left,
+            x: rect.left - 5,
             y: rect.top,
           }}
-          minWidth={160}
+          minWidth={200}
         />
       </div>
     )
@@ -470,15 +470,15 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
           visibility: visible ? 'visible' : 'hidden',
           left: transformPosition?.x,
           top: transformPosition?.y,
+          height: '24px',
           // transition: isTransformAmimation ? 'all 0.2s linear 0s' : 'opacity 0.2s linear 0s',
           cursor: dragging ? 'grabbing' : 'grab',
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {/* border border-solid border-gray-300 */}
         <div
-          tw="flex items-center justify-center rounded-md bg-white  shadow-sm text-xs text-gray-600  cursor-grab hover:bg-gray-200"
+          tw="flex items-center justify-center rounded-md bg-white border border-solid border-gray-300 shadow-sm text-xs text-gray-600  cursor-grab hover:bg-gray-200"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onDragStart={(e) => e.preventDefault()}

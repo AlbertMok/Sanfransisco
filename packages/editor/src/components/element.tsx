@@ -52,13 +52,12 @@ const Element = (props: {
 
   // Attributes that the developer must mix into the element in their
   // custom node renderer component.
-  // 基本元素
+  // 基本元素,最外层
   const attributes: ElementAttributes = {
     [DATA_EDITABLE_NODE]: 'element',
     style: {
       margin: '2px 0',
       padding: '3px 2px',
-      boxSizing: 'border-box',
     },
     ref,
   }
