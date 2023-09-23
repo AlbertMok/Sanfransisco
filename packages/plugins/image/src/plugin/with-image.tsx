@@ -20,10 +20,13 @@ import { withShortcuts } from './with-shortcuts'
 const defaultHotkey: ImageHotkey = ''
 
 const defaultBeforeUpload = (files: File[]) => {
-  return files.filter(file => file.type.startsWith('image/'))
+  return files.filter((file) => file.type.startsWith('image/'))
 }
 
-export const withImage = <T extends Editable>(editor: T, options: ImageOptions = {}) => {
+export const withImage = <T extends Editable>(
+  editor: T,
+  options: ImageOptions = {}
+) => {
   const newEditor = editor as T & ImageEditor
 
   setOptions(newEditor, options)
@@ -53,23 +56,26 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
 
   Slot.mount(newEditor, ImageViewer)
 
-  newEditor.isInline = element => {
+  newEditor.isInline = (element) => {
     return ImageEditor.isImage(newEditor, element) || isInline(element)
   }
 
-  newEditor.isVoid = element => {
+  newEditor.isVoid = (element) => {
     return ImageEditor.isImage(newEditor, element) || isVoid(element)
   }
 
   const insertImages = (files: (File | string)[]) => {
     Promise.all(
-      files.map(file =>
-        typeof file === 'string' ? Promise.resolve(file) : readImageFileInfo(file),
-      ),
-    ).then(items => {
-      items.forEach(item => {
+      files.map((file) =>
+        typeof file === 'string'
+          ? Promise.resolve(file)
+          : readImageFileInfo(file)
+      )
+    ).then((items) => {
+      items.forEach((item) => {
         if (!item) return
-        if (typeof item === 'string') return newEditor.insertImage({ file: item })
+        if (typeof item === 'string')
+          return newEditor.insertImage({ file: item })
         const { url, file, width, height } = item
         const path = insertImage(newEditor, {
           url,
@@ -94,7 +100,7 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
     openFileDialog({
       accept,
       multiple,
-      onChange: files => {
+      onChange: (files) => {
         const customFiles = onUploadBefore(files)
         if (customFiles.length > 0) insertImages(files)
       },
@@ -107,7 +113,7 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
     }
 
     const url = file instanceof File ? URL.createObjectURL(file) : file
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       const path = insertImage(editor, {
         url,
@@ -124,12 +130,15 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
     if (state !== 'done') return
     const degrees = rotate % -360
     if (onRotate && url && allowRotate !== false) {
-      readImageElement(url, true).then(img => {
-        rotateImgWithCanvas(img, degrees).then(blob => {
-          const file = new File([blob], image.name ?? 'rotate.png', { type: 'image/png' })
-          onRotate(file).then(res => {
+      readImageElement(url, true).then((img) => {
+        rotateImgWithCanvas(img, degrees).then((blob) => {
+          const file = new File([blob], image.name ?? 'rotate.png', {
+            type: 'image/png',
+          })
+          onRotate(file).then((res) => {
             if (res) {
-              const info = typeof res === 'string' ? { url: res, rotate: 0 } : res
+              const info =
+                typeof res === 'string' ? { url: res, rotate: 0 } : res
               Transforms.setNodes<Image>(
                 editor,
                 {
@@ -138,7 +147,7 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
                 },
                 {
                   at: Editable.findPath(editor, image),
-                },
+                }
               )
             }
           })
@@ -152,7 +161,7 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
       },
       {
         at: Editable.findPath(editor, image),
-      },
+      }
     )
   }
 
@@ -164,7 +173,7 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
       },
       {
         at: Editable.findPath(editor, image),
-      },
+      }
     )
   }
 

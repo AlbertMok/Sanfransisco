@@ -358,6 +358,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
     return <Tag {...attributes}>{children}</Tag>
   }
 
+  // 渲染叶子节点
   e.renderLeaf = (props: RenderLeafProps) => {
     const { attributes, children } = props
     return <span {...attributes}>{children}</span>
