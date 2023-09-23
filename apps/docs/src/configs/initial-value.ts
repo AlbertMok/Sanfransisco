@@ -3,35 +3,22 @@ export const initialValue = [
     type: 'title',
     children: [
       {
-        text: 'Editable`s Playground',
+        text: 'Editor',
+      },
+    ],
+  },
+
+  {
+    children: [
+      {
+        text: 'will be better',
       },
     ],
   },
   {
     children: [
       {
-        text: 'Welcome to ',
-      },
-      {
-        text: 'Editable',
-        bold: true,
-      },
-      {
-        text: '! Editable is an extensible rich text editing framework that focuses on stability, controllability, and performance.',
-      },
-    ],
-  },
-  {
-    children: [
-      {
-        text: '',
-      },
-    ],
-  },
-  {
-    children: [
-      {
-        text: 'Currently, it is still in beta version and the API may undergo significant changes, so related documents are not yet complete.',
+        text: '现在的版本做的不是很好',
       },
     ],
   },
