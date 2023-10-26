@@ -28,20 +28,21 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
+    "@editablejs/breaker": "workspace:*",
     "@editablejs/deserializer": "workspace:*",
     "@editablejs/serializer": "workspace:*",
-    "@editablejs/breaker": "workspace:*",
     "direction": "^1.0.3",
     "is-hotkey": "^0.1.6",
     "lodash.merge": "^4.6.2",
+    "nanoid": "5.0.2",
     "scroll-into-view-if-needed": "2.2.29",
     "zustand": "4.1.4"
   },
   "devDependencies": {
     "@editablejs/models": "workspace:*",
-    "@types/lodash.merge": "^4.6.7",
     "@types/is-hotkey": "^0.1.7",
     "@types/jest": "^26.0.22",
+    "@types/lodash.merge": "^4.6.7",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
     "eslint-config-editable": "workspace:*",

@@ -19,20 +19,8 @@ import {
 } from '@editablejs/editor'
 import { Editor, createEditor, Range, Transforms } from '@editablejs/models'
 import { MarkdownDeserializer } from '@editablejs/deserializer/markdown'
-import {
-  withPlugins,
-  useContextMenuEffect,
-  ContextMenu,
-  MentionUser,
-} from '@editablejs/plugins'
-import {
-  withYHistory,
-  withYjs,
-  YjsEditor,
-  withYCursors,
-  CursorData,
-  useRemoteStates,
-} from '@editablejs/plugin-yjs'
+import { withPlugins, useContextMenuEffect, ContextMenu, MentionUser } from '@editablejs/plugins'
+import { withYHistory, withYjs, YjsEditor, withYCursors, CursorData, useRemoteStates } from '@editablejs/plugin-yjs'
 
 import randomColor from 'randomcolor'
 import { faker } from '@faker-js/faker'
@@ -40,15 +28,9 @@ import { WebsocketProvider } from '@editablejs/yjs-websocket'
 import * as Y from 'yjs'
 import { withHTMLSerializerTransform } from '@editablejs/plugins/serializer/html'
 import { withTextSerializerTransform } from '@editablejs/plugins/serializer/text'
-import {
-  withMarkdownSerializerTransform,
-  withMarkdownSerializerPlugin,
-} from '@editablejs/plugins/serializer/markdown'
+import { withMarkdownSerializerTransform, withMarkdownSerializerPlugin } from '@editablejs/plugins/serializer/markdown'
 import { withHTMLDeserializerTransform } from '@editablejs/plugins/deserializer/html'
-import {
-  withMarkdownDeserializerTransform,
-  withMarkdownDeserializerPlugin,
-} from '@editablejs/plugins/deserializer/markdown'
+import { withMarkdownDeserializerTransform, withMarkdownDeserializerPlugin } from '@editablejs/plugins/deserializer/markdown'
 
 import { withTitleHTMLSerializerTransform } from '@editablejs/plugin-title/serializer/html'
 import { withTitleHTMLDeserializerTransform } from '@editablejs/plugin-title/deserializer/html'
@@ -58,37 +40,16 @@ import { javascript as codemirrorJavascript } from '@codemirror/lang-javascript-
 import { html as codemirrorHtml } from '@codemirror/lang-html-next'
 import { css as codemirrorCss } from '@codemirror/lang-css-next'
 import { withYCodeBlock } from '@editablejs/plugin-codeblock/yjs'
-import {
-  ToolbarComponent,
-  useToolbarEffect,
-  withToolbar,
-  Toolbar,
-} from '@editablejs/plugin-toolbar'
-import {
-  withInlineToolbar,
-  useInlineToolbarEffect,
-  InlineToolbar,
-} from '@editablejs/plugin-toolbar/inline'
-import {
-  withSideToolbar,
-  useSideToolbarMenuEffect,
-  SideToolbar,
-} from '@editablejs/plugin-toolbar/side'
-import {
-  withSlashToolbar,
-  useSlashToolbarEffect,
-  SlashToolbar,
-} from '@editablejs/plugin-toolbar/slash'
+import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@editablejs/plugin-toolbar'
+import { withInlineToolbar, useInlineToolbarEffect, InlineToolbar } from '@editablejs/plugin-toolbar/inline'
+import { withSideToolbar, useSideToolbarMenuEffect, SideToolbar } from '@editablejs/plugin-toolbar/side'
+import { withSlashToolbar, useSlashToolbarEffect, SlashToolbar } from '@editablejs/plugin-toolbar/slash'
 import { Switch, SwitchThumb, Icon, Tooltip } from '@editablejs/ui'
 import { TitleEditor, withTitle } from '@editablejs/plugin-title'
 import { HTMLDeserializer } from '@editablejs/deserializer/html'
 import { HTMLSerializer } from '@editablejs/serializer/html'
 import { createContextMenuItems } from '../configs/context-menu-items'
-import {
-  createToolbarItems,
-  defaultBackgroundColor,
-  defaultFontColor,
-} from '../configs/toolbar-items'
+import { createToolbarItems, defaultBackgroundColor, defaultFontColor } from '../configs/toolbar-items'
 import { createSideToolbarItems } from '../configs/side-toolbar-items'
 import { createInlineToolbarItems } from 'configs/inline-toolbar-items'
 import { checkMarkdownSyntax } from 'configs/check-markdown-syntax'
@@ -158,9 +119,7 @@ export default function Playground() {
             connect: false,
           })
 
-    const handleStatus = (
-      event: Record<'status', 'connecting' | 'connected' | 'disconnected'>
-    ) => {
+    const handleStatus = (event: Record<'status', 'connecting' | 'connected' | 'disconnected'>) => {
       const { status } = event
       if (status === 'connected') {
         setConnected(true)
@@ -262,8 +221,7 @@ export default function Playground() {
 
     // slash menu
     editor = withSlashToolbar(editor, {
-      match: () =>
-        !Editor.above(editor, { match: (n) => TitleEditor.isTitle(editor, n) }),
+      match: () => !Editor.above(editor, { match: (n) => TitleEditor.isTitle(editor, n) }),
     })
 
     editor = withTitle(editor)
@@ -273,11 +231,7 @@ export default function Playground() {
 
   useIsomorphicLayoutEffect(() => {
     const unsubscribe = Placeholder.subscribe(editor, ([node]) => {
-      if (
-        Editable.isFocused(editor) &&
-        Editor.isBlock(editor, node) &&
-        !TitleEditor.isTitle(editor, node)
-      )
+      if (Editable.isFocused(editor) && Editor.isBlock(editor, node) && !TitleEditor.isTitle(editor, node))
         return () => t('playground.editor.block-placeholder')
     })
     return () => unsubscribe()
@@ -333,10 +287,7 @@ export default function Playground() {
         const focus = Range.end(editor.selection)
         Promise.resolve().then(() => {
           const madst = MarkdownDeserializer.toMdastWithEditor(editor, text)
-          const content = MarkdownDeserializer.transformWithEditor(
-            editor,
-            madst
-          )
+          const content = MarkdownDeserializer.transformWithEditor(editor, madst)
           editor.selection = {
             anchor,
             focus,
@@ -372,14 +323,24 @@ export default function Playground() {
   }, editor)
 
   const remoteClients = useRemoteStates<CursorData>(editor)
-
+  const [content, setContent] = React.useState('')
   return (
     <>
       <CustomStyles />
       <Seo title={t('playground.title')} />
-      <EditableProvider editor={editor} value={initialValue}>
+      {/* 编辑器状态 */}
+      <EditableProvider
+        editor={editor}
+        value={initialValue}
+        onChange={(value) => {
+          setContent(JSON.stringify(value))
+        }}
+      >
         {/* 头部 */}
         <StyledHeader>
+          <div>
+            <button onClick={() => console.log(content)}>显示</button>
+          </div>
           <div tw="flex justify-between py-3 px-6 text-base">
             {/* <div tw="flex text-2xl text-link flex-1 gap-3">
               <NextLink href="/">
@@ -433,11 +394,7 @@ export default function Playground() {
         </StyledHeader>
 
         <StyledContainer>
-          <ContentEditable
-            lang={local ?? 'en-US'}
-            readOnly={readOnly}
-            placeholder={t('playground.editor.placeholder')}
-          />
+          <ContentEditable lang={local ?? 'en-US'} readOnly={readOnly} placeholder={t('playground.editor.placeholder')} />
         </StyledContainer>
       </EditableProvider>
     </>

@@ -4,12 +4,12 @@ import { HeadingType, Heading } from '../interfaces/heading'
 import { getOptions } from '../options'
 
 export interface HeadingEditor extends Editor {
-  toggleHeading: (type?: HeadingType | typeof PARAGRAPH_KEY) => void
+  createElement: (type?: HeadingType | typeof PARAGRAPH_KEY) => void
 }
 
 export const HeadingEditor = {
   isHeadingEditor: (editor: Editor): editor is HeadingEditor => {
-    return !!(editor as HeadingEditor).toggleHeading
+    return !!(editor as HeadingEditor).createElement
   },
 
   isHeading: (editor: Editor, n: any): n is Heading => {
@@ -24,6 +24,7 @@ export const HeadingEditor = {
     return true
   },
 
+  // 查询当前的文本的状态
   queryActive: (editor: Editor) => {
     const elements = Editor.elements(editor)
     for (const key in HeadingTags) {
@@ -37,6 +38,6 @@ export const HeadingEditor = {
   },
 
   toggle: (editor: Editor, type?: HeadingType | typeof PARAGRAPH_KEY) => {
-    if (HeadingEditor.isHeadingEditor(editor)) editor.toggleHeading(type)
+    if (HeadingEditor.isHeadingEditor(editor)) editor.createElement(type)
   },
 }

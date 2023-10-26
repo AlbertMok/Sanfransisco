@@ -1,10 +1,12 @@
 import { Descendant, Element } from '@editablejs/models'
 import { HeadingTags } from '../constants'
+import { generateId } from '@editablejs/editor'
 
 export type HeadingType = keyof typeof HeadingTags
 
 export interface Heading extends Element {
   type: HeadingType
+  id?: string
 }
 
 export type HeadingFontStyleName = 'fontSize' | 'fontWeight'
@@ -12,8 +14,8 @@ export type HeadingFontStyleName = 'fontSize' | 'fontWeight'
 export type HeadingTextMark = Record<HeadingFontStyleName, string>
 
 export const Heading = {
-  isHeading: (value: any): value is Heading => {
-    return Element.isElement(value) && !!value.type && value.type in HeadingTags
+  isHeading: (element: any): element is Heading => {
+    return Element.isElement(element) && !!element.type && element.type in HeadingTags
   },
 
   create: (type: HeadingType, children: Descendant[] = [{ text: '' }]): Heading => {

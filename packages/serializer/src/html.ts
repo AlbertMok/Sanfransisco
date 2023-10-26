@@ -11,13 +11,16 @@ export type HTMLSerializerAttributes =
   | Record<string, string | boolean | number | undefined>
 
 export type HTMLSerializerStyle = Partial<CSSStyleDeclaration>
+
 export interface HTMLSerializerOptions {
   attributes?: HTMLSerializerAttributes
   style?: HTMLSerializerStyle
 }
 
 export interface HTMLSerializerWithOptions {
-  attributes?: HTMLSerializerAttributes | ((node: Node) => HTMLSerializerAttributes)
+  attributes?:
+    | HTMLSerializerAttributes
+    | ((node: Node) => HTMLSerializerAttributes)
   style?: HTMLSerializerStyle | ((node: Node) => HTMLSerializerStyle)
 }
 
@@ -26,16 +29,20 @@ export type HTMLSerializerTransform = typeof HTMLSerializer.transform
 export type HTMLSerializerWithTransform<T = HTMLSerializerWithOptions> = (
   next: HTMLSerializerTransform,
   serializer: typeof HTMLSerializer,
-  options: T,
+  options: T
 ) => HTMLSerializerTransform
 
-export interface EditorHTMLSerializerWithTransform<T = HTMLSerializerWithOptions> {
+export interface EditorHTMLSerializerWithTransform<
+  T = HTMLSerializerWithOptions,
+> {
   transform: HTMLSerializerWithTransform<T>
   options: T
 }
 
-const HTML_SERIALIZER_TRANSFORMS: WeakMap<Editor, EditorHTMLSerializerWithTransform[]> =
-  new WeakMap()
+const HTML_SERIALIZER_TRANSFORMS: WeakMap<
+  Editor,
+  EditorHTMLSerializerWithTransform[]
+> = new WeakMap()
 
 export interface EditorHTMLSerializerOptions extends HTMLSerializerOptions {
   editor: Editor
@@ -45,7 +52,8 @@ const withEditorHTMLSerializerTransform: HTMLSerializerWithTransform<
   EditorHTMLSerializerOptions
 > = (next, _, { editor }) => {
   return (node, options = {}) => {
-    if (Text.isText(node)) return TextSerializer.transformWithEditor(editor, node)
+    if (Text.isText(node))
+      return TextSerializer.transformWithEditor(editor, node)
     return next(node, options)
   }
 }
@@ -55,7 +63,7 @@ export const HTMLSerializer = {
     const { attributes, style } = options
     if (Text.isText(node)) return TextSerializer.transform(node)
     const { children } = node
-    const html = children.map(child => this.transform(child)).join('')
+    const html = children.map((child) => this.transform(child)).join('')
     if (Editor.isEditor(node)) return html
     const { type } = node
     let nodeName = type ?? 'p'
@@ -71,11 +79,11 @@ export const HTMLSerializer = {
     tag: string,
     attributes: HTMLSerializerAttributes = {},
     style?: HTMLSerializerStyle,
-    children: string = '',
+    children: string = ''
   ) {
     const attributesString = htmlAttributesToString(attributes)
     const styleString = style ? cssStyleToString(style) : ''
-    const lineStyle = styleString ? ` style="${styleString}"` : ""
+    const lineStyle = styleString ? ` style="${styleString}"` : ''
 
     return `<${tag} ${attributesString}${lineStyle}>${children}</${tag}>`
   },
@@ -89,13 +97,16 @@ export const HTMLSerializer = {
     for (const customOption of customOptions) {
       mergedOptions = merge(
         mergedOptions,
-        customOption instanceof Function ? customOption(node) : customOption,
+        customOption instanceof Function ? customOption(node) : customOption
       )
     }
     return mergedOptions
   },
 
-  with<T = HTMLSerializerOptions>(transform: HTMLSerializerWithTransform<T>, options: T) {
+  with<T = HTMLSerializerOptions>(
+    transform: HTMLSerializerWithTransform<T>,
+    options: T
+  ) {
     const { transform: t } = this
     this.transform = transform(t.bind(this), this, options)
   },
@@ -103,10 +114,10 @@ export const HTMLSerializer = {
   withEditor<T = HTMLSerializerOptions>(
     editor: Editor,
     transform: HTMLSerializerWithTransform<T>,
-    options: T,
+    options: T
   ) {
     const fns = HTML_SERIALIZER_TRANSFORMS.get(editor) ?? []
-    if (fns.find(fn => fn.transform === transform)) return
+    if (fns.find((fn) => fn.transform === transform)) return
     fns.push({
       transform: transform as HTMLSerializerWithTransform,
       options: options as HTMLSerializerOptions,

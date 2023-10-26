@@ -1,40 +1,22 @@
 import * as React from 'react'
 import getDirection from 'direction'
-import {
-  Editor,
-  Node,
-  Range,
-  Element as SlateElement,
-} from '@editablejs/models'
+import { Editor, Node, Range, Element } from '@editablejs/models'
 
 import Text from './text'
 import useChildren from '../hooks/use-children'
 import { Editable, useEditableStatic, ElementAttributes } from '..'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
-import {
-  NODE_TO_ELEMENT,
-  ELEMENT_TO_NODE,
-  NODE_TO_PARENT,
-  NODE_TO_INDEX,
-  EDITOR_TO_KEY_TO_ELEMENT,
-} from '../utils/weak-maps'
-import {
-  DATA_EDITABLE_INLINE,
-  DATA_EDITABLE_NODE,
-  DATA_EDITABLE_VOID,
-} from '../utils/constants'
+import { NODE_TO_ELEMENT, ELEMENT_TO_NODE, NODE_TO_PARENT, NODE_TO_INDEX, EDITOR_TO_KEY_TO_ELEMENT } from '../utils/weak-maps'
+import { DATA_BLOCK_ID, DATA_EDITABLE_INLINE, DATA_EDITABLE_NODE, DATA_EDITABLE_VOID } from '../utils/constants'
 import { useElementDecorations } from '../hooks/use-decorate'
 import { PlaceholderRender } from '../plugin/placeholder'
 import { usePlaceholder } from '../hooks/use-placeholder'
+import { generateId } from '../utils/node-id'
 
 /**
  * Element.
  */
-const Element = (props: {
-  element: SlateElement
-  selection: Range | null
-  renderPlaceholder?: PlaceholderRender
-}) => {
+const ElementRender = (props: { element: Element; selection: Range | null; renderPlaceholder?: PlaceholderRender }) => {
   const { element, selection, renderPlaceholder } = props
   const ref = React.useRef<HTMLElement>(null)
   const editor = useEditableStatic()
@@ -45,27 +27,21 @@ const Element = (props: {
   let children: React.ReactNode = useChildren({
     node: element,
     selection,
-    renderPlaceholder: Editor.isEmpty(editor, element)
-      ? currentRenderPlaceholder ?? renderPlaceholder
-      : undefined,
+    renderPlaceholder: Editor.isEmpty(editor, element) ? currentRenderPlaceholder ?? renderPlaceholder : undefined,
   })
 
   // Attributes that the developer must mix into the element in their
   // custom node renderer component.
   // 基本元素,最外层
   const attributes: ElementAttributes = {
+    [DATA_BLOCK_ID]: element.id,
     [DATA_EDITABLE_NODE]: 'element',
-    style: {
-      margin: '2px 0',
-      padding: '3px 2px',
-    },
     ref,
   }
 
   if (isInline) {
     attributes[DATA_EDITABLE_INLINE] = true
   }
-
   // If it's a block node with inline children, add the proper `dir` attribute
   // for text direction.
   if (!isInline && Editor.hasInlines(editor, element)) {
@@ -92,12 +68,7 @@ const Element = (props: {
           outline: 'none',
         }}
       >
-        <Text
-          renderPlaceholder={renderPlaceholder ?? currentRenderPlaceholder}
-          isLast={false}
-          parent={element}
-          text={text}
-        />
+        <Text renderPlaceholder={renderPlaceholder ?? currentRenderPlaceholder} isLast={false} parent={element} text={text} />
       </Tag>
     )
 
@@ -120,7 +91,6 @@ const Element = (props: {
   const path = Editable.findPath(editor, element)
 
   const newAttributes = editor.renderElementAttributes({ attributes, element })
-
   // 渲染元素
   let content = editor.renderElement({
     attributes: newAttributes,
@@ -143,14 +113,11 @@ const Element = (props: {
   return content
 }
 
-const MemoizedElement = React.memo(Element, (prev, next) => {
+const MemoizedElement = React.memo(ElementRender, (prev, next) => {
   return (
     prev.element === next.element &&
     prev.renderPlaceholder === next.renderPlaceholder &&
-    (prev.selection === next.selection ||
-      (!!prev.selection &&
-        !!next.selection &&
-        Range.equals(prev.selection, next.selection)))
+    (prev.selection === next.selection || (!!prev.selection && !!next.selection && Range.equals(prev.selection, next.selection)))
   )
 })
 

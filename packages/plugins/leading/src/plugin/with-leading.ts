@@ -7,26 +7,29 @@ import { LeadingEditor } from './leading-editor'
 
 const defaultHotkeys: LeadingHotkey = {}
 
-export const withLeading = <T extends Editable>(editor: T, options: LeadingOptions = {}) => {
+export const withLeading = <T extends Editable>(
+  editor: T,
+  options: LeadingOptions = {}
+) => {
   const newEditor = editor as T & LeadingEditor
 
   setOptions(newEditor, options)
 
-  newEditor.toggleLeading = value => {
-    editor.normalizeSelection(selection => {
+  newEditor.toggleLeading = (value) => {
+    editor.normalizeSelection((selection) => {
       if (!selection) return
       if (editor.selection !== selection) editor.selection = selection
       if (!LeadingEditor.isLeadingEditor(editor)) return
 
       const lowestBlocks = Editor.nodes<Element>(editor, {
         mode: 'lowest',
-        match: n => Editor.isBlock(editor, n),
+        match: (n) => Editor.isBlock(editor, n),
       })
 
       for (const [element, path] of lowestBlocks) {
         const entry = Editor.above<List>(editor, {
           at: path,
-          match: n => editor.isList(n),
+          match: (n) => editor.isList(n),
         })
         const el = entry ? entry[0] : element
         if (Leading.isLeading(el) && el[LEADING_ATTR_KEY] === value) continue
@@ -38,7 +41,7 @@ export const withLeading = <T extends Editable>(editor: T, options: LeadingOptio
           },
           {
             at,
-          },
+          }
         )
       }
     })
@@ -65,7 +68,11 @@ export const withLeading = <T extends Editable>(editor: T, options: LeadingOptio
 
   const { onKeydown } = newEditor
 
-  const hotkeys: LeadingHotkey = Object.assign({}, defaultHotkeys, options.hotkey)
+  const hotkeys: LeadingHotkey = Object.assign(
+    {},
+    defaultHotkeys,
+    options.hotkey
+  )
   newEditor.onKeydown = (e: KeyboardEvent) => {
     const value = Hotkey.match(hotkeys, e)
     if (value) {

@@ -39,14 +39,23 @@ const SupStyles = tw(SubBaseStyles)`-top-2`
 const CodeStyles = styled.code(() => [
   tw`bg-black bg-opacity-8 break-words indent-0 rounded`,
   css`
-    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+    font-family:
+      SFMono-Regular,
+      Consolas,
+      Liberation Mono,
+      Menlo,
+      Courier,
+      monospace;
     font-size: inherit;
     padding: 0 2px;
     line-height: inherit;
   `,
 ])
 
-export const withMark = <T extends Editable>(editor: T, options: MarkOptions = {}) => {
+export const withMark = <T extends Editable>(
+  editor: T,
+  options: MarkOptions = {}
+) => {
   const newEditor = editor as T & MarkEditor
 
   setOptions(newEditor, options)
@@ -57,7 +66,7 @@ export const withMark = <T extends Editable>(editor: T, options: MarkOptions = {
     if (!MarkEditor.isEnabled(editor, format)) return
     const active = MarkEditor.isActive(editor, format)
 
-    newEditor.normalizeSelection(selection => {
+    newEditor.normalizeSelection((selection) => {
       if (newEditor.selection !== selection) newEditor.selection = selection
 
       if (active) {
@@ -73,8 +82,13 @@ export const withMark = <T extends Editable>(editor: T, options: MarkOptions = {
     })
   }
 
-  newEditor.renderLeaf = ({ attributes, children, text }: RenderLeafProps<Mark>) => {
+  newEditor.renderLeaf = ({
+    attributes,
+    children,
+    text,
+  }: RenderLeafProps<Mark>) => {
     const style: React.CSSProperties = attributes.style ?? {}
+
     if (text.bold && MarkEditor.isEnabled(editor, 'bold')) {
       style.fontWeight = typeof text.bold === 'string' ? text.bold : 'bold'
     } else {
@@ -108,7 +122,11 @@ export const withMark = <T extends Editable>(editor: T, options: MarkOptions = {
       children = <CodeStyles>{children}</CodeStyles>
     }
 
-    return renderLeaf({ attributes: Object.assign({}, attributes, { style }), children, text })
+    return renderLeaf({
+      attributes: Object.assign({}, attributes, { style }),
+      children,
+      text,
+    })
   }
 
   const hotkeys = Object.assign({}, defaultHotkeys, options.hotkey)
@@ -126,7 +144,10 @@ export const withMark = <T extends Editable>(editor: T, options: MarkOptions = {
 
   const { shortcuts } = options
   if (shortcuts !== false) {
-    withShortcuts(newEditor, Object.assign(defaultShortcuts, shortcuts === true ? {} : shortcuts))
+    withShortcuts(
+      newEditor,
+      Object.assign(defaultShortcuts, shortcuts === true ? {} : shortcuts)
+    )
   }
 
   return newEditor

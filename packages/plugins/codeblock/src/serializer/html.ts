@@ -8,19 +8,14 @@ import { Highlighter, highlightTree } from '@lezer/highlight'
 import { getOptions } from '../options'
 import { oneDarkHighlightStyle, colors as darkColors } from '../themes/one-dark'
 import { colors as lightColors } from '../themes/base-light'
-import {
-  CODEBLOCK_DATA_LINE_WRAPPING,
-  CODEBLOCK_DATA_SYNTAX,
-  CODEBLOCK_DATA_TABSIZE,
-  CODEBLOCK_DATA_THEME,
-} from '../constants'
+import { CODEBLOCK_DATA_LINE_WRAPPING, CODEBLOCK_DATA_SYNTAX, CODEBLOCK_DATA_TABSIZE, CODEBLOCK_DATA_THEME } from '../constants'
 
 export function runmode(
   textContent: string,
   language: Language,
   highlighter: Highlighter,
   callback: (text: string, style: string, from: number, to: number) => void,
-  options?: Record<string, any>,
+  options?: Record<string, any>
 ) {
   const tree = language.parser.parse(textContent)
   let pos = 0
@@ -35,9 +30,11 @@ export function runmode(
 export interface CodeBlockHTMLSerializerWithOptions extends HTMLSerializerWithOptions {
   editor: Editor
 }
-export const withCodeBlockHTMLSerializerTransform: HTMLSerializerWithTransform<
-  CodeBlockHTMLSerializerWithOptions
-> = (next, serializer, customOptions) => {
+export const withCodeBlockHTMLSerializerTransform: HTMLSerializerWithTransform<CodeBlockHTMLSerializerWithOptions> = (
+  next,
+  serializer,
+  customOptions
+) => {
   const { attributes: customAttributes, style: customStyle, editor } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -55,7 +52,7 @@ export const withCodeBlockHTMLSerializerTransform: HTMLSerializerWithTransform<
         }
       }
 
-      const l = languages?.find(l => l.value === language)
+      const l = languages?.find((l) => l.value === language)
       let html = ''
       if (l?.plugin) {
         runmode(code, l.plugin.language, highlightStyle, (text, style) => {
@@ -81,14 +78,13 @@ export const withCodeBlockHTMLSerializerTransform: HTMLSerializerWithTransform<
             [CODEBLOCK_DATA_TABSIZE]: tabSize,
             [CODEBLOCK_DATA_THEME]: theme,
           },
-          customAttributes,
+          customAttributes
         ),
         serializer.mergeOptions(
           node,
           style,
           {
-            fontFamily:
-              '"Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+            fontFamily: '"Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
             fontSize: '14px',
             lineHeight: '1.5',
             backgroundColor: theme === 'dark' ? darkColors.background : lightColors.background,
@@ -97,9 +93,9 @@ export const withCodeBlockHTMLSerializerTransform: HTMLSerializerWithTransform<
             border: '1px solid rgb(229 231 235 / 1)',
             padding: '4px 8px',
           },
-          customStyle,
+          customStyle
         ),
-        html,
+        html
       )
     }
     return next(node, options)

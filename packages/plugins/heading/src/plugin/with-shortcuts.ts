@@ -6,7 +6,7 @@ import { HeadingEditor } from './heading-editor'
 const findMatchedRange = (editor: Editor, at: Point, shortcuts: Record<string, HeadingType>) => {
   const block = Editor.above(editor, {
     at,
-    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
   })
 
   const path = block ? block[1] : []
@@ -37,7 +37,7 @@ const findMatchedRange = (editor: Editor, at: Point, shortcuts: Record<string, H
 export const withShortcuts = (editor: Editable, shortcuts: Record<string, HeadingType>) => {
   const { onKeydown } = editor
 
-  editor.onKeydown = event => {
+  editor.onKeydown = (event) => {
     const { selection } = editor
     if (
       selection &&

@@ -11,7 +11,7 @@ export type HTMLDeserializerTransform = typeof HTMLDeserializer.transform
 export type HTMLDeserializerWithTransform<T = HTMLDeserializerOptions> = (
   next: HTMLDeserializerTransform,
   deserializer: typeof HTMLDeserializer,
-  options: T,
+  options: T
 ) => HTMLDeserializerTransform
 
 export interface EditorHTMLDeserializerWithTransform<T = HTMLDeserializerOptions> {
@@ -19,23 +19,21 @@ export interface EditorHTMLDeserializerWithTransform<T = HTMLDeserializerOptions
   options: T
 }
 
-const HTML_DESERIALIZER_TRANSFORMS: WeakMap<Editor, EditorHTMLDeserializerWithTransform[]> =
-  new WeakMap()
+const HTML_DESERIALIZER_TRANSFORMS: WeakMap<Editor, EditorHTMLDeserializerWithTransform[]> = new WeakMap()
 
+/**
+ * 用于将 HTML 节点（或 DOMNode）反序列化为一个可编辑的数据结构
+ */
 export const HTMLDeserializer = {
   transform(node: DOMNode, options: HTMLDeserializerOptions = {}): Descendant[] {
     const { element, text, matchNewline } = options
     if (isDOMText(node)) {
       const content = node.textContent ?? ''
-      if (
-        matchNewline &&
-        /^\s{0,}(\r\n|\n)+\s{0,}$/.test(content) &&
-        (typeof matchNewline === 'boolean' || matchNewline(content))
-      ) {
+      if (matchNewline && /^\s{0,}(\r\n|\n)+\s{0,}$/.test(content) && (typeof matchNewline === 'boolean' || matchNewline(content))) {
         return []
       }
       const dataArray = content.split(/\r\n|\n/)
-      return dataArray.map(data => ({ ...text, text: data }))
+      return dataArray.map((data) => ({ ...text, text: data }))
     }
 
     const children = []
@@ -58,13 +56,9 @@ export const HTMLDeserializer = {
     this.transform = transform(t.bind(this), this, options)
   },
 
-  withEditor<T = HTMLDeserializerOptions>(
-    editor: Editor,
-    transform: HTMLDeserializerWithTransform<T>,
-    options: T,
-  ) {
+  withEditor<T = HTMLDeserializerOptions>(editor: Editor, transform: HTMLDeserializerWithTransform<T>, options: T) {
     const fns = HTML_DESERIALIZER_TRANSFORMS.get(editor) ?? []
-    if (fns.find(fn => fn.transform === transform)) return
+    if (fns.find((fn) => fn.transform === transform)) return
     fns.push({
       transform: transform as HTMLDeserializerWithTransform,
       options: options as HTMLDeserializerOptions,

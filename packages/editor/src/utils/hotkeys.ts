@@ -124,19 +124,21 @@ export default Hotkeys
 
 function match(
   keys: string | string[] | ((e: KeyboardEvent) => boolean),
-  event: KeyboardEvent,
+  event: KeyboardEvent
 ): boolean
+
 function match<T extends string = string>(
   keys: Record<T, string | string[] | ((e: KeyboardEvent) => boolean)>,
-  event: KeyboardEvent,
+  event: KeyboardEvent
 ): T | false
+
 function match<T extends string = string>(
   keys:
     | string
     | string[]
     | ((e: KeyboardEvent) => boolean)
     | Record<T, string | string[] | ((e: KeyboardEvent) => boolean)>,
-  event: KeyboardEvent,
+  event: KeyboardEvent
 ): T | boolean {
   if (typeof keys === 'string' || Array.isArray(keys)) {
     return isHotkey(keys, event)
@@ -152,18 +154,21 @@ function match<T extends string = string>(
   }
   return false
 }
+
 export const Hotkey = {
   isCode: isCodeHotkey,
   isKey: isKeyHotkey,
   format: (key: string, char = '+') => {
     let keys = key.toLowerCase().split('+')
-    keys = keys.map(key => {
+    keys = keys.map((key) => {
       if (key === 'mod') {
         return IS_APPLE ? '⌘' : 'Ctrl'
       } else if (key === 'opt') {
         return IS_APPLE ? 'Option' : 'Alt'
       } else if (key.length > 1) {
-        return key.substring(0, 1).toUpperCase() + key.substring(1).toLowerCase()
+        return (
+          key.substring(0, 1).toUpperCase() + key.substring(1).toLowerCase()
+        )
       }
       return key.toUpperCase()
     })

@@ -2,10 +2,7 @@ import { PhrasingContent } from 'mdast'
 import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
 import { Heading } from '../interfaces/heading'
 
-export const withHeadingMarkdownSerializerTransform: MarkdownSerializerWithTransform = (
-  next,
-  self,
-) => {
+export const withHeadingMarkdownSerializerTransform: MarkdownSerializerWithTransform = (next, self) => {
   return (node, options = {}) => {
     if (Heading.isHeading(node)) {
       let depth: 1 | 2 | 3 | 4 | 5 | 6 = 1
@@ -32,9 +29,7 @@ export const withHeadingMarkdownSerializerTransform: MarkdownSerializerWithTrans
         {
           type: 'heading',
           depth,
-          children: node.children
-            .map(child => self.transform(child, options))
-            .flat() as PhrasingContent[],
+          children: node.children.map((child) => self.transform(child, options)).flat() as PhrasingContent[],
         },
       ]
     }

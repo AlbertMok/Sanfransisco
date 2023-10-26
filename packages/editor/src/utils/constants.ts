@@ -11,6 +11,7 @@ export const DATA_EDITABLE_LENGTH = `data-ea-length`
 export const DATA_EDITABLE_VOID = `data-ea-void`
 export const DATA_EDITABLE_PLACEHOLDER = `data-ea-placeholder`
 export const DATA_EDITABLE_LEAF = `data-ea-leaf`
+export const DATA_BLOCK_ID = `data-block-id`
 
 export const Constants = {
   applicationType: APPLICATION_FRAGMENT_TYPE,

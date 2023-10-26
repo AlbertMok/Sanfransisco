@@ -179,8 +179,10 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
             `[${DATA_EDITABLE_STRING}],[${DATA_EDITABLE_ZERO_WIDTH}]`
           ) // 寻找与指定选择器或选择器组匹配的第一个Element元素
 
-      // const rects = (!isVoid && textElement ? textElement : element).getClientRects()
-      const rects = element.getClientRects()
+      const rects = (
+        !isVoid && textElement ? textElement : element
+      ).getClientRects()
+      // const rects = element.getClientRects()
 
       if (!rects.length) return delayHide()
       const rect = Array.from(rects).find((rect) => rect.height > 0) ?? rects[0]
@@ -198,7 +200,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         x,
         isVoid ? y : y + height / 2
       )
-      console.log(isVoid)
+
       clearDelayHideTimer()
 
       setCapturedData(editor, {

@@ -1,4 +1,12 @@
-import { Element, NodeEntry, Path, Transforms, Node, Range, Location } from 'slate'
+import {
+  Element,
+  NodeEntry,
+  Path,
+  Transforms,
+  Node,
+  Range,
+  Location,
+} from 'slate'
 import { Editor } from './editor'
 import { generateRandomKey } from '../utils/key'
 
@@ -53,7 +61,9 @@ type UpdateStartOptions = FindFirstListOptions & {
 export interface ListTemplate {
   key: string
   depth: number
-  render: (element: Omit<List, 'children'>) => string | Record<'type' | 'text', string>
+  render: (
+    element: Omit<List, 'children'>
+  ) => string | Record<'type' | 'text', string>
 }
 
 const TEMPLATE_WEAKMAP = new WeakMap<Editor, Map<string, ListTemplate[]>>()
@@ -65,7 +75,7 @@ export const List = {
     if (!selection) return
     const entry = Editor.above<List>(editor, {
       at: selection,
-      match: n => Editor.isList(editor, n) && (!match || match(n)),
+      match: (n) => Editor.isList(editor, n) && (!match || match(n)),
     })
     return entry
   },
@@ -77,8 +87,8 @@ export const List = {
     for (const key in elements) {
       entries.push(
         ...(elements[key].filter(
-          ([node]) => editor.isList(node) && (!match || match(node)),
-        ) as any),
+          ([node]) => editor.isList(node) && (!match || match(node))
+        ) as any)
       )
     }
     return entries
@@ -92,7 +102,9 @@ export const List = {
    */
   findFirstList: (
     editor: Editor,
-    options: FindFirstListOptions & { match?: (node: List, path: Path) => boolean },
+    options: FindFirstListOptions & {
+      match?: (node: List, path: Path) => boolean
+    }
   ) => {
     const { key, level, type, match: optionMatch } = options
     let { path } = options
@@ -116,7 +128,7 @@ export const List = {
     if (!entry) {
       ;[entry] = Editor.nodes<List>(editor, {
         at: path,
-        match: n => match(n) && (level === undefined || n.level === level),
+        match: (n) => match(n) && (level === undefined || n.level === level),
       })
     }
     return entry
@@ -163,7 +175,7 @@ export const List = {
     while (true) {
       const next = Editor.next<List>(editor, {
         at: startPath,
-        match: n =>
+        match: (n) =>
           Editor.isList(editor, n) &&
           (!type || n.type === type) &&
           n.key === key &&
@@ -187,7 +199,7 @@ export const List = {
         { start },
         {
           at: startPath,
-        },
+        }
       )
     }
   },
@@ -195,19 +207,19 @@ export const List = {
   wrapList<T extends List>(
     editor: Editor,
     list: Partial<Omit<T, 'children'>> & { type: string },
-    opitons: WrapListOptions = {},
+    opitons: WrapListOptions = {}
   ) {
     const { at } = opitons
     let { start = 1, template, type } = list
     List.unwrapList(editor, {
       at,
     })
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       if (!selection) return
       const entrys = Editor.nodes<Element>(editor, {
         at: selection,
-        match: n => Editor.isBlock(editor, n),
+        match: (n) => Editor.isBlock(editor, n),
         mode: 'lowest',
       })
 
@@ -215,7 +227,7 @@ export const List = {
       const afterPath = Editor.after(editor, selection.focus.path)
       const [prev] = Editor.nodes<List>(editor, {
         at: beforePath,
-        match: n => Editor.isList(editor, n) && n.type === type,
+        match: (n) => Editor.isList(editor, n) && n.type === type,
       })
       let key = ''
       let next: NodeEntry<List> | undefined = undefined
@@ -226,7 +238,7 @@ export const List = {
       } else if (
         ([next] = Editor.nodes<List>(editor, {
           at: afterPath,
-          match: n => Editor.isList(editor, n) && n.type === type,
+          match: (n) => Editor.isList(editor, n) && n.type === type,
         })) &&
         next
       ) {
@@ -253,6 +265,7 @@ export const List = {
           node,
         })
         const newProps = props ? props(key, node, path) : {}
+
         const element: List = {
           type,
           key,
@@ -281,7 +294,7 @@ export const List = {
   unwrapList: (editor: Editor, options: UnwrapListOptions = {}) => {
     const { at, match, props } = options
     const activeLists = List.lists(editor, { at, match })
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
 
       let hasList = false
@@ -308,7 +321,7 @@ export const List = {
                 { ...p },
                 {
                   at: path.concat(index),
-                },
+                }
               )
             }
           })
@@ -317,7 +330,7 @@ export const List = {
       if (!hasList) return
       Transforms.unwrapNodes(editor, {
         at,
-        match: n => Editor.isList(editor, n) && (!match || match(n)),
+        match: (n) => Editor.isList(editor, n) && (!match || match(n)),
         split: true,
       })
       if (!selection) return
@@ -353,7 +366,7 @@ export const List = {
           path,
           key: list.key,
           level,
-          match: list => list.level === level,
+          match: (list) => list.level === level,
         })
 
         Transforms.setNodes<List>(
@@ -365,7 +378,7 @@ export const List = {
           },
           {
             at: path,
-          },
+          }
         )
         List.updateStart(editor, {
           type,
@@ -379,7 +392,7 @@ export const List = {
             key: list.key,
           })
       } else {
-        List.unwrapList(editor, { at, match: n => n.type === type })
+        List.unwrapList(editor, { at, match: (n) => n.type === type })
         List.updateStart(editor, {
           type,
           path,
@@ -393,7 +406,7 @@ export const List = {
     // split the current list
     Transforms.splitNodes(editor, {
       at,
-      match: n => editor.isList(n) && n.type === type,
+      match: (n) => editor.isList(n) && n.type === type,
       always: true,
     })
     List.updateStart(editor, {
@@ -410,7 +423,7 @@ export const List = {
     const { at, match, unwrapProps } = options ?? {}
     const entry = Editor.above<List>(editor, {
       at,
-      match: n => Editor.isList(editor, n) && (!match || match(n)),
+      match: (n) => Editor.isList(editor, n) && (!match || match(n)),
     })
     if (!entry) return
     let [list, path] = entry
@@ -426,7 +439,7 @@ export const List = {
           },
           {
             at: path,
-          },
+          }
         )
         return
       }
@@ -448,8 +461,8 @@ export const List = {
           {
             at: path,
             mode: 'lowest',
-            match: n => Editor.isBlock(editor, n),
-          },
+            match: (n) => Editor.isBlock(editor, n),
+          }
         )
       }
 
@@ -471,7 +484,7 @@ export const List = {
    */
   getLevel: (editor: Editor, options: GetLevelOptions) => {
     console.warn(
-      '`List.getLevel` method is unimplemented and always returns 0. You can install `plugin-indent` plugin to make it work. Or implement it yourself.',
+      '`List.getLevel` method is unimplemented and always returns 0. You can install `plugin-indent` plugin to make it work. Or implement it yourself.'
     )
     return 0
   },
@@ -483,7 +496,7 @@ export const List = {
    */
   setIndent: (editor: Editor, list: List): List => {
     console.warn(
-      '`List.setIndent` method is unimplemented. You can install `plugin-indent` plugin to make it work. Or implement it yourself.',
+      '`List.setIndent` method is unimplemented. You can install `plugin-indent` plugin to make it work. Or implement it yourself.'
     )
     return list
   },
@@ -499,6 +512,6 @@ export const List = {
   getTemplate: (editor: Editor, type: string, key: string) => {
     const templates = TEMPLATE_WEAKMAP.get(editor) ?? new Map()
     const list: ListTemplate[] = templates.get(type) ?? []
-    return list.find(t => t.key === key)
+    return list.find((t) => t.key === key)
   },
 }

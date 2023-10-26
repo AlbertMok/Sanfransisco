@@ -1,14 +1,5 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import {
-  Editor,
-  Transforms,
-  List,
-  Path,
-  Element,
-  Text,
-  Range,
-  NodeEntry,
-} from '@editablejs/models'
+import { Editable, Hotkey, generateId } from '@editablejs/editor'
+import { Editor, Transforms, List, Path, Element, Text, Range, NodeEntry } from '@editablejs/models'
 import tw from 'twin.macro'
 import {
   HEADING_ONE_KEY,
@@ -21,13 +12,7 @@ import {
   HeadingTags,
 } from '../constants'
 import { HeadingType } from '../interfaces/heading'
-import {
-  HeadingHotkey,
-  HeadingOptions,
-  setOptions,
-  getTextMark,
-  getStyle,
-} from '../options'
+import { HeadingHotkey, HeadingOptions, setOptions, getTextMark, getStyle } from '../options'
 import { HeadingEditor } from './heading-editor'
 import { withShortcuts } from './with-shortcuts'
 
@@ -51,27 +36,21 @@ const defaultShortcuts: Record<string, HeadingType> = {
 
 const StyledHeading = tw.h1`font-semibold mb-2 mt-0`
 
-export const withHeading = <T extends Editable>(
-  editor: T,
-  options: HeadingOptions = {}
-) => {
+export const withHeading = <T extends Editable>(editor: T, options: HeadingOptions = {}) => {
   const newEditor = editor as T & HeadingEditor
 
   setOptions(newEditor, options)
 
-  newEditor.toggleHeading = (type) => {
+  newEditor.createElement = (type) => {
     editor.normalizeSelection((selection) => {
-      if (
-        !selection ||
-        (type &&
-          type !== PARAGRAPH_KEY &&
-          !HeadingEditor.isEnabled(editor, type))
-      )
-        return
+      if (!selection || (type && type !== PARAGRAPH_KEY && !HeadingEditor.isEnabled(editor, type))) return
+
+      // 如果当前的标题类型与用户要切换的标题类型相同，则目标标题类型被设置为普通段落（也就是说，它将取消标题）。
       if (!type) type = PARAGRAPH_KEY
       if (editor.selection !== selection) editor.selection = selection
       const activeType = HeadingEditor.queryActive(editor)
       if (!activeType && type === PARAGRAPH_KEY) return
+
       type = activeType === type ? PARAGRAPH_KEY : type
 
       const lowestBlocks = Editor.nodes<Element>(editor, {
@@ -96,11 +75,13 @@ export const withHeading = <T extends Editable>(
 
       const textMark = getTextMark(editor)
       for (const [_, path] of blocks) {
+        let id = generateId()
         if (type !== PARAGRAPH_KEY) {
           const style = getStyle(editor, type)
           const mark: Partial<Record<string, string>> = {}
           mark[textMark.fontSize] = style.fontSize
           mark[textMark.fontWeight] = style.fontWeight
+          mark['id'] = id
           Transforms.setNodes(editor, mark, {
             at: path,
             match: (n) => Text.isText(n),
@@ -108,24 +89,30 @@ export const withHeading = <T extends Editable>(
         } else {
           Transforms.setNodes(
             editor,
-            { [textMark.fontSize]: undefined, [textMark.fontWeight]: false },
+            {
+              [textMark.fontSize]: undefined,
+              [textMark.fontWeight]: false,
+              id,
+            },
             {
               at: path,
               match: (n) => Text.isText(n),
             }
           )
         }
-        Transforms.setNodes(editor, { type }, { at: path })
+        Transforms.setNodes(editor, { type, id }, { at: path })
       }
     })
   }
 
   const { renderElement } = newEditor
+
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (HeadingEditor.isHeading(editor, element)) {
       const tag = HeadingTags[element.type]
+
       return (
-        <div {...attributes}>
+        <div {...attributes} data-block-id={element.id}>
           <StyledHeading as={tag}>{children}</StyledHeading>
         </div>
       )
@@ -139,7 +126,7 @@ export const withHeading = <T extends Editable>(
     const value = Hotkey.match(hotkeys, e)
     if (value) {
       e.preventDefault()
-      newEditor.toggleHeading(value)
+      newEditor.createElement(value)
       return
     }
     const { selection } = editor
@@ -156,11 +143,7 @@ export const withHeading = <T extends Editable>(
           if (entry) {
             path = entry[1]
           }
-          Transforms.insertNodes(
-            newEditor,
-            { type: PARAGRAPH_KEY, children: [{ text: '' }] },
-            { at: Path.next(path), select: true }
-          )
+          Transforms.insertNodes(newEditor, { type: PARAGRAPH_KEY, children: [{ text: '' }] }, { at: Path.next(path), select: true })
         }
       }
     }
@@ -169,10 +152,7 @@ export const withHeading = <T extends Editable>(
 
   const { shortcuts } = options
   if (shortcuts !== false) {
-    withShortcuts(
-      newEditor,
-      Object.assign(defaultShortcuts, shortcuts === true ? {} : shortcuts)
-    )
+    withShortcuts(newEditor, Object.assign(defaultShortcuts, shortcuts === true ? {} : shortcuts))
   }
 
   return newEditor

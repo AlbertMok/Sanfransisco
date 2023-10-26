@@ -1,17 +1,6 @@
-import {
-  HTMLDeserializerOptions,
-  HTMLDeserializerWithTransform,
-} from '@editablejs/deserializer/html'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
 import { Editor } from '@editablejs/models'
-import {
-  HeadingTags,
-  HEADING_FIVE_KEY,
-  HEADING_FOUR_KEY,
-  HEADING_ONE_KEY,
-  HEADING_SIX_KEY,
-  HEADING_THREE_KEY,
-  HEADING_TWO_KEY,
-} from '../constants'
+import { HeadingTags, HEADING_FIVE_KEY, HEADING_FOUR_KEY, HEADING_ONE_KEY, HEADING_SIX_KEY, HEADING_THREE_KEY, HEADING_TWO_KEY } from '../constants'
 import { HeadingType } from '../interfaces/heading'
 import { getStyle } from '../options'
 
@@ -19,9 +8,7 @@ export interface HeadingHTMLDeserializerOptions extends HTMLDeserializerOptions 
   editor: Editor
 }
 
-export const withHeadingHTMLDeserializerTransform: HTMLDeserializerWithTransform<
-  HeadingHTMLDeserializerOptions
-> = (next, serializer, { editor }) => {
+export const withHeadingHTMLDeserializerTransform: HTMLDeserializerWithTransform<HeadingHTMLDeserializerOptions> = (next, serializer, { editor }) => {
   const tags = Object.values(HeadingTags)
   return (node, options = {}) => {
     const { element, text } = options

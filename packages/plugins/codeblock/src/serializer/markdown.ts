@@ -1,10 +1,7 @@
 import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
 import { CodeBlock } from '../interfaces/codeblock'
 
-export const withCodeBlockMarkdownSerializerTransform: MarkdownSerializerWithTransform = (
-  next,
-  self,
-) => {
+export const withCodeBlockMarkdownSerializerTransform: MarkdownSerializerWithTransform = (next, self) => {
   return (node, options = {}) => {
     if (CodeBlock.isCodeBlock(node)) {
       return [

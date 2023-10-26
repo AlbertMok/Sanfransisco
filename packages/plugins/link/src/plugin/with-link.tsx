@@ -1,4 +1,4 @@
-import { Editable, Locale, Slot, Hotkey } from '@editablejs/editor'
+import { Editable, Locale, Slot, Hotkey, generateId } from '@editablejs/editor'
 import { Transforms, Editor, Text, Range } from '@editablejs/models'
 import { LinkCreateComponent } from '../components/create'
 import { LinkComponent } from '../components/link'
@@ -11,10 +11,7 @@ import { withShortcuts } from './with-shortcuts'
 
 const defaultHotkey: LinkHotkey = 'mod+k'
 
-export const withLink = <T extends Editable>(
-  editor: T,
-  options: LinkOptions = {}
-) => {
+export const withLink = <T extends Editable>(editor: T, options: LinkOptions = {}) => {
   const newEditor = editor as T & LinkEditor
 
   setOptions(newEditor, options)
@@ -58,6 +55,7 @@ export const withLink = <T extends Editable>(
         ...link,
         children: [],
         type: LINK_KEY,
+        id: generateId(),
       },
       {
         match: (n) => Text.isText(n),

@@ -1,23 +1,7 @@
 import ReactDOM from 'react-dom'
-import {
-  Editor,
-  Node,
-  Path,
-  Operation,
-  Transforms,
-  Range,
-  Point,
-  List,
-  Key,
-} from '@editablejs/models'
+import { Editor, Node, Path, Operation, Transforms, Range, Point, List, Key } from '@editablejs/models'
 import { Editable, RenderElementProps, RenderLeafProps } from './editable'
-import {
-  EDITOR_TO_KEY_TO_ELEMENT,
-  NODE_TO_KEY,
-  IS_SHIFT_PRESSED,
-  EDITOR_TO_INPUT,
-  EDITOR_TO_SHADOW,
-} from '../utils/weak-maps'
+import { EDITOR_TO_KEY_TO_ELEMENT, NODE_TO_KEY, IS_SHIFT_PRESSED, EDITOR_TO_INPUT, EDITOR_TO_SHADOW } from '../utils/weak-maps'
 import { findCurrentLineRange } from '../utils/lines'
 import { EventEmitter } from './event'
 import { Placeholder } from './placeholder'
@@ -29,6 +13,8 @@ import { withNormalizeNode } from './with-normalize-node'
 import { withDataTransfer } from './with-data-transfer'
 import { getWordRange } from '../utils/text'
 import { ReadOnly } from '../hooks/use-read-only'
+import { generateId } from '../utils/node-id'
+import { DATA_BLOCK_ID } from '../utils/constants'
 
 /**
  * `withEditable` adds React and DOM specific behaviors to the editor.
@@ -108,11 +94,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
 
       if (parentBlockEntry) {
         const [, parentBlockPath] = parentBlockEntry
-        const parentElementRange = Editor.range(
-          editor,
-          parentBlockPath,
-          selection.anchor
-        )
+        const parentElementRange = Editor.range(editor, parentBlockPath, selection.anchor)
 
         const currentLineRange = findCurrentLineRange(e, parentElementRange)
 
@@ -154,10 +136,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
       }
 
       case 'move_node': {
-        const commonPath = Path.common(
-          Path.parent(op.path),
-          Path.parent(op.newPath)
-        )
+        const commonPath = Path.common(Path.parent(op.path), Path.parent(op.newPath))
         matches.push(...getMatches(e, commonPath))
         break
       }
@@ -251,9 +230,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
     }
     const { selection } = e
     if (!selection) return
-    const point = ['focus', 'end'].includes(edge)
-      ? Range.end(selection)
-      : Range.start(selection)
+    const point = ['focus', 'end'].includes(edge) ? Range.end(selection) : Range.start(selection)
     const { text, offset } = Editable.findTextOffsetOnLine(e, point)
     if (text) {
       const { path } = point
@@ -273,9 +250,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
     }
     const { selection } = e
     if (!selection) return
-    const point = ['focus', 'end'].includes(edge)
-      ? Range.end(selection)
-      : Range.start(selection)
+    const point = ['focus', 'end'].includes(edge) ? Range.end(selection) : Range.start(selection)
     const { path } = point
     const node = Node.get(e, path)
     let linePath = path
@@ -397,11 +372,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
   e.insertBreak = () => {
     const { selection } = editor
 
-    if (
-      !Editable.isEditor(editor) ||
-      !selection ||
-      Range.isExpanded(selection)
-    ) {
+    if (!Editable.isEditor(editor) || !selection || Range.isExpanded(selection)) {
       insertBreak()
       return
     }

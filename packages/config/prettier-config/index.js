@@ -1,9 +1,9 @@
 module.exports = {
-  ...require('prettier-config'),
+  ...require('prettier.config.cjs'),
   semi: false,
   tailwindConfig: 'packages/config/tailwind-config/tailwind.config.js',
   singleQuote: true,
-  printWidth: 100,
+  printWidth: 150,
   proseWrap: 'never',
   arrowParens: 'avoid',
   plugins: [require('prettier-plugin-tailwindcss')],
