@@ -16,7 +16,7 @@ export type MarkdownDeserializerTransform = typeof MarkdownDeserializer.transfor
 export type MarkdownDeserializerWithTransform<T = MarkdownDeserializerOptions> = (
   next: MarkdownDeserializerTransform,
   deserializer: typeof MarkdownDeserializer,
-  options: T,
+  options: T
 ) => MarkdownDeserializerTransform
 
 export interface MarkdownDeserializerWithEditorTransform<T = MarkdownDeserializerOptions> {
@@ -53,10 +53,7 @@ export type MarkdownCoreCommonmarkKeys =
   | 'list'
   | 'thematicBreak'
 
-export type MarkdownDeserializerExtension =
-  | Extension
-  | MarkdownCoreCommonmarkKeys
-  | (Extension | MarkdownCoreCommonmarkKeys)[]
+export type MarkdownDeserializerExtension = Extension | MarkdownCoreCommonmarkKeys | (Extension | MarkdownCoreCommonmarkKeys)[]
 
 export type MarkdownDeserializerMdastExtension = Partial<Config> | Partial<Config>[]
 export interface MarkdownDeserializerPlugin {
@@ -64,8 +61,7 @@ export interface MarkdownDeserializerPlugin {
   mdastExtensions?: MarkdownDeserializerMdastExtension
 }
 
-const MARKDOWN_DESERIALIZER_TRANSFORMS: WeakMap<Editor, MarkdownDeserializerWithEditorTransform[]> =
-  new WeakMap()
+const MARKDOWN_DESERIALIZER_TRANSFORMS: WeakMap<Editor, MarkdownDeserializerWithEditorTransform[]> = new WeakMap()
 
 const MARKDOWN_DESERIALIZER_PLUGINS: WeakMap<Editor, MarkdownDeserializerPlugin[]> = new WeakMap()
 
@@ -73,20 +69,14 @@ export interface EditorMarkdownDeserializerOptions extends MarkdownDeserializerO
   editor: Editor
 }
 
-const withEditorDeserializerTransform: MarkdownDeserializerWithTransform<
-  EditorMarkdownDeserializerOptions
-> = (next, self, { editor }) => {
+const withEditorDeserializerTransform: MarkdownDeserializerWithTransform<EditorMarkdownDeserializerOptions> = (next, self, { editor }) => {
   return (node, options = {}) => {
     if (node.type === 'html') {
       if (self._consumedHTMLNodes.has(node)) {
         if (self._consumedHTMLNodes.get(node) === true) self._consumedHTMLNodes.delete(node)
         return []
       }
-      const nodes = HTMLDeserializer.transformWithEditor(
-        editor,
-        new DOMParser().parseFromString(node.value, 'text/html').body,
-        options,
-      )
+      const nodes = HTMLDeserializer.transformWithEditor(editor, new DOMParser().parseFromString(node.value, 'text/html').body, options)
       return nodes.length === 0 ? [{ text: node.value }] : nodes
     }
     return next(node, options)
@@ -120,10 +110,7 @@ export const MarkdownDeserializer = {
           if (this._consumedHTMLNodes.get(node) === true) this._consumedHTMLNodes.delete(node)
           return []
         }
-        const nodes = HTMLDeserializer.transform(
-          new DOMParser().parseFromString(node.value, 'text/html').body,
-          options,
-        )
+        const nodes = HTMLDeserializer.transform(new DOMParser().parseFromString(node.value, 'text/html').body, options)
         return nodes.length === 0 ? [{ text: node.value }] : nodes
 
       case 'text':
@@ -140,21 +127,14 @@ export const MarkdownDeserializer = {
     }
   },
 
-  with<T = MarkdownDeserializerOptions>(
-    transform: MarkdownDeserializerWithTransform<T>,
-    options: T,
-  ) {
+  with<T = MarkdownDeserializerOptions>(transform: MarkdownDeserializerWithTransform<T>, options: T) {
     const { transform: t } = this
     this.transform = transform(t.bind(this), this, options)
   },
 
-  withEditor<T = MarkdownDeserializerOptions>(
-    editor: Editor,
-    transform: MarkdownDeserializerWithTransform<T>,
-    options: T,
-  ) {
+  withEditor<T = MarkdownDeserializerOptions>(editor: Editor, transform: MarkdownDeserializerWithTransform<T>, options: T) {
     const fns = MARKDOWN_DESERIALIZER_TRANSFORMS.get(editor) ?? []
-    if (fns.find(fn => fn.transform === transform)) return
+    if (fns.find((fn) => fn.transform === transform)) return
     fns.push({
       transform: transform as MarkdownDeserializerWithTransform,
       options: options as MarkdownDeserializerOptions,
@@ -184,7 +164,7 @@ export const MarkdownDeserializer = {
 
   withEditorPlugin(editor: Editor, plugin: MarkdownDeserializerPlugin) {
     const plugins = MARKDOWN_DESERIALIZER_PLUGINS.get(editor) ?? []
-    if (plugins.find(p => p === plugin)) return
+    if (plugins.find((p) => p === plugin)) return
     plugins.push(plugin)
     MARKDOWN_DESERIALIZER_PLUGINS.set(editor, plugins)
   },
@@ -219,7 +199,7 @@ export const MarkdownDeserializer = {
         for (const e of ext) {
           setMdastExtensions(e)
         }
-      } else if (!mdastExtensions.some(e => e === ext)) {
+      } else if (!mdastExtensions.some((e) => e === ext)) {
         mdastExtensions.push(ext)
       }
     }

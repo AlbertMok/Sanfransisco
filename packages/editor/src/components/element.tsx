@@ -1,7 +1,6 @@
 import * as React from 'react'
 import getDirection from 'direction'
 import { Editor, Node, Range, Element } from '@editablejs/models'
-
 import Text from './text'
 import useChildren from '../hooks/use-children'
 import { Editable, useEditableStatic, ElementAttributes } from '..'
@@ -11,7 +10,6 @@ import { DATA_BLOCK_ID, DATA_EDITABLE_INLINE, DATA_EDITABLE_NODE, DATA_EDITABLE_
 import { useElementDecorations } from '../hooks/use-decorate'
 import { PlaceholderRender } from '../plugin/placeholder'
 import { usePlaceholder } from '../hooks/use-placeholder'
-import { generateId } from '../utils/node-id'
 
 /**
  * Element.
@@ -22,7 +20,6 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   const editor = useEditableStatic()
   const isInline = editor.isInline(element)
   const key = Editable.findKey(editor, element)
-
   const currentRenderPlaceholder = usePlaceholder(element)
   let children: React.ReactNode = useChildren({
     node: element,

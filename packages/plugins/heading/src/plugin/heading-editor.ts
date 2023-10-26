@@ -4,12 +4,12 @@ import { HeadingType, Heading } from '../interfaces/heading'
 import { getOptions } from '../options'
 
 export interface HeadingEditor extends Editor {
-  createElement: (type?: HeadingType | typeof PARAGRAPH_KEY) => void
+  createHeadingElement: (type?: HeadingType | typeof PARAGRAPH_KEY) => void
 }
 
 export const HeadingEditor = {
   isHeadingEditor: (editor: Editor): editor is HeadingEditor => {
-    return !!(editor as HeadingEditor).createElement
+    return !!(editor as HeadingEditor).createHeadingElement
   },
 
   isHeading: (editor: Editor, n: any): n is Heading => {
@@ -38,6 +38,6 @@ export const HeadingEditor = {
   },
 
   toggle: (editor: Editor, type?: HeadingType | typeof PARAGRAPH_KEY) => {
-    if (HeadingEditor.isHeadingEditor(editor)) editor.createElement(type)
+    if (HeadingEditor.isHeadingEditor(editor)) editor.createHeadingElement(type)
   },
 }

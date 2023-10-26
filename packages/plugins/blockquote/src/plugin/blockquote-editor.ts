@@ -4,12 +4,12 @@ import { Blockquote } from '../interfaces/blockquote'
 import { getOptions } from '../options'
 
 export interface BlockquoteEditor extends Editor {
-  toggleBlockquote: () => void
+  createBlockQuoteElement: () => void
 }
 
 export const BlockquoteEditor = {
   isBlockquoteEditor: (editor: Editor): editor is BlockquoteEditor => {
-    return !!(editor as BlockquoteEditor).toggleBlockquote
+    return !!(editor as BlockquoteEditor).createBlockQuoteElement
   },
 
   isBlockquote: (editor: Editor, n: any): n is Blockquote => {
@@ -24,6 +24,6 @@ export const BlockquoteEditor = {
   getOptions,
 
   toggle: (editor: Editor) => {
-    if (BlockquoteEditor.isBlockquoteEditor(editor)) editor.toggleBlockquote()
+    if (BlockquoteEditor.isBlockquoteEditor(editor)) editor.createBlockQuoteElement()
   },
 }

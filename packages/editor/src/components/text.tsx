@@ -3,11 +3,7 @@ import { Element, Text as SlateText } from '@editablejs/models'
 
 import Leaf from './leaf'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
-import {
-  NODE_TO_ELEMENT,
-  ELEMENT_TO_NODE,
-  EDITOR_TO_KEY_TO_ELEMENT,
-} from '../utils/weak-maps'
+import { NODE_TO_ELEMENT, ELEMENT_TO_NODE, EDITOR_TO_KEY_TO_ELEMENT } from '../utils/weak-maps'
 import { useEditableStatic } from '../hooks/use-editable'
 import { Editable } from '../plugin/editable'
 import { DATA_EDITABLE_NODE } from '../utils/constants'
@@ -34,15 +30,12 @@ const Text = (props: {
     key: `__decorate__${index}`,
   }))
 
-  const ranges = decorates
-    .map(({ ranges, key }) =>
-      ranges.map((range) => ({ ...range, [key]: true }))
-    )
-    .flat()
+  const ranges = decorates.map(({ ranges, key }) => ranges.map((range) => ({ ...range, [key]: true }))).flat()
   const leaves = SlateText.decorations(text, ranges)
 
   const decorateKeys = decorates.map((d) => d.key)
   const children = []
+
   for (let i = 0; i < leaves.length; i++) {
     const leaf = leaves[i]
     let content = (
@@ -88,12 +81,7 @@ const Text = (props: {
 }
 
 const MemoizedText = React.memo(Text, (prev, next) => {
-  return (
-    next.parent === prev.parent &&
-    next.isLast === prev.isLast &&
-    next.text === prev.text &&
-    prev.renderPlaceholder === next.renderPlaceholder
-  )
+  return next.parent === prev.parent && next.isLast === prev.isLast && next.text === prev.text && prev.renderPlaceholder === next.renderPlaceholder
 })
 
 export default MemoizedText

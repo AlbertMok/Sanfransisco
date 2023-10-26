@@ -13,7 +13,7 @@ import { PlaceholderRender } from '../plugin/placeholder'
 // 这段代码似乎是关于文档编辑器的一部分，特别是关于如何渲染子元素或子节点的逻辑。
 //useChildren是一个自定义的React hook，它的目的是为给定的祖先节点生成子组件
 /**
- * Render Children Element And Leaf ELement.
+ * Render Children Element And Leaf ELement, Return the `children`:`Decesdant[]`.
  */
 const useChildren = (props: { node: Ancestor; selection: Range | null; renderPlaceholder?: PlaceholderRender }) => {
   const { node, selection, renderPlaceholder } = props
@@ -49,6 +49,7 @@ const useChildren = (props: { node: Ancestor; selection: Range | null; renderPla
           </GridContext.Provider>
         )
       } else {
+        // 不是表格，直接加入到children中
         children.push(element)
       }
     } else {

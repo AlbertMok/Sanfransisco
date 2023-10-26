@@ -1,0 +1,28 @@
+{
+  "name": "paragraph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src --fix",
+    "format": "prettier --write \"src/**/*.{json,ts,tsx,js,jsx}\"",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@editablejs/models": "workspace:*",
+    "prettier-config": "workspace:*",
+    "react": "^18.x",
+    "react-dom": "^18.x",
+    "tsconfig": "workspace:*",
+    "tsup": "^6.5.0",
+    "tsup-config": "workspace:*",
+    "typescript": "^4.x",
+    "workspace": "0.0.1-preview.1"
+  }
+}

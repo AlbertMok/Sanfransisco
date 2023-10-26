@@ -1,6 +1,5 @@
 import { Descendant, Element } from '@editablejs/models'
 import { HeadingTags } from '../constants'
-import { generateId } from '@editablejs/editor'
 
 export type HeadingType = keyof typeof HeadingTags
 

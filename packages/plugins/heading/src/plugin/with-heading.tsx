@@ -41,7 +41,7 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
 
   setOptions(newEditor, options)
 
-  newEditor.createElement = (type) => {
+  newEditor.createHeadingElement = (type) => {
     editor.normalizeSelection((selection) => {
       if (!selection || (type && type !== PARAGRAPH_KEY && !HeadingEditor.isEnabled(editor, type))) return
 
@@ -106,7 +106,6 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
   }
 
   const { renderElement } = newEditor
-
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (HeadingEditor.isHeading(editor, element)) {
       const tag = HeadingTags[element.type]
@@ -126,7 +125,7 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
     const value = Hotkey.match(hotkeys, e)
     if (value) {
       e.preventDefault()
-      newEditor.createElement(value)
+      newEditor.createHeadingElement(value)
       return
     }
     const { selection } = editor

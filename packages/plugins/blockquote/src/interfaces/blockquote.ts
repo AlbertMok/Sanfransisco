@@ -3,6 +3,7 @@ import { BLOCKQUOTE_KEY } from '../constants'
 
 export interface Blockquote extends Element {
   type: typeof BLOCKQUOTE_KEY
+  id: string
 }
 
 export const Blockquote = {
@@ -10,8 +11,9 @@ export const Blockquote = {
     return Element.isElement(node) && node.type === BLOCKQUOTE_KEY
   },
 
-  create(children: Descendant[]): Blockquote {
+  create(children: Descendant[], id: string): Blockquote {
     return {
+      id,
       type: BLOCKQUOTE_KEY,
       children,
     }

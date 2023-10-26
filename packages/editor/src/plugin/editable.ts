@@ -275,7 +275,6 @@ export const Editable = {
   /**
    * Find a key for a Editor node.
    */
-
   findKey(editor: Editor, node: Node): Key {
     let key = NODE_TO_KEY.get(node)
 
@@ -290,7 +289,6 @@ export const Editable = {
   /**
    * Find the path of Editor node.
    */
-
   findPath(editor: Editor, node: Node): Path {
     const path: Path = []
     let child = node
@@ -322,7 +320,6 @@ export const Editable = {
   /**
    * Find the DOM node that implements DocumentOrShadowRoot for the editor.
    */
-
   findDocumentOrShadowRoot(editor: Editor): Document | ShadowRoot {
     const el = Editable.toDOMNode(editor, editor)
     const root = el.getRootNode()
