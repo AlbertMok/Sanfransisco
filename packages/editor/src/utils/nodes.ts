@@ -1,29 +1,23 @@
 import { Editor, Element, Path } from '@editablejs/models'
 import { TEditor } from '../types'
 
-export const getMatchedNode = (editor: TEditor, type: string) => {
+export const getMatchedNode = (editor: Editor, type: string) => {
   const { selection } = editor
   if (!selection) return false
 
   const [match] = Array.from(
     Editor.nodes(editor, {
       at: Editor.unhangRange(editor, selection),
-      match: (n) =>
-        !Editor.isEditor(n) && Element.isElement(n) && n.type === type,
+      match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === type,
     })
   )
 
   return match
 }
 
-export const isElementActive = (editor: TEditor, type: string) =>
-  !!getMatchedNode(editor, type)
+export const isElementActive = (editor: Editor, type: string) => !!getMatchedNode(editor, type)
 
-export const getElementByPath = (
-  editor: TEditor,
-  path?: Path,
-  mode: 'all' | 'highest' | 'lowest' = 'lowest'
-): any => {
+export const getElementByPath = (editor: Editor, path?: Path, mode: 'all' | 'highest' | 'lowest' = 'lowest'): any => {
   const nodeEntry = Array.from(
     Editor.nodes(editor, {
       match: (node) => Editor.isEditor(editor) && Element.isElement(node),

@@ -5,7 +5,7 @@ import { BlockquoteEditor } from './blockquote-editor'
 const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {
   const block = Editor.above(editor, {
     at,
-    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
   })
   const path = block ? block[1] : []
 
@@ -37,10 +37,12 @@ const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {
     }
   }
 }
+
+// 带有快捷键的方式
 export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
   const { onKeydown } = editor
 
-  editor.onKeydown = event => {
+  editor.onKeydown = (event) => {
     const { selection } = editor
     if (
       selection &&
@@ -51,6 +53,7 @@ export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
     ) {
       const anchor = Range.start(selection)
       const match = findMatchedRange(editor, anchor, shortcuts)
+
       if (match) {
         event.preventDefault()
         const { range, start } = match

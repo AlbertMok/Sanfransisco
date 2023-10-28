@@ -15,21 +15,21 @@ export const usePlaceholderStore = () => {
 
 export const usePlaceholders = () => {
   const store = usePlaceholderStore()
-  const placeholders = useStore(store, state => state.placeholders)
+  const placeholders = useStore(store, (state) => state.placeholders)
   return placeholders
 }
 
 export const usePlaceholder = (node: Node) => {
   const editor = useEditableStatic()
   const store = usePlaceholderStore()
-  const actives = useStore(store, state => state.actives)
+  const actives = useStore(store, (state) => state.actives)
   useIsomorphicLayoutEffect(() => {
     if (Editor.isEmpty(editor, node)) {
       Placeholder.update(editor, [node, Editable.findPath(editor, node)])
       return () => {
         store.setState(({ actives }) => {
           return {
-            actives: actives.filter(d => d.entry[0] !== node),
+            actives: actives.filter((d) => d.entry[0] !== node),
           }
         })
       }
@@ -37,6 +37,6 @@ export const usePlaceholder = (node: Node) => {
   }, [store, node, editor])
 
   return React.useMemo(() => {
-    return actives.find(d => d.entry[0] === node)?.render
+    return actives.find((d) => d.entry[0] === node)?.render
   }, [actives, node])
 }

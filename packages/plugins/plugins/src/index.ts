@@ -2,11 +2,7 @@ import { Editable } from '@editablejs/editor'
 import { MarkEditor, MarkOptions, withMark } from '@editablejs/plugin-mark'
 import { FontSizeEditor, FontSizeOptions, withFontSize } from '@editablejs/plugin-font/size'
 import { FontColorEditor, FontColorOptions, withFontColor } from '@editablejs/plugin-font/color'
-import {
-  BackgroundColorEditor,
-  BackgroundColorOptions,
-  withBackgroundColor,
-} from '@editablejs/plugin-font/background-color'
+import { BackgroundColorEditor, BackgroundColorOptions, withBackgroundColor } from '@editablejs/plugin-font/background-color'
 import { HeadingEditor, HeadingOptions, withHeading } from '@editablejs/plugin-heading'
 import { BlockquoteOptions, withBlockquote, BlockquoteEditor } from '@editablejs/plugin-blockquote'
 import { IndentEditor, IndentOptions, withIndent } from '@editablejs/plugin-indent'
@@ -29,11 +25,8 @@ import { AlignOptions, AlignEditor, withAlign } from '@editablejs/plugin-alignme
 import { LeadingOptions, LeadingEditor, withLeading } from '@editablejs/plugin-leading'
 import { MentionOptions, MentionEditor, withMention } from '@editablejs/plugin-mention'
 import { CodeBlockOptions, CodeBlockEditor, withCodeBlock } from '@editablejs/plugin-codeblock'
-import {
-  ContextMenuEditor,
-  ContextMenuOptions,
-  withContextMenu,
-} from '@editablejs/plugin-context-menu'
+import { ContextMenuEditor, ContextMenuOptions, withContextMenu } from '@editablejs/plugin-context-menu'
+import { ParagraphEditor, withParagraph } from '@editablejs/plugin-paragraph'
 
 export interface PluginOptions {
   contextMenu?: ContextMenuOptions
@@ -77,6 +70,8 @@ export const withPlugins = <T extends Editable>(editor: T, options: PluginOption
   newEditor = withLeading(newEditor, options.leading)
   newEditor = withMention(newEditor, options.mention)
   newEditor = withCodeBlock(newEditor, options.codeBlock)
+  newEditor = withParagraph(newEditor, {})
+
   return newEditor as T &
     ContextMenuEditor &
     MarkEditor &
@@ -96,7 +91,8 @@ export const withPlugins = <T extends Editable>(editor: T, options: PluginOption
     FontColorEditor &
     BackgroundColorEditor &
     MentionEditor &
-    CodeBlockEditor
+    CodeBlockEditor &
+    ParagraphEditor
 }
 
 export * from '@editablejs/plugin-mark'
@@ -116,3 +112,4 @@ export * from '@editablejs/plugin-alignment'
 export * from '@editablejs/plugin-leading'
 export * from '@editablejs/plugin-mention'
 export * from '@editablejs/plugin-codeblock'
+export * from '@editablejs/plugin-paragraph'

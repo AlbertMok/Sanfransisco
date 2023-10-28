@@ -1,16 +1,17 @@
 import { Editor, Descendant, Element, Text } from '@editablejs/models'
-
 import { Root, HTML, Content } from 'mdast'
 import { fromMarkdown, Value } from 'mdast-util-from-markdown'
 import { Extension } from 'micromark-util-types'
 import { Config } from 'mdast-util-from-markdown/lib'
 import { HTMLDeserializer } from './html'
 
+/**Markdown反序列化的配置选项 */
 export interface MarkdownDeserializerOptions {
   element?: Omit<Element, 'children'>
   text?: Omit<Text, 'text'>
 }
 
+/**MarkdownDeserializer.transform的别名 */
 export type MarkdownDeserializerTransform = typeof MarkdownDeserializer.transform
 
 export type MarkdownDeserializerWithTransform<T = MarkdownDeserializerOptions> = (
@@ -24,6 +25,7 @@ export interface MarkdownDeserializerWithEditorTransform<T = MarkdownDeserialize
   options: T
 }
 
+// 默认禁用的Markdown解析功能
 const defaultDisable = [
   'attention',
   'autolink',
@@ -56,6 +58,7 @@ export type MarkdownCoreCommonmarkKeys =
 export type MarkdownDeserializerExtension = Extension | MarkdownCoreCommonmarkKeys | (Extension | MarkdownCoreCommonmarkKeys)[]
 
 export type MarkdownDeserializerMdastExtension = Partial<Config> | Partial<Config>[]
+
 export interface MarkdownDeserializerPlugin {
   extensions?: MarkdownDeserializerExtension
   mdastExtensions?: MarkdownDeserializerMdastExtension
@@ -93,6 +96,7 @@ export const MarkdownDeserializer = {
           children.push(...this.transform(child))
         }
         return children
+
       case 'paragraph':
         for (const child of node.children) {
           children.push(...this.transform(child, { text }))
@@ -115,6 +119,7 @@ export const MarkdownDeserializer = {
 
       case 'text':
         return [Object.assign({}, this._text, text, { text: node.value })]
+
       default:
         if ('children' in node) {
           for (const child of node.children) {

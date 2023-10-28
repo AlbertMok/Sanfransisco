@@ -1,8 +1,66 @@
 {
-  "name": "paragraph",
+  "name": "@editablejs/plugin-paragraph",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.mjs"
+      },
+      "require": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.js"
+      }
+    },
+    "./serializer/*": {
+      "import": {
+        "types": "./dist/serializer/*.d.ts",
+        "default": "./dist/serializer/*.mjs"
+      },
+      "require": {
+        "types": "./dist/serializer/*.d.ts",
+        "default": "./dist/serializer/*.js"
+      }
+    },
+    "./deserializer/*": {
+      "import": {
+        "types": "./dist/deserializer/*.d.ts",
+        "default": "./dist/deserializer/*.mjs"
+      },
+      "require": {
+        "types": "./dist/deserializer/*.d.ts",
+        "default": "./dist/deserializer/*.js"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "serializer/html": [
+        "dist/serializer/html.d.ts"
+      ],
+      "serializer/markdown": [
+        "dist/serializer/markdown.d.ts"
+      ],
+      "deserializer/html": [
+        "dist/deserializer/html.d.ts"
+      ],
+      "deserializer/markdown": [
+        "dist/deserializer/markdown.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "test": "jest",
     "build": "tsup",
@@ -15,7 +73,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@editablejs/deserializer": "workspace:*",
+    "@editablejs/editor": "workspace:*",
     "@editablejs/models": "workspace:*",
+    "@editablejs/serializer": "workspace:*",
+    "@types/lodash.clonedeep": "4.5.8",
+    "@types/react": "^18.x",
+    "@types/react-dom": "^18.x",
+    "lodash.clonedeep": "4.5.0",
     "prettier-config": "workspace:*",
     "react": "^18.x",
     "react-dom": "^18.x",

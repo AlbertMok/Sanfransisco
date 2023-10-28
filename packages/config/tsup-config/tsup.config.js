@@ -1,6 +1,6 @@
 const styled = require('esbuild-plugin-styled-components')
 
-module.exports = options => {
+module.exports = (options) => {
   const isDev = !!options.watch
   return {
     bundle: true,

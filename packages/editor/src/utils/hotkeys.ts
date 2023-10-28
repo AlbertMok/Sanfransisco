@@ -4,7 +4,6 @@ import { IS_APPLE } from './environment'
 /**
  * Hotkey mappings for each platform.
  */
-
 const HOTKEYS: Record<string, string | string[]> = {
   compose: ['down', 'left', 'right', 'up', 'backspace', 'enter'],
   selectAll: 'mod+a',
@@ -60,7 +59,6 @@ const WINDOWS_HOTKEYS: Record<string, string | string[]> = {
 /**
  * Create a platform-aware hotkey checker.
  */
-
 const create = (key: string) => {
   const generic = HOTKEYS[key]
   const apple = APPLE_HOTKEYS[key]
@@ -80,7 +78,6 @@ const create = (key: string) => {
 /**
  * Hotkeys.
  */
-
 const Hotkeys = {
   isSelectAll: create('selectAll'),
   isCut: create('cut'),
@@ -122,22 +119,12 @@ const Hotkeys = {
 
 export default Hotkeys
 
-function match(
-  keys: string | string[] | ((e: KeyboardEvent) => boolean),
-  event: KeyboardEvent
-): boolean
+function match(keys: string | string[] | ((e: KeyboardEvent) => boolean), event: KeyboardEvent): boolean
+
+function match<T extends string = string>(keys: Record<T, string | string[] | ((e: KeyboardEvent) => boolean)>, event: KeyboardEvent): T | false
 
 function match<T extends string = string>(
-  keys: Record<T, string | string[] | ((e: KeyboardEvent) => boolean)>,
-  event: KeyboardEvent
-): T | false
-
-function match<T extends string = string>(
-  keys:
-    | string
-    | string[]
-    | ((e: KeyboardEvent) => boolean)
-    | Record<T, string | string[] | ((e: KeyboardEvent) => boolean)>,
+  keys: string | string[] | ((e: KeyboardEvent) => boolean) | Record<T, string | string[] | ((e: KeyboardEvent) => boolean)>,
   event: KeyboardEvent
 ): T | boolean {
   if (typeof keys === 'string' || Array.isArray(keys)) {
@@ -166,9 +153,7 @@ export const Hotkey = {
       } else if (key === 'opt') {
         return IS_APPLE ? 'Option' : 'Alt'
       } else if (key.length > 1) {
-        return (
-          key.substring(0, 1).toUpperCase() + key.substring(1).toLowerCase()
-        )
+        return key.substring(0, 1).toUpperCase() + key.substring(1).toLowerCase()
       }
       return key.toUpperCase()
     })

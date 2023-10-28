@@ -1,6 +1,6 @@
 import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
-import { BLOCKQUOTE_KEY } from '../constants'
-import { Blockquote } from '../interfaces/blockquote'
+import { PARAGRAPH_KEY } from '../constants'
+import { Paragraph } from '../interfaces/paragraph'
 
 export const withBlockquoteHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
@@ -8,21 +8,11 @@ export const withBlockquoteHTMLSerializerTransform: HTMLSerializerWithTransform 
   return (node, options) => {
     const { attributes, style } = options ?? {}
 
-    if (Blockquote.isBlockquote(node)) {
+    if (Paragraph.isParagraph(node)) {
       return serializer.create(
-        BLOCKQUOTE_KEY,
+        PARAGRAPH_KEY,
         serializer.mergeOptions(node, attributes, customAttributes),
-        serializer.mergeOptions(
-          node,
-          style,
-          {
-            borderLeft: '4px solid #ddd',
-            paddingLeft: '1em',
-            marginLeft: '0px',
-            opacity: '0.5',
-          },
-          customStyle
-        ),
+        serializer.mergeOptions(node, style, customStyle),
         node.children.map((child) => serializer.transform(child)).join('')
       )
     }

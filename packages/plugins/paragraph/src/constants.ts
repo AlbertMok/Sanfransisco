@@ -1,1 +1,1 @@
-const PARAGRAPH_KEY = 'paragraph'
+export const PARAGRAPH_KEY = 'paragraph'

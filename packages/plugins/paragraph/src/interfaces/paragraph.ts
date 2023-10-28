@@ -1,4 +1,5 @@
 import { Descendant, Element } from '@editablejs/models'
+import { PARAGRAPH_KEY } from '../constants'
 
 export interface Paragraph extends Element {
   type: typeof PARAGRAPH_KEY
@@ -10,7 +11,7 @@ export const Paragraph = {
     return Element.isElement(element) && !!element.type && element.type === PARAGRAPH_KEY
   },
 
-  creat(children: Descendant[], id: string): Paragraph {
+  create(children: Descendant[], id: string): Paragraph {
     return {
       id,
       type: PARAGRAPH_KEY,

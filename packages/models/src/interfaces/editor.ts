@@ -30,6 +30,9 @@ const EDITOR_ACTIVE_MARKS = new WeakMap<Editor, EditorMarks>()
 
 const EDITOR_ACTIVE_ELEMENTS = new WeakMap<Editor, EditorElements>()
 
+/**
+ * extend the slate baseEditor
+ */
 interface EditorInterface extends SlateEditorInterface {
   isSolidVoid: (editor: SlateEditor, element: Element) => boolean
   isGrid: (editor: SlateEditor, value: any) => value is Grid
@@ -105,11 +108,11 @@ const marks = (editor: SlateEditor): EditorMarks | null => {
   if (anchor.offset === 0) {
     const prev = Editor.previous(editor, { at: path, match: Text.isText })
     const markedVoid = Editor.above(editor, {
-      match: n => Element.isElement(n) && Editor.isVoid(editor, n) && editor.markableVoid(n),
+      match: (n) => Element.isElement(n) && Editor.isVoid(editor, n) && editor.markableVoid(n),
     })
     if (!markedVoid) {
       const block = Editor.above(editor, {
-        match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+        match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
       })
 
       if (prev && block) {
@@ -133,7 +136,7 @@ SlateEditor.marks = (editor: SlateEditor, at?: Location) => {
   let editorMarks: EditorMarks = {}
   const prevSelection = editor.selection
   if (at) editor.selection = Editor.range(editor, at)
-  editor.normalizeSelection(selection => {
+  editor.normalizeSelection((selection) => {
     if (editor.selection !== selection) editor.selection = selection
     Object.assign(editorMarks, marks(editor) ?? {})
   })
@@ -160,8 +163,7 @@ SlateEditor.point = (editor: SlateEditor, at: Location, options: EditorPointOpti
 SlateEditor.isEmpty = (editor: Editor, node: Node): boolean => {
   if (Text.isText(node)) return node.text === '' && !CompositionText.isCompositionText(node)
   else if (node.children.length === 0) return true
-  else if (node.children.length === 1)
-    return !Editor.isVoid(editor, node) && SlateEditor.isEmpty(editor, node.children[0] as Element)
+  else if (node.children.length === 1) return !Editor.isVoid(editor, node) && SlateEditor.isEmpty(editor, node.children[0] as Element)
   else return false
 }
 
@@ -197,11 +199,11 @@ export const Editor: EditorInterface = {
     const prevSelection = editor.selection
     if (at) editor.selection = Editor.range(editor, at)
     const editorElements: EditorElements = {}
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (selection === null) return
       const nodeEntries = Editor.nodes<Element>(editor, {
         at: selection,
-        match: n => !Editor.isEditor(n) && Element.isElement(n),
+        match: (n) => !Editor.isEditor(n) && Element.isElement(n),
       })
 
       for (const entry of nodeEntries) {
@@ -218,6 +220,9 @@ export const Editor: EditorInterface = {
 
 export * from 'slate'
 
+/**
+ * create an Editor instance
+ */
 export const createEditor = () => {
   const baseEditor = createSlateEditor()
 
@@ -325,20 +330,6 @@ export const createEditor = () => {
   return baseEditor
 }
 
-export {
-  Element,
-  Location,
-  Node,
-  Operation,
-  Path,
-  PathRef,
-  Point,
-  PointRef,
-  Range,
-  RangeRef,
-  Scrubber,
-  Span,
-  Text,
-} from 'slate'
+export { Element, Location, Node, Operation, Path, PathRef, Point, PointRef, Range, RangeRef, Scrubber, Span, Text } from 'slate'
 export type Editor = SlateEditor
 export type { EditorInterface }

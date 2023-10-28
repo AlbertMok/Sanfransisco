@@ -110,14 +110,17 @@ export const HTMLDeserializer = {
   },
 }
 
+/**这是一个类型别名,这个是HTMLDeserializer.transform的函数的type的别名. */
 export type HTMLDeserializerTransform = typeof HTMLDeserializer.transform
 
+// 这是一个更高阶的函数，它接受三个参数
 export type HTMLDeserializerWithTransform<T = HTMLDeserializerOptions> = (
   next: HTMLDeserializerTransform,
   deserializer: typeof HTMLDeserializer,
   options: T
 ) => HTMLDeserializerTransform
 
+/** 定义与特定编辑器相关的HTML反序列化配置 */
 export interface EditorHTMLDeserializerWithTransform<T = HTMLDeserializerOptions> {
   transform: HTMLDeserializerWithTransform<T>
   options: T

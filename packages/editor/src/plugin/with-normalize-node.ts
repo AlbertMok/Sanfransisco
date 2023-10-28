@@ -6,7 +6,7 @@ export const withNormalizeNode = <T extends Editor>(editor: T) => {
 
   const { normalizeNode } = editor
 
-  e.normalizeNode = entry => {
+  e.normalizeNode = (entry) => {
     const [node, path] = entry
     if (Editor.isBlock(e, node)) {
       const { type, ...attributes } = node

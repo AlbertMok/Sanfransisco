@@ -3,12 +3,7 @@ import { Editor, Transforms, Range, Node } from '@editablejs/models'
 import { HTMLSerializer } from '@editablejs/serializer/html'
 import { TextSerializer } from '@editablejs/serializer/text'
 import { readClipboardData, writeClipboardData } from '../utils/clipboard'
-import {
-  APPLICATION_FRAGMENT_TYPE,
-  DATA_EDITABLE_FRAGMENT,
-  TEXT_HTML,
-  TEXT_PLAIN,
-} from '../utils/constants'
+import { APPLICATION_FRAGMENT_TYPE, DATA_EDITABLE_FRAGMENT, TEXT_HTML, TEXT_PLAIN } from '../utils/constants'
 import { fragmentToString, parseDataTransfer } from '../utils/data-transfer'
 import { IS_PASTE_TEXT } from '../utils/weak-maps'
 import { Editable } from './editable'
@@ -16,13 +11,13 @@ import { Editable } from './editable'
 export const withDataTransfer = <T extends Editor>(editor: T) => {
   const e = editor as T & Editable
 
-  e.toDataTransfer = range => {
+  e.toDataTransfer = (range) => {
     const fragment = e.getFragment(range)
     const fragmentString = fragmentToString(fragment)
 
-    const text = fragment.map(node => TextSerializer.transformWithEditor(e, node)).join('\n')
+    const text = fragment.map((node) => TextSerializer.transformWithEditor(e, node)).join('\n')
 
-    let html = fragment.map(node => HTMLSerializer.transformWithEditor(e, node)).join('')
+    let html = fragment.map((node) => HTMLSerializer.transformWithEditor(e, node)).join('')
     html = `<div ${DATA_EDITABLE_FRAGMENT}="${fragmentString}">${html}</div>`
     html = `<html><head><meta name="source" content="${DATA_EDITABLE_FRAGMENT}" /></head><body>${html}</body></html>`
     const dataTransfer = new DataTransfer()
@@ -32,7 +27,7 @@ export const withDataTransfer = <T extends Editor>(editor: T) => {
     return dataTransfer
   }
 
-  e.onCut = event => {
+  e.onCut = (event) => {
     if (event.defaultPrevented) return
     const { selection } = e
     const { clipboardData } = event
@@ -50,14 +45,14 @@ export const withDataTransfer = <T extends Editor>(editor: T) => {
     e.emit('cut', event)
   }
 
-  e.onCopy = event => {
+  e.onCopy = (event) => {
     if (event.defaultPrevented) return
     const { clipboardData } = event
     if (clipboardData) writeClipboardData(clipboardData)
     e.emit('copy', event)
   }
 
-  e.onPaste = event => {
+  e.onPaste = (event) => {
     if (event.defaultPrevented) return
     const { clipboardData } = event
     if (!clipboardData) return
@@ -78,7 +73,7 @@ export const withDataTransfer = <T extends Editor>(editor: T) => {
         if (split) {
           Transforms.splitNodes(e, { always: true })
         }
-        e.normalizeSelection(selection => {
+        e.normalizeSelection((selection) => {
           if (selection !== e.selection) e.selection = selection
           e.insertText(line)
         })
@@ -91,13 +86,13 @@ export const withDataTransfer = <T extends Editor>(editor: T) => {
     e.emit('paste', event)
   }
 
-  e.copy = range => {
+  e.copy = (range) => {
     const data = e.toDataTransfer(range)
     const event = new ClipboardEvent('copy', { clipboardData: data })
     e.onCopy(event)
   }
 
-  e.cut = range => {
+  e.cut = (range) => {
     const data = e.toDataTransfer(range)
     const event = new ClipboardEvent('copy', { clipboardData: data })
     if (range) {
@@ -106,21 +101,21 @@ export const withDataTransfer = <T extends Editor>(editor: T) => {
     e.onCut(event)
   }
 
-  e.insertFromClipboard = range => {
+  e.insertFromClipboard = (range) => {
     if (range) {
       Transforms.select(e, range)
     }
-    readClipboardData().then(data => {
+    readClipboardData().then((data) => {
       const event = new ClipboardEvent('paste', { clipboardData: data })
       e.onPaste(event)
     })
   }
 
-  e.insertTextFromClipboard = range => {
+  e.insertTextFromClipboard = (range) => {
     if (range) {
       Transforms.select(e, range)
     }
-    readClipboardData().then(data => {
+    readClipboardData().then((data) => {
       IS_PASTE_TEXT.set(e, true)
       const event = new ClipboardEvent('pasteText', { clipboardData: data })
       e.onPaste(event)

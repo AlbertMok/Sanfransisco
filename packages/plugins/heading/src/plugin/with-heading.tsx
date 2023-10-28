@@ -72,10 +72,9 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
           blocks.push(entry)
         }
       }
-
+      let id = generateId()
       const textMark = getTextMark(editor)
       for (const [_, path] of blocks) {
-        let id = generateId()
         if (type !== PARAGRAPH_KEY) {
           const style = getStyle(editor, type)
           const mark: Partial<Record<string, string>> = {}

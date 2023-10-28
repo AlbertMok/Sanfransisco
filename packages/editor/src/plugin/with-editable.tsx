@@ -12,9 +12,6 @@ import { withKeydown } from './with-keydown'
 import { withNormalizeNode } from './with-normalize-node'
 import { withDataTransfer } from './with-data-transfer'
 import { getWordRange } from '../utils/text'
-import { ReadOnly } from '../hooks/use-read-only'
-import { generateId } from '../utils/node-id'
-import { DATA_BLOCK_ID } from '../utils/constants'
 
 /**
  * `withEditable` adds React and DOM specific behaviors to the editor.
@@ -23,6 +20,9 @@ import { DATA_BLOCK_ID } from '../utils/constants'
  * this plugin.
  *
  * See https://docs.slatejs.org/concepts/11-typescript to learn how.
+ *
+ * this plugin is for you to extend your custom editor, and there are some default functions
+ * you can override them with your custom editor function , like renderElement,render...
  */
 export const withEditable = <T extends Editor>(editor: T) => {
   const e = editor as T & Editable
@@ -367,8 +367,9 @@ export const withEditable = <T extends Editor>(editor: T) => {
     )
   }
 
+  // 这个是扩展后的编辑器的自定义的 insertBreak
   const { insertBreak } = e
-
+  // 插入新的block
   e.insertBreak = () => {
     const { selection } = editor
 

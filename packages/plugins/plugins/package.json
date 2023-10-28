@@ -113,7 +113,8 @@
     "@editablejs/plugin-list": "workspace:*",
     "@editablejs/plugin-mark": "workspace:*",
     "@editablejs/plugin-mention": "workspace:*",
-    "@editablejs/plugin-table": "workspace:*"
+    "@editablejs/plugin-table": "workspace:*",
+    "@editablejs/plugin-paragraph":"workspace:*"
   },
   "lint-staged": {
     "src/**/*.{json,ts,tsx,js,jsx}": [
