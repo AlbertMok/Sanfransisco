@@ -12,8 +12,8 @@ export const BlockquoteEditor = {
     return !!(editor as BlockquoteEditor).createBlockQuoteElement
   },
 
-  isBlockquote: (editor: Editor, n: any): n is Blockquote => {
-    return Blockquote.isBlockquote(n)
+  isBlockquote: (editor: Editor, node: any): node is Blockquote => {
+    return Blockquote.isBlockquote(node)
   },
 
   isActive: (editor: Editor) => {

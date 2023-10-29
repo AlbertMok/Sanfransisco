@@ -1,21 +1,12 @@
 import { Range } from '@editablejs/models'
 import * as React from 'react'
 import { Editable } from '../plugin/editable'
-import {
-  EDITOR_TO_INPUT,
-  IS_COMPOSING,
-  IS_MOUSEDOWN,
-  IS_PASTE_TEXT,
-  IS_TOUCHING,
-} from '../utils/weak-maps'
+import { EDITOR_TO_INPUT, IS_COMPOSING, IS_MOUSEDOWN, IS_PASTE_TEXT, IS_TOUCHING } from '../utils/weak-maps'
 import { useFocused } from '../hooks/use-focused'
 import { ShadowBlock, ShadowRect } from './shadow'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
 import { useEditableStatic } from '../hooks/use-editable'
-import {
-  useSelectionDrawingSelection,
-  useSelectionDrawingRects,
-} from '../hooks/use-selection-drawing'
+import { useSelectionDrawingSelection, useSelectionDrawingRects } from '../hooks/use-selection-drawing'
 import { ReadOnly, useReadOnly } from '../hooks/use-read-only'
 import { composeEventHandlers } from '../utils/event'
 import { useEffect } from 'react'
@@ -112,10 +103,7 @@ const InputComponent: React.FC<InputProps> = ({ autoFocus }) => {
         const { nativeEvent } = event
         const isPasteText = IS_PASTE_TEXT.get(editor)
         event.preventDefault()
-        const e = new ClipboardEvent(
-          isPasteText ? 'pasteText' : 'paste',
-          nativeEvent
-        )
+        const e = new ClipboardEvent(isPasteText ? 'pasteText' : 'paste', nativeEvent)
         editor.onPaste(e)
       }
     )(event)

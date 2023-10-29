@@ -17,7 +17,7 @@ export const insertNodes = <T extends Node>(
     hanging?: boolean
     select?: boolean
     voids?: boolean
-  } = {},
+  } = {}
 ) => {
   const { at = editor.selection } = options
   if (handleInserInGrid(editor, at)) {
@@ -30,7 +30,7 @@ export const insertNodes = <T extends Node>(
       (editor.isGrid(firstNode) || (editor.isVoid(firstNode) && Editor.isBlock(editor, firstNode)))
     ) {
       const block = Editor.above(editor, {
-        match: n => Editor.isBlock(editor, n),
+        match: (n) => Editor.isBlock(editor, n),
       })
       if (at && block && Editor.isEmpty(editor, block[0])) {
         pathRef = Editor.pathRef(editor, block[1])
@@ -54,7 +54,7 @@ export const insertNodes = <T extends Node>(
     Promise.resolve().then(() => {
       FLUSHING.set(editor, false)
       const block = Editor.above(editor, {
-        match: n => n === LAST_NODE.get(editor),
+        match: (n) => n === LAST_NODE.get(editor),
       })
       if (!block) return
       if (editor.isGrid(block[0]) || editor.isVoid(block[0])) {
@@ -62,15 +62,8 @@ export const insertNodes = <T extends Node>(
         const next = Editor.next(editor, {
           at: path,
         })
-        if (
-          !next ||
-          (Element.isElement(next[0]) && (editor.isGrid(next[0]) || editor.isVoid(next[0])))
-        ) {
-          Transforms.insertNodes(
-            editor,
-            { type: 'paragraph', children: [{ text: '' }] },
-            { at: Path.next(path) },
-          )
+        if (!next || (Element.isElement(next[0]) && (editor.isGrid(next[0]) || editor.isVoid(next[0])))) {
+          Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] }, { at: Path.next(path) })
         }
       }
     })

@@ -108,9 +108,8 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (HeadingEditor.isHeading(editor, element)) {
       const tag = HeadingTags[element.type]
-
       return (
-        <div {...attributes} data-block-id={element.id}>
+        <div {...attributes}>
           <StyledHeading as={tag}>{children}</StyledHeading>
         </div>
       )
@@ -141,7 +140,12 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
           if (entry) {
             path = entry[1]
           }
-          Transforms.insertNodes(newEditor, { type: PARAGRAPH_KEY, children: [{ text: '' }] }, { at: Path.next(path), select: true })
+          Transforms.insertNodes(
+            newEditor,
+            { type: PARAGRAPH_KEY, children: [{ text: '' }], id: generateId() },
+            { at: Path.next(path), select: true }
+          )
+          // editor.insertBreak()
         }
       }
     }

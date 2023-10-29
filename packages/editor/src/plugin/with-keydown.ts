@@ -216,9 +216,7 @@ export const withKeydown = <T extends Editor>(editor: T) => {
 
     if (Hotkeys.isMoveEditorEnd(event)) {
       event.preventDefault()
-
       e.focus(false)
-
       return
     }
 

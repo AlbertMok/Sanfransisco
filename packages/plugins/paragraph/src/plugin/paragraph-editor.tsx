@@ -26,7 +26,6 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const newEditor = editor as T & ParagraphEditor
 
   newEditor.createParagraphElement = () => {
-    let id = generateId()
     const { selection } = editor
     if (selection) {
       // type NodeEntry<T extends Node = Node> = [T, Path],
@@ -35,40 +34,44 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
         mode: 'lowest',
       })
 
-      const isDefaultNode = nodeEntry && nodeEntry[0].type !== PARAGRAPH_KEY
-
       // create a new Paragraph
-      const newParagraph = { type: 'paragraph', children: [{ text: '' }], id }
+      const newParagraph = { type: 'paragraph', children: [{ text: '' }], id: generateId() }
+
+      // 不是 paragraph
+      const isNotParagraph = nodeEntry && nodeEntry[0].type !== newParagraph.type
 
       //获取当前光标所在位置的anchor
       const parentPath = Path.parent(selection.anchor.path)
       // Get the text string content of a location.
       const text = Editor.string(editor, parentPath)
-      if (isDefaultNode && text.length === 0) {
+      console.log(isNotParagraph)
+      if (isNotParagraph && text.length === 0) {
+        console.log('convert to the paragraph')
+        console.log('text is 0')
         Transforms.setNodes(editor, newParagraph, { at: parentPath })
         return
       }
-
       // 如果光标是在一个节点的最开头位置，并按下enter之后,当前节点下移的话，需要把当前节点删除，然后深复制，然后在下面插入
       const isStart = Editor.isStart(editor, selection.anchor, parentPath)
-      if (isDefaultNode && isStart) {
+      if (isNotParagraph && isStart) {
+        console.log('isstart')
         const [currentNode] = nodeEntry
         Transforms.setNodes(editor, newParagraph, { at: parentPath })
         Transforms.delete(editor, { unit: 'block' })
         Transforms.insertNodes(editor, cloneDeep(currentNode), { at: Path.next(parentPath) })
-
         // 移动光标到被下移动的节点的开头
         Transforms.select(editor, { path: [Path.next(selection.anchor.path)[0] + 1, 0], offset: 0 })
         return
       }
-
       Transforms.splitNodes(editor, { always: true })
       Transforms.setNodes(editor, newParagraph)
+
       return
     }
     return
   }
 
+  /** Insert a block break at the current selection. If the selection is currently expanded, delete it first. */
   newEditor.insertBreak = () => {
     newEditor.createParagraphElement()
   }

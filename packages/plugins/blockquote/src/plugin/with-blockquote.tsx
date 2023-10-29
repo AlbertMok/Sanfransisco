@@ -117,6 +117,7 @@ export const withBlockquote = <T extends Editable>(editor: T, options: Blockquot
     onKeydown(e)
   }
 
+  /** options的shorcuts */
   const { shortcuts } = options
   if (shortcuts !== false) {
     withShortcuts(newEditor, defaultShortcuts.concat(Array.isArray(shortcuts) ? shortcuts : []))

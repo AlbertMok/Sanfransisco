@@ -22,8 +22,7 @@ module.exports = {
     },
     boxShadow: {
       sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-      DEFAULT:
-        '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+      DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
       md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
       lg: '0px 0.8px 2px rgba(0, 0, 0, 0.032), 0px 2.7px 6.7px rgba(0, 0, 0, 0.048), 0px 12px 30px rgba(0, 0, 0, 0.08)',
       'lg-dark':
@@ -47,11 +46,7 @@ module.exports = {
         8: '0.08',
       },
       fontFamily: {
-        sans: [
-          'Optimistic Display',
-          '-apple-system',
-          ...defaultTheme.fontFamily.sans,
-        ],
+        sans: ['Optimistic Display', '-apple-system', ...defaultTheme.fontFamily.sans],
         mono: ['"Source Code Pro"', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {

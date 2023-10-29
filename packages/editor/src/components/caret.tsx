@@ -14,6 +14,7 @@ import { isTouchDevice } from '../utils/environment'
 import { useReadOnly } from '../hooks/use-read-only'
 import { ShadowBlock } from './shadow'
 
+/**光标 */
 interface CaretProps {
   timeout?: number | false
 }
@@ -49,8 +50,7 @@ const CaretComponent: React.FC<CaretProps> = React.memo(({ timeout = 530 }) => {
   const setOpacity = (opacity?: number) => {
     const elRef = ref.current
     if (elRef) {
-      elRef.style.opacity =
-        opacity !== undefined ? String(opacity) : elRef.style.opacity === '1' ? '0' : '1'
+      elRef.style.opacity = opacity !== undefined ? String(opacity) : elRef.style.opacity === '1' ? '0' : '1'
     }
   }
 
@@ -67,7 +67,7 @@ const CaretComponent: React.FC<CaretProps> = React.memo(({ timeout = 530 }) => {
         active()
       }, timeout)
     },
-    [clearActive, editor, rect, timeout],
+    [clearActive, editor, rect, timeout]
   )
 
   useIsomorphicLayoutEffect(() => {
@@ -81,11 +81,7 @@ const CaretComponent: React.FC<CaretProps> = React.memo(({ timeout = 530 }) => {
 
   return (
     <ShadowBlock
-      rect={
-        rect
-          ? Object.assign({}, rect, { width: caretWidth, color: caretColor })
-          : { width: 0, height: 0, top: 0, left: 0 }
-      }
+      rect={rect ? Object.assign({}, rect, { width: caretWidth, color: caretColor }) : { width: 0, height: 0, top: 0, left: 0 }}
       ref={ref}
       style={{ willChange: 'opacity, transform', opacity: rect ? 1 : 0 }}
     />

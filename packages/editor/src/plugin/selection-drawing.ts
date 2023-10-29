@@ -40,10 +40,7 @@ export interface SelectionDrawingStore {
   enabled: boolean
 }
 
-const EDITOR_TO_SELECTION_DRAWING_STORE = new WeakMap<
-  Editor,
-  UseBoundStore<StoreApi<SelectionDrawingStore>>
->()
+const EDITOR_TO_SELECTION_DRAWING_STORE = new WeakMap<Editor, UseBoundStore<StoreApi<SelectionDrawingStore>>>()
 
 const getStore = (editor: Editor) => {
   let store = EDITOR_TO_SELECTION_DRAWING_STORE.get(editor)
@@ -54,9 +51,9 @@ const getStore = (editor: Editor) => {
 
         blurColor: 'rgba(136, 136, 136, 0.3)',
 
-        caretColor: '#000',
+        caretColor: 'rgb(37, 99, 235)',
 
-        caretWidth: 1,
+        caretWidth: 1.5,
 
         dragColor: 'rgb(37, 99, 235)',
 

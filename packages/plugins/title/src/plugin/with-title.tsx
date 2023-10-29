@@ -1,4 +1,4 @@
-import { Editable, Placeholder } from '@editablejs/editor'
+import { Editable, generateId, Placeholder } from '@editablejs/editor'
 import { Editor, Transforms, Node, Path, List } from '@editablejs/models'
 import { FC } from 'react'
 import tw from 'twin.macro'
@@ -8,7 +8,7 @@ import { Title } from '../interfaces/title'
 import { setOptions, TitleComponentProps, TitleOptions } from '../options'
 import { TitleEditor } from './title-editor'
 
-const StyledTitle = tw.h1`font-bold text-5xl mb-6`
+const StyledTitle = tw.h1`font-bold text-3xl mb-6`
 
 const DefaultTitle: FC<TitleComponentProps> = ({ attributes, children }) => {
   return <StyledTitle {...attributes}>{children}</StyledTitle>
@@ -24,35 +24,23 @@ Editor.isEmpty = (editor, node) => {
   return isEmpty(editor, node)
 }
 
-export const withTitle = <T extends Editable>(
-  editor: T,
-  options: TitleOptions = {}
-) => {
+export const withTitle = <T extends Editable>(editor: T, options: TitleOptions = {}) => {
   const titleEditor = editor as T & TitleEditor
 
   setOptions(titleEditor, options)
 
   const { renderElement, normalizeNode } = titleEditor
 
-  titleEditor.renderElement = ({ element, attributes, children }) => {
-    if (Title.isTitle(element)) {
-      const Component = options.component || DefaultTitle
-      return <Component attributes={attributes}>{children}</Component>
-    }
-    return renderElement({ attributes, children, element })
-  }
-
   titleEditor.normalizeNode = (entry) => {
     const [node, path] = entry
+
     if (Editor.isEditor(node)) {
       let isHandled = false
+
       const firstChild = node.children[0]
+
       if (!firstChild || Editor.isVoid(titleEditor, firstChild)) {
-        Transforms.insertNodes(
-          titleEditor,
-          { type: TITLE_KEY, children: [{ text: '' }] },
-          { at: [0] }
-        )
+        Transforms.insertNodes(titleEditor, { type: TITLE_KEY, children: [{ text: '' }] }, { at: [0] })
         isHandled = true
       } else if (!Title.isTitle(firstChild)) {
         let block: Node = firstChild
@@ -75,13 +63,11 @@ export const withTitle = <T extends Editable>(
         )
         isHandled = true
       }
+
       const secondChild = node.children[1]
       if (!secondChild) {
-        Transforms.insertNodes(
-          titleEditor,
-          { type: 'paragraph', children: [{ text: '' }] },
-          { at: [1] }
-        )
+        // if there is not a second node in the editor,then insert a new node
+        Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }], id: generateId() }, { at: [1] })
         isHandled = true
       } else if (Title.isTitle(secondChild)) {
         Transforms.setNodes(titleEditor, { type: 'paragraph' }, { at: [1] })
@@ -95,7 +81,9 @@ export const withTitle = <T extends Editable>(
           return
         }
       }
+
       const parent = Node.parent(titleEditor, path)
+
       if (!Editor.isEditor(parent)) {
         if (Editor.isList(editor, parent)) {
           const selection = editor.selection
@@ -120,6 +108,14 @@ export const withTitle = <T extends Editable>(
       }
     }
     normalizeNode(entry)
+  }
+
+  titleEditor.renderElement = ({ element, attributes, children }) => {
+    if (Title.isTitle(element)) {
+      const Component = options.component || DefaultTitle
+      return <Component attributes={attributes}>{children}</Component>
+    }
+    return renderElement({ attributes, children, element })
   }
 
   Placeholder.subscribe(

@@ -15,28 +15,30 @@ type ShadowBlockProps = {
   rect: ShadowRect
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const ShadowBlockDefault: React.FC<ShadowBlockProps & React.RefAttributes<HTMLDivElement>> =
-  React.forwardRef<HTMLDivElement, ShadowBlockProps>(({ children, rect, style, ...props }, ref) => (
-    <div
-      ref={ref}
-      style={{
-        position: 'absolute',
-        top: rect.top,
-        left: rect.left,
-        width: rect.width,
-        height: rect.height,
-        // 数值为单数的情况下，两组重合位置会有阴影
-        // transform: `translateX(${rect.left || 0}px) translateY(${rect.top || 0}px)`,
-        opacity: 1,
-        backgroundColor: `${rect.color || 'transparent'}`,
-        zIndex: 1,
-        ...style,
-      }}
-      {...props}
-    >
-      {children}
-    </div>
-  ))
+export const ShadowBlockDefault: React.FC<ShadowBlockProps & React.RefAttributes<HTMLDivElement>> = React.forwardRef<
+  HTMLDivElement,
+  ShadowBlockProps
+>(({ children, rect, style, ...props }, ref) => (
+  <div
+    ref={ref}
+    style={{
+      position: 'absolute',
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height,
+      // 数值为单数的情况下，两组重合位置会有阴影
+      // transform: `translateX(${rect.left || 0}px) translateY(${rect.top || 0}px)`,
+      opacity: 1,
+      backgroundColor: `${rect.color || 'transparent'}`,
+      zIndex: 1,
+      ...style,
+    }}
+    {...props}
+  >
+    {children}
+  </div>
+))
 
 ShadowBlockDefault.displayName = 'ShadowBlock'
 
@@ -55,8 +57,8 @@ interface ShadowContainerProps {
   children?: React.ReactNode
 }
 
-const ShadowContainer: React.FC<ShadowContainerProps & React.RefAttributes<ShadowRoot>> =
-  React.forwardRef<ShadowRoot, ShadowContainerProps>(({ children }, ref) => {
+const ShadowContainer: React.FC<ShadowContainerProps & React.RefAttributes<ShadowRoot>> = React.forwardRef<ShadowRoot, ShadowContainerProps>(
+  ({ children }, ref) => {
     const [root, setRoot] = React.useState<ShadowRoot>()
     const containerRef = React.useRef<HTMLDivElement>(null)
 
@@ -70,11 +72,11 @@ const ShadowContainer: React.FC<ShadowContainerProps & React.RefAttributes<Shado
 
     return (
       <div ref={containerRef} style={{ position: 'absolute', zIndex: 2, top: 0, left: 0 }}>
-        {root &&
-          ReactDOM.createPortal(<div style={{ pointerEvents: 'none' }}>{children}</div>, root)}
+        {root && ReactDOM.createPortal(<div style={{ pointerEvents: 'none' }}>{children}</div>, root)}
       </div>
     )
-  })
+  }
+)
 
 ShadowContainer.displayName = 'Shadow'
 

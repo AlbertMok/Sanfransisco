@@ -1,10 +1,7 @@
 import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
 import { BLOCKQUOTE_KEY } from '../constants'
 
-export const withBlockquoteHTMLDeserializerTransform: HTMLDeserializerWithTransform = (
-  next,
-  serializer,
-) => {
+export const withBlockquoteHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next, serializer) => {
   return (node, options = {}) => {
     const { element, text } = options
     if (node.nodeName.toLowerCase() === BLOCKQUOTE_KEY) {
