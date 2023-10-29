@@ -11,7 +11,6 @@ interface CapturedData {
 
 const sideToolBarCapturedDataWeakMap = new WeakMap<Editable, CapturedData>()
 
-
 /**
  *
  * @param editor
@@ -29,7 +28,6 @@ export const getCapturedData = (editor: Editable): CapturedData | undefined => {
 export const setCapturedData = (editor: Editable, data: CapturedData) => {
   sideToolBarCapturedDataWeakMap.set(editor, data)
 }
-
 
 /**
  * 清空元素快照信息

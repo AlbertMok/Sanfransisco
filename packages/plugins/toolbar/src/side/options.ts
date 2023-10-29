@@ -1,5 +1,5 @@
 import { Editable } from '@editablejs/editor'
-import { Node } from '@editablejs/models'
+import { Editor, Node } from '@editablejs/models'
 import { SideToolbarLocale } from './locale'
 
 export interface SideToolbarOptions {
@@ -8,13 +8,13 @@ export interface SideToolbarOptions {
   delayDragDuration?: number
   horizontalDistanceThreshold?: number
   verticalDistanceThreshold?: number // 垂直距离入口
-  match?: (node: Node) => boolean
+  match?: (node: Node) => boolean // 匹配的节点，只有匹配到才会显示
 }
 
-export const SIDE_TOOLBAR_OPTIONS = new WeakMap<Editable, SideToolbarOptions>()
+export const SIDE_TOOLBAR_OPTIONS = new WeakMap<Editor, SideToolbarOptions>()
 
-export const getOptions = (editable: Editable): SideToolbarOptions => {
-  return SIDE_TOOLBAR_OPTIONS.get(editable) || {}
+export const getOptions = (editor: Editable): SideToolbarOptions => {
+  return SIDE_TOOLBAR_OPTIONS.get(editor) || {}
 }
 
 export const setOptions = (editable: Editable, options: SideToolbarOptions): void => {

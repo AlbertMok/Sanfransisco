@@ -1,19 +1,11 @@
-import {
-  Element,
-  NodeEntry,
-  Path,
-  Transforms,
-  Node,
-  Range,
-  Location,
-} from 'slate'
+import { Element, NodeEntry, Path, Transforms, Node, Range, Location } from 'slate'
 import { Editor } from './editor'
 import { generateRandomKey } from '../utils/key'
 
 export interface List extends Element {
   start: number
-  key: string
-  level: number
+  key: string // 是列表项的唯一标识符
+  level: number // 表示列表的级别或深度
   type: string
   template?: string
 }
@@ -61,9 +53,7 @@ type UpdateStartOptions = FindFirstListOptions & {
 export interface ListTemplate {
   key: string
   depth: number
-  render: (
-    element: Omit<List, 'children'>
-  ) => string | Record<'type' | 'text', string>
+  render: (element: Omit<List, 'children'>) => string | Record<'type' | 'text', string>
 }
 
 const TEMPLATE_WEAKMAP = new WeakMap<Editor, Map<string, ListTemplate[]>>()
@@ -85,11 +75,7 @@ export const List = {
     const elements = Editor.elements(editor, at)
     const entries: NodeEntry<List>[] = []
     for (const key in elements) {
-      entries.push(
-        ...(elements[key].filter(
-          ([node]) => editor.isList(node) && (!match || match(node))
-        ) as any)
-      )
+      entries.push(...(elements[key].filter(([node]) => editor.isList(node) && (!match || match(node))) as any))
     }
     return entries
   },
@@ -109,13 +95,9 @@ export const List = {
     const { key, level, type, match: optionMatch } = options
     let { path } = options
     let entry: NodeEntry<List> | undefined = undefined
-    const match = (n: Node): n is List =>
-      Editor.isList(editor, n) && (!type || n.type === type) && n.key === key
+    const match = (n: Node): n is List => Editor.isList(editor, n) && (!type || n.type === type) && n.key === key
     while (true) {
-      const prev = Editor.previous<List>(editor, {
-        at: path,
-        match,
-      })
+      const prev = Editor.previous<List>(editor, { at: path, match })
       if (!prev) break
       const [prevList, p] = prev
       if (level !== undefined && prevList.level < level) {
@@ -149,12 +131,7 @@ export const List = {
       startMap[level ?? 0] = start
     }
     if (mode === 'all') {
-      const top = List.findFirstList(editor, {
-        path,
-        key,
-        level,
-        type,
-      })
+      const top = List.findFirstList(editor, { path, key, level, type })
       if (top) {
         const [list, path] = top
         startPath = path
@@ -162,12 +139,7 @@ export const List = {
       }
     } else {
       const startList = Node.get(editor, path)
-      if (
-        Editor.isList(editor, startList) &&
-        (!type || startList.type === type) &&
-        start === undefined
-      )
-        startMap[startList.level] = startList.start
+      if (Editor.isList(editor, startList) && (!type || startList.type === type) && start === undefined) startMap[startList.level] = startList.start
     }
 
     const levelOut = Number(Object.keys(startMap)[0])
@@ -175,11 +147,7 @@ export const List = {
     while (true) {
       const next = Editor.next<List>(editor, {
         at: startPath,
-        match: (n) =>
-          Editor.isList(editor, n) &&
-          (!type || n.type === type) &&
-          n.key === key &&
-          (level === undefined || n.level === level),
+        match: (n) => Editor.isList(editor, n) && (!type || n.type === type) && n.key === key && (level === undefined || n.level === level),
       })
       if (!next) break
       const [list, path] = next
@@ -192,56 +160,30 @@ export const List = {
         start++
         startMap[nextLevel]++
       }
-
       prevLevel = nextLevel
-      Transforms.setNodes<List>(
-        editor,
-        { start },
-        {
-          at: startPath,
-        }
-      )
+      Transforms.setNodes<List>(editor, { start }, { at: startPath })
     }
   },
 
-  wrapList<T extends List>(
-    editor: Editor,
-    list: Partial<Omit<T, 'children'>> & { type: string },
-    opitons: WrapListOptions = {}
-  ) {
+  wrapList<T extends List>(editor: Editor, list: Partial<Omit<T, 'children'>> & { type: string }, opitons: WrapListOptions = {}) {
     const { at } = opitons
     let { start = 1, template, type } = list
-    List.unwrapList(editor, {
-      at,
-    })
+    List.unwrapList(editor, { at })
     editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       if (!selection) return
-      const entrys = Editor.nodes<Element>(editor, {
-        at: selection,
-        match: (n) => Editor.isBlock(editor, n),
-        mode: 'lowest',
-      })
+      const entrys = Editor.nodes<Element>(editor, { at: selection, match: (n) => Editor.isBlock(editor, n), mode: 'lowest' })
 
       const beforePath = Editor.before(editor, selection.anchor.path)
       const afterPath = Editor.after(editor, selection.focus.path)
-      const [prev] = Editor.nodes<List>(editor, {
-        at: beforePath,
-        match: (n) => Editor.isList(editor, n) && n.type === type,
-      })
+      const [prev] = Editor.nodes<List>(editor, { at: beforePath, match: (n) => Editor.isList(editor, n) && n.type === type })
       let key = ''
       let next: NodeEntry<List> | undefined = undefined
       if (prev) {
         const prevList = prev[0]
         key = prevList.key
         start = prevList.start + 1
-      } else if (
-        ([next] = Editor.nodes<List>(editor, {
-          at: afterPath,
-          match: (n) => Editor.isList(editor, n) && n.type === type,
-        })) &&
-        next
-      ) {
+      } else if (([next] = Editor.nodes<List>(editor, { at: afterPath, match: (n) => Editor.isList(editor, n) && n.type === type })) && next) {
         const nextList = next[0]
         key = nextList.key
         start = Math.max(nextList.start - 1, 1)
@@ -258,35 +200,15 @@ export const List = {
             start--
           }
         }
-        const newLevel = List.getLevel(editor, {
-          type,
-          path,
-          key,
-          node,
-        })
+        const newLevel = List.getLevel(editor, { type, path, key, node })
         const newProps = props ? props(key, node, path) : {}
-
-        const element: List = {
-          type,
-          key,
-          start,
-          template,
-          level: newLevel,
-          ...newProps,
-          children: [],
-        }
-        Transforms.wrapNodes(editor, element, {
-          at: path,
-        })
+        const element: List = { type, key, start, template, level: newLevel, ...newProps, children: [] }
+        Transforms.wrapNodes(editor, element, { at: path })
         prevPath = path
         start++
       }
       if (prevPath) {
-        List.updateStart(editor, {
-          type,
-          path: prevPath,
-          key,
-        })
+        List.updateStart(editor, { type, path: prevPath, key })
       }
     }, at)
   },
@@ -303,12 +225,7 @@ export const List = {
         hasList = true
         const { key, type } = element
         if (!topLists.has(key)) {
-          const startList = List.findFirstList(editor, {
-            path,
-            key,
-            level: element.level,
-            type,
-          }) ?? [element, path]
+          const startList = List.findFirstList(editor, { path, key, level: element.level, type }) ?? [element, path]
           topLists.set(key, startList)
         }
 
@@ -316,23 +233,13 @@ export const List = {
         if (p) {
           element.children.forEach((child, index) => {
             if (Editor.isBlock(editor, child)) {
-              Transforms.setNodes(
-                editor,
-                { ...p },
-                {
-                  at: path.concat(index),
-                }
-              )
+              Transforms.setNodes(editor, { ...p }, { at: path.concat(index) })
             }
           })
         }
       }
       if (!hasList) return
-      Transforms.unwrapNodes(editor, {
-        at,
-        match: (n) => Editor.isList(editor, n) && (!match || match(n)),
-        split: true,
-      })
+      Transforms.unwrapNodes(editor, { at, match: (n) => Editor.isList(editor, n) && (!match || match(n)), split: true })
       if (!selection) return
       for (const [key, [list, path]] of topLists) {
         List.updateStart(editor, {
@@ -406,7 +313,7 @@ export const List = {
     // split the current list
     Transforms.splitNodes(editor, {
       at,
-      match: (n) => editor.isList(n) && n.type === type,
+      match: (node) => editor.isList(node) && node.type === type,
       always: true,
     })
     List.updateStart(editor, {
@@ -495,9 +402,7 @@ export const List = {
    * @param list
    */
   setIndent: (editor: Editor, list: List): List => {
-    console.warn(
-      '`List.setIndent` method is unimplemented. You can install `plugin-indent` plugin to make it work. Or implement it yourself.'
-    )
+    console.warn('`List.setIndent` method is unimplemented. You can install `plugin-indent` plugin to make it work. Or implement it yourself.')
     return list
   },
 

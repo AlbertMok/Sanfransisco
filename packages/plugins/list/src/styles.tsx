@@ -1,54 +1,13 @@
-import {
-  DATA_EDITABLE_LEAF,
-  Editable,
-  RenderElementProps,
-  useEditableStatic,
-  useIsomorphicLayoutEffect,
-} from '@editablejs/editor'
+import { DATA_EDITABLE_LEAF, Editable, RenderElementProps, useEditableStatic, useIsomorphicLayoutEffect } from '@editablejs/editor'
 import { List, ListTemplate, Text, Element } from '@editablejs/models'
 import React, { useState } from 'react'
 import { StyledComponent } from 'styled-components'
 import tw, { styled } from 'twin.macro'
 
-export interface RenderListOptions {
-  props: RenderElementProps<List>
-  StyledList?: StyledComponent<'div', any>
-  onRenderLabel?: (element: List, template?: ListTemplate) => React.ReactNode
-  isAutoUpdateLabelStyle?: boolean
-}
+export const ListStyles = styled.div(() => [tw`w-full flex align-baseline items-baseline justify-start`])
 
-export const renderList = (editor: Editable, options: RenderListOptions) => {
-  const {
-    props: { element, attributes, children },
-    StyledList,
-    onRenderLabel,
-    isAutoUpdateLabelStyle,
-  } = options
-  const renderLabel = () => {
-    const { template: key = 'default', type, start } = element
-    const template = key ? List.getTemplate(editor, type, key) : undefined
-    if (onRenderLabel) return onRenderLabel(element, template)
-    const result = template ? template.render(element) : `${start}.`
-    return typeof result === 'object' ? result.text : result
-  }
+export const ListLabelStyles = styled.div(() => [tw`inline-block mr-3 whitespace-nowrap`])
 
-  return (
-    <ListElement
-      StyledList={StyledList}
-      element={element}
-      attributes={attributes}
-      onRenderLabel={renderLabel}
-      isAutoUpdateLabelStyle={isAutoUpdateLabelStyle}
-    >
-      {children}
-    </ListElement>
-  )
-}
-
-export const ListStyles = styled.div(() => [
-  tw`w-full flex align-baseline items-baseline justify-start`,
-])
-export const ListLabelStyles = styled.span(() => [tw`inline-block mr-3 whitespace-nowrap`])
 export const ListContentsStyles = tw.div`flex-1`
 
 type FontStyle = Record<'size' | 'weight' | 'color', string>
@@ -81,11 +40,7 @@ export const ListElement = ({
           weight: style.fontWeight,
           color: style.color,
         }
-      } else if (
-        font.size !== style.fontSize ||
-        font.weight !== style.fontWeight ||
-        font.color !== style.color
-      ) {
+      } else if (font.size !== style.fontSize || font.weight !== style.fontWeight || font.color !== style.color) {
         font = null
         return false
       }
@@ -121,5 +76,40 @@ export const ListElement = ({
       <ListLabelStyles style={textStyle}>{onRenderLabel(element)}</ListLabelStyles>
       <ListContentsStyles>{children}</ListContentsStyles>
     </StyledComponent>
+  )
+}
+
+export interface RenderListOptions {
+  props: RenderElementProps<List>
+  StyledList?: StyledComponent<'div', any>
+  onRenderLabel?: (element: List, template?: ListTemplate) => React.ReactNode
+  isAutoUpdateLabelStyle?: boolean
+}
+
+export const renderList = (editor: Editable, options: RenderListOptions) => {
+  const {
+    props: { element, attributes, children },
+    StyledList,
+    onRenderLabel,
+    isAutoUpdateLabelStyle,
+  } = options
+  const renderLabel = () => {
+    const { template: key = 'default', type, start } = element
+    const template = key ? List.getTemplate(editor, type, key) : undefined
+    if (onRenderLabel) return onRenderLabel(element, template)
+    const result = template ? template.render(element) : `${start}.`
+    return typeof result === 'object' ? result.text : result
+  }
+
+  return (
+    <ListElement
+      StyledList={StyledList}
+      element={element}
+      attributes={attributes}
+      onRenderLabel={renderLabel}
+      isAutoUpdateLabelStyle={isAutoUpdateLabelStyle}
+    >
+      {children}
+    </ListElement>
   )
 }

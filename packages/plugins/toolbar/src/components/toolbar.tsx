@@ -7,12 +7,7 @@ import {
   ToolbarSeparator,
   ColorPickerLocale,
 } from '@editablejs/ui'
-import {
-  ToolbarButtonItem,
-  ToolbarColorPickerItem,
-  ToolbarDropdownItem,
-  ToolbarItem,
-} from '../types'
+import { ToolbarButtonItem, ToolbarColorPickerItem, ToolbarDropdownItem, ToolbarItem } from '../types'
 
 export const ToolbarButtonDefault: React.FC<ToolbarButtonItem> = ({ type, ...props }) => {
   return <UIToolbarButton {...props} />
@@ -55,32 +50,16 @@ export const ToolbarColorPickerDefault: React.FC<
 }
 
 export const ToolbarColorPicker = React.memo(ToolbarColorPickerDefault, (prev, next) => {
-  return (
-    prev.disabled === next.disabled &&
-    prev.value === next.value &&
-    prev.onSelect === next.onSelect &&
-    prev.colors === next.colors
-  )
+  return prev.disabled === next.disabled && prev.value === next.value && prev.onSelect === next.onSelect && prev.colors === next.colors
 })
 export interface ToolbarProps extends UIToolbar {
   items: ToolbarItem[]
   locale?: Record<'colorPicker', ColorPickerLocale>
   disabled?: boolean
-  onRenderItem?: (
-    item: ToolbarItem,
-    index: number,
-    defaultRenderItem: (item: ToolbarItem, index: number) => React.ReactNode,
-  ) => React.ReactNode
+  onRenderItem?: (item: ToolbarItem, index: number, defaultRenderItem: (item: ToolbarItem, index: number) => React.ReactNode) => React.ReactNode
 }
 
-export const Toolbar: React.FC<ToolbarProps> = ({
-  className,
-  locale,
-  items,
-  disabled,
-  onRenderItem,
-  ...props
-}) => {
+export const Toolbar: React.FC<ToolbarProps> = ({ className, locale, items, disabled, onRenderItem, ...props }) => {
   const defaultRenderItem = React.useCallback(
     (item: ToolbarItem, index: number) => {
       if (item === 'separator') return <ToolbarSeparator key={index} />
@@ -95,7 +74,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           return <ToolbarColorPicker locale={locale} key={index} {...item} />
       }
     },
-    [locale],
+    [locale]
   )
 
   const renderItem = React.useMemo(() => {

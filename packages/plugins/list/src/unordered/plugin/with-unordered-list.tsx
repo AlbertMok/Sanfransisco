@@ -11,21 +11,17 @@ const defaultHotkey: UnorderedListHotkey = 'mod+shift+8'
 
 const defaultShortcuts = ['*', '-', '+']
 
-export const withUnorderedList = <T extends Editable>(
-  editor: T,
-  options: UnorderedListOptions = {},
-) => {
+export const withUnorderedList = <T extends Editable>(editor: T, options: UnorderedListOptions = {}) => {
   const hotkey = options.hotkey || defaultHotkey
 
   const newEditor = editor as T & UnorderedListEditor
 
-  UnorderedListTemplates.forEach(template => {
+  UnorderedListTemplates.forEach((template) => {
     List.addTemplate(newEditor, UNORDERED_LIST_KEY, template)
   })
 
   const { renderElement } = newEditor
-
-  newEditor.renderElement = props => {
+  newEditor.renderElement = (props) => {
     const { element, attributes, children } = props
     if (UnorderedListEditor.isUnordered(newEditor, element)) {
       return renderList(newEditor, {
@@ -43,7 +39,7 @@ export const withUnorderedList = <T extends Editable>(
     const activeElements = UnorderedListEditor.queryActive(editor)
     if (activeElements) {
       List.unwrapList(editor, {
-        match: n => n.type === UNORDERED_LIST_KEY,
+        match: (n) => n.type === UNORDERED_LIST_KEY,
       })
     } else {
       const { template } = options

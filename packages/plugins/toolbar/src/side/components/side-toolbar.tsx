@@ -16,19 +16,11 @@ import {
 import { DOMElement, Editor, GridCell, Transforms } from '@editablejs/models'
 import * as React from 'react'
 import { Point, Icon, Tooltip } from '@editablejs/ui'
-import {
-  useSideToolbarMenuOpen,
-  SideToolbar as SideToolbarStore,
-  useSideToolbarDecorateOpen,
-} from '../store'
+import { useSideToolbarMenuOpen, SideToolbar as SideToolbarStore, useSideToolbarDecorateOpen } from '../store'
 import { SideToolbarLocale } from '../locale'
 import tw from 'twin.macro'
 import { ContextMenu } from './context-menu'
-import {
-  clearCapturedData,
-  getCapturedData,
-  setCapturedData,
-} from '../weak-map'
+import { clearCapturedData, getCapturedData, setCapturedData } from '../weak-map'
 import { getOptions } from '../options'
 
 export interface SideToolbar extends SlotComponentProps {}
@@ -51,6 +43,7 @@ const findFirstElementChild = (el: DOMElement): DOMElement => {
 
 export const SideToolbar: React.FC<SideToolbar> = () => {
   const editor = useEditableStatic()
+
   const {
     delayDragDuration = 0.2, //初始化拖拽操作的延迟持续时间
     delayHideDuration = 0.2, //初始化隐藏操作的延迟持续时间
@@ -59,7 +52,9 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
     match,
   } = React.useMemo(() => {
     return getOptions(editor) //getOptions(editor) 函数来获取当前编辑器实例的选项配置
-  }, [editor]) //当editor变化时，useMemo 钩子内的函数会被重新执行。
+  }, [editor])
+
+  //当editor变化时，useMemo 钩子内的函数会被重新执行。
   const containerRef = React.useRef<HTMLDivElement>(null)
 
   // 位置 x y 坐标
@@ -147,9 +142,12 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
   // 更新鼠标位置
   const handleUpdatePosition = React.useCallback(
     (event: MouseEvent) => {
+      // 寻找鼠标所在的节点的 point ,这个point是slate的point类型
       const point = Editable.findEventPoint(editor, event)
       if (!point) return
+
       let isFindList = false
+
       // Get the matching ancestor above a location in the document.
       const entry = Editor.above(editor, {
         at: point,
@@ -163,7 +161,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
           }
           return isFindList ? false : Editor.isBlock(editor, n) // 判断是列表元素还是block元素
         },
-        mode: 'all',
+        mode: 'lowest',
       })
 
       if (!entry) return delayHide()
@@ -175,13 +173,9 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
       // 优先对齐文本节点
       const textElement = isFindList // 如果是列表的话
         ? findFirstElementChild(element) // 递归寻找文本节点
-        : element.querySelector(
-            `[${DATA_EDITABLE_STRING}],[${DATA_EDITABLE_ZERO_WIDTH}]`
-          ) // 寻找与指定选择器或选择器组匹配的第一个Element元素
+        : element.querySelector(`[${DATA_EDITABLE_STRING}],[${DATA_EDITABLE_ZERO_WIDTH}]`) // 寻找与指定选择器或选择器组匹配的第一个Element元素
 
-      const rects = (
-        !isVoid && textElement ? textElement : element
-      ).getClientRects()
+      const rects = (!isVoid && textElement ? textElement : element).getClientRects()
       // const rects = element.getClientRects()
 
       if (!rects.length) return delayHide()
@@ -195,11 +189,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         x = cellRect.x
       }
 
-      const [left, top] = Editable.toRelativePosition(
-        editor,
-        x,
-        isVoid ? y : y + height / 2
-      )
+      const [left, top] = Editable.toRelativePosition(editor, x, isVoid ? y : y + height / 2)
 
       clearDelayHideTimer()
 
@@ -211,10 +201,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         isVoid,
       })
 
-      setPosition({
-        x: left,
-        y: top,
-      })
+      setPosition({ x: left, y: top })
     },
     [clearDelayHideTimer, delayHide, editor]
   )
@@ -228,18 +215,10 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
       const data = getCapturedData(editor)
       // 介于按钮和节点区域之间不处理
       if (containerRef.current && data) {
-        const { x, y, bottom } = Editable.toDOMNode(
-          editor,
-          data.element
-        ).getBoundingClientRect()
+        const { x, y, bottom } = Editable.toDOMNode(editor, data.element).getBoundingClientRect()
         const currentRect = containerRef.current.getBoundingClientRect()
         const { x: cX } = currentRect
-        if (
-          clientX >= cX &&
-          clientX <= x &&
-          clientY >= y &&
-          clientY <= bottom
-        ) {
+        if (clientX >= cX && clientX <= x && clientY >= y && clientY <= bottom) {
           return
         }
       }
@@ -266,14 +245,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
 
       handleUpdatePosition(event)
     },
-    [
-      dragging,
-      menuOpen,
-      handleUpdatePosition,
-      delayHide,
-      horizontalDistanceThreshold,
-      verticalDistanceThreshold,
-    ]
+    [dragging, menuOpen, handleUpdatePosition, delayHide, horizontalDistanceThreshold, verticalDistanceThreshold]
   )
 
   const handleMoseLeave = React.useCallback(() => {
@@ -297,11 +269,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
       const domElement = Editable.toDOMNode(editor, data.element)
       const prevCssText = domElement.style.cssText
       // 选中的元素的背景
-      domElement.style.cssText = `
-    border-radius: 3px;
-    background-color: rgb(235 238 253 / 1);
-    ${prevCssText}
-    `
+      domElement.style.cssText = ` border-radius: 3px; background-color: rgb(235 238 253 / 1); ${prevCssText}`
       return () => {
         domElement.style.cssText = prevCssText
       }
@@ -410,18 +378,14 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
   const renderTooltipContent = () => {
     const contents = [
       <div key="action-open-menu">
-        <StyledTooltipContentAction>
-          {local.actionClick}
-        </StyledTooltipContentAction>
+        <StyledTooltipContentAction>{local.actionClick}</StyledTooltipContentAction>
         {local.openMenu}
       </div>,
     ]
     if (actionType === 'drag')
       contents.push(
         <div key="action-drag">
-          <StyledTooltipContentAction>
-            {local.actionDrag}
-          </StyledTooltipContentAction>
+          <StyledTooltipContentAction>{local.actionDrag}</StyledTooltipContentAction>
           {local.dragDrop}
         </div>
       )
@@ -498,11 +462,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
   if (dragging || menuOpen || !visible) return renderBtn()
 
   return (
-    <Tooltip
-      content={renderTooltipContent()}
-      defaultOpen={tooltipDefaultOpen}
-      side="top"
-    >
+    <Tooltip content={renderTooltipContent()} defaultOpen={tooltipDefaultOpen} side="top">
       {renderBtn()}
     </Tooltip>
   )

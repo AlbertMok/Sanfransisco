@@ -2,6 +2,7 @@ import * as React from 'react'
 import ReactDOM from 'react-dom'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
 
+/** shadowBlock's rect */
 export interface ShadowRect {
   left: number
   top: number
@@ -15,6 +16,7 @@ type ShadowBlockProps = {
   rect: ShadowRect
 } & React.HTMLAttributes<HTMLDivElement>
 
+// 使用React.forwardRef来转发引用
 export const ShadowBlockDefault: React.FC<ShadowBlockProps & React.RefAttributes<HTMLDivElement>> = React.forwardRef<
   HTMLDivElement,
   ShadowBlockProps
@@ -40,6 +42,7 @@ export const ShadowBlockDefault: React.FC<ShadowBlockProps & React.RefAttributes
   </div>
 ))
 
+// 在React中，displayName属性用于调试。当你查看React开发者工具中的组件树时，displayName属性定义了在工具中显示的组件名称
 ShadowBlockDefault.displayName = 'ShadowBlock'
 
 export const ShadowBlock = React.memo(ShadowBlockDefault, (prev, next) => {

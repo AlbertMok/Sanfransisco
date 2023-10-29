@@ -11,18 +11,22 @@ export const useSlotStore = () => {
 
 export const useSlotComponents = () => {
   const store = useSlotStore()
-  return useStore(store, state => state.components, shallow)
+  return useStore(store, (state) => state.components, shallow)
 }
 
 export const useSlotActive = (component: React.FC) => {
   const components = useSlotComponents()
+
+  // 获取编辑器实例
   const editor = useEditableStatic()
-  const slot = components.find(c => c.component === component)
+
+  const slot = components.find((c) => c.component === component)
+
   return React.useMemo(() => {
     return [
       slot?.props.active ?? false,
       (active: boolean) => {
-        Slot.update(editor, { active }, c => c === component)
+        Slot.update(editor, { active }, (c) => c === component)
       },
     ] as const
   }, [editor, slot, component])

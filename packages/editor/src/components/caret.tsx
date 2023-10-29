@@ -14,7 +14,7 @@ import { isTouchDevice } from '../utils/environment'
 import { useReadOnly } from '../hooks/use-read-only'
 import { ShadowBlock } from './shadow'
 
-/**光标 */
+/**光标参数 */
 interface CaretProps {
   timeout?: number | false
 }
@@ -83,7 +83,7 @@ const CaretComponent: React.FC<CaretProps> = React.memo(({ timeout = 530 }) => {
     <ShadowBlock
       rect={rect ? Object.assign({}, rect, { width: caretWidth, color: caretColor }) : { width: 0, height: 0, top: 0, left: 0 }}
       ref={ref}
-      style={{ willChange: 'opacity, transform', opacity: rect ? 1 : 0 }}
+      style={{ willChange: 'opacity, transform', opacity: rect ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
     />
   )
 })

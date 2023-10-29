@@ -42,15 +42,17 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
 
       //获取当前光标所在位置的anchor
       const parentPath = Path.parent(selection.anchor.path)
+
       // Get the text string content of a location.
       const text = Editor.string(editor, parentPath)
-      console.log(isNotParagraph)
+      console.log(nodeEntry?.[0].type)
       if (isNotParagraph && text.length === 0) {
         console.log('convert to the paragraph')
         console.log('text is 0')
         Transforms.setNodes(editor, newParagraph, { at: parentPath })
         return
       }
+
       // 如果光标是在一个节点的最开头位置，并按下enter之后,当前节点下移的话，需要把当前节点删除，然后深复制，然后在下面插入
       const isStart = Editor.isStart(editor, selection.anchor, parentPath)
       if (isNotParagraph && isStart) {
@@ -80,7 +82,11 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const { renderElement } = newEditor
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (ParagraphEditor.isParagraph(element)) {
-      return <div {...attributes}>{children}</div>
+      return (
+        <div {...attributes} style={{ marginTop: '1px', marginBottom: '1px' }}>
+          {children}
+        </div>
+      )
     }
     return renderElement({ attributes, children, element })
   }

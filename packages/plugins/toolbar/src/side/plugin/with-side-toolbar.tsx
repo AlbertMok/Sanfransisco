@@ -9,10 +9,7 @@ export const SideToolbarEditor = {
   getOptions,
 }
 
-export const withSideToolbar = <T extends Editable>(
-  editor: T,
-  options: SideToolbarOptions = {}
-) => {
+export const withSideToolbar = <T extends Editable>(editor: T, options: SideToolbarOptions = {}) => {
   const newEditor = editor as T & SideToolbarEditor
 
   setOptions(newEditor, options)
@@ -20,6 +17,7 @@ export const withSideToolbar = <T extends Editable>(
   const { locale: localeOptions = {} } = options
   Locale.setLocale(newEditor, locale, localeOptions)
 
+  // 挂载 SideToolbar组件
   Slot.mount(editor, SideToolbar)
 
   newEditor.on('destory', () => {

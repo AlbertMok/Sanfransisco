@@ -24,10 +24,7 @@ export type SideToolbarItem =
       type: 'separator'
     }
   | {
-      content:
-        | React.ReactElement
-        | string
-        | React.FC<Record<'onSelect', (event: React.MouseEvent) => void>>
+      content: React.ReactElement | string | React.FC<Record<'onSelect', (event: React.MouseEvent) => void>>
     }
 
 const EDITOR_TO_TOOLBAR_STORE = new WeakMap<Editable, UseBoundStore<StoreApi<ToolbarState>>>()
@@ -51,7 +48,7 @@ export const useSideToolbarStore = (editor: Editable) => {
 
 export const useSideToolbarItems = (editor: Editable) => {
   const store = useSideToolbarStore(editor)
-  return useStore(store, state => state.items, shallow)
+  return useStore(store, (state) => state.items, shallow)
 }
 
 export const useSideToolbarDecorateOpen = (editor: Editable) => {
@@ -63,7 +60,7 @@ export const useSideToolbarDecorateOpen = (editor: Editable) => {
 
 export const useSideToolbarMenuOpen = (editor: Editable): [boolean, (open: boolean) => void] => {
   const store = useSideToolbarStore(editor)
-  const open = useStore(store, state => state.menuOpen)
+  const open = useStore(store, (state) => state.menuOpen)
   return React.useMemo(
     () => [
       open,
@@ -71,7 +68,7 @@ export const useSideToolbarMenuOpen = (editor: Editable): [boolean, (open: boole
         SideToolbar.setOpen(editor, open)
       },
     ],
-    [editor, open],
+    [editor, open]
   )
 }
 

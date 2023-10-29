@@ -57,8 +57,8 @@ export const withBlockquote = <T extends Editable>(editor: T, options: Blockquot
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (BlockquoteEditor.isBlockquote(newEditor, element)) {
       return (
-        <div {...attributes} tw="">
-          <blockquote tw="opacity-50 pl-4 border-2 border-solid border-gray-300 border-y-0 border-r-0 ">{children}</blockquote>
+        <div {...attributes}>
+          <blockquote tw="before:border-solid opacity-50 border-2 border-solid border-y-0 border-r-0 ">{children}</blockquote>
         </div>
       )
     }

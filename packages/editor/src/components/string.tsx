@@ -1,21 +1,9 @@
 import * as React from 'react'
-import {
-  Editor,
-  Text,
-  Path,
-  Element,
-  Node,
-  CompositionText,
-} from '@editablejs/models'
+import { Editor, Text, Path, Element, Node, CompositionText } from '@editablejs/models'
 
 import { Editable } from '../plugin/editable'
 import { useEditableStatic } from '../hooks/use-editable'
-import {
-  DATA_EDITABLE_COMPOSITION,
-  DATA_EDITABLE_LENGTH,
-  DATA_EDITABLE_STRING,
-  DATA_EDITABLE_ZERO_WIDTH,
-} from '../utils/constants'
+import { DATA_EDITABLE_COMPOSITION, DATA_EDITABLE_LENGTH, DATA_EDITABLE_STRING, DATA_EDITABLE_ZERO_WIDTH } from '../utils/constants'
 
 /**
  * Leaf content strings.
@@ -50,6 +38,7 @@ const String: React.FC<{
       </>
     )
   }
+
   // COMPAT: If this is the last text node in an empty block, render a zero-
   // width space that will convert into a line break when copying and pasting
   // to support expected plain text.

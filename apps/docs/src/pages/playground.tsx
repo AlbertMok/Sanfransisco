@@ -31,10 +31,8 @@ import { withTextSerializerTransform } from '@editablejs/plugins/serializer/text
 import { withMarkdownSerializerTransform, withMarkdownSerializerPlugin } from '@editablejs/plugins/serializer/markdown'
 import { withHTMLDeserializerTransform } from '@editablejs/plugins/deserializer/html'
 import { withMarkdownDeserializerTransform, withMarkdownDeserializerPlugin } from '@editablejs/plugins/deserializer/markdown'
-
 import { withTitleHTMLSerializerTransform } from '@editablejs/plugin-title/serializer/html'
 import { withTitleHTMLDeserializerTransform } from '@editablejs/plugin-title/deserializer/html'
-
 import { withHistory } from '@editablejs/plugin-history'
 import { javascript as codemirrorJavascript } from '@codemirror/lang-javascript-next'
 import { html as codemirrorHtml } from '@codemirror/lang-html-next'
@@ -257,6 +255,7 @@ export default function Playground() {
     return () => YjsEditor.disconnect(editor)
   }, [editor, connected])
 
+  // 序列化
   useIsomorphicLayoutEffect(() => {
     withMarkdownDeserializerPlugin(editor) // Adds a markdown deserializer plugin to the editor
     withMarkdownSerializerPlugin(editor) // Adds a markdown serializer plugin to the editor
@@ -302,6 +301,7 @@ export default function Playground() {
     }
   }, [editor])
 
+  // MENU
   useContextMenuEffect(() => {
     ContextMenu.setItems(editor, createContextMenuItems(editor))
   }, editor)
@@ -342,21 +342,16 @@ export default function Playground() {
             <button onClick={() => console.log(content)}>显示</button>
           </div>
           <div tw="flex justify-between py-3 px-6 text-base">
-            {/* <div tw="flex text-2xl text-link flex-1 gap-3">
-              <NextLink href="/">
-                <a>
-                  <IconLogo />
-                </a>
-              </NextLink>
+            <div tw="flex text-2xl text-link flex-1 gap-3">
               <ExternalLink
                 aria-label="Editable on Github"
                 href="https://github.com/editablejs/editable/blob/main/apps/docs/src/pages/playground.tsx"
               >
                 <IconGitHub />
               </ExternalLink>
-            </div> */}
-            {/* <div tw="flex gap-1 items-center">
-              {Object.keys(remoteClients).map(id => {
+            </div>
+            <div tw="flex gap-1 items-center">
+              {Object.keys(remoteClients).map((id) => {
                 const state = remoteClients[id]
                 if (!state.data) return
                 const { name, avatar } = state.data
@@ -378,16 +373,12 @@ export default function Playground() {
                 </label>
                 {connecting && <Icon name="loading" />}
                 {!connecting && (
-                  <StyledSwitch
-                    checked={enableCollaborative}
-                    onChange={setEnableCollaborative}
-                    id="collaboration-mode"
-                  >
+                  <StyledSwitch checked={enableCollaborative} onChange={setEnableCollaborative} id="collaboration-mode">
                     <StyledSwitchThumb />
                   </StyledSwitch>
                 )}
               </div>
-            </div> */}
+            </div>
             2.0版本
           </div>
           <StyledToolbar editor={editor} disabled={readOnly} />

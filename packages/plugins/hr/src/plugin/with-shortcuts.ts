@@ -5,7 +5,7 @@ import { HrEditor } from './hr-editor'
 const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {
   const block = Editor.above(editor, {
     at,
-    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
   })
 
   const path = block ? block[1] : []
@@ -38,14 +38,9 @@ const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {
 export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
   const { onKeydown } = editor
 
-  editor.onKeydown = event => {
+  editor.onKeydown = (event) => {
     const { selection } = editor
-    if (
-      selection &&
-      Range.isCollapsed(selection) &&
-      !Editable.isComposing(editor) &&
-      Hotkey.match('enter', event)
-    ) {
+    if (selection && Range.isCollapsed(selection) && !Editable.isComposing(editor) && Hotkey.match('enter', event)) {
       const anchor = Range.start(selection)
       const match = findMatchedRange(editor, anchor, shortcuts)
       if (match) {
