@@ -20,29 +20,16 @@ export const withUnorderedList = <T extends Editable>(editor: T, options: Unorde
     List.addTemplate(newEditor, UNORDERED_LIST_KEY, template)
   })
 
-  const { renderElement } = newEditor
-  newEditor.renderElement = (props) => {
-    const { element, attributes, children } = props
-    if (UnorderedListEditor.isUnordered(newEditor, element)) {
-      return renderList(newEditor, {
-        props: {
-          element,
-          attributes,
-          children,
-        },
-      })
-    }
-    return renderElement(props)
-  }
-
-  newEditor.toggleUnorderedList = (options: ToggleUnorderedListOptions = {}) => {
+  newEditor.createUnorderedList = (options: ToggleUnorderedListOptions = {}) => {
     const activeElements = UnorderedListEditor.queryActive(editor)
+
     if (activeElements) {
       List.unwrapList(editor, {
         match: (n) => n.type === UNORDERED_LIST_KEY,
       })
     } else {
       const { template } = options
+
       List.wrapList(editor, {
         type: UNORDERED_LIST_KEY,
         template: template ?? UnorderedListTemplates[0].key,
@@ -50,16 +37,27 @@ export const withUnorderedList = <T extends Editable>(editor: T, options: Unorde
     }
   }
 
-  const { onKeydown, isList } = newEditor
+  // 重载渲染函数
+  const { renderElement } = newEditor
+  newEditor.renderElement = (props) => {
+    const { element, attributes, children } = props
 
-  newEditor.isList = (value: any): value is List => {
-    return UnorderedListEditor.isUnordered(newEditor, value) || isList(value)
+    if (UnorderedListEditor.isUnorderedList(newEditor, element)) {
+      return renderList(newEditor, { props: { element, attributes, children } })
+    }
+
+    return renderElement(props)
+  }
+
+  const { onKeydown, isList } = newEditor
+  newEditor.isList = (node: any): node is List => {
+    return UnorderedListEditor.isUnorderedList(newEditor, node) || isList(node)
   }
 
   newEditor.onKeydown = (e: KeyboardEvent) => {
     if (Hotkey.match(hotkey, e)) {
       e.preventDefault()
-      newEditor.toggleUnorderedList()
+      newEditor.createUnorderedList()
       return
     }
     onKeydown(e)

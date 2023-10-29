@@ -52,7 +52,9 @@ const TaskCheckboxInnerStyles = styled.span(() => [
       border-top: 0;
       border-left: 0;
       content: ' ';
-      transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6), opacity 0.1s;
+      transition:
+        all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),
+        opacity 0.1s;
       opacity: 0;
     }
   `,
@@ -115,15 +117,11 @@ export const withTaskList = <T extends Editable>(editor: T, options: TaskListOpt
           children,
         },
         StyledList: StyledTask,
-        onRenderLabel: element => {
+        onRenderLabel: (element) => {
           const { checked } = element as TaskList
           const onChange = (checked: boolean) => {
             if (Editable.isReadOnly(editor)) return
-            Transforms.setNodes<TaskList>(
-              editor,
-              { checked },
-              { at: Editable.findPath(editor, element) },
-            )
+            Transforms.setNodes<TaskList>(editor, { checked }, { at: Editable.findPath(editor, element) })
           }
           return <TaskElement checked={checked ?? false} onChange={onChange} />
         },
@@ -137,7 +135,7 @@ export const withTaskList = <T extends Editable>(editor: T, options: TaskListOpt
     const activeElements = TaskListEditor.queryActive(editor)
     if (activeElements) {
       List.unwrapList(editor, {
-        match: n => n.type === TASK_LIST_KEY,
+        match: (n) => n.type === TASK_LIST_KEY,
       })
     } else {
       const { checked, template } = options

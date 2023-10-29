@@ -25,12 +25,16 @@ export const ListElement = ({
   isAutoUpdateLabelStyle?: boolean
 }) => {
   const { level } = element
+
   const StyledComponent = StyledList ?? ListStyles
+
   const editor = useEditableStatic()
+
   const [textStyle, setTextStyle] = useState<React.CSSProperties>({})
 
   useIsomorphicLayoutEffect(() => {
     if (!isAutoUpdateLabelStyle) return
+
     let font: FontStyle | null = null
 
     const compareStyle = (style: CSSStyleDeclaration) => {
@@ -93,11 +97,18 @@ export const renderList = (editor: Editable, options: RenderListOptions) => {
     onRenderLabel,
     isAutoUpdateLabelStyle,
   } = options
+
+  // 渲染 label
   const renderLabel = () => {
+    // template 是用于表示列表模板的键，如果没有提供，则默认为 'default'
     const { template: key = 'default', type, start } = element
+
     const template = key ? List.getTemplate(editor, type, key) : undefined
+
     if (onRenderLabel) return onRenderLabel(element, template)
+
     const result = template ? template.render(element) : `${start}.`
+
     return typeof result === 'object' ? result.text : result
   }
 

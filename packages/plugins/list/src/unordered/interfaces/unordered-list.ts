@@ -8,13 +8,13 @@ export interface UnorderedList extends List {
 }
 
 export const UnorderedList = {
-  isUnorderedList: (value: any): value is UnorderedList => {
-    return Element.isElement(value) && value.type === UNORDERED_LIST_KEY
+  isUnorderedList: (node: any): node is UnorderedList => {
+    return Element.isElement(node) && node.type === UNORDERED_LIST_KEY
   },
 
-  create: (orderedList: Omit<UnorderedList, 'type'>): UnorderedList => {
+  create: (unorderedList: Omit<UnorderedList, 'type'>): UnorderedList => {
     return {
-      ...orderedList,
+      ...unorderedList,
       type: UNORDERED_LIST_KEY,
       id: generateId(),
     }

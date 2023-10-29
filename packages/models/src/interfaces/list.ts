@@ -2,6 +2,9 @@ import { Element, NodeEntry, Path, Transforms, Node, Range, Location } from 'sla
 import { Editor } from './editor'
 import { generateRandomKey } from '../utils/key'
 
+/**
+ * List is an element interface which extends Element
+ */
 export interface List extends Element {
   start: number
   key: string // 是列表项的唯一标识符
@@ -59,17 +62,29 @@ export interface ListTemplate {
 const TEMPLATE_WEAKMAP = new WeakMap<Editor, Map<string, ListTemplate[]>>()
 
 export const List = {
+  /**
+   * 查找当前光标或所选位置上方的列表
+   * @param editor
+   * @param options
+   * @returns
+   */
   above: (editor: Editor, options: ListAboveOptions = {}) => {
     const { at, match } = options
     const selection = at ?? editor.selection
     if (!selection) return
     const entry = Editor.above<List>(editor, {
       at: selection,
-      match: (n) => Editor.isList(editor, n) && (!match || match(n)),
+      match: (node) => Editor.isList(editor, node) && (!match || match(node)), // 检查节点是否满足外部传入的 match 函数的条件
     })
     return entry
   },
 
+  /**
+   * 返回与给定条件匹配的所有列表
+   * @param editor
+   * @param options
+   * @returns
+   */
   lists: (editor: Editor, options: ListAboveOptions = {}) => {
     const { at, match } = options
     const elements = Editor.elements(editor, at)
@@ -108,6 +123,7 @@ export const List = {
       if (optionMatch && optionMatch(entry[0], entry[1])) break
     }
     if (!entry) {
+      // 获取第一个nodeEntry
       ;[entry] = Editor.nodes<List>(editor, {
         at: path,
         match: (n) => match(n) && (level === undefined || n.level === level),
@@ -116,6 +132,12 @@ export const List = {
     return entry
   },
 
+  /**
+   * 检查给定的列表是否是最顶部的列表
+   * @param editor
+   * @param options
+   * @returns
+   */
   isFirstList: (editor: Editor, options: FindFirstListOptions) => {
     const { path } = options
     const root = List.findFirstList(editor, options)
@@ -123,8 +145,10 @@ export const List = {
     return Path.equals(path, root[1])
   },
 
+  /**更新列表的开始值，适用于有序列表，例如当列表的某一部分被删除或添加时，需要重新计算开始的数字 */
   updateStart: (editor: Editor, options: UpdateStartOptions) => {
     const { path, key, type, level, mode = 'all', start } = options
+
     let startPath = path
     const startMap: Record<number, number> = {}
     if (start !== undefined) {
@@ -139,7 +163,9 @@ export const List = {
       }
     } else {
       const startList = Node.get(editor, path)
-      if (Editor.isList(editor, startList) && (!type || startList.type === type) && start === undefined) startMap[startList.level] = startList.start
+      if (Editor.isList(editor, startList) && (!type || startList.type === type) && start === undefined) {
+        startMap[startList.level] = startList.start
+      }
     }
 
     const levelOut = Number(Object.keys(startMap)[0])
@@ -165,13 +191,20 @@ export const List = {
     }
   },
 
+  /**将选定的元素包装为一个新的列表。这对于用户选择一些文本并将其转换为列表很有用 */
   wrapList<T extends List>(editor: Editor, list: Partial<Omit<T, 'children'>> & { type: string }, opitons: WrapListOptions = {}) {
     const { at } = opitons
+
+    // 默认开始是1
     let { start = 1, template, type } = list
+
     List.unwrapList(editor, { at })
+
     editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
+
       if (!selection) return
+
       const entrys = Editor.nodes<Element>(editor, { at: selection, match: (n) => Editor.isBlock(editor, n), mode: 'lowest' })
 
       const beforePath = Editor.before(editor, selection.anchor.path)
@@ -213,6 +246,11 @@ export const List = {
     }, at)
   },
 
+  /**
+   * 移除列表结构，将其内容转换为普通文本或段落
+   * @param editor
+   * @param options
+   */
   unwrapList: (editor: Editor, options: UnwrapListOptions = {}) => {
     const { at, match, props } = options
     const activeLists = List.lists(editor, { at, match })
@@ -254,13 +292,11 @@ export const List = {
   },
 
   splitList: (editor: Editor, options?: SplitListOptions) => {
+    // 获取当前的selection
     const { selection } = editor
     if (!selection || Range.isExpanded(selection)) return
     let { at, match, props } = options ?? {}
-    const entry = List.above(editor, {
-      at,
-      match,
-    })
+    const entry = List.above(editor, { at, match })
     if (!entry) return
     const [list, path] = entry
     const type = list.type
@@ -324,6 +360,12 @@ export const List = {
     })
   },
 
+  /**
+   * 删除列表的指定级别。例如，用户可能想要删除整个子列表
+   * @param editor
+   * @param options
+   * @returns
+   */
   deleteLevel: (editor: Editor, options?: DeleteLevelOptions) => {
     const { selection } = editor
     if (!selection) return
@@ -384,7 +426,7 @@ export const List = {
   },
 
   /**
-   * 根据列表缩进的获取 level
+   * 根据列表缩进的获取 level ,获取列表的缩进级别,这可以帮助识别列表是主列表还是子列表
    * @param editor
    * @param options
    * @returns
