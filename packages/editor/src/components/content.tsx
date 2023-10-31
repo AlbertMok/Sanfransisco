@@ -75,6 +75,7 @@ export const ContentEditable = (props: EditableProps) => {
     selectionDrawingStyle: selectionDrawingStyleProp,
     ...attributes
   } = props
+
   const editor = useEditableStatic()
 
   const ref = React.useRef<HTMLDivElement>(null)

@@ -1,6 +1,8 @@
-import { Element, NodeEntry, Path, Transforms, Node, Range, Location } from 'slate'
-import { Editor } from './editor'
-import { generateRandomKey } from '../utils/key'
+import { generateId } from '@editablejs/editor'
+import { Element, Editor, NodeEntry, Path, Transforms, Node, Range, Location, BaseEditor } from '@editablejs/models'
+import { UNORDERED_LIST_KEY } from '../unordered/constants'
+import { ORDERED_LIST_KEY } from '../ordered/constants'
+import { TASK_LIST_KEY } from '../task/constants'
 
 /**
  * List is an element interface which extends Element
@@ -62,6 +64,10 @@ export interface ListTemplate {
 const TEMPLATE_WEAKMAP = new WeakMap<Editor, Map<string, ListTemplate[]>>()
 
 export const List = {
+  isList: (editor: Editor, node: any): node is List => {
+    return Element.isElement(node) && (node.type === UNORDERED_LIST_KEY || node.type === ORDERED_LIST_KEY || node.type === TASK_LIST_KEY)
+  },
+
   /**
    * 查找当前光标或所选位置上方的列表
    * @param editor
@@ -110,7 +116,7 @@ export const List = {
     const { key, level, type, match: optionMatch } = options
     let { path } = options
     let entry: NodeEntry<List> | undefined = undefined
-    const match = (n: Node): n is List => Editor.isList(editor, n) && (!type || n.type === type) && n.key === key
+    const match = (n: Node): n is List => List.isList(editor, n) && (!type || n.type === type) && n.key === key
     while (true) {
       const prev = Editor.previous<List>(editor, { at: path, match })
       if (!prev) break
@@ -208,7 +214,7 @@ export const List = {
     const { at } = opitons
 
     // 默认开始是1
-    let { start = 1, template, type, id } = list
+    let { start = 1, template, type } = list
 
     List.unwrapList(editor, { at })
 
@@ -240,7 +246,7 @@ export const List = {
         key = nextListElement.key
         start = Math.max(nextListElement.start - 1, 1)
       } else {
-        key = generateRandomKey()
+        key = generateId()
       }
 
       const { props } = opitons
@@ -260,7 +266,7 @@ export const List = {
 
         const newProps = props ? props(key, node, path) : {}
 
-        let element: List = { type, key, start, template, level: newLevel, ...newProps, children: [], id }
+        let element: List = { type, key, start, template, level: newLevel, ...newProps, children: [] }
 
         Transforms.wrapNodes(editor, element, { at: path })
 
@@ -305,7 +311,7 @@ export const List = {
         }
       }
       if (!hasList) return
-      Transforms.unwrapNodes(editor, { at, match: (n) => Editor.isList(editor, n) && (!match || match(n)), split: true })
+      Transforms.unwrapNodes(editor, { at, match: (n) => List.isList(editor, n) && (!match || match(n)), split: true })
       if (!selection) return
       for (const [key, [list, path]] of topLists) {
         List.updateStart(editor, {
@@ -322,17 +328,13 @@ export const List = {
   splitList: (editor: Editor, options?: SplitListOptions) => {
     // 获取当前的selection
     const { selection } = editor
-
     if (!selection || Range.isExpanded(selection)) return
 
     let { at, match, props } = options ?? {}
-
     const entry = List.above(editor, { at, match })
-
     if (!entry) return
 
     const [list, path] = entry
-
     const type = list.type
     console.log(list)
 
@@ -357,7 +359,6 @@ export const List = {
       } else {
         // 节点非空的情况下
         List.unwrapList(editor, { at, match: (n) => n.type === type })
-
         List.updateStart(editor, { type, path, key: list.key, level: list.level })
       }
 
@@ -367,7 +368,7 @@ export const List = {
     // split the current list
     Transforms.splitNodes(editor, {
       at,
-      match: (node) => editor.isList(node) && node.type === type,
+      match: (node) => List.isList(editor, node) && node.type === type,
       always: true,
     })
 
@@ -479,5 +480,9 @@ export const List = {
     const templates = TEMPLATE_WEAKMAP.get(editor) ?? new Map()
     const list: ListTemplate[] = templates.get(type) ?? []
     return list.find((t) => t.key === key)
+  },
+
+  isElement: (node: any): node is Element => {
+    return Element.isElement(node)
   },
 }

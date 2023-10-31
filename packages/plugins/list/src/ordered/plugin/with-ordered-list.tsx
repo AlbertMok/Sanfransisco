@@ -1,5 +1,4 @@
 import { Editable, Hotkey } from '@editablejs/editor'
-import { List, ListTemplate, Path } from '@editablejs/models'
 import React from 'react'
 import tw, { styled } from 'twin.macro'
 import { ListStyles, ListLabelStyles, renderList } from '../../styles'
@@ -8,20 +7,14 @@ import { OrderedListHotkey, OrderedListOptions } from '../options'
 import { OrderedListTemplates } from '../template'
 import { OrderedListEditor, ToggleOrderedListOptions } from './ordered-list-editor'
 import { withShortcuts } from './with-shortcuts'
+import { List, ListTemplate } from '../../list/list'
+import { Path } from '@editablejs/models'
 
 const defaultHotkey: OrderedListHotkey = 'mod+shift+7'
 
 const LabelStyles = tw.span`ml-7 mr-0`
 
-const LabelElement = ({
-  editor,
-  element,
-  template = OrderedListTemplates[0],
-}: {
-  editor: Editable
-  element: List
-  template?: ListTemplate
-}) => {
+const LabelElement = ({ editor, element, template = OrderedListTemplates[0] }: { editor: Editable; element: List; template?: ListTemplate }) => {
   const { level, key } = element
   const ref = React.useRef<HTMLSpanElement>(null)
 
@@ -72,21 +65,18 @@ const StyledList = styled(ListStyles)`
   }
 `
 
-export const withOrderedList = <T extends Editable>(
-  editor: T,
-  options: OrderedListOptions = {},
-) => {
+export const withOrderedList = <T extends Editable>(editor: T, options: OrderedListOptions = {}) => {
   const hotkey = options.hotkey || defaultHotkey
 
   const newEditor = editor as T & OrderedListEditor
 
   const { renderElement } = newEditor
 
-  OrderedListTemplates.forEach(template => {
+  OrderedListTemplates.forEach((template) => {
     List.addTemplate(newEditor, ORDERED_LIST_KEY, template)
   })
 
-  newEditor.renderElement = props => {
+  newEditor.renderElement = (props) => {
     const { element, attributes, children } = props
     if (OrderedListEditor.isOrderedList(newEditor, element)) {
       return renderList(newEditor, {
@@ -96,9 +86,7 @@ export const withOrderedList = <T extends Editable>(
           children,
         },
         StyledList,
-        onRenderLabel: (element, template) => (
-          <LabelElement element={element} editor={newEditor} template={template} />
-        ),
+        onRenderLabel: (element, template) => <LabelElement element={element} editor={newEditor} template={template} />,
       })
     }
     return renderElement(props)
@@ -108,7 +96,7 @@ export const withOrderedList = <T extends Editable>(
     const activeElements = OrderedListEditor.queryActive(editor)
     if (activeElements) {
       List.unwrapList(editor, {
-        match: n => n.type === ORDERED_LIST_KEY,
+        match: (n) => n.type === ORDERED_LIST_KEY,
       })
     } else {
       const { start, template } = options

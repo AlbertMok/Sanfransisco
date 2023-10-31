@@ -1,5 +1,5 @@
 import { Editable, generateId } from '@editablejs/editor'
-import { Editor, Element, Path, Transforms } from '@editablejs/models'
+import { Editor, Element, List, Path, Range, Transforms } from '@editablejs/models'
 import { Paragraph } from '../interfaces/paragraph'
 import cloneDeep from 'lodash.clonedeep'
 import { PARAGRAPH_KEY } from '../constants'
@@ -45,7 +45,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
 
       // Get the text string content of a location.
       const text = Editor.string(editor, parentPath)
-      console.log(nodeEntry?.[0].type)
+
       if (isNotParagraph && text.length === 0) {
         console.log('convert to the paragraph')
         console.log('text is 0')
@@ -73,9 +73,25 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
     return
   }
 
-  /** Insert a block break at the current selection. If the selection is currently expanded, delete it first. */
+  const { insertBreak } = newEditor
+  // 插入新的block
   newEditor.insertBreak = () => {
+    console.log('这是段落编辑器')
+    const { selection } = editor
+    if (!Editable.isEditor(editor) || !selection || Range.isExpanded(selection)) {
+      newEditor.createParagraphElement()
+      return
+    }
+    console.log(editor)
     newEditor.createParagraphElement()
+    // const entry = List.above(editor)
+    // // 如果当前节点不是列表节点的话
+    // if (!entry) {
+    //   return
+    // }
+
+    // // 当前节点是列表节点
+    // List.splitList(editor)
   }
 
   // 渲染paragraph元素

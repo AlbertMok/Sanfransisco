@@ -1,8 +1,9 @@
 import { DATA_EDITABLE_LEAF, Editable, RenderElementProps, useEditableStatic, useIsomorphicLayoutEffect } from '@editablejs/editor'
-import { List, ListTemplate, Text, Element } from '@editablejs/models'
+import { Text, Element } from '@editablejs/models'
 import React, { useState } from 'react'
 import { StyledComponent } from 'styled-components'
 import tw, { styled } from 'twin.macro'
+import { List, ListTemplate } from './list/list'
 
 export const ListStyles = styled.div(() => [tw`w-full flex align-baseline items-baseline justify-start`])
 

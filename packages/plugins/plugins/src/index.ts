@@ -52,6 +52,7 @@ export interface PluginOptions {
 
 export const withPlugins = <T extends Editable>(editor: T, options: PluginOptions = {}) => {
   let newEditor = withContextMenu(editor)
+  newEditor = withParagraph(newEditor, {})
   newEditor = withIndent(newEditor, options.indent)
   newEditor = withMark(newEditor, options.mark)
   newEditor = withFontSize(newEditor, options.fontSize)
@@ -70,7 +71,6 @@ export const withPlugins = <T extends Editable>(editor: T, options: PluginOption
   newEditor = withLeading(newEditor, options.leading)
   newEditor = withMention(newEditor, options.mention)
   newEditor = withCodeBlock(newEditor, options.codeBlock)
-  newEditor = withParagraph(newEditor, {})
 
   return newEditor as T &
     ContextMenuEditor &

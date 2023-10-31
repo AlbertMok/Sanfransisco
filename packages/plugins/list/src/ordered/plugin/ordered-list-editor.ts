@@ -25,7 +25,7 @@ export const OrderedListEditor = {
 
   queryActive: (editor: Editor) => {
     const elements = List.lists(editor, {
-      match: n => n.type === ORDERED_LIST_KEY,
+      match: (n) => n.type === ORDERED_LIST_KEY,
     })
     return elements.length > 0 ? elements : null
   },

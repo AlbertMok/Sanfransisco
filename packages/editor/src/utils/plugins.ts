@@ -1,6 +1,5 @@
 import { HTMLAttributes, ReactElement } from 'react'
 import { Element, NodeEntry, Range } from '@editablejs/models'
-// import { RenderLeafProps } from '@editablejs/models'
 import { TEditor, RenderYooptaElementProps, TBaseElement } from '../types'
 import { EditorEventHandlers } from './eventHandlers'
 import { HOTKEYS_TYPE } from './hotkeys'
@@ -12,11 +11,8 @@ export type HandlersOptions = {
 
 export type DecoratorFn = (nodeEntry: NodeEntry) => Range[]
 
-export type YooptaPluginEventHandlers = {
-  [key in keyof EditorEventHandlers]: (
-    editor: TEditor,
-    options: HandlersOptions
-  ) => EditorEventHandlers[key] | void
+export type PluginEventHandlers = {
+  [key in keyof EditorEventHandlers]: (editor: TEditor, options: HandlersOptions) => EditorEventHandlers[key] | void
 }
 
 export type RenderHTMLAttributes = {
@@ -28,26 +24,24 @@ export type PluginBaseOptions = RenderHTMLAttributes & {
   displayLabel?: string
 }
 
-export type YooptaRenderElementFunc<
-  P extends TBaseElement<string> = TBaseElement<string>,
-> = (
+/**
+ * render element function
+ */
+export type RenderElementFunc<P extends TBaseElement<string> = TBaseElement<string>> = (
   editor: TEditor,
   plugin: PluginType
 ) => (props: RenderYooptaElementProps<P> & RenderHTMLAttributes) => ReactElement
 
-export type YooptaRender<P extends TBaseElement<string>> =
-  YooptaRenderElementFunc<P>
+// 基本的渲染方法
+export type Render<P extends TBaseElement<string>> = RenderElementFunc<P>
 
-export type ExtendedYooptaRender<P extends TBaseElement<string>> = {
-  editor: YooptaRenderElementFunc<P>
-  render: (
-    props: RenderYooptaElementProps<P> & RenderHTMLAttributes
-  ) => ReactElement
+// 扩展后的渲染方法
+export type ExtendedRender<P extends TBaseElement<string>> = {
+  editor: RenderElementFunc<P>
+  render: (props: RenderYooptaElementProps<P> & RenderHTMLAttributes) => ReactElement
 }
 
-export type YooptaRenderer<P extends TBaseElement<string>> =
-  | ExtendedYooptaRender<P>
-  | YooptaRender<P>
+export type YooptaRenderer<P extends TBaseElement<string>> = ExtendedRender<P> | Render<P>
 
 type DeserializeHTML = {
   nodeName: string | string[]
@@ -65,10 +59,7 @@ type Exports<T> = {
   markdown: Serializes<T, { mark: string; parse: (mark: any) => any }>
 }
 
-export type PluginType<
-  O extends PluginBaseOptions = PluginBaseOptions,
-  P extends TBaseElement<string> = TBaseElement<string>,
-> = {
+export type PluginType<O extends PluginBaseOptions = PluginBaseOptions, P extends TBaseElement<string> = TBaseElement<string>> = {
   /**
    * The type of the plugin and element.
    */
@@ -92,7 +83,7 @@ export type PluginType<
   /**
    * The element's events: onKeyDown, onCopy and etc.
    */
-  events?: YooptaPluginEventHandlers
+  events?: PluginEventHandlers
   /**
    * The element's options object that can be extended with custom options for your plugin
    * Default options: HTMLAttributes
@@ -119,10 +110,7 @@ export type PluginType<
 
 export type ParentYooptaPlugin = Omit<PluginType, 'childPlugin' | 'hasParent'>
 
-export class YooptaPlugin<
-  O extends PluginBaseOptions,
-  P extends TBaseElement<string>,
-> {
+export class YooptaPlugin<O extends PluginBaseOptions, P extends TBaseElement<string>> {
   #props: Readonly<PluginType<O, P>>
 
   constructor(inputPlugin: PluginType<O, P>) {
@@ -130,19 +118,7 @@ export class YooptaPlugin<
   }
 
   extend(
-    overrides: Partial<
-      Pick<
-        PluginType<O, P>,
-        | 'type'
-        | 'renderer'
-        | 'placeholder'
-        | 'shortcut'
-        | 'exports'
-        | 'events'
-        | 'options'
-        | 'extendEditor'
-      >
-    >
+    overrides: Partial<Pick<PluginType<O, P>, 'type' | 'renderer' | 'placeholder' | 'shortcut' | 'exports' | 'events' | 'options' | 'extendEditor'>>
   ) {
     const {
       type = this.#props.type,
@@ -173,23 +149,15 @@ export class YooptaPlugin<
   }
 }
 
-export function createYooptaPlugin<
-  O extends PluginBaseOptions,
-  P extends TBaseElement<string>,
->(input: PluginType<O, P>) {
+export function createYooptaPlugin<O extends PluginBaseOptions, P extends TBaseElement<string>>(input: PluginType<O, P>) {
   return new YooptaPlugin<O, P>(input)
 }
 
-export function mergePlugins<
-  O extends PluginBaseOptions,
-  P extends TBaseElement<string>,
->(plugins: YooptaPlugin<O, P>[]): PluginType<O, P>[] {
+export function mergePlugins<O extends PluginBaseOptions, P extends TBaseElement<string>>(plugins: YooptaPlugin<O, P>[]): PluginType<O, P>[] {
   const items: PluginType<O, P>[] = plugins
     .map((instance) => {
       const { childPlugin, ...componentProps } = instance.getPlugin
-      return childPlugin
-        ? [componentProps, { ...childPlugin.getPlugin, hasParent: true }]
-        : componentProps
+      return childPlugin ? [componentProps, { ...childPlugin.getPlugin, hasParent: true }] : componentProps
     })
     .flat()
 

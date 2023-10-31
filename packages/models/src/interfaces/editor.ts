@@ -15,6 +15,7 @@ import {
   Range,
   Path,
   Operation,
+  BaseEditor,
 } from 'slate'
 import { GridCell } from './cell'
 import { CompositionText } from './composition-text'
@@ -223,8 +224,8 @@ export * from 'slate'
 /**
  * create an Editor instance
  */
-export const createEditor = () => {
-  const baseEditor = createSlateEditor()
+export const createEditor = (): BaseEditor => {
+  const baseEditor = createSlateEditor() // baseEditor 是 BaseEditor类型
 
   const { apply, onChange } = baseEditor
 
@@ -331,5 +332,6 @@ export const createEditor = () => {
 }
 
 export { Element, Location, Node, Operation, Path, PathRef, Point, PointRef, Range, RangeRef, Scrubber, Span, Text } from 'slate'
+// Editor is the alias of SlateEditor
 export type Editor = SlateEditor
 export type { EditorInterface }

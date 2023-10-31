@@ -1,6 +1,7 @@
-import { List, Editor } from '@editablejs/models'
+import { Editor } from '@editablejs/models'
 import { TASK_LIST_KEY } from '../constants'
 import { TaskList } from '../interfaces/task-list'
+import { List } from '../../list/list'
 
 export interface ToggleTaskListOptions {
   template?: string
@@ -22,7 +23,7 @@ export const TaskListEditor = {
 
   queryActive: (editor: Editor) => {
     const elements = List.lists(editor, {
-      match: n => n.type === TASK_LIST_KEY,
+      match: (n) => n.type === TASK_LIST_KEY,
     })
     return elements.length > 0 ? elements : null
   },

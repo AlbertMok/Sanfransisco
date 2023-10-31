@@ -1,5 +1,5 @@
 import { RenderElementProps, ElementAttributes, Editable, Hotkey } from '@editablejs/editor'
-import { Transforms, List } from '@editablejs/models'
+import { Transforms } from '@editablejs/models'
 import tw, { styled, css, theme } from 'twin.macro'
 import { ListStyles, ListLabelStyles, renderList } from '../../styles'
 import { DATA_TASK_CHECKED_KEY, TASK_LIST_KEY } from '../constants'
@@ -7,6 +7,7 @@ import { TaskList } from '../interfaces/task-list'
 import { TaskListHotkey, TaskListOptions } from '../options'
 import { TaskListEditor, ToggleTaskListOptions } from './task-list-editor'
 import { withShortcuts } from './with-shortcuts'
+import { List } from '../../list/list'
 
 const defaultHotkey: TaskListHotkey = 'mod+shift+9'
 
@@ -148,7 +149,6 @@ export const withTaskList = <T extends Editable>(editor: T, options: TaskListOpt
   }
 
   const { onKeydown, isList } = newEditor
-
   newEditor.isList = (value: any): value is List => {
     return TaskListEditor.isTaskList(newEditor, value) || isList(value)
   }

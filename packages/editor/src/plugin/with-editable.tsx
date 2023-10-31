@@ -64,9 +64,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
     const { selection } = editor
 
     if (selection && Range.isCollapsed(selection)) {
-      const [cell] = Editor.nodes(editor, {
-        match: (n) => e.isGridCell(n),
-      })
+      const [cell] = Editor.nodes(editor, { match: (n) => e.isGridCell(n) })
 
       if (cell) {
         const [, cellPath] = cell
@@ -372,7 +370,6 @@ export const withEditable = <T extends Editor>(editor: T) => {
   // 插入新的block
   e.insertBreak = () => {
     const { selection } = editor
-
     if (!Editable.isEditor(editor) || !selection || Range.isExpanded(selection)) {
       insertBreak()
       return

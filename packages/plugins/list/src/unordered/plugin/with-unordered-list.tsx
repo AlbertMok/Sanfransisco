@@ -1,11 +1,11 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import { List } from '@editablejs/models'
+import { Editable, Hotkey, generateId } from '@editablejs/editor'
 import { renderList } from '../../styles'
 import { UNORDERED_LIST_KEY } from '../constants'
 import { UnorderedListOptions, UnorderedListHotkey } from '../options'
 import { UnorderedListTemplates } from '../template'
 import { UnorderedListEditor, ToggleUnorderedListOptions } from './unordered-list-editor'
 import { withShortcuts } from './with-shortcuts'
+import { List } from '../../list/list'
 
 const defaultHotkey: UnorderedListHotkey = 'mod+shift+8'
 
@@ -22,18 +22,15 @@ export const withUnorderedList = <T extends Editable>(editor: T, options: Unorde
 
   newEditor.createUnorderedList = (options: ToggleUnorderedListOptions = {}) => {
     const activeElements = UnorderedListEditor.queryActive(editor)
-
+    let id = generateId()
     if (activeElements) {
       List.unwrapList(editor, {
         match: (n) => n.type === UNORDERED_LIST_KEY,
       })
     } else {
       const { template } = options
-
-      List.wrapList(editor, {
-        type: UNORDERED_LIST_KEY,
-        template: template ?? UnorderedListTemplates[0].key,
-      })
+      const newListElement = { type: UNORDERED_LIST_KEY, template: template ?? UnorderedListTemplates[0].key, id }
+      List.wrapList(editor, newListElement)
     }
   }
 
@@ -61,6 +58,19 @@ export const withUnorderedList = <T extends Editable>(editor: T, options: Unorde
       return
     }
     onKeydown(e)
+  }
+
+  const { insertBreak } = newEditor
+  newEditor.insertBreak = () => {
+    const entry = List.above(editor)
+    if (entry) {
+      console.log(entry)
+      // 当前节点是列表节点
+      List.splitList(editor)
+      return
+    } else {
+      insertBreak()
+    }
   }
 
   const { shortcuts } = options

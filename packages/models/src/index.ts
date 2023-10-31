@@ -21,17 +21,18 @@ export type TElementConfig = {
 }
 
 // 自定义元素类型 T 是string类型
-type TBaseElement = BaseElement & {
+type TBaseElement<T extends string> = {
+  children: BaseElement['children']
   id?: string
-  type?: string
+  type?: T
   data?: any
 }
 
 declare module 'slate' {
   interface CustomTypes {
     Editor: BaseEditor
-    // Element: BaseElement & { type?: string; id?: string | number }
-    Element: TBaseElement
+    // Element: BaseElement & { type?: string; }
+    Element: TBaseElement<string>
   }
 }
 

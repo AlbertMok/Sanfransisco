@@ -1,6 +1,6 @@
-import { List, Element } from '@editablejs/models'
 import { UNORDERED_LIST_KEY } from '../constants'
 import { generateId } from '@editablejs/editor'
+import { List } from '../../list/list'
 
 export interface UnorderedList extends List {
   type: typeof UNORDERED_LIST_KEY
@@ -9,7 +9,7 @@ export interface UnorderedList extends List {
 
 export const UnorderedList = {
   isUnorderedList: (node: any): node is UnorderedList => {
-    return Element.isElement(node) && node.type === UNORDERED_LIST_KEY
+    return List.isElement(node) && node.type === UNORDERED_LIST_KEY
   },
 
   create: (unorderedList: Omit<UnorderedList, 'type'>): UnorderedList => {

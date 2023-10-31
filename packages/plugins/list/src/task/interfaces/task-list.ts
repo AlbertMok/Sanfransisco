@@ -1,4 +1,4 @@
-import { List, Element } from '@editablejs/models'
+import { List } from '../../list/list'
 import { TASK_LIST_KEY } from '../constants'
 
 export interface TaskList extends List {
@@ -7,8 +7,8 @@ export interface TaskList extends List {
 }
 
 export const TaskList = {
-  isTaskList: (value: any): value is TaskList => {
-    return Element.isElement(value) && value.type === TASK_LIST_KEY
+  isTaskList: (node: any): node is TaskList => {
+    return List.isElement(node) && node.type === TASK_LIST_KEY
   },
 
   create: (taskList: Omit<TaskList, 'type'>): TaskList => {

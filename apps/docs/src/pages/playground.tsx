@@ -343,10 +343,7 @@ export default function Playground() {
           </div>
           <div tw="flex justify-between py-3 px-6 text-base">
             <div tw="flex text-2xl text-link flex-1 gap-3">
-              <ExternalLink
-                aria-label="Editable on Github"
-                href="https://github.com/editablejs/editable/blob/main/apps/docs/src/pages/playground.tsx"
-              >
+              <ExternalLink aria-label="Editable on Github" href="https://github.com/AlbertMok/Sanfransisco">
                 <IconGitHub />
               </ExternalLink>
             </div>

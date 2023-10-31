@@ -12,7 +12,7 @@ export type MarkdownSerializerTransform = typeof MarkdownSerializer.transform
 export type MarkdownSerializerWithTransform<T = MarkdownSerializerWithOptions> = (
   next: MarkdownSerializerTransform,
   serializer: typeof MarkdownSerializer,
-  options: T,
+  options: T
 ) => MarkdownSerializerTransform
 
 export interface EditorMarkdownSerializerWithTransform<T = MarkdownSerializerWithOptions> {
@@ -24,8 +24,7 @@ export interface MarkdownSerializerPlugin {
   extensions?: Options | Options[]
 }
 
-const MARKDOWN_SERIALIZER_TRANSFORMS: WeakMap<Editor, EditorMarkdownSerializerWithTransform[]> =
-  new WeakMap()
+const MARKDOWN_SERIALIZER_TRANSFORMS: WeakMap<Editor, EditorMarkdownSerializerWithTransform[]> = new WeakMap()
 
 const MARKDOWN_SERIALIZER_PLUGINS: WeakMap<Editor, MarkdownSerializerPlugin[]> = new WeakMap()
 
@@ -33,14 +32,11 @@ export interface EditorMarkdownSerializerOptions extends MarkdownSerializerOptio
   editor: Editor
 }
 
-const withEditorSerializerTransform: MarkdownSerializerWithTransform<
-  EditorMarkdownSerializerOptions
-> = (next, _, { editor }) => {
+const withEditorSerializerTransform: MarkdownSerializerWithTransform<EditorMarkdownSerializerOptions> = (next, _, { editor }) => {
   return (node, options = {}) => {
     if (Element.isElement(node)) {
       const { type = 'paragraph' } = node
-      if (type !== 'paragraph')
-        return [{ type: 'html', value: HTMLSerializer.transformWithEditor(editor, node) }]
+      if (type !== 'paragraph') return [{ type: 'html', value: HTMLSerializer.transformWithEditor(editor, node) }]
     }
     return next(node, options)
   }
@@ -49,7 +45,7 @@ const withEditorSerializerTransform: MarkdownSerializerWithTransform<
 export const MarkdownSerializer = {
   transform(node: Node, options: MarkdownSerializerOptions = {}): Content[] {
     if (Text.isText(node)) return [{ type: 'text', value: node.text }]
-    const tChildren = () => node.children.map(child => this.transform(child, options)).flat()
+    const tChildren = () => node.children.map((child) => this.transform(child, options)).flat()
     if (Editor.isEditor(node)) return tChildren()
     const { type = 'paragraph' } = node
 
@@ -66,13 +62,9 @@ export const MarkdownSerializer = {
     this.transform = transform(t.bind(this), this, options)
   },
 
-  withEditor<T = MarkdownSerializerOptions>(
-    editor: Editor,
-    transform: MarkdownSerializerWithTransform<T>,
-    options: T,
-  ) {
+  withEditor<T = MarkdownSerializerOptions>(editor: Editor, transform: MarkdownSerializerWithTransform<T>, options: T) {
     const fns = MARKDOWN_SERIALIZER_TRANSFORMS.get(editor) ?? []
-    if (fns.find(fn => fn.transform === transform)) return
+    if (fns.find((fn) => fn.transform === transform)) return
     fns.push({
       transform: transform as MarkdownSerializerWithTransform,
       options: options as MarkdownSerializerOptions,
@@ -101,7 +93,7 @@ export const MarkdownSerializer = {
 
   withEditorPlugin(editor: Editor, plugin: MarkdownSerializerPlugin) {
     const plugins = MARKDOWN_SERIALIZER_PLUGINS.get(editor) ?? []
-    if (plugins.find(p => p === plugin)) return
+    if (plugins.find((p) => p === plugin)) return
     plugins.push(plugin)
     MARKDOWN_SERIALIZER_PLUGINS.set(editor, plugins)
   },
@@ -120,7 +112,7 @@ export const MarkdownSerializer = {
       },
       {
         extensions,
-      },
+      }
     )
   },
 

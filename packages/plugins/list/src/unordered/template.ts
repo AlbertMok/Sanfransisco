@@ -1,4 +1,4 @@
-import { ListTemplate } from '@editablejs/models'
+import { ListTemplate } from '../list/list'
 
 export const UnorderedListTemplates: ListTemplate[] = [
   {
