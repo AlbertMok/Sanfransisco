@@ -47,8 +47,6 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
       const text = Editor.string(editor, parentPath)
 
       if (isNotParagraph && text.length === 0) {
-        console.log('convert to the paragraph')
-        console.log('text is 0')
         Transforms.setNodes(editor, newParagraph, { at: parentPath })
         return
       }
@@ -56,7 +54,6 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
       // 如果光标是在一个节点的最开头位置，并按下enter之后,当前节点下移的话，需要把当前节点删除，然后深复制，然后在下面插入
       const isStart = Editor.isStart(editor, selection.anchor, parentPath)
       if (isNotParagraph && isStart) {
-        console.log('isstart')
         const [currentNode] = nodeEntry
         Transforms.setNodes(editor, newParagraph, { at: parentPath })
         Transforms.delete(editor, { unit: 'block' })
@@ -76,13 +73,11 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const { insertBreak } = newEditor
   // 插入新的block
   newEditor.insertBreak = () => {
-    console.log('这是段落编辑器')
     const { selection } = editor
     if (!Editable.isEditor(editor) || !selection || Range.isExpanded(selection)) {
       newEditor.createParagraphElement()
       return
     }
-    console.log(editor)
     newEditor.createParagraphElement()
     // const entry = List.above(editor)
     // // 如果当前节点不是列表节点的话
@@ -98,11 +93,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const { renderElement } = newEditor
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (ParagraphEditor.isParagraph(element)) {
-      return (
-        <div {...attributes} style={{ marginTop: '1px', marginBottom: '1px' }}>
-          {children}
-        </div>
-      )
+      return <div {...attributes}>{children}</div>
     }
     return renderElement({ attributes, children, element })
   }

@@ -205,7 +205,7 @@ export const List = {
         startMap[nextLevel]++
       }
       prevLevel = nextLevel
-      Transforms.setNodes<List>(editor, { start }, { at: startPath })
+      Transforms.setNodes<List>(editor, { start, id: generateId() }, { at: startPath })
     }
   },
 
@@ -266,7 +266,7 @@ export const List = {
 
         const newProps = props ? props(key, node, path) : {}
 
-        let element: List = { type, key, start, template, level: newLevel, ...newProps, children: [] }
+        let element: List = { type, key, start, template, level: newLevel, ...newProps, children: [], id: key }
 
         Transforms.wrapNodes(editor, element, { at: path })
 

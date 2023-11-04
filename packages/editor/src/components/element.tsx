@@ -31,7 +31,6 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   // custom node renderer component.
   // 基本元素,最外层
   const attributes: ElementAttributes = {
-    [DATA_BLOCK_ID]: element.id,
     [DATA_EDITABLE_NODE]: 'element',
     ref,
   }
@@ -89,12 +88,15 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
 
   const newAttributes = editor.renderElementAttributes({ attributes, element })
   // 渲染元素
-  let content = editor.renderElement({
-    attributes: newAttributes,
-    children,
-    element,
-  })
-
+  let content = (
+    <div data-block-id={element.id} data-block-type={element.type}>
+      {editor.renderElement({
+        attributes: newAttributes,
+        children,
+        element,
+      })}
+    </div>
+  )
   const decorates = useElementDecorations(element, path)
 
   if (decorates.length > 0) {

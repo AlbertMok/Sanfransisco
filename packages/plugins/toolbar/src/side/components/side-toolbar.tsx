@@ -44,6 +44,7 @@ const findFirstElementChild = (el: DOMElement): DOMElement => {
 export const SideToolbar: React.FC<SideToolbar> = () => {
   const editor = useEditableStatic()
 
+  // 从SideToolbarOptions中获取参数
   const {
     delayDragDuration = 0.2, //初始化拖拽操作的延迟持续时间
     delayHideDuration = 0.2, //初始化隐藏操作的延迟持续时间
@@ -54,10 +55,14 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
     return getOptions(editor) //getOptions(editor) 函数来获取当前编辑器实例的选项配置
   }, [editor])
 
-  //当editor变化时，useMemo 钩子内的函数会被重新执行。
+  /**
+   * containerRef是侧边栏悬浮按钮的ref
+   */
   const containerRef = React.useRef<HTMLDivElement>(null)
 
-  // 位置 x y 坐标
+  /**
+   * data-block-node:text 的位置，即这个矩形相对于编辑器矩形的原点的 x 坐标 和 y坐标
+   */
   const [position, setPosition] = React.useState<Point | null>(null)
 
   const [menuOpen, setMenuOpen] = useSideToolbarMenuOpen(editor)
@@ -71,6 +76,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
   const [readOnly] = useReadOnly() //是否为只读模式，即内容不可编辑
 
   const dragging = useDragging()
+
   const hide = React.useCallback(() => {
     if (dragging) return //正在拖动，就不隐藏
     // 设置隐藏参数
@@ -165,23 +171,34 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
       })
 
       if (!entry) return delayHide()
-
       const [node, path] = entry
       const isVoid = editor.isVoid(node) //是否为void元素
 
+      // 将找到的Slate节点转化为实际的DOM元素， 一般是 data-block-node:element
       const element = Editable.toDOMNode(editor, node)
+
       // 优先对齐文本节点
-      const textElement = isFindList // 如果是列表的话
-        ? findFirstElementChild(element) // 递归寻找文本节点
-        : element.querySelector(`[${DATA_EDITABLE_STRING}],[${DATA_EDITABLE_ZERO_WIDTH}]`) // 寻找与指定选择器或选择器组匹配的第一个Element元素
+      const textElement = isFindList
+        ? findFirstElementChild(element) // 如果是列表的话递归寻找文本节点
+        : element.querySelector(`[${DATA_EDITABLE_NODE}]`) // 寻找与指定选择器或选择器组匹配的第一个Element元素
 
+      // 获取元素的clientRects
       const rects = (!isVoid && textElement ? textElement : element).getClientRects()
-      // const rects = element.getClientRects()
 
+      // 如果没有元素
       if (!rects.length) return delayHide()
+
+      // 在集合中找到第一个具有大于0高度的矩形，如果没有找到这样的矩形，它将默认为集合中的第一个矩形，即data-block-node=text的矩形
       const rect = Array.from(rects).find((rect) => rect.height > 0) ?? rects[0]
+
+      // x是data-block-node=text矩形原点的 x 坐标，y是矩形原点的 y 坐标，height是矩形的高度
       let { x, y, height } = rect
 
+      const elementRect = element.getBoundingClientRect()
+      let elementX = elementRect.x
+      x = x > elementX ? elementX : x
+
+      // 判断是否为表格元素
       const gridCell = GridCell.find(editor, point)
       if (gridCell) {
         const cellElement = Editable.toDOMNode(editor, gridCell[0])
@@ -189,6 +206,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         x = cellRect.x
       }
 
+      // 获取这个 date-block-node:text 相对于编辑器 data-block-node:editor 的 x 坐标和 y 坐标
       const [left, top] = Editable.toRelativePosition(editor, x, isVoid ? y : y + height / 2)
 
       clearDelayHideTimer()
@@ -201,6 +219,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         isVoid,
       })
 
+      // 设置位置坐标
       setPosition({ x: left, y: top })
     },
     [clearDelayHideTimer, delayHide, editor]
@@ -210,19 +229,26 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
     (event: MouseEvent) => {
       if (dragging || menuOpen) return
 
+      // 获取鼠标的 x 坐标 和 y 坐标
       const { clientX, clientY } = event
 
       const data = getCapturedData(editor)
+
       // 介于按钮和节点区域之间不处理
       if (containerRef.current && data) {
+        // 获取元素的 data-block-node="element"的矩形
         const { x, y, bottom } = Editable.toDOMNode(editor, data.element).getBoundingClientRect()
+
         const currentRect = containerRef.current.getBoundingClientRect()
+
+        // 编辑器的容错范围外直接隐藏
         const { x: cX } = currentRect
         if (clientX >= cX && clientX <= x && clientY >= y && clientY <= bottom) {
           return
         }
       }
-      // 编辑器的容错范围外直接隐藏
+
+      // 获取编辑器data-block-node="editor"的div
       const container = Editable.toDOMNode(editor, editor)
       const { x, y, width, height } = container.getBoundingClientRect()
       if (
@@ -243,11 +269,14 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         y: clientY,
       }
 
+      // 更新坐标
+      // 核心函数
       handleUpdatePosition(event)
     },
     [dragging, menuOpen, handleUpdatePosition, delayHide, horizontalDistanceThreshold, verticalDistanceThreshold]
   )
 
+  // useCallback returns a function
   const handleMoseLeave = React.useCallback(() => {
     clearDelayHideTimer()
     if (!showingRef.current) delayHide()
@@ -256,16 +285,19 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
   // 监听事件
   React.useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
     }
   }, [editor, handleMoseLeave, handleMouseMove])
 
   const decorateOpen = useSideToolbarDecorateOpen(editor)
+
   useIsomorphicLayoutEffect(() => {
     const data = getCapturedData(editor)
 
     if (decorateOpen && data) {
+      // 获取当前选中元素 即 data-block-node="element"
       const domElement = Editable.toDOMNode(editor, data.element)
       const prevCssText = domElement.style.cssText
       // 选中的元素的背景
@@ -277,21 +309,23 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
   }, [editor, decorateOpen])
 
   const visible = React.useMemo(() => {
-    // !!是 JavaScript 中的一种常见的类型转换技巧，它的作用是将一个值强制转换为布尔值（Boolean
-    // 如果 position 有值，!!position 将为 true，如果 position 是 null、undefined 或空字符串，!!position 将为 false
     return !!position
   }, [position]) //函数中的计算结果会被缓存，只有在依赖数组中的值发生变化时才会重新计算。
 
   // 判断元素是否内容为空,为空则为add,不为空就是drag
   const actionType = getCapturedData(editor)?.isEmpty ? 'add' : 'drag'
+
   const transformPosition = React.useMemo(() => {
     if (!position || !containerRef.current) return
     const { x, y } = position
+
+    // 侧边栏按钮的 offsetWidth 和 clientHeight
     const { offsetWidth, clientHeight } = containerRef.current
     const data = getCapturedData(editor)
+
     return {
       x: x - offsetWidth - 8,
-      y: data?.isVoid ? y : y - clientHeight / 2,
+      y: data?.isVoid ? y : y - clientHeight / 2, // y 是 侧边栏悬浮按钮矩形的原点的 y 坐标
     }
   }, [position, editor])
 
@@ -426,7 +460,8 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
     )
   }
 
-  const renderBtn = () => {
+  // 渲染悬浮按钮
+  const renderSideBtn = () => {
     return (
       <div
         ref={containerRef}
@@ -459,11 +494,11 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
 
   if (readOnly) return null
 
-  if (dragging || menuOpen || !visible) return renderBtn()
+  if (dragging || menuOpen || !visible) return renderSideBtn()
 
   return (
     <Tooltip content={renderTooltipContent()} defaultOpen={tooltipDefaultOpen} side="top">
-      {renderBtn()}
+      {renderSideBtn()}
     </Tooltip>
   )
 }

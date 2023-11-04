@@ -67,7 +67,7 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
       const secondChild = node.children[1]
       if (!secondChild) {
         // if there is not a second node in the editor,then insert a new node
-        Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }], id: generateId() }, { at: [1] })
+        Transforms.insertNodes(titleEditor, { type: 'paragraph', id: generateId(), children: [{ text: '' }] }, { at: [1] })
         isHandled = true
       } else if (Title.isTitle(secondChild)) {
         Transforms.setNodes(titleEditor, { type: 'paragraph' }, { at: [1] })

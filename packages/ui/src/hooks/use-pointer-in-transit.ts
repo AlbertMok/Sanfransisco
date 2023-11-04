@@ -103,24 +103,14 @@ function getHullPresorted<P extends Point>(points: Readonly<Array<P>>): Array<P>
   }
   lowerHull.pop()
 
-  if (
-    upperHull.length === 1 &&
-    lowerHull.length === 1 &&
-    upperHull[0].x === lowerHull[0].x &&
-    upperHull[0].y === lowerHull[0].y
-  ) {
+  if (upperHull.length === 1 && lowerHull.length === 1 && upperHull[0].x === lowerHull[0].x && upperHull[0].y === lowerHull[0].y) {
     return upperHull
   } else {
     return upperHull.concat(lowerHull)
   }
 }
 
-export const usePointerInTransit = ({
-  triggerEl,
-  contentEl,
-  onClose,
-  getChildOpens,
-}: PointerInTransitOptions) => {
+export const usePointerInTransit = ({ triggerEl, contentEl, onClose, getChildOpens }: PointerInTransitOptions) => {
   const [pointerGraceArea, setPointerGraceArea] = React.useState<Polygon | null>(null)
   const isPointerInTransitRef = React.useRef(false)
   const handleRemoveGraceArea = React.useCallback(() => {
@@ -128,25 +118,20 @@ export const usePointerInTransit = ({
     isPointerInTransitRef.current = false
   }, [])
 
-  const handleCreateGraceArea = React.useCallback(
-    (event: PointerEvent, hoverTarget: HTMLElement) => {
-      const currentTarget = event.currentTarget as HTMLElement
-      const exitPoint = { x: event.clientX, y: event.clientY }
-      const exitSide = getExitSideFromRect(exitPoint, currentTarget.getBoundingClientRect())
+  const handleCreateGraceArea = React.useCallback((event: PointerEvent, hoverTarget: HTMLElement) => {
+    const currentTarget = event.currentTarget as HTMLElement
+    const exitPoint = { x: event.clientX, y: event.clientY }
+    const exitSide = getExitSideFromRect(exitPoint, currentTarget.getBoundingClientRect())
 
-      const bleed = exitSide === 'right' || exitSide === 'bottom' ? -5 : 5
-      const isXAxis = exitSide === 'right' || exitSide === 'left'
-      const startPoint = isXAxis
-        ? { x: event.clientX + bleed, y: event.clientY }
-        : { x: event.clientX, y: event.clientY + bleed }
+    const bleed = exitSide === 'right' || exitSide === 'bottom' ? -5 : 5
+    const isXAxis = exitSide === 'right' || exitSide === 'left'
+    const startPoint = isXAxis ? { x: event.clientX + bleed, y: event.clientY } : { x: event.clientX, y: event.clientY + bleed }
 
-      const hoverTargetPoints = getPointsFromRect(hoverTarget.getBoundingClientRect())
-      const graceArea = getHull([startPoint, ...hoverTargetPoints])
-      setPointerGraceArea(graceArea)
-      isPointerInTransitRef.current = true
-    },
-    [],
-  )
+    const hoverTargetPoints = getPointsFromRect(hoverTarget.getBoundingClientRect())
+    const graceArea = getHull([startPoint, ...hoverTargetPoints])
+    setPointerGraceArea(graceArea)
+    isPointerInTransitRef.current = true
+  }, [])
 
   React.useEffect(() => {
     return () => handleRemoveGraceArea()
@@ -177,7 +162,7 @@ export const usePointerInTransit = ({
 
         if (hasEnteredTarget) {
           handleRemoveGraceArea()
-        } else if (isPointerOutsideGraceArea && childOpens.every(open => !open)) {
+        } else if (isPointerOutsideGraceArea && childOpens.every((open) => !open)) {
           handleRemoveGraceArea()
           onClose?.()
         }

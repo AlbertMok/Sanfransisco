@@ -61,7 +61,7 @@ export type BaseAttributes = Omit<React.HTMLAttributes<HTMLElement>, 'children'>
 
 // 元素属性
 export interface ElementAttributes<T extends any = any> extends BaseAttributes {
-  [DATA_BLOCK_ID]?: string
+  // [DATA_BLOCK_ID]?: string
   [DATA_EDITABLE_NODE]: 'element'
   [DATA_EDITABLE_INLINE]?: true
   [DATA_EDITABLE_VOID]?: true
@@ -1073,9 +1073,9 @@ export const Editable = {
    */
   toRelativePosition(editor: Editor, x: number, y: number): [number, number] {
     const container = Editable.toDOMNode(editor, editor) //获取编辑器容器的DOM节点
-    const rootRect = container.getBoundingClientRect() // 返回值是一个 DOMRect 对象，是包含整个元素的最小矩形（包括 padding 和 border-width）。该对象使用 left、top、right、bottom、x、y、width 和 height 这几个以像素为单位的只读属性描述整个矩形的位置和大小
-
-    return [x - rootRect.left, y - rootRect.top]
+    // 获取 data-block-node="editor"的div rect
+    const editorContainerRect = container.getBoundingClientRect()
+    return [x - editorContainerRect.left, y - editorContainerRect.top]
   },
 
   reverseRelativePosition(editor: Editor, x: number, y: number): [number, number] {

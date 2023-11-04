@@ -17,7 +17,6 @@ export const withBlockquote = <T extends Editable>(editor: T, options: Blockquot
 
   // 转化为blockquote
   newEditor.createBlockQuoteElement = () => {
-    let id = generateId()
     editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
 
@@ -29,7 +28,7 @@ export const withBlockquote = <T extends Editable>(editor: T, options: Blockquot
       } else {
         Transforms.wrapNodes(
           editor,
-          { type: BLOCKQUOTE_KEY, children: [], id },
+          { type: BLOCKQUOTE_KEY, children: [], id: generateId() },
           {
             mode: 'highest',
             match: (n) => Editor.isBlock(editor, n) && !editor.isGrid(n) && !editor.isGridRow(n) && !editor.isGridCell(n),
