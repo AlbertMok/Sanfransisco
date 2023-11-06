@@ -472,6 +472,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
           left: transformPosition?.x,
           top: transformPosition?.y,
           height: '24px',
+
           // transition: isTransformAmimation ? 'all 0.2s linear 0s' : 'opacity 0.2s linear 0s',
           cursor: dragging ? 'grabbing' : 'grab',
         }}
@@ -479,7 +480,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         onMouseLeave={handleMouseLeave}
       >
         <div
-          tw="flex items-center justify-center rounded-md bg-white border border-solid border-gray-300 shadow-sm text-xs text-gray-600  cursor-grab hover:bg-gray-200"
+          tw="flex items-center justify-center rounded-md text-xs text-gray-600  cursor-grab hover:bg-gray-200"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onDragStart={(e) => e.preventDefault()}

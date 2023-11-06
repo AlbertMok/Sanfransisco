@@ -36,7 +36,7 @@ export const withInput = <T extends Editor>(editor: T) => {
               offset,
             },
           },
-          { at: path },
+          { at: path }
         )
         const point = { path, offset: offset + value.length }
         Transforms.select(editor, {
@@ -50,11 +50,11 @@ export const withInput = <T extends Editor>(editor: T) => {
     e.emit('input', value)
   }
 
-  e.onBeforeInput = value => {
+  e.onBeforeInput = (value) => {
     e.emit('beforeinput', value)
   }
 
-  e.onCompositionStart = data => {
+  e.onCompositionStart = (data) => {
     if (editor.selection && Range.isExpanded(editor.selection)) {
       Editor.deleteFragment(editor)
     }
@@ -73,7 +73,7 @@ export const withInput = <T extends Editor>(editor: T) => {
         {
           composition: undefined,
         },
-        { at: path },
+        { at: path }
       )
       const point = { path, offset: composition?.offset ?? selection.anchor.offset }
       const range = composition?.isEmpty

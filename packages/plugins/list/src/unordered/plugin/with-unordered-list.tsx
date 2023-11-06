@@ -64,7 +64,6 @@ export const withUnorderedList = <T extends Editable>(editor: T, options: Unorde
   newEditor.insertBreak = () => {
     const entry = List.above(editor)
     if (entry) {
-      console.log(entry)
       // 当前节点是列表节点
       List.splitList(editor)
       return

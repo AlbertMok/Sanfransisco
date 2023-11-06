@@ -52,10 +52,7 @@ const CodeStyles = styled.code(() => [
   `,
 ])
 
-export const withMark = <T extends Editable>(
-  editor: T,
-  options: MarkOptions = {}
-) => {
+export const withMark = <T extends Editable>(editor: T, options: MarkOptions = {}) => {
   const newEditor = editor as T & MarkEditor
 
   setOptions(newEditor, options)
@@ -82,11 +79,7 @@ export const withMark = <T extends Editable>(
     })
   }
 
-  newEditor.renderLeaf = ({
-    attributes,
-    children,
-    text,
-  }: RenderLeafProps<Mark>) => {
+  newEditor.renderLeaf = ({ attributes, children, text }: RenderLeafProps<Mark>) => {
     const style: React.CSSProperties = attributes.style ?? {}
 
     if (text.bold && MarkEditor.isEnabled(editor, 'bold')) {
@@ -104,9 +97,7 @@ export const withMark = <T extends Editable>(
     }
 
     if (text.strikethrough && MarkEditor.isEnabled(editor, 'strikethrough')) {
-      style.textDecoration = style.textDecoration
-        ? style.textDecoration + ' line-through'
-        : 'line-through'
+      style.textDecoration = style.textDecoration ? style.textDecoration + ' line-through' : 'line-through'
     }
 
     const enabledSub = text.sub && MarkEditor.isEnabled(editor, 'sub')
@@ -144,10 +135,7 @@ export const withMark = <T extends Editable>(
 
   const { shortcuts } = options
   if (shortcuts !== false) {
-    withShortcuts(
-      newEditor,
-      Object.assign(defaultShortcuts, shortcuts === true ? {} : shortcuts)
-    )
+    withShortcuts(newEditor, Object.assign(defaultShortcuts, shortcuts === true ? {} : shortcuts))
   }
 
   return newEditor

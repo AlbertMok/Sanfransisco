@@ -186,15 +186,16 @@ export const List = {
     let prevLevel = levelOut
 
     while (true) {
+      // 从第二个列表元素开始算起来
       const next = Editor.next<List>(editor, {
         at: startPath,
         match: (n) => Editor.isList(editor, n) && (!type || n.type === type) && n.key === key && (level === undefined || n.level === level),
       })
-
       if (!next) break
 
       // 下一个元素
       const [listNode, path] = next
+      // 更新当前的path
       startPath = path
       const nextLevel = listNode.level
       let start = startMap[nextLevel]
@@ -205,7 +206,7 @@ export const List = {
         startMap[nextLevel]++
       }
       prevLevel = nextLevel
-      Transforms.setNodes<List>(editor, { start, id: generateId() }, { at: startPath })
+      Transforms.setNodes<List>(editor, { start }, { at: startPath })
     }
   },
 
@@ -288,6 +289,7 @@ export const List = {
   unwrapList: (editor: Editor, options: UnwrapListOptions = {}) => {
     const { at, match, props } = options
     const activeLists = List.lists(editor, { at, match })
+
     editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
 
@@ -311,8 +313,10 @@ export const List = {
         }
       }
       if (!hasList) return
+
       Transforms.unwrapNodes(editor, { at, match: (n) => List.isList(editor, n) && (!match || match(n)), split: true })
       if (!selection) return
+
       for (const [key, [list, path]] of topLists) {
         List.updateStart(editor, {
           type: list.type,
@@ -336,7 +340,6 @@ export const List = {
 
     const [list, path] = entry
     const type = list.type
-    console.log(list)
 
     // 空节点拆分
     if (Editor.isEmpty(editor, list)) {
@@ -371,6 +374,8 @@ export const List = {
       match: (node) => List.isList(editor, node) && node.type === type,
       always: true,
     })
+
+    Transforms.setNodes(editor, { id: generateId() }, { at })
 
     List.updateStart(editor, {
       type,
