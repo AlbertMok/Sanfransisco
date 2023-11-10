@@ -1,5 +1,6 @@
 import { Element } from '@editablejs/models'
 import { HR_KEY } from '../constants'
+import { generateId } from '@editablejs/editor'
 
 export type HrStyle = 'dashed' | 'solid' | 'dotted' | 'double'
 
@@ -20,6 +21,7 @@ export const Hr = {
       ...hr,
       type: HR_KEY,
       children: [{ text: '' }],
+      id: generateId(),
     }
   },
 }

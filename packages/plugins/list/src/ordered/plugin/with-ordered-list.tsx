@@ -1,4 +1,4 @@
-import { Editable, Hotkey } from '@editablejs/editor'
+import { Editable, Hotkey, generateId } from '@editablejs/editor'
 import React from 'react'
 import tw, { styled } from 'twin.macro'
 import { ListStyles, ListLabelStyles, renderList } from '../../styles'
@@ -70,6 +70,24 @@ export const withOrderedList = <T extends Editable>(editor: T, options: OrderedL
 
   const newEditor = editor as T & OrderedListEditor
 
+  newEditor.toggleOrderedList = (options: ToggleOrderedListOptions = {}) => {
+    const activeElements = OrderedListEditor.queryActive(editor)
+    if (activeElements) {
+      List.unwrapList(editor, {
+        match: (n) => n.type === ORDERED_LIST_KEY,
+      })
+    } else {
+      const { currentNumber, template } = options
+      const newListElement = {
+        type: ORDERED_LIST_KEY,
+        currentNumber,
+        template,
+        id: generateId(),
+      }
+      List.wrapList(editor, newListElement)
+    }
+  }
+
   const { renderElement } = newEditor
 
   OrderedListTemplates.forEach((template) => {
@@ -90,22 +108,6 @@ export const withOrderedList = <T extends Editable>(editor: T, options: OrderedL
       })
     }
     return renderElement(props)
-  }
-
-  newEditor.toggleOrderedList = (options: ToggleOrderedListOptions = {}) => {
-    const activeElements = OrderedListEditor.queryActive(editor)
-    if (activeElements) {
-      List.unwrapList(editor, {
-        match: (n) => n.type === ORDERED_LIST_KEY,
-      })
-    } else {
-      const { start, template } = options
-      List.wrapList(editor, {
-        type: ORDERED_LIST_KEY,
-        start,
-        template,
-      })
-    }
   }
 
   const { onKeydown, isList } = newEditor

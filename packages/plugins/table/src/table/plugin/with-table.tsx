@@ -26,7 +26,7 @@ export const withTable = <T extends Editable>(editor: T, options: TableOptions =
     return TableEditor.isTable(newEditor, node) || isGrid(node)
   }
 
-  newEditor.insertTable = options => {
+  newEditor.insertTable = (options) => {
     const table = Table.isTable(options) ? options : TableEditor.create(newEditor, options)
     Transforms.insertNodes(newEditor, table)
     Grid.focus(newEditor, {
@@ -36,7 +36,7 @@ export const withTable = <T extends Editable>(editor: T, options: TableOptions =
 
   const { renderElement } = newEditor
 
-  newEditor.renderElement = props => {
+  newEditor.renderElement = (props) => {
     if (TableEditor.isTable(newEditor, props.element)) {
       return <TableComponent editor={newEditor} {...(props as RenderElementProps<Table>)} />
     }

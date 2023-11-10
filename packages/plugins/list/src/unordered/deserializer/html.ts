@@ -1,7 +1,4 @@
-import {
-  HTMLDeserializerOptions,
-  HTMLDeserializerWithTransform,
-} from '@editablejs/deserializer/html'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
 import { Descendant, isDOMText, List, generateRandomKey, Editor } from '@editablejs/models'
 import { UNORDERED_LIST_KEY } from '../constants'
 
@@ -9,9 +6,11 @@ export interface UnorderedListHTMLDeserializerOptions extends HTMLDeserializerOp
   editor: Editor
 }
 
-export const withUnorderedListHTMLDeserializerTransform: HTMLDeserializerWithTransform<
-  UnorderedListHTMLDeserializerOptions
-> = (next, serializer, { editor }) => {
+export const withUnorderedListHTMLDeserializerTransform: HTMLDeserializerWithTransform<UnorderedListHTMLDeserializerOptions> = (
+  next,
+  serializer,
+  { editor }
+) => {
   return (node, options = {}) => {
     const { element, text } = options
     const { parentElement } = node
@@ -33,7 +32,7 @@ export const withUnorderedListHTMLDeserializerTransform: HTMLDeserializerWithTra
           ...element,
           key,
           type: UNORDERED_LIST_KEY,
-          start,
+          currentNumber: start,
           children: serializer.transform(node, { text }),
           level: 0,
         })
@@ -44,7 +43,7 @@ export const withUnorderedListHTMLDeserializerTransform: HTMLDeserializerWithTra
             list.key = key
           }
           List.setIndent(editor, list)
-          list.children.forEach(child => {
+          list.children.forEach((child) => {
             if (editor.isList(child)) {
               addLevel(child, list.level)
             }
@@ -71,7 +70,7 @@ export const withUnorderedListHTMLDeserializerTransform: HTMLDeserializerWithTra
           ...element,
           key,
           type: UNORDERED_LIST_KEY,
-          start,
+          currentNumber: start,
           children,
           level: 0,
         })

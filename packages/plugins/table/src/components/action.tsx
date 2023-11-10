@@ -40,15 +40,7 @@ export interface TableActionProps {
 }
 
 // insert action
-const InsertActionDefault: React.FC<TableActionProps> = ({
-  editor,
-  table,
-  left,
-  top,
-  height,
-  width,
-  index,
-}) => {
+const InsertActionDefault: React.FC<TableActionProps> = ({ editor, table, left, top, height, width, index }) => {
   if (left !== undefined) {
     left -= 1
   }
@@ -65,8 +57,7 @@ const InsertActionDefault: React.FC<TableActionProps> = ({
 
   const type = left !== undefined ? TYPE_COL : TYPE_ROW
 
-  const { minColWidth = defaultTableMinColWidth, minRowHeight = defaultTableMinRowHeight } =
-    useTableOptions(editor)
+  const { minColWidth = defaultTableMinColWidth, minRowHeight = defaultTableMinRowHeight } = useTableOptions(editor)
 
   const draggingTo = useTableDragTo()
 
@@ -89,14 +80,7 @@ const InsertActionDefault: React.FC<TableActionProps> = ({
         Transforms.setNodes<Grid>(editor, { colsWidth: newColsWidth }, { at: path })
       }
     } else if (type === TYPE_ROW) {
-      Grid.insertRow(
-        editor,
-        Editable.findPath(editor, table),
-        index,
-        { type: TABLE_ROW_KEY },
-        { type: TABLE_CELL_KEY },
-        minRowHeight,
-      )
+      Grid.insertRow(editor, Editable.findPath(editor, table), index, { type: TABLE_ROW_KEY }, { type: TABLE_CELL_KEY }, minRowHeight)
     }
   }
 
@@ -147,15 +131,7 @@ interface TableDragSplitOptions {
   end: number
 }
 // split action
-const SplitActionDefault: React.FC<TableActionProps> = ({
-  editor,
-  table,
-  left,
-  top,
-  height,
-  width,
-  index,
-}) => {
+const SplitActionDefault: React.FC<TableActionProps> = ({ editor, table, left, top, height, width, index }) => {
   if (height !== undefined) {
     height += 8
   }
@@ -172,8 +148,7 @@ const SplitActionDefault: React.FC<TableActionProps> = ({
   const type = left !== undefined ? TYPE_COL : TYPE_ROW
 
   const dragRef = React.useRef<TableDragSplitOptions | null>(null)
-  const { minColWidth = defaultTableMinColWidth, minRowHeight = defaultTableMinRowHeight } =
-    useTableOptions(editor)
+  const { minColWidth = defaultTableMinColWidth, minRowHeight = defaultTableMinRowHeight } = useTableOptions(editor)
   const [isHover, setHover] = React.useState(false)
   const isDrag = React.useRef(false)
 
@@ -223,7 +198,7 @@ const SplitActionDefault: React.FC<TableActionProps> = ({
         }
       }
     },
-    [editor, minColWidth, minRowHeight, table],
+    [editor, minColWidth, minRowHeight, table]
   )
 
   const cancellablePromisesApi = useCancellablePromises()
@@ -266,7 +241,7 @@ const SplitActionDefault: React.FC<TableActionProps> = ({
       .then(() => {
         setHover(true)
       })
-      .catch(err => {})
+      .catch((err) => {})
   }, [cancellablePromisesApi, draging])
 
   const handleMouseLeave = React.useCallback(() => {

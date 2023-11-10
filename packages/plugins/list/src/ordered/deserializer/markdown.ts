@@ -1,15 +1,9 @@
-import {
-  MarkdownDeserializerWithTransform,
-  MarkdownDeserializerPlugin,
-} from '@editablejs/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@editablejs/deserializer/markdown'
 import { Descendant, generateRandomKey } from '@editablejs/models'
 import { ListItem } from 'mdast'
 import { OrderedList } from '../interfaces/ordered-list'
 
-export const withOrderedListMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (
-  next,
-  self,
-) => {
+export const withOrderedListMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {
   return (node, options = {}) => {
     const { type } = node
     if (type === 'list' && node.ordered) {
@@ -28,8 +22,8 @@ export const withOrderedListMarkdownDeserializerTransform: MarkdownDeserializerW
                 ...node,
                 children: checkedNotNullListItem,
               },
-              options,
-            ),
+              options
+            )
           )
           checkedNotNullListItem = []
         }
@@ -43,9 +37,9 @@ export const withOrderedListMarkdownDeserializerTransform: MarkdownDeserializerW
             OrderedList.create({
               key,
               level: 0,
-              start: start + index,
+              currentNumber: start + index,
               children: self.transform(child, options),
-            }),
+            })
           )
         } else {
           // 列表项的 checked 不为 null 时，交给下一个插件处理

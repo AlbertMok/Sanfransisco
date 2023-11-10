@@ -1,9 +1,7 @@
 import { ListTemplate } from '@editablejs/models'
 
 const toABC = (num: number): string => {
-  return num <= 26
-    ? String.fromCharCode(num + 64).toLowerCase()
-    : toABC(~~((num - 1) / 26)) + toABC(num % 26 || 26)
+  return num <= 26 ? String.fromCharCode(num + 64).toLowerCase() : toABC(~~((num - 1) / 26)) + toABC(num % 26 || 26)
 }
 
 const toRoman = (num: number) => {
@@ -39,15 +37,15 @@ export const OrderedListTemplates: ListTemplate[] = [
   {
     key: 'default',
     depth: 3,
-    render: ({ start, level }) => {
+    render: ({ currentNumber, level }) => {
       const l = level % 3
       switch (l) {
         case 1:
-          return { type: 'a', text: `${toABC(start)}.` }
+          return { type: 'a', text: `${toABC(currentNumber)}.` }
         case 2:
-          return { type: 'I', text: `${toRoman(start)}.` }
+          return { type: 'I', text: `${toRoman(currentNumber)}.` }
         default:
-          return { type: '1', text: `${start}.` }
+          return { type: '1', text: `${currentNumber}.` }
       }
     },
   },

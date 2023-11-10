@@ -1,7 +1,4 @@
-import {
-  HTMLDeserializerOptions,
-  HTMLDeserializerWithTransform,
-} from '@editablejs/deserializer/html'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
 import { Descendant, DOMNode, Editor, isDOMText, List, generateRandomKey } from '@editablejs/models'
 import { TASK_LIST_KEY } from '../constants'
 import { TaskList } from '../interfaces/task-list'
@@ -22,9 +19,11 @@ const findCheckbox = (el: DOMNode | null): HTMLInputElement | null => {
   return findCheckbox(firstChild)
 }
 
-export const withTaskListHTMLDeserializerTransform: HTMLDeserializerWithTransform<
-  TaskListHTMLDeserializerOptions
-> = (next, serializer, { editor }) => {
+export const withTaskListHTMLDeserializerTransform: HTMLDeserializerWithTransform<TaskListHTMLDeserializerOptions> = (
+  next,
+  serializer,
+  { editor }
+) => {
   return (node, options = {}) => {
     const { element, text } = options
     const { parentElement } = node
@@ -55,7 +54,7 @@ export const withTaskListHTMLDeserializerTransform: HTMLDeserializerWithTransfor
           key,
           checked,
           type: TASK_LIST_KEY,
-          start,
+          currentNumber: start,
           children: serializer.transform(node, { text }),
           level: 0,
         })
@@ -66,7 +65,7 @@ export const withTaskListHTMLDeserializerTransform: HTMLDeserializerWithTransfor
             list.key = key
           }
           List.setIndent(editor, list)
-          list.children.forEach(child => {
+          list.children.forEach((child) => {
             if (editor.isList(child)) {
               addLevel(child, list.level)
             }
@@ -94,7 +93,7 @@ export const withTaskListHTMLDeserializerTransform: HTMLDeserializerWithTransfor
           key,
           type: TASK_LIST_KEY,
           checked,
-          start,
+          currentNumber: start,
           children,
           level: 0,
         })

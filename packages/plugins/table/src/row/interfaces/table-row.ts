@@ -9,14 +9,11 @@ export interface TableRow extends Element {
 }
 
 export const TableRow = {
-  create: (
-    row: Partial<Omit<TableRow, 'type' | 'children'>> = {},
-    cells: Partial<Omit<TableCell, 'type' | 'children'>>[],
-  ): TableRow => {
+  create: (row: Partial<Omit<TableRow, 'type' | 'children'>> = {}, cells: Partial<Omit<TableCell, 'type' | 'children'>>[]): TableRow => {
     const { height, ...rest } = row
     return {
       type: TABLE_ROW_KEY,
-      children: cells.map(cell => TableCell.create(cell)),
+      children: cells.map((cell) => TableCell.create(cell)),
       height,
       ...rest,
     }

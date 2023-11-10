@@ -8,7 +8,7 @@ import { TASK_LIST_KEY } from '../task/constants'
  * List is an element interface which extends Element
  */
 export interface List extends Element {
-  start: number
+  currentNumber: number
   key: string // 是列表项的唯一标识符
   level: number // 表示列表的级别或深度
   type: string
@@ -52,7 +52,8 @@ interface FindFirstListOptions {
 
 type UpdateStartOptions = FindFirstListOptions & {
   mode?: 'all' | 'after'
-  start?: number
+  start?: number // 有序列表的当前编号 old
+  currentNumber?: number
 }
 
 export interface ListTemplate {
@@ -69,7 +70,7 @@ export const List = {
   },
 
   /**
-   * 查找当前光标或所选位置上方的列表
+   * 查找当前光标或所选位置上方的列表元素
    * @param editor
    * @param options
    * @returns
@@ -80,7 +81,7 @@ export const List = {
     if (!selection) return
     const entry = Editor.above<List>(editor, {
       at: selection,
-      match: (node) => Editor.isList(editor, node) && (!match || match(node)), // 检查节点是否满足外部传入的 match 函数的条件
+      match: (node) => List.isList(editor, node) && (!match || match(node)), // 检查节点是否满足外部传入的 match 函数的条件
     })
     return entry
   },
@@ -96,7 +97,7 @@ export const List = {
     const elements = Editor.elements(editor, at)
     const entries: NodeEntry<List>[] = []
     for (const key in elements) {
-      entries.push(...(elements[key].filter(([node]) => editor.isList(node) && (!match || match(node))) as any))
+      entries.push(...(elements[key].filter(([node]) => List.isList(editor, node) && (!match || match(node))) as any))
     }
     return entries
   },
@@ -159,31 +160,36 @@ export const List = {
   updateStart: (editor: Editor, options: UpdateStartOptions) => {
     const { path, key, type, level, mode = 'all', start } = options
 
+    // startPath是第一个列表元素的path
     let startPath = path
-
+    // startMap为一个空的记录对象，用于记录每个级别的开始序号。用于记录当前的level对应的开始的编号
     const startMap: Record<number, number> = {}
-
+    // start是定义了的
     if (start !== undefined) {
+      // 设置对应的level和start编号
       startMap[level ?? 0] = start
     }
 
+    // mode 默认为 'all'
     if (mode === 'all') {
       const top = List.findFirstList(editor, { path, key, level, type })
+      // 寻找第一个列表元素
       if (top) {
-        const [list, path] = top
+        // 获取第一个列表元素的 node 和 path
+        const [listNode, path] = top
         startPath = path
-        if (start === undefined) startMap[list.level] = list.start
+        if (start === undefined) startMap[listNode.level] = listNode.currentNumber
       }
     } else {
       const startList = Node.get(editor, path)
       if (Editor.isList(editor, startList) && (!type || startList.type === type) && start === undefined) {
-        startMap[startList.level] = startList.start
+        startMap[startList.level] = startList.currentNumber
       }
     }
 
+    // 获取第一个列表元素的level
     const levelOut = Number(Object.keys(startMap)[0])
-
-    let prevLevel = levelOut
+    let prevLevel = levelOut // prevLevel是 相对于当前列表元素的前一个列表元素的level
 
     while (true) {
       // 从第二个列表元素开始算起来
@@ -198,15 +204,18 @@ export const List = {
       // 更新当前的path
       startPath = path
       const nextLevel = listNode.level
-      let start = startMap[nextLevel]
-      if (!start || nextLevel > prevLevel) {
-        start = startMap[nextLevel] = 1
+      // 更新当前列表元素的编号
+      let currentNumber = startMap[nextLevel]
+
+      if (!currentNumber || nextLevel > prevLevel) {
+        currentNumber = startMap[nextLevel] = 1
       } else {
-        start++
+        currentNumber++
         startMap[nextLevel]++
       }
+
       prevLevel = nextLevel
-      Transforms.setNodes<List>(editor, { start }, { at: startPath })
+      Transforms.setNodes<List>(editor, { currentNumber }, { at: startPath })
     }
   },
 
@@ -215,7 +224,7 @@ export const List = {
     const { at } = opitons
 
     // 默认开始是1
-    let { start = 1, template, type } = list
+    let { currentNumber = 1, template, type } = list
 
     List.unwrapList(editor, { at })
 
@@ -241,11 +250,11 @@ export const List = {
       if (prev) {
         const prevListElement = prev[0]
         key = prevListElement.key
-        start = prevListElement.start + 1
+        currentNumber = prevListElement.currentNumber + 1
       } else if (([next] = Editor.nodes<List>(editor, { at: afterPath, match: (n) => Editor.isList(editor, n) && n.type === type })) && next) {
         const nextListElement = next[0]
         key = nextListElement.key
-        start = Math.max(nextListElement.start - 1, 1)
+        currentNumber = Math.max(nextListElement.currentNumber - 1, 1)
       } else {
         key = generateId()
       }
@@ -259,7 +268,7 @@ export const List = {
           const prevNode = Node.get(editor, prevPath)
 
           if (!Editor.isList(editor, prevNode)) {
-            start--
+            currentNumber--
           }
         }
 
@@ -267,13 +276,13 @@ export const List = {
 
         const newProps = props ? props(key, node, path) : {}
 
-        let element: List = { type, key, start, template, level: newLevel, ...newProps, children: [], id: key }
+        let element: List = { type, key, currentNumber, template, level: newLevel, ...newProps, children: [], id: key }
 
-        Transforms.wrapNodes(editor, element, { at: path })
+        Transforms.wrapNodes(editor, element, { at: path, mode: 'lowest' })
 
         prevPath = path
 
-        start++
+        currentNumber++
       }
       if (prevPath) {
         List.updateStart(editor, { type, path: prevPath, key })
@@ -288,6 +297,8 @@ export const List = {
    */
   unwrapList: (editor: Editor, options: UnwrapListOptions = {}) => {
     const { at, match, props } = options
+
+    // 查询当前的列表项
     const activeLists = List.lists(editor, { at, match })
 
     editor.normalizeSelection((selection) => {
@@ -295,6 +306,7 @@ export const List = {
 
       let hasList = false
       const topLists = new Map<string, NodeEntry<List>>()
+
       for (const [element, path] of activeLists) {
         hasList = true
         const { key, type } = element
@@ -323,7 +335,7 @@ export const List = {
           path,
           key: key,
           level: list.level,
-          start: list.start,
+          start: list.currentNumber,
         })
       }
     }, at)
@@ -335,6 +347,7 @@ export const List = {
     if (!selection || Range.isExpanded(selection)) return
 
     let { at, match, props } = options ?? {}
+    // 获取当前位置的列表元素
     const entry = List.above(editor, { at, match })
     if (!entry) return
 
@@ -361,6 +374,8 @@ export const List = {
         if (top.type !== type) List.updateStart(editor, { type: top.type, path, key: list.key })
       } else {
         // 节点非空的情况下
+
+        // 基本执行这个
         List.unwrapList(editor, { at, match: (n) => n.type === type })
         List.updateStart(editor, { type, path, key: list.key, level: list.level })
       }
@@ -374,12 +389,12 @@ export const List = {
       match: (node) => List.isList(editor, node) && node.type === type,
       always: true,
     })
-
-    Transforms.setNodes(editor, { id: generateId() }, { at })
-
+    // 设置当前位置的块的id为新的id
+    Transforms.setNodes(editor, { id: generateId() }, { at, mode: 'all' })
+    Transforms.setNodes(editor, { id: generateId() }, { at, mode: 'lowest' })
     List.updateStart(editor, {
       type,
-      path: selection.focus.path,
+      path: selection.focus.path, // 传入的是当前光标所在位置
       key: list.key,
       level: list.level,
     })
@@ -397,7 +412,7 @@ export const List = {
     const { at, match, unwrapProps } = options ?? {}
     const entry = Editor.above<List>(editor, {
       at,
-      match: (n) => Editor.isList(editor, n) && (!match || match(n)),
+      match: (n) => List.isList(editor, n) && (!match || match(n)),
     })
     if (!entry) return
     let [list, path] = entry
@@ -425,9 +440,8 @@ export const List = {
           type: list.type,
         }) ?? entry
       // level 为0 就删除
-      Transforms.unwrapNodes(editor, {
-        at: path,
-      })
+      Transforms.unwrapNodes(editor, { at: path })
+
       if (unwrapProps) {
         Transforms.setNodes(
           editor,
@@ -445,7 +459,7 @@ export const List = {
         path,
         key,
         level: list.level,
-        start: top[0].start,
+        start: top[0].currentNumber,
       })
     }
   },

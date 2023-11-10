@@ -37,7 +37,7 @@ export const withUnorderedListMarkdownDeserializerTransform: MarkdownDeserialize
             UnorderedList.create({
               key,
               level: 0,
-              start: 0,
+              currentNumber: 0,
               children: self.transform(child, options),
               id: generateId(),
             })

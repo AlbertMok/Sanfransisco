@@ -3,13 +3,7 @@ import * as React from 'react'
 import { InsertAction, SplitAction } from './action'
 import { useTableStore } from '../context'
 import { Editor, Grid } from '@editablejs/models'
-import {
-  ColsHeaderItemStyles,
-  ColsHeaderStyles,
-  HeaderDragStyles,
-  RowsHeaderItemStyles,
-  RowsHeaderStyles,
-} from './styles'
+import { ColsHeaderItemStyles, ColsHeaderStyles, HeaderDragStyles, RowsHeaderItemStyles, RowsHeaderStyles } from './styles'
 import { TableDrag } from '../hooks/use-drag'
 import { useTableRowContentHeights } from '../row/store'
 export interface TableHeaderProps {
@@ -31,7 +25,7 @@ const TableRowHeaderDefault: React.FC<
         end: [row, cols - 1],
       })
     },
-    [editor, table, cols],
+    [editor, table, cols]
   )
 
   const handleWindowMouseUp = React.useCallback(() => {
@@ -66,7 +60,7 @@ const TableRowHeaderDefault: React.FC<
         window.addEventListener('mouseup', handleWindowMouseUp)
       }
     },
-    [selected.rowFull, selected.allFull, selected.rows, handleWindowMouseUp],
+    [selected.rowFull, selected.allFull, selected.rows, handleWindowMouseUp]
   )
 
   const handleMouseUp = React.useCallback(
@@ -74,21 +68,12 @@ const TableRowHeaderDefault: React.FC<
       e.preventDefault()
       selectRow(row)
     },
-    [selectRow],
+    [selectRow]
   )
 
   const headers = React.useMemo(() => {
     const headers = []
-    headers.push(
-      <InsertAction
-        editor={editor}
-        table={table}
-        index={0}
-        width={width}
-        top={0}
-        key="insert--1"
-      />,
-    )
+    headers.push(<InsertAction editor={editor} table={table} index={0} width={width} top={0} key="insert--1" />)
     let height = 0
     const { children } = table
     for (let i = 0; i < children.length; i++) {
@@ -100,8 +85,8 @@ const TableRowHeaderDefault: React.FC<
       const hover = ~selected.rows.indexOf(i)
       headers.push(
         <RowsHeaderItemStyles
-          onMouseDown={e => handleMouseDown(e, i)}
-          onMouseUp={e => handleMouseUp(e, i)}
+          onMouseDown={(e) => handleMouseDown(e, i)}
+          onMouseUp={(e) => handleMouseUp(e, i)}
           allFull={selected.allFull}
           isHover={!!hover}
           isFull={!!hover && selected.rowFull}
@@ -111,36 +96,12 @@ const TableRowHeaderDefault: React.FC<
         >
           <HeaderDragStyles name="drag" />
         </RowsHeaderItemStyles>,
-        <InsertAction
-          editor={editor}
-          table={table}
-          width={width}
-          index={i + 1}
-          top={height}
-          key={`insert-${i}`}
-        />,
-        <SplitAction
-          editor={editor}
-          table={table}
-          index={i}
-          width={width}
-          top={height}
-          key={`split-${i}`}
-        />,
+        <InsertAction editor={editor} table={table} width={width} index={i + 1} top={height} key={`insert-${i}`} />,
+        <SplitAction editor={editor} table={table} index={i} width={width} top={height} key={`split-${i}`} />
       )
     }
     return headers
-  }, [
-    editor,
-    handleMouseDown,
-    handleMouseUp,
-    selected.allFull,
-    selected.rowFull,
-    selected.rows,
-    table,
-    width,
-    rowContentHeights,
-  ])
+  }, [editor, handleMouseDown, handleMouseUp, selected.allFull, selected.rowFull, selected.rows, table, width, rowContentHeights])
 
   return <RowsHeaderStyles>{headers}</RowsHeaderStyles>
 }
@@ -157,7 +118,7 @@ const TableColHeaderDefault: React.FC<TableHeaderProps> = ({ editor, table }) =>
         end: [rows - 1, col],
       })
     },
-    [editor, table, rows],
+    [editor, table, rows]
   )
 
   const handleWindowMouseUp = React.useCallback(() => {
@@ -191,7 +152,7 @@ const TableColHeaderDefault: React.FC<TableHeaderProps> = ({ editor, table }) =>
         window.addEventListener('mouseup', handleWindowMouseUp)
       }
     },
-    [handleWindowMouseUp, selected.allFull, selected.colFull, selected.cols],
+    [handleWindowMouseUp, selected.allFull, selected.colFull, selected.cols]
   )
 
   const handleMouseUp = React.useCallback(
@@ -199,7 +160,7 @@ const TableColHeaderDefault: React.FC<TableHeaderProps> = ({ editor, table }) =>
       e.preventDefault()
       selectColumn(col)
     },
-    [selectColumn],
+    [selectColumn]
   )
 
   const { colsWidth = [] } = table
@@ -207,16 +168,7 @@ const TableColHeaderDefault: React.FC<TableHeaderProps> = ({ editor, table }) =>
   const headers = React.useMemo(() => {
     const headers = []
     let width = 0
-    headers.push(
-      <InsertAction
-        editor={editor}
-        table={table}
-        index={0}
-        height={height}
-        left={0}
-        key="insert--1"
-      />,
-    )
+    headers.push(<InsertAction editor={editor} table={table} index={0} height={height} left={0} key="insert--1" />)
     for (let i = 0; i < colsWidth.length; i++) {
       const cw = colsWidth[i]
       const currentWidth = width
@@ -224,8 +176,8 @@ const TableColHeaderDefault: React.FC<TableHeaderProps> = ({ editor, table }) =>
       const hover = ~selected.cols.indexOf(i)
       headers.push(
         <ColsHeaderItemStyles
-          onMouseDown={e => handleMouseDown(e, i)}
-          onMouseUp={e => handleMouseUp(e, i)}
+          onMouseDown={(e) => handleMouseDown(e, i)}
+          onMouseUp={(e) => handleMouseUp(e, i)}
           isHover={!!hover}
           allFull={selected.allFull}
           isFull={!!hover && selected.colFull}
@@ -235,36 +187,12 @@ const TableColHeaderDefault: React.FC<TableHeaderProps> = ({ editor, table }) =>
         >
           <HeaderDragStyles name="drag" />
         </ColsHeaderItemStyles>,
-        <InsertAction
-          editor={editor}
-          table={table}
-          index={i + 1}
-          left={width}
-          height={height}
-          key={`insert-${i}`}
-        />,
-        <SplitAction
-          editor={editor}
-          table={table}
-          index={i}
-          height={height}
-          left={width}
-          key={`split-${i}`}
-        />,
+        <InsertAction editor={editor} table={table} index={i + 1} left={width} height={height} key={`insert-${i}`} />,
+        <SplitAction editor={editor} table={table} index={i} height={height} left={width} key={`split-${i}`} />
       )
     }
     return headers
-  }, [
-    colsWidth,
-    editor,
-    handleMouseDown,
-    handleMouseUp,
-    height,
-    selected.allFull,
-    selected.colFull,
-    selected.cols,
-    table,
-  ])
+  }, [colsWidth, editor, handleMouseDown, handleMouseUp, height, selected.allFull, selected.colFull, selected.cols, table])
 
   return <ColsHeaderStyles>{headers}</ColsHeaderStyles>
 }

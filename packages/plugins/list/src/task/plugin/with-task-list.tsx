@@ -1,4 +1,4 @@
-import { RenderElementProps, ElementAttributes, Editable, Hotkey } from '@editablejs/editor'
+import { RenderElementProps, ElementAttributes, Editable, Hotkey, generateId } from '@editablejs/editor'
 import { Transforms } from '@editablejs/models'
 import tw, { styled, css, theme } from 'twin.macro'
 import { ListStyles, ListLabelStyles, renderList } from '../../styles'
@@ -105,6 +105,19 @@ export const withTaskList = <T extends Editable>(editor: T, options: TaskListOpt
 
   const newEditor = editor as T & TaskListEditor
 
+  newEditor.toggleTaskList = (options: ToggleTaskListOptions = {}) => {
+    const activeElements = TaskListEditor.queryActive(editor)
+    if (activeElements) {
+      List.unwrapList(editor, {
+        match: (n) => n.type === TASK_LIST_KEY,
+      })
+    } else {
+      const { checked, template } = options
+      const newTaskElement = { type: TASK_LIST_KEY, template, checked: checked ?? false, id: generateId() }
+      List.wrapList(editor, newTaskElement)
+    }
+  }
+
   const { renderElement } = newEditor
 
   newEditor.renderElement = (props: RenderTaskElementProps) => {
@@ -130,22 +143,6 @@ export const withTaskList = <T extends Editable>(editor: T, options: TaskListOpt
       })
     }
     return renderElement(props)
-  }
-
-  newEditor.toggleTaskList = (options: ToggleTaskListOptions = {}) => {
-    const activeElements = TaskListEditor.queryActive(editor)
-    if (activeElements) {
-      List.unwrapList(editor, {
-        match: (n) => n.type === TASK_LIST_KEY,
-      })
-    } else {
-      const { checked, template } = options
-      List.wrapList<TaskList>(editor, {
-        type: TASK_LIST_KEY,
-        template,
-        checked: checked ?? false,
-      })
-    }
   }
 
   const { onKeydown, isList } = newEditor

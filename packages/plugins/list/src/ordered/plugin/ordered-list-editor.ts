@@ -4,7 +4,7 @@ import { OrderedList } from '../interfaces/ordered-list'
 import { getOptions } from '../options'
 
 export interface ToggleOrderedListOptions {
-  start?: number
+  currentNumber?: number
   template?: string
 }
 

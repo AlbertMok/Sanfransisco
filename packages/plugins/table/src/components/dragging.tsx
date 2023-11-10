@@ -17,9 +17,7 @@ export const Dragging = () => {
         transform: `translate(${x}px, ${y}px)`,
       }}
     >
-      <div tw="text-center text-sm">
-        {format(TableDrag.getDragType() === 'col' ? 'moveCols' : 'moveRows', { count })}
-      </div>
+      <div tw="text-center text-sm">{format(TableDrag.getDragType() === 'col' ? 'moveCols' : 'moveRows', { count })}</div>
     </div>
   )
 }

@@ -56,9 +56,12 @@
   },
   "dependencies": {
     "@floating-ui/react-dom": "1.0.0",
+    "colord": "2.9.0",
+    "install": "0.13.0",
+    "lucide-react": "0.292.0",
+    "pnpm": "8.10.2",
     "react-colorful": "5.6.1",
-    "styled-components": "5.3.6",
-    "colord": "2.9.0"
+    "styled-components": "5.3.6"
   },
   "lint-staged": {
     "src/**/*.{json,ts,tsx,js,jsx}": [

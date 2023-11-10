@@ -1,4 +1,4 @@
-export const initialValue = [
+export const initialValue2 = [
   // {
   //   type: 'title',
   //   children: [
@@ -530,3 +530,5 @@ export const initialValue = [
   //   ],
   // },
 ]
+
+export const initialValue = []

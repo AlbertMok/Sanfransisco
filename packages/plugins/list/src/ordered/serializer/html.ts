@@ -8,20 +8,18 @@ export interface OrderedListHTMLSerializerWithOptions extends HTMLSerializerWith
   editor: Editor
 }
 
-export const withOrderedListHTMLSerializerTransform: HTMLSerializerWithTransform<
-  OrderedListHTMLSerializerWithOptions
-> = (next, serializer, customOptions) => {
+export const withOrderedListHTMLSerializerTransform: HTMLSerializerWithTransform<OrderedListHTMLSerializerWithOptions> = (
+  next,
+  serializer,
+  customOptions
+) => {
   const { attributes: customAttributes, style: customStyle, editor } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
     if (OrderedList.isOrderedList(node)) {
-      const { start, template } = node
-      const listTemplate = List.getTemplate(
-        editor,
-        ORDERED_LIST_KEY,
-        template || OrderedListTemplates[0].key,
-      )
-      const label = listTemplate?.render({ ...node, start: 1 })
+      const { currentNumber, template } = node
+      const listTemplate = List.getTemplate(editor, ORDERED_LIST_KEY, template || OrderedListTemplates[0].key)
+      const label = listTemplate?.render({ ...node, currentNumber: 1 })
       const type = typeof label === 'string' ? label?.replace(/\.$/, '').trim() : label?.type
       const pl = style?.paddingLeft ?? '0px'
       delete style?.paddingLeft
@@ -31,10 +29,10 @@ export const withOrderedListHTMLSerializerTransform: HTMLSerializerWithTransform
           node,
           attributes,
           {
-            start,
+            currentNumber,
             type,
           },
-          customAttributes,
+          customAttributes
         ),
         serializer.mergeOptions(
           node,
@@ -42,14 +40,9 @@ export const withOrderedListHTMLSerializerTransform: HTMLSerializerWithTransform
           {
             marginLeft: pl,
           },
-          customStyle,
+          customStyle
         ),
-        serializer.create(
-          'li',
-          {},
-          {},
-          node.children.map(child => serializer.transform(child)).join(''),
-        ),
+        serializer.create('li', {}, {}, node.children.map((child) => serializer.transform(child)).join(''))
       )
     }
     return next(node, options)

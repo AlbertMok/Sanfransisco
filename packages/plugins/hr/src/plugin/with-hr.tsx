@@ -1,4 +1,4 @@
-import { Editable, Hotkey, Locale } from '@editablejs/editor'
+import { Editable, Hotkey, Locale, generateId } from '@editablejs/editor'
 import { HrComponent } from '../components/hr'
 import { DEFAULT_HR_WIDTH, DEFAULT_HR_STYLE, DEFUALT_HR_COLOR, HR_KEY } from '../constants'
 import { HrEditor } from './hr-editor'
@@ -21,7 +21,7 @@ export const withHr = <T extends Editable>(editor: T, options: HrOptions = {}) =
 
   const { renderElement, isVoid } = newEditor
 
-  newEditor.isVoid = element => {
+  newEditor.isVoid = (element) => {
     return HrEditor.isHr(newEditor, element) || isVoid(element)
   }
 
@@ -33,47 +33,24 @@ export const withHr = <T extends Editable>(editor: T, options: HrOptions = {}) =
       width,
       style,
       children: [{ text: '' }],
+      id: generateId(),
     }
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       Transforms.insertNodes(editor, hr)
     })
   }
 
   newEditor.setColorHr = (color, hr) => {
-    Transforms.setNodes<Hr>(
-      editor,
-      {
-        color,
-      },
-      {
-        at: Editable.findPath(editor, hr),
-      },
-    )
+    Transforms.setNodes<Hr>(editor, { color }, { at: Editable.findPath(editor, hr) })
   }
 
   newEditor.setWidthHr = (width, hr) => {
-    Transforms.setNodes<Hr>(
-      editor,
-      {
-        width,
-      },
-      {
-        at: Editable.findPath(editor, hr),
-      },
-    )
+    Transforms.setNodes<Hr>(editor, { width }, { at: Editable.findPath(editor, hr) })
   }
 
   newEditor.setStyleHr = (style, hr) => {
-    Transforms.setNodes<Hr>(
-      editor,
-      {
-        style,
-      },
-      {
-        at: Editable.findPath(editor, hr),
-      },
-    )
+    Transforms.setNodes<Hr>(editor, { style }, { at: Editable.findPath(editor, hr) })
   }
 
   newEditor.renderElement = ({ attributes, children, element }) => {

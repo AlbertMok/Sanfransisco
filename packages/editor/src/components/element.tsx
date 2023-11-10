@@ -21,6 +21,7 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   const isInline = editor.isInline(element)
   const key = Editable.findKey(editor, element)
   const currentRenderPlaceholder = usePlaceholder(element)
+
   let children: React.ReactNode = useChildren({
     node: element,
     selection,
@@ -87,16 +88,27 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   const path = Editable.findPath(editor, element)
 
   const newAttributes = editor.renderElementAttributes({ attributes, element })
-  // 渲染元素
-  let content = (
-    <div data-block-id={element.id} data-block-type={element.type}>
-      {editor.renderElement({
-        attributes: newAttributes,
-        children,
-        element,
-      })}
-    </div>
-  )
+  // // 渲染元素
+  // let content = (
+  //   <div
+  //     data-block-id={element.id}
+  //     data-block-type={element.type}
+  //     style={{ marginTop: '1px', marginBottom: '1px', paddingTop: '1px', paddingBottom: '1px', minHeight: '24px' }}
+  //   >
+  //     {editor.renderElement({
+  //       attributes: newAttributes,
+  //       children,
+  //       element,
+  //     })}
+  //   </div>
+  // )
+
+  let content = editor.renderElement({
+    attributes: newAttributes,
+    children,
+    element,
+  })
+
   const decorates = useElementDecorations(element, path)
 
   if (decorates.length > 0) {

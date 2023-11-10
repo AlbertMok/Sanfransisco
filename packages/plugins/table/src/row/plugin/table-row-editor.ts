@@ -12,13 +12,13 @@ export const TableRowEditor = {
 
   isActive: (editor: Editor): boolean => {
     const elements = Editor.elements(editor)[TABLE_ROW_KEY] ?? []
-    return elements.some(e => TableRowEditor.isTableRow(editor, e[0]))
+    return elements.some((e) => TableRowEditor.isTableRow(editor, e[0]))
   },
 
   create: (
     editor: Editor,
     row: Partial<Omit<TableRow, 'type' | 'children'>> = {},
-    cells: Partial<Omit<TableCell, 'type' | 'children'>>[],
+    cells: Partial<Omit<TableCell, 'type' | 'children'>>[]
   ): TableRow => {
     return TableRow.create(row, cells)
   },

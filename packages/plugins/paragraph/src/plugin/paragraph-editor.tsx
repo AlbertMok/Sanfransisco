@@ -93,7 +93,11 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const { renderElement } = newEditor
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (ParagraphEditor.isParagraph(element)) {
-      return <div {...attributes}>{children}</div>
+      return (
+        <div data-block-id={element.id} data-block-type={element.type}>
+          <div {...attributes}>{children}</div>
+        </div>
+      )
     }
     return renderElement({ attributes, children, element })
   }

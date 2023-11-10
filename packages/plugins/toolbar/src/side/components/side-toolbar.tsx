@@ -167,7 +167,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
           }
           return isFindList ? false : Editor.isBlock(editor, n) // 判断是列表元素还是block元素
         },
-        mode: 'lowest',
+        mode: 'all',
       })
 
       if (!entry) return delayHide()

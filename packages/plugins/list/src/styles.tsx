@@ -9,11 +9,11 @@ export const ListStyles = styled.div(() => [tw`w-full flex align-baseline items-
 
 export const ListLabelStyles = styled.div(() => [tw`inline-block mr-3 whitespace-nowrap`])
 
-export const ListContentsStyles = tw.div`flex-1`
+const ListContentsStyles = tw.div`flex-1`
 
 type FontStyle = Record<'size' | 'weight' | 'color', string>
 
-export const ListElement = ({
+const ListElement = ({
   element,
   attributes,
   children,
@@ -102,13 +102,13 @@ export const renderList = (editor: Editable, options: RenderListOptions) => {
   // 渲染 label
   const renderLabel = () => {
     // template 是用于表示列表模板的键，如果没有提供，则默认为 'default'
-    const { template: key = 'default', type, start } = element
+    const { template: key = 'default', type, currentNumber } = element
 
     const template = key ? List.getTemplate(editor, type, key) : undefined
 
     if (onRenderLabel) return onRenderLabel(element, template)
 
-    const result = template ? template.render(element) : `${start}.`
+    const result = template ? template.render(element) : `${currentNumber}.`
 
     return typeof result === 'object' ? result.text : result
   }

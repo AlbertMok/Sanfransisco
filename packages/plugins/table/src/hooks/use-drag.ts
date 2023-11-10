@@ -34,7 +34,7 @@ const store = create<TableDragStore>(() => ({
  * @returns
  */
 export const useTableDragging = () => {
-  const drag = useStore(store, state => state.drag !== null)
+  const drag = useStore(store, (state) => state.drag !== null)
 
   return React.useMemo(() => drag, [drag])
 }
@@ -44,7 +44,7 @@ export const useTableDragging = () => {
  * @returns
  */
 export const useTableDragTo = () => {
-  const drag = useStore(store, state => state.drag)
+  const drag = useStore(store, (state) => state.drag)
 
   return React.useMemo(() => drag?.to ?? -1, [drag])
 }
@@ -54,7 +54,7 @@ export const useTableDragTo = () => {
  * @returns
  */
 export const useTableDragPoint = () => {
-  const drag = useStore(store, state => state.drag)
+  const drag = useStore(store, (state) => state.drag)
 
   return React.useMemo(() => drag?.point ?? null, [drag])
 }
@@ -64,7 +64,7 @@ export const useTableDragPoint = () => {
  * @returns
  */
 export const useTableDragCount = () => {
-  const drag = useStore(store, state => state.drag)
+  const drag = useStore(store, (state) => state.drag)
 
   return React.useMemo(() => drag?.from.length ?? 0, [drag])
 }

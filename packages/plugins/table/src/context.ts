@@ -23,5 +23,5 @@ export const useTableStore = () => {
 
 export const useTableSize = () => {
   const context = React.useContext(TableContext)
-  return useStore(context, state => ({ height: state.height, width: state.width }))
+  return useStore(context, (state) => ({ height: state.height, width: state.width }))
 }

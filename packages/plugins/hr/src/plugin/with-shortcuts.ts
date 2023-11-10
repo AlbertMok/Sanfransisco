@@ -46,12 +46,7 @@ export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
       if (match) {
         event.preventDefault()
         const { range, start } = match
-        Transforms.delete(editor, {
-          at: {
-            anchor: start,
-            focus: range.anchor,
-          },
-        })
+        Transforms.delete(editor, { at: { anchor: start, focus: range.anchor } })
         Transforms.collapse(editor)
         HrEditor.insert(editor)
         return

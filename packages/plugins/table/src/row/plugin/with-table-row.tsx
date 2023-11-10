@@ -1,7 +1,7 @@
 import { Editable, RenderElementProps, useIsomorphicLayoutEffect } from '@editablejs/editor'
 import { Transforms, GridRow, Editor, Node } from '@editablejs/models'
 import { useTableSize } from '../../context'
-import { RowStyles } from '../../components/styles'
+import { RowStyles } from '../../components/row'
 import { TableRow } from '../interfaces/table-row'
 import { getOptions, setOptions, TableRowOptions } from '../options'
 import { TableRowEditor } from './table-row-editor'
@@ -12,12 +12,7 @@ interface TableRowProps extends React.AnchorHTMLAttributes<HTMLTableRowElement> 
   element: TableRow
 }
 
-const Row: React.FC<TableRowProps & RenderElementProps<TableRow, HTMLTableRowElement>> = ({
-  editor,
-  element,
-  attributes,
-  children,
-}) => {
+const Row: React.FC<TableRowProps & RenderElementProps<TableRow, HTMLTableRowElement>> = ({ editor, element, attributes, children }) => {
   const { style, ref, ...rest } = attributes
   // 表格宽度变化导致挤压内容需要重新计算高度
   const { width } = useTableSize()
@@ -48,7 +43,7 @@ export const withTableRow = <T extends Editable>(editor: T, options: TableRowOpt
     return TableRowEditor.isTableRow(newEditor, node) || isGridRow(node)
   }
 
-  newEditor.renderElement = props => {
+  newEditor.renderElement = (props) => {
     const { element, attributes, children } = props
     if (TableRowEditor.isTableRow(newEditor, element)) {
       return (

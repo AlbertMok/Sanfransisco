@@ -6,7 +6,7 @@ import { generateRandomKey } from '../utils/key'
  * List is an element interface which extends Element
  */
 export interface List extends Element {
-  start: number
+  currentNumber: number
   key: string // 是列表项的唯一标识符
   level: number // 表示列表的级别或深度
   type: string
@@ -166,12 +166,12 @@ export const List = {
       if (top) {
         const [list, path] = top
         startPath = path
-        if (start === undefined) startMap[list.level] = list.start
+        if (start === undefined) startMap[list.level] = list.currentNumber
       }
     } else {
       const startList = Node.get(editor, path)
       if (Editor.isList(editor, startList) && (!type || startList.type === type) && start === undefined) {
-        startMap[startList.level] = startList.start
+        startMap[startList.level] = startList.currentNumber
       }
     }
 
@@ -191,15 +191,15 @@ export const List = {
       const [listNode, path] = next
       startPath = path
       const nextLevel = listNode.level
-      let start = startMap[nextLevel]
-      if (!start || nextLevel > prevLevel) {
-        start = startMap[nextLevel] = 1
+      let currentNumber = startMap[nextLevel]
+      if (!currentNumber || nextLevel > prevLevel) {
+        currentNumber = startMap[nextLevel] = 1
       } else {
-        start++
+        currentNumber++
         startMap[nextLevel]++
       }
       prevLevel = nextLevel
-      Transforms.setNodes<List>(editor, { start }, { at: startPath })
+      Transforms.setNodes<List>(editor, { currentNumber }, { at: startPath })
     }
   },
 
@@ -208,7 +208,7 @@ export const List = {
     const { at } = opitons
 
     // 默认开始是1
-    let { start = 1, template, type, id } = list
+    let { currentNumber = 1, template, type, id } = list
 
     List.unwrapList(editor, { at })
 
@@ -234,11 +234,11 @@ export const List = {
       if (prev) {
         const prevListElement = prev[0]
         key = prevListElement.key
-        start = prevListElement.start + 1
+        currentNumber = prevListElement.currentNumber + 1
       } else if (([next] = Editor.nodes<List>(editor, { at: afterPath, match: (n) => Editor.isList(editor, n) && n.type === type })) && next) {
         const nextListElement = next[0]
         key = nextListElement.key
-        start = Math.max(nextListElement.start - 1, 1)
+        currentNumber = Math.max(nextListElement.currentNumber - 1, 1)
       } else {
         key = generateRandomKey()
       }
@@ -252,7 +252,7 @@ export const List = {
           const prevNode = Node.get(editor, prevPath)
 
           if (!Editor.isList(editor, prevNode)) {
-            start--
+            currentNumber--
           }
         }
 
@@ -260,13 +260,13 @@ export const List = {
 
         const newProps = props ? props(key, node, path) : {}
 
-        let element: List = { type, key, start, template, level: newLevel, ...newProps, children: [], id }
+        let element: List = { type, key, currentNumber, template, level: newLevel, ...newProps, children: [], id }
 
         Transforms.wrapNodes(editor, element, { at: path })
 
         prevPath = path
 
-        start++
+        currentNumber++
       }
       if (prevPath) {
         List.updateStart(editor, { type, path: prevPath, key })
@@ -313,7 +313,7 @@ export const List = {
           path,
           key: key,
           level: list.level,
-          start: list.start,
+          start: list.currentNumber,
         })
       }
     }, at)
@@ -439,7 +439,7 @@ export const List = {
         path,
         key,
         level: list.level,
-        start: top[0].start,
+        start: top[0].currentNumber,
       })
     }
   },

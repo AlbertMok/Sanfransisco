@@ -1,7 +1,4 @@
-import {
-  MarkdownDeserializerWithTransform,
-  MarkdownDeserializerPlugin,
-} from '@editablejs/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@editablejs/deserializer/markdown'
 import { Descendant, generateRandomKey } from '@editablejs/models'
 import { gfmTaskListItem } from 'micromark-extension-gfm-task-list-item'
 import { gfmTaskListItemFromMarkdown } from 'mdast-util-gfm-task-list-item'
@@ -9,10 +6,7 @@ import { gfmTaskListItemFromMarkdown } from 'mdast-util-gfm-task-list-item'
 import { ListItem } from 'mdast'
 import { TaskList } from '../interfaces/task-list'
 
-export const withTaskListMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (
-  next,
-  self,
-) => {
+export const withTaskListMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {
   return (node, options = {}) => {
     const { type } = node
     if (type === 'list') {
@@ -24,20 +18,12 @@ export const withTaskListMarkdownDeserializerTransform: MarkdownDeserializerWith
       // 将 checked 为 null 的列表项交给下一个插件处理
       const finishCheckedNullListItem = () => {
         if (checkedNullListItem.length > 0) {
-          children.push(
-            ...next(
-              {
-                ...node,
-                children: checkedNullListItem,
-              },
-              options,
-            ),
-          )
+          children.push(...next({ ...node, children: checkedNullListItem }, options))
           checkedNullListItem = []
         }
       }
 
-      node.children.forEach(child => {
+      node.children.forEach((child) => {
         // 列表项的 checked 为 null 时，交给下一个插件处理
         if (child.checked === null) {
           checkedNullListItem.push(child)
@@ -48,10 +34,10 @@ export const withTaskListMarkdownDeserializerTransform: MarkdownDeserializerWith
             TaskList.create({
               key,
               level: 0,
-              start: 0,
+              currentNumber: 0,
               checked: child.checked,
               children: self.transform(child, options),
-            }),
+            })
           )
         }
       })

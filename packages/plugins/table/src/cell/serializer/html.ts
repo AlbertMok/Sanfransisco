@@ -1,11 +1,7 @@
 import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
 import { TableCell } from '../interfaces/table-cell'
 
-export const withTableCellHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withTableCellHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -13,15 +9,7 @@ export const withTableCellHTMLSerializerTransform: HTMLSerializerWithTransform =
       const { rowspan, colspan, span } = node
       return serializer.create(
         'td',
-        serializer.mergeOptions(
-          node,
-          attributes,
-          {
-            colspan,
-            rowspan,
-          },
-          customAttributes,
-        ),
+        serializer.mergeOptions(node, attributes, { colspan, rowspan }, customAttributes),
         serializer.mergeOptions(
           node,
           style,
@@ -32,9 +20,9 @@ export const withTableCellHTMLSerializerTransform: HTMLSerializerWithTransform =
             verticalAlign: 'top',
             display: span ? 'none' : '',
           },
-          customStyle,
+          customStyle
         ),
-        node.children.map(child => serializer.transform(child)).join(''),
+        node.children.map((child) => serializer.transform(child)).join('')
       )
     }
     return next(node, options)

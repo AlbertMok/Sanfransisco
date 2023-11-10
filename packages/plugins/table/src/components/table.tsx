@@ -10,15 +10,7 @@ import {
   useGridSelected,
   useReadOnly,
 } from '@editablejs/editor'
-import {
-  Grid,
-  Editor,
-  Range,
-  Transforms,
-  isDOMNode,
-  GridCell,
-  isDOMHTMLElement,
-} from '@editablejs/models'
+import { Grid, Editor, Range, Transforms, isDOMNode, GridCell, isDOMHTMLElement } from '@editablejs/models'
 import { useComposedRefs } from '@editablejs/ui'
 import * as React from 'react'
 import { createStore } from 'zustand'
@@ -61,7 +53,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
       const isBackward = Range.isBackward(selection)
       const [startRow] = Editor.nodes<TableRow>(editor, {
         at: anchor.path,
-        match: n => TableRowEditor.isTableRow(editor, n),
+        match: (n) => TableRowEditor.isTableRow(editor, n),
       })
       if (startRow) {
         const [row, path] = startRow
@@ -85,7 +77,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
       }
       const [endRow] = Editor.nodes<TableRow>(editor, {
         at: focus.path,
-        match: n => TableRowEditor.isTableRow(editor, n),
+        match: (n) => TableRowEditor.isTableRow(editor, n),
       })
       if (endRow) {
         const [row, path] = endRow
@@ -154,14 +146,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
         rows: element.children.length,
         cols: element.colsWidth?.length ?? 0,
       })),
-    [
-      element.children.length,
-      element.colsWidth?.length,
-      selected,
-      selection,
-      tableHeight,
-      tableWidth,
-    ],
+    [element.children.length, element.colsWidth?.length, selected, selection, tableHeight, tableWidth]
   )
 
   const renderAllHeader = () => {
@@ -183,7 +168,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
       .then(() => {
         setHover(true)
       })
-      .catch(err => {})
+      .catch((err) => {})
   }, [selected, cancellablePromisesApi])
 
   const handleMouseLeave = React.useCallback(() => {
@@ -217,7 +202,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
       }
       return -1
     },
-    [colsWidth, element, editor],
+    [colsWidth, element, editor]
   )
 
   const getMoveRowToIndex = React.useCallback(
@@ -248,7 +233,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
       }
       return -1
     },
-    [element, editor],
+    [element, editor]
   )
 
   const handleMouseMove = React.useCallback(
@@ -256,11 +241,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
       const tableEl = tableRef.current
       const { target, offsetX, offsetY } = event
       const { type, point } = TableDrag.getDrag()
-      if (
-        (type === 'col' && Math.abs(point.x - offsetX) < 3) ||
-        (type === 'row' && Math.abs(point.y - offsetY) < 3)
-      )
-        return
+      if ((type === 'col' && Math.abs(point.x - offsetX) < 3) || (type === 'row' && Math.abs(point.y - offsetY) < 3)) return
 
       TableDrag.setPoint({ x: event.clientX, y: event.clientY })
       if (!tableEl || !isDOMNode(target) || !tableEl.contains(target)) {
@@ -294,7 +275,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
       const to = type === 'row' ? getMoveRowToIndex(row, offsetY) : getMoveColToIndex(col, offsetX)
       TableDrag.setTo(to)
     },
-    [editor, getMoveRowToIndex, getMoveColToIndex],
+    [editor, getMoveRowToIndex, getMoveColToIndex]
   )
 
   React.useEffect(() => {
@@ -323,9 +304,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
         ref={composedRefs}
       >
         {!readOnly && <TableColHeader editor={editor} table={element} />}
-        {!readOnly && (
-          <TableRowHeader editor={editor} table={element} rowContentHeights={rowContentHeights} />
-        )}
+        {!readOnly && <TableRowHeader editor={editor} table={element} rowContentHeights={rowContentHeights} />}
         {!readOnly && renderAllHeader()}
         <table style={{ width: !tableWidth ? '' : tableWidth }}>
           {renderColgroup()}

@@ -12,7 +12,7 @@ export const TableCellEditor = {
 
   isActive: (editor: Editor): boolean => {
     const elements = Editor.elements(editor)[TABLE_CELL_KEY] ?? []
-    return elements.some(e => TableCellEditor.isTableCell(editor, e[0]))
+    return elements.some((e) => TableCellEditor.isTableCell(editor, e[0]))
   },
 
   create: (editor: Editor, cell: Partial<Omit<TableCell, 'type'>> = {}): TableCell => {
