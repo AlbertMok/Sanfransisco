@@ -7,10 +7,7 @@ export interface TableCell extends GridCell {
 
 export const TableCell = {
   create: (cell: Partial<Omit<TableCell, 'type'>> = {}): TableCell => {
-    return GridCell.create<TableCell>({
-      ...cell,
-      type: TABLE_CELL_KEY,
-    })
+    return GridCell.create<TableCell>({ ...cell, type: TABLE_CELL_KEY })
   },
 
   isTableCell: (value: any): value is TableCell => {

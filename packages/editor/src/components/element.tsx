@@ -103,11 +103,7 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   //   </div>
   // )
 
-  let content = editor.renderElement({
-    attributes: newAttributes,
-    children,
-    element,
-  })
+  let content = editor.renderElement({ attributes: newAttributes, children, element })
 
   const decorates = useElementDecorations(element, path)
 

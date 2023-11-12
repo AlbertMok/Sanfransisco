@@ -3,6 +3,7 @@ import { Editor, Element, List, Path, Range, Transforms } from '@editablejs/mode
 import { Paragraph } from '../interfaces/paragraph'
 import cloneDeep from 'lodash.clonedeep'
 import { PARAGRAPH_KEY } from '../constants'
+import { useMemo } from 'react'
 
 export interface ParagraphEditor extends Editor {
   /** create a paragraph element in editor. */
@@ -79,14 +80,6 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
       return
     }
     newEditor.createParagraphElement()
-    // const entry = List.above(editor)
-    // // 如果当前节点不是列表节点的话
-    // if (!entry) {
-    //   return
-    // }
-
-    // // 当前节点是列表节点
-    // List.splitList(editor)
   }
 
   // 渲染paragraph元素
@@ -94,7 +87,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (ParagraphEditor.isParagraph(element)) {
       return (
-        <div data-block-id={element.id} data-block-type={element.type}>
+        <div data-block-type={element.type} data-block-id={element.id}>
           <div {...attributes}>{children}</div>
         </div>
       )

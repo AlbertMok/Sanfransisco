@@ -1,10 +1,9 @@
 import { Editable, generateId, Placeholder } from '@editablejs/editor'
 import { Editor, Transforms, Node, Path, List } from '@editablejs/models'
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import tw from 'twin.macro'
 import { TITLE_KEY } from '../constants'
 import { Title } from '../interfaces/title'
-
 import { setOptions, TitleComponentProps, TitleOptions } from '../options'
 import { TitleEditor } from './title-editor'
 
@@ -54,23 +53,17 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
             break
           }
         }
-        Transforms.setNodes(
-          titleEditor,
-          {
-            type: TITLE_KEY,
-          },
-          { at: path }
-        )
+        Transforms.setNodes(titleEditor, { type: TITLE_KEY }, { at: path })
         isHandled = true
       }
 
       const secondChild = node.children[1]
       if (!secondChild) {
         // if there is not a second node in the editor,then insert a new node
-        Transforms.insertNodes(titleEditor, { type: 'paragraph', id: generateId(), children: [{ text: '' }] }, { at: [1] })
+        Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }], id: generateId() }, { at: [1] })
         isHandled = true
       } else if (Title.isTitle(secondChild)) {
-        Transforms.setNodes(titleEditor, { type: 'paragraph' }, { at: [1] })
+        Transforms.setNodes(titleEditor, { type: 'paragraph', id: generateId() }, { at: [1] })
         isHandled = true
       }
       if (isHandled) return

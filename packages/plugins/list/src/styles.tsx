@@ -5,7 +5,7 @@ import { StyledComponent } from 'styled-components'
 import tw, { styled } from 'twin.macro'
 import { List, ListTemplate } from './list/list'
 
-export const ListStyles = styled.div(() => [tw`w-full flex align-baseline items-baseline justify-start`])
+export const ListStyles = styled.div(() => [tw`w-full flex align-baseline items-baseline justify-start `])
 
 export const ListLabelStyles = styled.div(() => [tw`inline-block mr-3 whitespace-nowrap`])
 
@@ -13,18 +13,13 @@ const ListContentsStyles = tw.div`flex-1`
 
 type FontStyle = Record<'size' | 'weight' | 'color', string>
 
-const ListElement = ({
-  element,
-  attributes,
-  children,
-  onRenderLabel,
-  StyledList,
-  isAutoUpdateLabelStyle = true,
-}: RenderElementProps<List> & {
-  onRenderLabel: (element: List) => React.ReactNode
+type RenderListElement = RenderElementProps<List> & {
   StyledList?: StyledComponent<'div', any>
   isAutoUpdateLabelStyle?: boolean
-}) => {
+  onRenderLabel: (element: List) => React.ReactNode
+}
+
+const ListElement = ({ element, attributes, children, onRenderLabel, StyledList, isAutoUpdateLabelStyle = true }: RenderListElement) => {
   const { level } = element
 
   const StyledComponent = StyledList ?? ListStyles
@@ -77,14 +72,16 @@ const ListElement = ({
   }, [editor, element, isAutoUpdateLabelStyle])
 
   return (
-    <StyledComponent data-list-level={level} {...attributes}>
-      <ListLabelStyles style={textStyle}>{onRenderLabel(element)}</ListLabelStyles>
-      <ListContentsStyles>{children}</ListContentsStyles>
-    </StyledComponent>
+    <div data-block-id={element.id} data-block-type={element.type}>
+      <StyledComponent data-list-level={level} {...attributes}>
+        <ListLabelStyles style={textStyle}>{onRenderLabel(element)}</ListLabelStyles>
+        <ListContentsStyles>{children}</ListContentsStyles>
+      </StyledComponent>
+    </div>
   )
 }
 
-export interface RenderListOptions {
+interface RenderListOptions {
   props: RenderElementProps<List>
   StyledList?: StyledComponent<'div', any>
   onRenderLabel?: (element: List, template?: ListTemplate) => React.ReactNode
@@ -92,6 +89,7 @@ export interface RenderListOptions {
 }
 
 export const renderList = (editor: Editable, options: RenderListOptions) => {
+  // 解构options
   const {
     props: { element, attributes, children },
     StyledList,
@@ -106,6 +104,7 @@ export const renderList = (editor: Editable, options: RenderListOptions) => {
 
     const template = key ? List.getTemplate(editor, type, key) : undefined
 
+    // 如果有提供onRenderLabel函数，就调用
     if (onRenderLabel) return onRenderLabel(element, template)
 
     const result = template ? template.render(element) : `${currentNumber}.`

@@ -14,13 +14,11 @@ interface Portal extends PrimitiveDivProps {
   container?: HTMLElement | null
 }
 
-const Portal = React.forwardRef<PortalElement, Portal>(
-  (props, forwardedRef) => {
-    const { container = globalThis?.document?.body, ...portalProps } = props
-    const children = <Root.div {...portalProps} ref={forwardedRef} />
-    return container ? ReactDOM.createPortal(children, container) : children
-  }
-)
+const Portal = React.forwardRef<PortalElement, Portal>((props, forwardedRef) => {
+  const { container = globalThis?.document?.body, ...portalProps } = props
+  const children = <Root.div {...portalProps} ref={forwardedRef} />
+  return container ? ReactDOM.createPortal(children, container) : children
+})
 
 Portal.displayName = PORTAL_NAME
 

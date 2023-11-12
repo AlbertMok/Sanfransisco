@@ -13,7 +13,7 @@ import {
   DATA_EDITABLE_ZERO_WIDTH,
   DATA_EDITABLE_NODE,
 } from '@editablejs/editor'
-import { DOMElement, Editor, GridCell, Transforms } from '@editablejs/models'
+import { DOMElement, Editor, Grid, GridCell, Transforms } from '@editablejs/models'
 import * as React from 'react'
 import { Point, Icon, Tooltip } from '@editablejs/ui'
 import { useSideToolbarMenuOpen, SideToolbar as SideToolbarStore, useSideToolbarDecorateOpen } from '../store'
@@ -66,7 +66,9 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
   const [position, setPosition] = React.useState<Point | null>(null)
 
   const [menuOpen, setMenuOpen] = useSideToolbarMenuOpen(editor)
-  // const prevVisibleRef = React.useRef(false)
+
+  const prevVisibleRef = React.useRef(false)
+
   const prevEventPositionRef = React.useRef<Point | null>(null)
 
   const showingRef = React.useRef(false)
@@ -200,6 +202,12 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
 
       // 判断是否为表格元素
       const gridCell = GridCell.find(editor, point)
+      const tableNodeEntry = Grid.above(editor, point)
+      if (tableNodeEntry) {
+        const tableElement = Editable.toDOMNode(editor, tableNodeEntry[0])
+        const tableRect = tableElement.getBoundingClientRect()
+        x = tableRect.x - 15
+      }
       if (gridCell) {
         const cellElement = Editable.toDOMNode(editor, gridCell[0])
         const cellRect = cellElement.getBoundingClientRect()
@@ -329,15 +337,14 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
     }
   }, [position, editor])
 
-  // const isTransformAmimation = React.useMemo(() => {
-  //   const visible = !!position
-  //   const isAmimation = visible === prevVisibleRef.current
-  //   prevVisibleRef.current = visible
-  //   return isAmimation
-  // }, [position])
+  const isTransformAnimation = React.useMemo(() => {
+    const visible = !!position
+    const isAnimation = visible === prevVisibleRef.current //比较当前的 visible 状态和上一次渲染时的状态（存储在 prevVisibleRef.current 中）如果它们相同，则 isAmimation 为 true
+    prevVisibleRef.current = visible //更新 ref 对象以存储当前的 visible 状态，供下一次渲染时使用
+    return isAnimation
+  }, [position])
 
   const { setDrag } = useDragMethods()
-
   const drag = React.useCallback(() => {
     const data = getCapturedData(editor)
     if (!data || !position) {
@@ -444,6 +451,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         style={{
           right: `${(containerRef.current.offsetWidth ?? 0) + 2}px`,
         }}
+        data-block-node="pmenu"
       >
         <ContextMenu
           editor={editor}
@@ -472,15 +480,15 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
           left: transformPosition?.x,
           top: transformPosition?.y,
           height: '24px',
-
-          // transition: isTransformAmimation ? 'all 0.2s linear 0s' : 'opacity 0.2s linear 0s',
+          transition: isTransformAnimation ? 'all 0.1s linear 0s' : 'opacity 0.2s linear 0s', // 移位动画
           cursor: dragging ? 'grabbing' : 'grab',
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
+        {/* 侧边栏按钮图标 */}
         <div
-          tw="flex items-center justify-center rounded-md text-xs text-gray-600  cursor-grab hover:bg-gray-200"
+          tw="flex items-center justify-center rounded-md text-xs text-gray-600 cursor-grab hover:bg-gray-200"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onDragStart={(e) => e.preventDefault()}

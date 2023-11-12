@@ -65,7 +65,7 @@ export const ColsHeaderItemStyles = styled.div(({ isHover, isFull, allFull }: { 
     height: var(--table-item-wh);
     background: var(--table-item-bg);
     cursor: pointer;
-    border-bottom: 1px solid var(--table-border-color);
+
     position: absolute;
 
     &:hover {
@@ -73,6 +73,7 @@ export const ColsHeaderItemStyles = styled.div(({ isHover, isFull, allFull }: { 
       z-index: 2;
     }
   `,
+  // border-bottom: 1px solid var(--table-border-color);
   isHover &&
     css`
       background: var(--table-item-hover-bg);
@@ -90,15 +91,15 @@ export const ColsHeaderItemStyles = styled.div(({ isHover, isFull, allFull }: { 
   isFull &&
     !allFull &&
     css`
-      cursor: move;
+      cursor: grab;
     `,
-  isFull &&
-    !allFull &&
-    `${HeaderDragStyles} {
-      display: flex;
-      left: calc(50% - 8px);
-      transform: rotate(90deg);
-    }`,
+  // isFull &&
+  //   !allFull &&
+  //   `${HeaderDragStyles} {
+  //     display: flex;
+  //     left: calc(50% - 8px);
+  //     transform: rotate(90deg);
+  //   }`,
 ])
 
 export const RowsHeaderStyles = styled.div(() => [
@@ -115,7 +116,7 @@ export const RowsHeaderItemStyles = styled.div(({ isHover, isFull, allFull }: { 
     width: var(--table-item-wh);
     background: var(--table-item-bg);
     cursor: pointer;
-    border-right: 1px solid var(--table-border-color);
+
     position: absolute;
 
     &:hover {
@@ -123,6 +124,7 @@ export const RowsHeaderItemStyles = styled.div(({ isHover, isFull, allFull }: { 
       z-index: 2;
     }
   `,
+  // border-right: 1px solid var(--table-border-color);
   isHover &&
     css`
       background: var(--table-item-hover-bg);
@@ -143,12 +145,12 @@ export const RowsHeaderItemStyles = styled.div(({ isHover, isFull, allFull }: { 
     css`
       cursor: move;
     `,
-  isFull &&
-    !allFull &&
-    `${HeaderDragStyles} {
-      display: flex;
-      top: calc(50% - 4px);
-    }`,
+  // isFull &&
+  //   !allFull &&
+  //   `${HeaderDragStyles} {
+  //     display: flex;
+  //     top: calc(50% - 4px);
+  //   }`,
 ])
 
 export const AllHeaderStyles = styled.div(({ allFull }: { allFull: boolean }) => [

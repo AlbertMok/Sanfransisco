@@ -27,29 +27,28 @@ export const TableEditor = {
 
   isActive: (editor: Editor): boolean => {
     const elements = Editor.elements(editor)[TABLE_KEY] ?? []
-    return elements.some(e => TableEditor.isTable(editor, e[0]))
+    return elements.some((e) => TableEditor.isTable(editor, e[0]))
   },
 
   getOptions,
 
   create: (editor: Editor, options: CreateTableOptions = {}): Table => {
-    const { rows = 3, cols = 3 } = options
-    const { minRowHeight = defaultTableMinRowHeight, minColWidth = defaultTableMinRowHeight } =
-      getOptions(editor)
+    const { rows = 5, cols = 5 } = options
+    const { minRowHeight = defaultTableMinRowHeight, minColWidth = defaultTableMinRowHeight } = getOptions(editor)
     const rowHeight = minRowHeight
     const tableRows: TableRow[] = []
     const tableColsWdith = calculateAverageColumnWidthInContainer(editor, {
       cols,
       minWidth: minColWidth,
-      getWidth: width => width - 1,
+      getWidth: (width) => width - 1,
     })
     for (let r = 0; r < rows; r++) {
       tableRows.push(
         TableRowEditor.create(
           editor,
           { height: rowHeight },
-          tableColsWdith.map(() => TableCellEditor.create(editor)),
-        ),
+          tableColsWdith.map(() => TableCellEditor.create(editor))
+        )
       )
     }
     return Grid.create<Table, TableRow, TableCell>(
@@ -57,7 +56,7 @@ export const TableEditor = {
         type: TABLE_KEY,
         colsWidth: tableColsWdith,
       },
-      ...tableRows,
+      ...tableRows
     )
   },
 

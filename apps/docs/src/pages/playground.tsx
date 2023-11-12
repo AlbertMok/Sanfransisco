@@ -155,7 +155,7 @@ export default function Playground() {
         data: cursorData,
       })
     }
-
+    editor = withTitle(editor)
     editor = withHistory(editor)
 
     editor = withYHistory(editor)
@@ -221,8 +221,6 @@ export default function Playground() {
     editor = withSlashToolbar(editor, {
       match: () => !Editor.above(editor, { match: (n) => TitleEditor.isTitle(editor, n) }),
     })
-
-    editor = withTitle(editor)
 
     return editor
   }, [document, provider])

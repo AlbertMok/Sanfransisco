@@ -61,7 +61,6 @@ export type BaseAttributes = Omit<React.HTMLAttributes<HTMLElement>, 'children'>
 
 // 元素属性
 export interface ElementAttributes<T extends any = any> extends BaseAttributes {
-  // [DATA_BLOCK_ID]?: string
   [DATA_EDITABLE_NODE]: 'element'
   [DATA_EDITABLE_INLINE]?: true
   [DATA_EDITABLE_VOID]?: true

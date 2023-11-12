@@ -13,13 +13,7 @@ export const withTableCellHTMLSerializerTransform: HTMLSerializerWithTransform =
         serializer.mergeOptions(
           node,
           style,
-          {
-            margin: '0px',
-            padding: '6px',
-            border: '1px solid #d6d6d6',
-            verticalAlign: 'top',
-            display: span ? 'none' : '',
-          },
+          { margin: '0px', padding: '6px', border: '1px solid #d6d6d6', verticalAlign: 'top', display: span ? 'none' : '' },
           customStyle
         ),
         node.children.map((child) => serializer.transform(child)).join('')

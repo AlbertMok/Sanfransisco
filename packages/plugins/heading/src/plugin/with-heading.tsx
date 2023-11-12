@@ -81,25 +81,11 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
           mark[textMark.fontSize] = style.fontSize
           mark[textMark.fontWeight] = style.fontWeight
           mark['id'] = id
-          Transforms.setNodes(editor, mark, {
-            at: path,
-            match: (n) => Text.isText(n),
-          })
+          Transforms.setNodes(editor, mark, { at: path, match: (n) => Text.isText(n) })
         } else {
-          Transforms.setNodes(
-            editor,
-            {
-              [textMark.fontSize]: undefined,
-              [textMark.fontWeight]: false,
-              id,
-            },
-            {
-              at: path,
-              match: (n) => Text.isText(n),
-            }
-          )
+          Transforms.setNodes(editor, { [textMark.fontSize]: undefined, [textMark.fontWeight]: false }, { at: path, match: (n) => Text.isText(n) })
         }
-        Transforms.setNodes(editor, { type, id }, { at: path })
+        Transforms.setNodes(editor, { type }, { at: path })
       }
     })
   }
@@ -109,8 +95,10 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
     if (HeadingEditor.isHeading(editor, element)) {
       const tag = HeadingTags[element.type]
       return (
-        <div {...attributes}>
-          <StyledHeading as={tag}>{children}</StyledHeading>
+        <div data-block-id={element.id} data-block-type={element.type}>
+          <StyledHeading {...attributes} as={tag}>
+            {children}
+          </StyledHeading>
         </div>
       )
     }
