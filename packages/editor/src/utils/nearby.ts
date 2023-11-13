@@ -13,32 +13,24 @@ interface NearbyNode {
 export const isPrecedingY = (rect: DOMRect, node: Node, other: NearbyNode) => {
   return (
     rect.bottom > other.rect.bottom ||
-    (rect.top === other.rect.bottom &&
-      node.compareDocumentPosition(other.node) === Node.DOCUMENT_POSITION_PRECEDING)
+    (rect.top === other.rect.bottom && node.compareDocumentPosition(other.node) === Node.DOCUMENT_POSITION_PRECEDING)
   )
 }
 
 export const isFollowingY = (rect: DOMRect, node: Node, other: NearbyNode) => {
-  return (
-    rect.top < other.rect.top ||
-    (rect.top === other.rect.top &&
-      node.compareDocumentPosition(other.node) === Node.DOCUMENT_POSITION_FOLLOWING)
-  )
+  return rect.top < other.rect.top || (rect.top === other.rect.top && node.compareDocumentPosition(other.node) === Node.DOCUMENT_POSITION_FOLLOWING)
 }
 
 export const isPrecedingX = (rect: DOMRect, node: Node, other: NearbyNode) => {
   return (
     rect.right > other.rect.right ||
-    (rect.right === other.rect.right &&
-      node.compareDocumentPosition(other.node) === Node.DOCUMENT_POSITION_PRECEDING)
+    (rect.right === other.rect.right && node.compareDocumentPosition(other.node) === Node.DOCUMENT_POSITION_PRECEDING)
   )
 }
 
 export const isFollowingX = (rect: DOMRect, node: Node, other: NearbyNode) => {
   return (
-    rect.left < other.rect.left ||
-    (rect.left === other.rect.left &&
-      node.compareDocumentPosition(other.node) === Node.DOCUMENT_POSITION_FOLLOWING)
+    rect.left < other.rect.left || (rect.left === other.rect.left && node.compareDocumentPosition(other.node) === Node.DOCUMENT_POSITION_FOLLOWING)
   )
 }
 
@@ -89,13 +81,7 @@ export const getMinXInRect = (x: number, rect: DOMRect) => {
   return Math.min(Math.abs(x - rect.left), Math.abs(x - rect.right))
 }
 
-export const onNearbyY = (
-  x: number,
-  rect: DOMRect,
-  node: Node,
-  nearbyNode: NearbyNode,
-  preceding = true,
-) => {
+export const onNearbyY = (x: number, rect: DOMRect, node: Node, nearbyNode: NearbyNode, preceding = true) => {
   if (isAlignY(rect, nearbyNode.rect)) {
     const topBetween = isBetweenX(x, nearbyNode.rect)
     const isBetween = isBetweenX(x, rect)
@@ -145,44 +131,21 @@ const findNearbyNodes = (nodes: Element[], x: number, y: number): Element | Near
       // 点击位置在区域 top上方
       else if (y < rect.top) {
         if (!closerNode.below || onNearbyY(x, rect, child, closerNode.below, false)) {
-          closerNode.below = {
-            rect,
-            node: child,
-          }
+          closerNode.below = { rect, node: child }
         }
       }
       // 点击区域在 bottom 上方
       else if (y > rect.bottom) {
         if (!closerNode.top || onNearbyY(x, rect, child, closerNode.top)) {
-          closerNode.top = {
-            rect,
-            node: child,
-          }
+          closerNode.top = { rect, node: child }
         }
         if (closerNode.left && isPrecedingX(rect, child, closerNode.left)) {
-          closerNode.left = {
-            rect,
-            node: child,
-          }
+          closerNode.left = { rect, node: child }
         }
-      } else if (
-        isBetweenY(y, rect) &&
-        x > rect.left &&
-        (!closerNode.left || isPrecedingX(rect, child, closerNode.left))
-      ) {
-        closerNode.left = {
-          rect,
-          node: child,
-        }
-      } else if (
-        isBetweenY(y, rect) &&
-        x < rect.right &&
-        (!closerNode.right || isFollowingX(rect, child, closerNode.right))
-      ) {
-        closerNode.right = {
-          rect,
-          node: child,
-        }
+      } else if (isBetweenY(y, rect) && x > rect.left && (!closerNode.left || isPrecedingX(rect, child, closerNode.left))) {
+        closerNode.left = { rect, node: child }
+      } else if (isBetweenY(y, rect) && x < rect.right && (!closerNode.right || isFollowingX(rect, child, closerNode.right))) {
+        closerNode.right = { rect, node: child }
       }
     }
   }

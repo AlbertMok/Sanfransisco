@@ -1,9 +1,8 @@
 import { Editable, generateId } from '@editablejs/editor'
-import { Editor, Element, List, Path, Range, Transforms } from '@editablejs/models'
+import { Editor, Element, Path, Range, Transforms } from '@editablejs/models'
 import { Paragraph } from '../interfaces/paragraph'
 import cloneDeep from 'lodash.clonedeep'
 import { PARAGRAPH_KEY } from '../constants'
-import { useMemo } from 'react'
 
 export interface ParagraphEditor extends Editor {
   /** create a paragraph element in editor. */

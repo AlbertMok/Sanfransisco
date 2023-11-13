@@ -10,7 +10,7 @@ import { withShortcuts } from './with-shortcuts'
 
 const defaultHotkey: HrHotkey = 'mod+shift+e'
 
-const defaultShortcuts: string[] = ['*', '-']
+const defaultShortcuts: string[] = ['*', '---']
 
 export const withHr = <T extends Editable>(editor: T, options: HrOptions = {}) => {
   const newEditor = editor as T & HrEditor
@@ -27,14 +27,7 @@ export const withHr = <T extends Editable>(editor: T, options: HrOptions = {}) =
 
   newEditor.insertHr = (options = {}) => {
     const { color = DEFUALT_HR_COLOR, width = DEFAULT_HR_WIDTH, style = DEFAULT_HR_STYLE } = options
-    const hr: Hr = {
-      type: HR_KEY,
-      color,
-      width,
-      style,
-      children: [{ text: '' }],
-      id: generateId(),
-    }
+    const hr: Hr = { type: HR_KEY, color, width, style, children: [{ text: '' }], id: generateId() }
     editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       Transforms.insertNodes(editor, hr)

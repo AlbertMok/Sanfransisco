@@ -13,27 +13,38 @@ export interface HrProps extends RenderElementProps<Hr> {
 
 export const HrComponent: FC<HrProps> = ({ children, attributes, editor, element }) => {
   const focused = useNodeFocused()
+
   const [readOnly] = useReadOnly()
+
   const { color = DEFUALT_HR_COLOR, width = DEFAULT_HR_WIDTH, style = DEFAULT_HR_STYLE } = element
+
   return (
     <HrPopover editor={editor} element={element}>
-      <div
-        css={[
-          tw`py-4 rounded cursor-default`,
-          !readOnly && tw`hover:bg-gray-100`,
-          focused && !readOnly && tw`bg-gray-100`,
-        ]}
-        {...attributes}
-      >
-        <hr
+      <div data-block-id={element.id} data-block-type={element.type}>
+        <div
           css={[
+            tw` rounded cursor-pointer`,
+            !readOnly && tw`hover:bg-gray-100`,
+            focused && !readOnly && tw`bg-gray-100`,
             css`
-              border-top: ${width}px ${style} ${color};
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              padding-top: 11px;
+              padding-bottom: 11px;
             `,
           ]}
-        />
-
-        <div tw="hidden absolute">{children}</div>
+          {...attributes}
+        >
+          <div
+            css={[
+              css`
+                border-top: ${width}px ${style} ${color};
+              `,
+            ]}
+          />
+          <div tw="hidden absolute">{children}</div>
+        </div>
       </div>
     </HrPopover>
   )

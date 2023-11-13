@@ -3,10 +3,8 @@ import { useEditableStatic } from './use-editable'
 import { Drag, DragStore } from '../plugin/drag'
 import { useStore } from 'zustand'
 
-
 // 拖拽
 export const useDragStore = () => {
-
   const editor = useEditableStatic()
 
   const store = React.useMemo(() => {
@@ -22,7 +20,7 @@ export const useDragStore = () => {
 export const useDragging = () => {
   const store = useDragStore()
 
-  const drag = useStore(store, state => state.drag !== null)
+  const drag = useStore(store, (state) => state.drag !== null)
 
   return React.useMemo(() => drag, [drag])
 }
@@ -30,7 +28,7 @@ export const useDragging = () => {
 export const useDragType = () => {
   const store = useDragStore()
 
-  const type = useStore(store, state => state.drag?.type ?? null)
+  const type = useStore(store, (state) => state.drag?.type ?? null)
 
   return React.useMemo(() => type, [type])
 }
@@ -41,7 +39,7 @@ export const useDragType = () => {
  */
 export const useDragTo = () => {
   const store = useDragStore()
-  const drag = useStore(store, state => state.drag)
+  const drag = useStore(store, (state) => state.drag)
 
   return React.useMemo(() => drag?.to ?? null, [drag])
 }
@@ -52,7 +50,7 @@ export const useDragTo = () => {
  */
 export const useDragPosition = () => {
   const store = useDragStore()
-  const drag = useStore(store, state => state.drag)
+  const drag = useStore(store, (state) => state.drag)
 
   return React.useMemo(() => drag?.position ?? null, [drag])
 }
@@ -63,7 +61,7 @@ export const useDragPosition = () => {
  */
 export const useDragData = () => {
   const store = useDragStore()
-  const drag = useStore(store, state => state.drag)
+  const drag = useStore(store, (state) => state.drag)
 
   return React.useMemo(() => drag?.data ?? 0, [drag])
 }
@@ -75,7 +73,7 @@ export const useDragMethods = () => {
     (drag: Partial<DragStore['drag']>) => {
       Drag.setDrag(editor, drag)
     },
-    [editor],
+    [editor]
   )
 
   const getDrag = React.useCallback(() => {

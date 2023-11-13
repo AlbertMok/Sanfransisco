@@ -84,6 +84,7 @@
     "prettier-config": "workspace:*",
     "react": "^18.x",
     "react-dom": "^18.x",
+    "tailwindcss": "^3.2.4",
     "tsconfig": "workspace:*",
     "tsup": "^6.5.0",
     "tsup-config": "workspace:*",

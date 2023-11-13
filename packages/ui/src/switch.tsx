@@ -26,18 +26,9 @@ interface SwitchProps extends Omit<PrimitiveButtonProps, 'onChange'> {
 }
 
 const Switch = React.forwardRef<SwitchElement, SwitchProps>((props: SwitchProps, forwardedRef) => {
-  const {
-    name,
-    checked: checkedProp,
-    defaultChecked,
-    required,
-    disabled,
-    value = 'on',
-    onChange,
-    ...switchProps
-  } = props
+  const { name, checked: checkedProp, defaultChecked, required, disabled, value = 'on', onChange, ...switchProps } = props
   const [button, setButton] = React.useState<HTMLButtonElement | null>(null)
-  const composedRefs = useComposedRefs(forwardedRef, node => setButton(node))
+  const composedRefs = useComposedRefs(forwardedRef, (node) => setButton(node))
   const hasConsumerStoppedPropagationRef = React.useRef(false)
   // We set this to true by default so that events bubble to forms without JS (SSR)
   const isFormControl = button ? Boolean(button.closest('form')) : true
@@ -61,8 +52,8 @@ const Switch = React.forwardRef<SwitchElement, SwitchProps>((props: SwitchProps,
         value={value}
         {...switchProps}
         ref={composedRefs}
-        onClick={composeEventHandlers(props.onClick, event => {
-          setChecked(prevChecked => !prevChecked)
+        onClick={composeEventHandlers(props.onClick, (event) => {
+          setChecked((prevChecked) => !prevChecked)
           if (isFormControl) {
             hasConsumerStoppedPropagationRef.current = event.isPropagationStopped()
             // if switch is in a form, stop propagation from the button so that we only propagate
@@ -103,20 +94,11 @@ type SwitchThumbElement = React.ElementRef<typeof Root.span>
 type PrimitiveSpanProps = React.ComponentPropsWithoutRef<typeof Root.span>
 interface SwitchThumbProps extends PrimitiveSpanProps {}
 
-const SwitchThumb = React.forwardRef<SwitchThumbElement, SwitchThumbProps>(
-  (props: SwitchThumbProps, forwardedRef) => {
-    const { ...thumbProps } = props
-    const context = useSwitchContext()
-    return (
-      <Root.span
-        data-state={getState(context.checked)}
-        data-disabled={context.disabled ? '' : undefined}
-        {...thumbProps}
-        ref={forwardedRef}
-      />
-    )
-  },
-)
+const SwitchThumb = React.forwardRef<SwitchThumbElement, SwitchThumbProps>((props: SwitchThumbProps, forwardedRef) => {
+  const { ...thumbProps } = props
+  const context = useSwitchContext()
+  return <Root.span data-state={getState(context.checked)} data-disabled={context.disabled ? '' : undefined} {...thumbProps} ref={forwardedRef} />
+})
 
 SwitchThumb.displayName = THUMB_NAME
 
