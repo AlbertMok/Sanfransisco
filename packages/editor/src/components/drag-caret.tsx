@@ -17,7 +17,7 @@ export const DragCaretComponent = React.memo(() => {
     if (dragType === 'block') {
       const entry = Editor.above(editor, {
         at: dragTo,
-        match: n => Element.isElement(n),
+        match: (n) => Element.isElement(n),
         mode: 'lowest',
       })
       if (!entry) return null

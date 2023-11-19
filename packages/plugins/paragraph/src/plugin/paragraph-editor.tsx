@@ -3,6 +3,7 @@ import { Editor, Element, Path, Range, Transforms } from '@editablejs/models'
 import { Paragraph } from '../interfaces/paragraph'
 import cloneDeep from 'lodash.clonedeep'
 import { PARAGRAPH_KEY } from '../constants'
+import tw from 'twin.macro'
 
 export interface ParagraphEditor extends Editor {
   /** create a paragraph element in editor. */
@@ -85,8 +86,10 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const { renderElement } = newEditor
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (ParagraphEditor.isParagraph(element)) {
+      // paragraph style
+      const style = tw`my-0.5 px-0.5`
       return (
-        <div data-block-type={element.type} data-block-id={element.id}>
+        <div data-block-type={element.type} data-block-id={element.id} css={style}>
           <div {...attributes}>{children}</div>
         </div>
       )
