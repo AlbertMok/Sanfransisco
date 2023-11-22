@@ -12,6 +12,7 @@ import { withKeydown } from './with-keydown'
 import { withNormalizeNode } from './with-normalize-node'
 import { withDataTransfer } from './with-data-transfer'
 import { getWordRange } from '../utils/text'
+import { DATA_BLOCK_ID } from '../utils/constants'
 
 /**
  * `withEditable` adds React and DOM specific behaviors to the editor.

@@ -48,7 +48,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
       const text = Editor.string(editor, parentPath)
 
       if (isNotParagraph && text.length === 0) {
-        Transforms.setNodes(editor, newParagraph, { at: parentPath })
+        Transforms.wrapNodes(editor, newParagraph, { at: parentPath })
         return
       }
 

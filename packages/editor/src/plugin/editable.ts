@@ -171,7 +171,7 @@ export interface Editable extends Editor {
   onDestory: () => void
   renderElementAttributes: (props: RenderElementAttributes) => ElementAttributes
   renderLeafAttributes: (props: RenderLeafAttributes) => TextAttributes
-  renderElement: (props: RenderElementProps) => JSX.Element
+  renderElement: (props: RenderElementProps) => any
   renderLeaf: (props: RenderLeafProps) => JSX.Element
   renderPlaceholder: (props: RenderPlaceholderProps) => JSX.Element | void | null
   toDataTransfer: (range?: Range) => DataTransfer | null

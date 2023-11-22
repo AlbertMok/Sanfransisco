@@ -4,7 +4,7 @@ import shallow from 'zustand/shallow'
 import { Slot } from '../plugin/solt'
 import { useEditableStatic } from './use-editable'
 
-export const useSlotStore = () => {
+const useSlotStore = () => {
   const editor = useEditableStatic()
   return React.useMemo(() => Slot.getStore(editor), [editor])
 }

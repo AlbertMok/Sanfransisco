@@ -12,6 +12,7 @@ export const DragCaretComponent = React.memo(() => {
   const dragTo = useDragTo()
   const dragType = useDragType()
   const dragPosition = useDragPosition()
+
   const rects = React.useMemo(() => {
     if (!dragTo || !dragPosition) return null
     if (dragType === 'block') {

@@ -1796,6 +1796,12 @@ importers:
 
   packages/plugins/selection:
     dependencies:
+      '@editablejs/editor':
+        specifier: workspace:*
+        version: link:../../editor
+      '@editablejs/models':
+        specifier: workspace:*
+        version: link:../../models
       react:
         specifier: ^18.x
         version: 18.2.0

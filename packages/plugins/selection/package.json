@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@editablejs/editor": "workspace:*",
+    "@editablejs/models": "workspace:*",
     "react": "^18.x",
     "react-dom": "^18.x",
     "tailwind-config": "workspace:*",

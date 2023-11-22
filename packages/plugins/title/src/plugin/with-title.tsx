@@ -1,6 +1,6 @@
 import { Editable, generateId, Placeholder } from '@editablejs/editor'
 import { Editor, Transforms, Node, Path, List } from '@editablejs/models'
-import { FC, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import tw from 'twin.macro'
 import { TITLE_KEY } from '../constants'
 import { Title } from '../interfaces/title'
@@ -10,7 +10,11 @@ import { TitleEditor } from './title-editor'
 const StyledTitle = tw.h1`font-bold text-3xl mb-6`
 
 const DefaultTitle: FC<TitleComponentProps> = ({ attributes, children }) => {
-  return <StyledTitle {...attributes}>{children}</StyledTitle>
+  return (
+    <StyledTitle css={{ color: '#1f2329' }} {...attributes}>
+      {children}
+    </StyledTitle>
+  )
 }
 
 const { isEmpty } = Editor
@@ -36,10 +40,11 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
     if (Editor.isEditor(node)) {
       let isHandled = false
 
+      // 处理编辑器的第一个节点
       const firstChild = node.children[0]
-
       if (!firstChild || Editor.isVoid(titleEditor, firstChild)) {
         Transforms.insertNodes(titleEditor, { type: TITLE_KEY, children: [{ text: '' }] }, { at: [0] })
+
         isHandled = true
       } else if (!Title.isTitle(firstChild)) {
         let block: Node = firstChild
@@ -56,14 +61,14 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
         Transforms.setNodes(titleEditor, { type: TITLE_KEY }, { at: path })
         isHandled = true
       }
-
+      // 处理第二个节点
       const secondChild = node.children[1]
       if (!secondChild) {
         // if there is not a second node in the editor,then insert a new node
-        Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }] }, { at: [1] })
+        Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }], id: 'first_paragqwdiqjd' }, { at: [1] })
         isHandled = true
       } else if (Title.isTitle(secondChild)) {
-        Transforms.setNodes(titleEditor, { type: 'paragraph', id: generateId() }, { at: [1] })
+        Transforms.setNodes(titleEditor, { type: 'paragraph' }, { at: [1] })
         isHandled = true
       }
       if (isHandled) return
@@ -100,6 +105,7 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
         return
       }
     }
+
     normalizeNode(entry)
   }
 

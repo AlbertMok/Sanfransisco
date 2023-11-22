@@ -16,10 +16,15 @@ import { usePlaceholder } from '../hooks/use-placeholder'
  */
 const ElementRender = (props: { element: Element; selection: Range | null; renderPlaceholder?: PlaceholderRender }) => {
   const { element, selection, renderPlaceholder } = props
+
   const ref = React.useRef<HTMLElement>(null)
+
   const editor = useEditableStatic()
+
   const isInline = editor.isInline(element)
+
   const key = Editable.findKey(editor, element)
+
   const currentRenderPlaceholder = usePlaceholder(element)
 
   let children: React.ReactNode = useChildren({

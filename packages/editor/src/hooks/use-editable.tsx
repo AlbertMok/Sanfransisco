@@ -2,7 +2,6 @@ import * as React from 'react'
 import { StoreApi, UseBoundStore, useStore } from 'zustand'
 import { Editable } from '../plugin/editable'
 
-// zustand是一个状态管理库
 // 编辑器对象的状态存储
 export interface EditableStore {
   editor: [Editable] //editor是一个元组类型
@@ -11,9 +10,7 @@ export interface EditableStore {
 export const useEditableStore = () => {
   const contenxt = React.useContext(EditableStoreContext)
   if (!contenxt) {
-    throw new Error(
-      `The \`useEditableStore\` hook must be used inside the <EditableProvider> component's context.`,
-    )
+    throw new Error(`The \`useEditableStore\` hook must be used inside the <EditableProvider> component's context.`)
   }
 
   return contenxt.store
@@ -34,9 +31,7 @@ export const useEditableStatic = (): Editable => {
   const contenxt = React.useContext(EditableStoreContext)
 
   if (!contenxt) {
-    throw new Error(
-      `The \`useEditableStatic\` hook must be used inside the <EditableProvider> component's context.`,
-    )
+    throw new Error(`The \`useEditableStatic\` hook must be used inside the <EditableProvider> component's context.`)
   }
 
   return contenxt.editor
@@ -49,7 +44,7 @@ export const useEditableStatic = (): Editable => {
 export const useEditable = (): Editable => {
   const store = useEditableStore()
 
-  return useStore(store, state => {
+  return useStore(store, (state) => {
     return state.editor
   })[0]
 }
