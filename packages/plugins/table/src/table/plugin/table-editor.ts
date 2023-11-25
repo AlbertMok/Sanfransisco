@@ -12,6 +12,7 @@ export interface CreateTableOptions {
   rows?: number
   cols?: number
 }
+
 export interface TableEditor extends Editor {
   insertTable: (options?: CreateTableOptions | Table) => void
 }
@@ -32,18 +33,32 @@ export const TableEditor = {
 
   getOptions,
 
+  /**
+   * 创建表格元素
+   * @param editor
+   * @param options
+   * @returns
+   */
   create: (editor: Editor, options: CreateTableOptions = {}): Table => {
+    // 定义行数和列数
     const { rows = 5, cols = 5 } = options
+
     const { minRowHeight = defaultTableMinRowHeight, minColWidth = defaultTableMinRowHeight } = getOptions(editor)
+
     const rowHeight = minRowHeight
+
     const tableRows: TableRow[] = []
+
+    // 计算每一列的宽度,即每一个  cell 的宽度
     const tableColsWdith = calculateAverageColumnWidthInContainer(editor, {
       cols,
       minWidth: minColWidth,
       getWidth: (width) => width - 1,
     })
+
     for (let r = 0; r < rows; r++) {
       tableRows.push(
+        // 调用 table row 的 create 方法来创建 row
         TableRowEditor.create(
           editor,
           { height: rowHeight },
@@ -51,13 +66,9 @@ export const TableEditor = {
         )
       )
     }
-    return Grid.create<Table, TableRow, TableCell>(
-      {
-        type: TABLE_KEY,
-        colsWidth: tableColsWdith,
-      },
-      ...tableRows
-    )
+
+    // 调用Grid.Create函数创造表格
+    return Grid.create<Table, TableRow, TableCell>({ type: TABLE_KEY, colsWidth: tableColsWdith }, ...tableRows)
   },
 
   insert: (editor: Editor, options?: CreateTableOptions | Table) => {

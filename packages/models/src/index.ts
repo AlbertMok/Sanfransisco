@@ -8,9 +8,11 @@ import { GridRow } from './interfaces/row'
 type BaseEditor = SlateBaseEditor & {
   id: string
   isSolidVoid: (element: BaseElement) => boolean
+
   isGrid: (value: any) => value is Grid
   isGridRow: (value: any) => value is GridRow
   isGridCell: (value: any) => value is GridCell
+
   isList: (value: any) => value is List
   getFragment: (range?: BaseRange) => Descendant[]
   normalizeSelection: (fn: (selection: BaseSelection, options?: { grid: NodeEntry<Grid>; row: number; col: number }) => void, at?: Location) => void

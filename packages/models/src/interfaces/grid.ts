@@ -63,7 +63,7 @@ export const Grid = {
     }
     const [grid] = Editor.nodes<Grid>(editor, {
       at,
-      match: n => editor.isGrid(n),
+      match: (n) => editor.isGrid(n),
       mode: 'lowest',
     })
     return grid
@@ -82,24 +82,20 @@ export const Grid = {
 
     try {
       const range = Editor.range(editor, path)
-      if (
-        !Range.includes(range, editorSelection.anchor) ||
-        !Range.includes(range, editorSelection.focus)
-      )
-        return
+      if (!Range.includes(range, editorSelection.anchor) || !Range.includes(range, editorSelection.focus)) return
     } catch (error) {
       return
     }
 
     const [startEntry] = Editor.nodes<GridCell>(editor, {
       at: start,
-      match: n => editor.isGridCell(n),
+      match: (n) => editor.isGridCell(n),
     })
     if (!startEntry) return
     const [endEntry] = Range.isExpanded(editorSelection)
       ? Editor.nodes<GridCell>(editor, {
           at: end,
-          match: n => editor.isGridCell(n),
+          match: (n) => editor.isGridCell(n),
         })
       : [startEntry]
     if (!endEntry) return
@@ -111,11 +107,7 @@ export const Grid = {
     }
   },
 
-  getSelected: (
-    editor: Editor,
-    at?: GridLocation,
-    selection?: GridSelection,
-  ): GridSelected | undefined => {
+  getSelected: (editor: Editor, at?: GridLocation, selection?: GridSelection): GridSelected | undefined => {
     if (!at || Path.isPath(at)) {
       const entry = Grid.above(editor, at)
       if (!entry) return
@@ -239,7 +231,7 @@ export const Grid = {
               { colspan: span.colspan - 1 },
               {
                 at: path,
-              },
+              }
             )
           }
         }
@@ -252,7 +244,7 @@ export const Grid = {
             { colspan: cell.colspan - 1, rowspan: cell.rowspan, span: undefined },
             {
               at: path.concat([r, nextIndex]),
-            },
+            }
           )
         }
       }
@@ -266,7 +258,7 @@ export const Grid = {
             { span: [cell.span[0], cell.span[1] - 1] },
             {
               at: path.concat([r, c]),
-            },
+            }
           )
         }
       }
@@ -311,7 +303,7 @@ export const Grid = {
               { rowspan: span.rowspan - 1 },
               {
                 at: path,
-              },
+              }
             )
           }
         }
@@ -324,7 +316,7 @@ export const Grid = {
             { colspan: cell.colspan, rowspan: cell.rowspan - 1, span: undefined },
             {
               at: path.concat([nextIndex, c]),
-            },
+            }
           )
         }
       }
@@ -338,7 +330,7 @@ export const Grid = {
             { span: [cell.span[0] - 1, cell.span[1]] },
             {
               at: path.concat([r, c]),
-            },
+            }
           )
         }
       }
@@ -423,7 +415,7 @@ export const Grid = {
         { colsWidth: newColsWidth },
         {
           at: path,
-        },
+        }
       )
     }
 
@@ -440,7 +432,7 @@ export const Grid = {
             { span: [span[0], span[1] + moveCount] },
             {
               at: path.concat([r, c]),
-            },
+            }
           )
         } else if (!isBackward && span[1] >= move[1] && span[1] < to) {
           Transforms.setNodes<GridCell>(
@@ -448,15 +440,11 @@ export const Grid = {
             { span: [span[0], span[1] - moveCount] },
             {
               at: path.concat([r, c]),
-            },
+            }
           )
         }
       }
-      for (
-        let c = isBackward ? move[1] : move[0];
-        isBackward ? c >= move[0] : c <= move[1];
-        isBackward ? c-- : c++
-      ) {
+      for (let c = isBackward ? move[1] : move[0]; isBackward ? c >= move[0] : c <= move[1]; isBackward ? c-- : c++) {
         const cell = cells[c]
         // 多个列移动后列索引会发生变化，所以这里不能取c的值
         const cellPath = path.concat([r, isBackward ? move[1] : move[0]])
@@ -470,7 +458,7 @@ export const Grid = {
               },
               {
                 at: cellPath,
-              },
+              }
             )
           }
         }
@@ -558,7 +546,7 @@ export const Grid = {
             { span: [span[0] + moveCount, span[1]] },
             {
               at: path.concat([r, c]),
-            },
+            }
           )
         } else if (!isBackward && span[0] >= move[0] && span[0] < to) {
           Transforms.setNodes<GridCell>(
@@ -566,17 +554,13 @@ export const Grid = {
             { span: [span[0] - moveCount, span[1]] },
             {
               at: path.concat([r, c]),
-            },
+            }
           )
         }
       }
     }
 
-    for (
-      let r = isBackward ? move[1] : move[0];
-      isBackward ? r >= move[0] : r <= move[1];
-      isBackward ? r-- : r++
-    ) {
+    for (let r = isBackward ? move[1] : move[0]; isBackward ? r >= move[0] : r <= move[1]; isBackward ? r-- : r++) {
       for (let c = colCount - 1; c >= 0; c--) {
         const cell = rows[r].children[c]
         // 多个列移动后列索引会发生变化，所以这里不能取c的值
@@ -587,7 +571,7 @@ export const Grid = {
             { span: [isBackward ? to : to - 1, cell.span[1]] },
             {
               at: cellPath,
-            },
+            }
           )
         }
       }
@@ -608,7 +592,7 @@ export const Grid = {
     index: number,
     cell: Partial<Omit<C, 'children'>>,
     width?: number,
-    minWidth: number = 5,
+    minWidth: number = 5
   ) => {
     if (Path.isPath(at)) {
       const entry = Grid.above(editor, at)
@@ -640,7 +624,7 @@ export const Grid = {
             { colspan: spanCell.colspan + 1 },
             {
               at: path.concat([spanRow, spanCol]),
-            },
+            }
           )
         }
       }
@@ -655,7 +639,7 @@ export const Grid = {
               { span: [row, col + 1] },
               {
                 at: path.concat([r, c]),
-              },
+              }
             )
           }
         }
@@ -677,7 +661,7 @@ export const Grid = {
     index: number,
     row: Partial<Omit<R, 'children'>>,
     cell: Partial<Omit<C, 'children'>>,
-    height?: number,
+    height?: number
   ) => {
     if (Path.isPath(at)) {
       const entry = Grid.above(editor, at)
@@ -706,7 +690,7 @@ export const Grid = {
             { rowspan: spanCell.rowspan + 1 },
             {
               at: path.concat([spanRow, spanCol]),
-            },
+            }
           )
         }
       }
@@ -721,7 +705,7 @@ export const Grid = {
               { span: [spanRow + 1, spanCol] },
               {
                 at: path.concat([r, col]),
-              },
+              }
             )
           }
         }
@@ -732,7 +716,7 @@ export const Grid = {
     const rowHeight = height ?? 5
     const newRow = GridRow.create(
       { ...row, height: rowHeight },
-      (colsWidth ?? [0]).map((_, index) => setCell(GridCell.create(cell), index)),
+      (colsWidth ?? [0]).map((_, index) => setCell(GridCell.create(cell), index))
     )
     Transforms.insertNodes(editor, newRow, { at: path.concat([index]) })
     Grid.focus(editor, {
@@ -784,7 +768,7 @@ export const Grid = {
           },
           {
             at: cellPath,
-          },
+          }
         )
       } else {
         if (!cell.span && !Editor.isEmpty(editor, cell)) {
@@ -806,7 +790,7 @@ export const Grid = {
           },
           {
             at: cellPath,
-          },
+          }
         )
       }
     }
@@ -860,7 +844,7 @@ export const Grid = {
           { span: undefined },
           {
             at: cellPath,
-          },
+          }
         )
         for (let i = 0; i < cell.children.length; i++) {
           Transforms.delete(editor, {
@@ -872,7 +856,7 @@ export const Grid = {
           { children: [{ text: '' }] },
           {
             at: cellPath.concat(0),
-          },
+          }
         )
       } else if (cell.rowspan > 1 || cell.colspan > 1) {
         Transforms.setNodes<GridCell>(
@@ -880,17 +864,13 @@ export const Grid = {
           { rowspan: 1, colspan: 1 },
           {
             at: cellPath,
-          },
+          }
         )
       }
     }
   },
 
-  *cells(
-    editor: Editor,
-    at?: GridLocation,
-    opitons: GridGeneratorCellsOptions = {},
-  ): Generator<[GridCell, number, number]> {
+  *cells(editor: Editor, at?: GridLocation, opitons: GridGeneratorCellsOptions = {}): Generator<[GridCell, number, number]> {
     if (!at || Path.isPath(at)) {
       const entry = Grid.above(editor, at)
       if (!entry) return
@@ -1023,7 +1003,7 @@ export const Grid = {
       point: CellPoint
       at?: GridLocation
       edge?: SelectionEdge
-    },
+    }
   ) => {
     let { point, at, edge = 'start' } = options
     if (!at) {
@@ -1050,10 +1030,7 @@ export const Grid = {
       if (!entry) return
       at = entry
     }
-    const {
-      start = [0, 0],
-      end = [Grid.getRowCount(editor, at) - 1, Grid.getColCount(editor, at) - 1],
-    } = selection
+    const { start = [0, 0], end = [Grid.getRowCount(editor, at) - 1, Grid.getColCount(editor, at) - 1] } = selection
     const sel = Grid.edges(editor, at, { start, end })
     const { start: startCell, end: endCell } = Grid.span(editor, at, sel)
     const [, path] = at
@@ -1064,11 +1041,7 @@ export const Grid = {
     })
   },
 
-  getCell: (
-    editor: Editor,
-    at: GridLocation,
-    point: CellPoint,
-  ): NodeEntry<GridCell> | undefined => {
+  getCell: (editor: Editor, at: GridLocation, point: CellPoint): NodeEntry<GridCell> | undefined => {
     if (Path.isPath(at)) {
       const entry = Grid.above(editor, at)
       if (!entry) return
@@ -1090,7 +1063,7 @@ export const Grid = {
       at = entry
     }
     const [grid] = at
-    return grid.children.filter(child => editor.isGridRow(child)).length
+    return grid.children.filter((child) => editor.isGridRow(child)).length
   },
 
   getColCount: (editor: Editor, at: GridLocation): number => {

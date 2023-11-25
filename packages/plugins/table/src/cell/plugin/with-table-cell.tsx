@@ -4,6 +4,12 @@ import { setOptions, TableCellOptions } from '../options'
 import { CellInnerStyles, CellStyles } from '../../components/cell'
 import { TableCellEditor } from './table-cell-editor'
 
+/**
+ * 定义渲染 table cell的方式
+ * @param editor
+ * @param options
+ * @returns
+ */
 export const withTableCell = <T extends Editable>(editor: T, options: TableCellOptions = {}) => {
   const newEditor = editor as T & TableCellEditor
 

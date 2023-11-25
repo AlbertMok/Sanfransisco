@@ -27,11 +27,12 @@ export const withTable = <T extends Editable>(editor: T, options: TableOptions =
   }
 
   newEditor.insertTable = (options) => {
+    // 创建表格元素
     const table = Table.isTable(options) ? options : TableEditor.create(newEditor, options)
+
+    // 通过 Transforms.insertNodes来添加表格元素到文档树中
     Transforms.insertNodes(newEditor, table)
-    Grid.focus(newEditor, {
-      point: [0, 0],
-    })
+    Grid.focus(newEditor, { point: [0, 0] })
   }
 
   const { renderElement } = newEditor
