@@ -14,12 +14,12 @@ export const useSelectionDrawingStore = () => {
 
 export const useSelectionDrawingStyle = () => {
   const store = useSelectionDrawingStore()
-  return useStore(store, state => state.style)
+  return useStore(store, (state) => state.style)
 }
 
 export const useSelectionDrawingSelection = () => {
   const store = useSelectionDrawingStore()
-  return useStore(store, state => state.selection)
+  return useStore(store, (state) => state.selection)
 }
 
 export const useSelectionDrawingRects = () => {
@@ -37,5 +37,5 @@ export const useSelectionDrawingRects = () => {
 
 export const useSelectionDrawingEnabled = () => {
   const store = useSelectionDrawingStore()
-  return useStore(store, state => state.enabled)
+  return useStore(store, (state) => state.enabled)
 }

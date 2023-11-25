@@ -18,6 +18,11 @@ const SelectionContext = createContext<SelectionAreaClass | undefined>(undefined
 
 export const useSelection = () => useContext(SelectionContext)
 
+/**
+ * 选择区域组件
+ * @param props
+ * @returns
+ */
 export const SelectionArea: React.FunctionComponent<SelectionAreaProps> = (props) => {
   // 用于存储 SelectionAreaClass 的实例
   const [selectionState, setSelection] = useState<SelectionAreaClass | undefined>(undefined)

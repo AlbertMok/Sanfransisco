@@ -371,15 +371,18 @@ export const withEditable = <T extends Editor>(editor: T) => {
   // 插入新的block
   e.insertBreak = () => {
     const { selection } = editor
+
     if (!Editable.isEditor(editor) || !selection || Range.isExpanded(selection)) {
       insertBreak()
       return
     }
+
     const entrie = List.above(editor)
     if (!entrie) {
       insertBreak()
       return
     }
+
     List.splitList(editor)
   }
 

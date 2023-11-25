@@ -2,7 +2,7 @@ import SelectionAreaClass from '../core/index'
 import { SelectionEvents, SelectionOptions } from '../types'
 import React, { createRef, useEffect, createContext, useContext, useState } from 'react'
 
-// 允许用户传递自定义的 id、className 以及选择区域特有的事件处理器如 onBeforeStart, onBeforeDrag, onStart, onMove, onStop
+// SelectionAreaProps扩展了 React.HTMLAttributes<HTMLDivElement> 和 Omit<Partial<SelectionOptions>, 'boundaries'>
 export interface SelectionAreaProps extends Omit<Partial<SelectionOptions>, 'boundaries'>, React.HTMLAttributes<HTMLDivElement> {
   id?: string
   className?: string
@@ -18,6 +18,11 @@ const SelectionContext = createContext<SelectionAreaClass | undefined>(undefined
 
 export const useSelection = () => useContext(SelectionContext)
 
+/**
+ * 选择区域组件
+ * @param props SelectionAreaProps扩展了 React.HTMLAttributes<HTMLDivElement> 和 Omit<Partial<SelectionOptions>, 'boundaries'>
+ * @returns
+ */
 export const SelectionArea: React.FunctionComponent<SelectionAreaProps> = (props) => {
   // 用于存储 SelectionAreaClass 的实例
   const [selectionState, setSelection] = useState<SelectionAreaClass | undefined>(undefined)
@@ -52,12 +57,11 @@ export const SelectionArea: React.FunctionComponent<SelectionAreaProps> = (props
       setSelection(undefined)
     }
   }, [])
-
   return (
-    <SelectionContext.Provider value={selectionState}>
-      <div ref={root} className={props.className} id={props.id}>
-        {props.children}
-      </div>
-    </SelectionContext.Provider>
+    // <SelectionContext.Provider value={selectionState}>
+    <div ref={root} className={props.className} id={props.id}>
+      {props.children}
+    </div>
+    // </SelectionContext.Provider>
   )
 }

@@ -7,10 +7,7 @@ export interface CalculateAverageColumnWidthInContainerOptions {
   getWidth?: (width: number) => number
 }
 
-export const calculateAverageColumnWidthInContainer = (
-  editor: Editor,
-  options: CalculateAverageColumnWidthInContainerOptions,
-): number[] => {
+export const calculateAverageColumnWidthInContainer = (editor: Editor, options: CalculateAverageColumnWidthInContainerOptions): number[] => {
   const { minWidth = 10, cols, getWidth } = options
   const container = Editable.toDOMNode(editor, editor)
   const rect = container.getBoundingClientRect()
@@ -33,11 +30,7 @@ export const calculateAverageColumnWidthInContainer = (
   return tableColsWdith
 }
 
-export const adaptiveExpandColumnWidthInContainer = (
-  editor: Editor,
-  colsWidth: number[],
-  minWidth = 5,
-): number[] => {
+export const adaptiveExpandColumnWidthInContainer = (editor: Editor, colsWidth: number[], minWidth = 5): number[] => {
   const container = Editable.toDOMNode(editor, editor)
   const containerRect = container.getBoundingClientRect()
   const { width: containerWidth } = containerRect

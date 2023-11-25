@@ -5,7 +5,7 @@ import { UnorderedListEditor } from './unordered-list-editor'
 const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {
   const block = Editor.above(editor, {
     at,
-    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
   })
 
   const path = block ? block[1] : []
@@ -35,7 +35,7 @@ const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {
 export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
   const { onKeydown } = editor
 
-  editor.onKeydown = event => {
+  editor.onKeydown = (event) => {
     const { selection } = editor
     if (
       selection &&
@@ -50,10 +50,7 @@ export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
         event.preventDefault()
         const { range, start } = match
         Transforms.delete(editor, {
-          at: {
-            anchor: start,
-            focus: range.anchor,
-          },
+          at: { anchor: start, focus: range.anchor },
         })
         UnorderedListEditor.toggle(editor)
         return

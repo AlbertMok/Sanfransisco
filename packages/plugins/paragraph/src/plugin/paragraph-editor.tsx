@@ -88,11 +88,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
     if (ParagraphEditor.isParagraph(element)) {
       // paragraph style
       const style = tw`my-0.5 px-0.5`
-      return (
-        <div data-block-type={element.type} data-block-id={element.id} css={style}>
-          <div {...attributes}>{children}</div>
-        </div>
-      )
+      return <div {...attributes}>{children}</div>
     }
     return renderElement({ attributes, children, element })
   }

@@ -33,7 +33,7 @@ const getStore = (editor: Editor) => {
 export const useFocused = (): [boolean, (isFocused: boolean) => void] => {
   const editor = useEditableStatic()
   const store = getStore(editor)
-  const isFocused = useStore(store, state => state.isFocused)
+  const isFocused = useStore(store, (state) => state.isFocused)
 
   return [
     isFocused,

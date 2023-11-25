@@ -26,7 +26,7 @@ export const ColorPickerGroup: FC<ColorPickerGroupProps> = ({ colors, ...props }
         `,
       ]}
     >
-      {colors.map(color => {
+      {colors.map((color) => {
         return <ColorPickerItem color={color} key={color} {...props} />
       })}
     </span>

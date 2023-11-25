@@ -4,10 +4,7 @@ import { TableCellEditor } from '../../cell'
 import { TableEditor } from './table-editor'
 
 const findMatchedRange = (editor: Editor, at: Point) => {
-  const block = Editor.above(editor, {
-    at,
-    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
-  })
+  const block = Editor.above(editor, { at, match: (n) => Element.isElement(n) && Editor.isBlock(editor, n) })
   const path = block ? block[1] : []
 
   const start = Editor.start(editor, path)
@@ -28,10 +25,7 @@ const findMatchedRange = (editor: Editor, at: Point) => {
     return {
       columns,
       range: {
-        anchor: {
-          path: start.path,
-          offset: start.offset + beforeText.length,
-        },
+        anchor: { path: start.path, offset: start.offset + beforeText.length },
         focus: end,
       },
       start,
@@ -42,15 +36,9 @@ const findMatchedRange = (editor: Editor, at: Point) => {
 export const withShortcuts = (editor: Editable) => {
   const { onKeydown } = editor
 
-  editor.onKeydown = event => {
+  editor.onKeydown = (event) => {
     const { selection } = editor
-    if (
-      selection &&
-      Range.isCollapsed(selection) &&
-      !Editable.isComposing(editor) &&
-      Hotkey.match('enter', event) &&
-      !TableEditor.isActive(editor)
-    ) {
+    if (selection && Range.isCollapsed(selection) && !Editable.isComposing(editor) && Hotkey.match('enter', event) && !TableEditor.isActive(editor)) {
       const anchor = Range.start(selection)
       const match = findMatchedRange(editor, anchor)
       if (match) {
@@ -62,10 +50,10 @@ export const withShortcuts = (editor: Editable) => {
             focus: range.anchor,
           },
         })
-        const cols = columns.map(column =>
+        const cols = columns.map((column) =>
           TableCellEditor.create(editor, {
             children: [{ text: column }],
-          }),
+          })
         )
         const table = TableEditor.create(editor, {
           cols: cols.length,

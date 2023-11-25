@@ -58,7 +58,6 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   // If it's a void node, wrap the children in extra void-specific elements.
   if (Editor.isVoid(editor, element)) {
     attributes[DATA_EDITABLE_VOID] = true
-
     const Tag = isInline ? 'span' : 'div'
     const [[text]] = Node.texts(element)
 
@@ -93,20 +92,6 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   const path = Editable.findPath(editor, element)
 
   const newAttributes = editor.renderElementAttributes({ attributes, element })
-  // // 渲染元素
-  // let content = (
-  //   <div
-  //     data-block-id={element.id}
-  //     data-block-type={element.type}
-  //     style={{ marginTop: '1px', marginBottom: '1px', paddingTop: '1px', paddingBottom: '1px', minHeight: '24px' }}
-  //   >
-  //     {editor.renderElement({
-  //       attributes: newAttributes,
-  //       children,
-  //       element,
-  //     })}
-  //   </div>
-  // )
 
   let content = editor.renderElement({ attributes: newAttributes, children, element })
 
@@ -114,11 +99,7 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
 
   if (decorates.length > 0) {
     content = decorates.reduceRight((children, decorate) => {
-      return decorate.renderElement({
-        node: element,
-        path,
-        children,
-      })
+      return decorate.renderElement({ node: element, path, children })
     }, content)
   }
 

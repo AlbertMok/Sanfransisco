@@ -6,6 +6,7 @@ import { TableCellEditor } from './table-cell-editor'
 
 export const withTableCell = <T extends Editable>(editor: T, options: TableCellOptions = {}) => {
   const newEditor = editor as T & TableCellEditor
+
   const { renderElement, isGridCell } = editor
 
   setOptions(editor, options)
@@ -16,6 +17,7 @@ export const withTableCell = <T extends Editable>(editor: T, options: TableCellO
 
   newEditor.renderElement = (props) => {
     const { element, attributes, children } = props
+
     if (TableCellEditor.isTableCell(newEditor, element)) {
       const { style, ...rest } = attributes
       return (

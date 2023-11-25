@@ -68,7 +68,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps & { class
       renderButton,
       side,
     },
-    ref,
+    ref
   ) => {
     const palette = useMemo(() => createPalette(colors), [colors])
     const [open, setOpen] = useState(false)
@@ -88,27 +88,12 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps & { class
 
     const renderColorButton = () => {
       return (
-        <Button
-          tw="px-1.5 inline-flex flex-col"
-          disabled={disabled}
-          className={className}
-          type="text"
-          onClick={() => handleSelect(value)}
-        >
+        <Button tw="px-1.5 inline-flex flex-col" disabled={disabled} className={className} type="text" onClick={() => handleSelect(value)}>
           <span tw="inline-block">{children}</span>
           <span tw="inline-block -mt-[1px]">
             <svg width="14px" height="2px" viewBox="0 0 14 2">
               <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                <rect
-                  stroke={palette.getStroke(value)}
-                  strokeWidth="0.5"
-                  fill={value}
-                  x="0"
-                  y="0"
-                  width="100%"
-                  height="2"
-                  rx="0.125"
-                />
+                <rect stroke={palette.getStroke(value)} strokeWidth="0.5" fill={value} x="0" y="0" width="100%" height="2" rx="0.125" />
               </g>
             </svg>
           </span>
@@ -121,15 +106,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps & { class
         <Button
           disabled={disabled}
           type="text"
-          icon={
-            <Icon
-              name="arrowCaretDown"
-              css={[
-                tw`text-xxs text-gray-400 align-[unset] transform-none transition-all`,
-                open && tw`rotate-180`,
-              ]}
-            />
-          }
+          icon={<Icon name="arrowCaretDown" css={[tw`text-xxs text-gray-400 align-[unset] transform-none transition-all`, open && tw`rotate-180`]} />}
           tw="w-5 rounded -ml-1"
           className={className}
         />
@@ -137,11 +114,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps & { class
     }
 
     return (
-      <Popover
-        open={open}
-        onOpenChange={value => setOpen(disabled ? false : value)}
-        trigger="click"
-      >
+      <Popover open={open} onOpenChange={(value) => setOpen(disabled ? false : value)} trigger="click">
         <PopoverTrigger asChild>
           <div
             data-open={open || undefined}
@@ -155,26 +128,14 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps & { class
             ]}
             ref={ref}
           >
-            {renderButton
-              ? renderButton({ type: 'button', children: renderColorButton() })
-              : renderColorButton()}
-            {renderButton
-              ? renderButton({ type: 'arrow', children: renderArrowButton() })
-              : renderArrowButton()}
+            {renderButton ? renderButton({ type: 'button', children: renderColorButton() }) : renderColorButton()}
+            {renderButton ? renderButton({ type: 'arrow', children: renderArrowButton() }) : renderArrowButton()}
           </div>
         </PopoverTrigger>
         <PopoverContent align="start" side={side} sideOffset={1}>
-          <div
-            css={[
-              tw`bg-white shadow-outer rounded-md text-base pt-1`,
-              size === 'large' && tw`text-lg`,
-            ]}
-          >
+          <div css={[tw`bg-white shadow-outer rounded-md text-base pt-1`, size === 'large' && tw`text-lg`]}>
             {defaultColor && (
-              <div
-                tw="flex items-center gap-2 p-2 mb-2 cursor-pointer hover:bg-black/5"
-                onClick={() => handleSelect(defaultColor.color)}
-              >
+              <div tw="flex items-center gap-2 p-2 mb-2 cursor-pointer hover:bg-black/5" onClick={() => handleSelect(defaultColor.color)}>
                 <ColorPickerItem palette={palette} color={defaultColor.color} activeColors={[]} />
                 <span>{defaultColor.title}</span>
               </div>
@@ -184,26 +145,24 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps & { class
                 <ColorPickerGroup
                   key={index}
                   activeColors={[value]}
-                  colors={group.map(color => (typeof color === 'string' ? color : color.color))}
+                  colors={group.map((color) => (typeof color === 'string' ? color : color.color))}
                   palette={palette}
-                  onSelect={value => handleSelect(value)}
+                  onSelect={(value) => handleSelect(value)}
                 />
               ))}
               {enableRecent && (
                 <div tw="mt-2">
                   <div tw="text-base">{locale.recent.title}</div>
                   <div tw="flex items-center">
-                    {localColors.length === 0 && (
-                      <div tw="text-black/10 text-base">{locale.recent.empty}</div>
-                    )}
-                    {localColors.map(localColor => {
+                    {localColors.length === 0 && <div tw="text-black/10 text-base">{locale.recent.empty}</div>}
+                    {localColors.map((localColor) => {
                       return (
                         <ColorPickerItem
                           key={localColor}
                           palette={palette}
                           color={localColor}
                           activeColors={[value]}
-                          onSelect={value => handleSelect(value)}
+                          onSelect={(value) => handleSelect(value)}
                         />
                       )
                     })}
@@ -302,16 +261,13 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps & { class
                       `,
                     ]}
                   >
-                    <RgbaStringColorPicker
-                      color={value}
-                      onChange={color => handleSelect(color, false)}
-                    />
+                    <RgbaStringColorPicker color={value} onChange={(color) => handleSelect(color, false)} />
                     <HexColorInput
                       tw="outline-none border border-gray-200 rounded bg-gray-100 text-base uppercase px-2 py-0.5 text-center"
                       prefixed={true}
                       alpha={true}
                       color={colord(value).toRgbString()}
-                      onChange={color => handleSelect(colord(color).toRgbString(), false)}
+                      onChange={(color) => handleSelect(colord(color).toRgbString(), false)}
                     />
                   </div>
                 </PopoverContent>
@@ -321,7 +277,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps & { class
         </PopoverContent>
       </Popover>
     )
-  },
+  }
 )
 
 ColorPicker.displayName = 'ColorPicker'

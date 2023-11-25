@@ -5,6 +5,7 @@ import { Editable } from '../plugin/editable'
 import { EditableStore, EditableStoreContext } from '../hooks/use-editable'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
 import { generateId } from '../utils/node-id'
+import { BlockSelectionArea } from '../plugin/src/components/BlockSelectionArea'
 
 const EDITABLE_TO_STORE = new WeakMap<Editable, UseBoundStore<StoreApi<EditableStore>>>()
 
@@ -60,7 +61,7 @@ export const EditableProvider = (props: {
         editor,
       }}
     >
-      {children}
+      <BlockSelectionArea>{children}</BlockSelectionArea>
     </EditableStoreContext.Provider>
   )
 }

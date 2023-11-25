@@ -2,8 +2,8 @@ import React from 'react'
 import { SelectionArea, SelectionAreaProps } from './SelectionArea'
 import { SelectionEvent } from '../core'
 import { blockSelectionStore } from '../store/selectionStore'
-import { useEditableStatic } from '@editablejs/editor'
 import { Transforms } from '@editablejs/models'
+import { useEditableStatic } from '../../../hooks/use-editable'
 
 export interface BlockSelectionAreaProps extends Partial<SelectionAreaProps> {}
 
@@ -32,9 +32,8 @@ export const useBlockSelectionArea = (props: BlockSelectionAreaProps): Selection
     style: { position: 'relative', width: '100%' },
     onStart,
     onMove,
-    selectionAreaClass: 'slate-selection-area',
+    selectionAreaClass: 'selection-area',
     selectables: '.slate-selectable',
-    startAreas: '.slate-start-area',
     ...props,
   }
 }

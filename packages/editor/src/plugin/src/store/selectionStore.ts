@@ -1,8 +1,8 @@
 import { Editor } from '@editablejs/models'
-import { StoreApi } from 'zustand'
-import create, { UseBoundStore, useStore } from 'zustand/react'
+
 import { ChangedElements } from '../core'
-import { DATA_BLOCK_ID } from '@editablejs/editor'
+import { DATA_BLOCK_ID } from '../../../utils/constants'
+import create, { StoreApi, UseBoundStore, useStore } from 'zustand'
 
 interface blockSelectionStore {
   selectedBlockIds: Set<string> // 被选择到的块

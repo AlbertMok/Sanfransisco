@@ -1,16 +1,7 @@
 import * as React from 'react'
 import tw, { css } from 'twin.macro'
 import { Icon } from './icon'
-import {
-  MenuAnchor,
-  MenuContent,
-  MenuItem,
-  Menu,
-  MenuSeparator,
-  MenuSub,
-  MenuSubContent,
-  MenuSubTrigger,
-} from './menu'
+import { MenuAnchor, MenuContent, MenuItem, Menu, MenuSeparator, MenuSub, MenuSubContent, MenuSubTrigger } from './menu'
 import { useIsomorphicLayoutEffect } from './utils'
 export interface ContextMenuItem {
   icon?: JSX.Element
@@ -21,11 +12,7 @@ export interface ContextMenuItem {
   onSelect?: (e: React.MouseEvent<any>) => void
 }
 
-const sizeCls = (size: ContextMenuSize = 'default') => [
-  tw`py-1`,
-  size === 'small' && tw`py-0.5`,
-  size === 'large' && tw`py-2`,
-]
+const sizeCls = (size: ContextMenuSize = 'default') => [tw`py-1`, size === 'small' && tw`py-0.5`, size === 'large' && tw`py-2`]
 
 const disabledCls = (disabled?: boolean) => [disabled && tw`text-gray-400 cursor-default`]
 
@@ -53,14 +40,7 @@ const rightCls = (disabled?: boolean, size?: ContextMenuSize) => [
   ...disabledCls(disabled),
 ]
 
-export const ContextMenuItem: React.FC<ContextMenuItem> = ({
-  icon,
-  rightText,
-  children,
-  disabled,
-  href,
-  onSelect,
-}) => {
+export const ContextMenuItem: React.FC<ContextMenuItem> = ({ icon, rightText, children, disabled, href, onSelect }) => {
   const size = useContextMenuSize()
 
   const render = () => {
@@ -75,7 +55,7 @@ export const ContextMenuItem: React.FC<ContextMenuItem> = ({
   return (
     <MenuItem
       css={itemCls(disabled, size)}
-      onMouseDown={e => {
+      onMouseDown={(e) => {
         e.preventDefault()
         if (onSelect) onSelect(e)
       }}
@@ -117,9 +97,7 @@ export interface ContextMenuSeparatorProps {
   className?: string
 }
 
-export const ContextMenuSeparator: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
-  className,
-}) => {
+export const ContextMenuSeparator: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className }) => {
   return (
     <MenuSeparator
       css={[
@@ -133,21 +111,10 @@ export const ContextMenuSeparator: React.FC<React.HTMLAttributes<HTMLDivElement>
   )
 }
 
-export const ContextMenuLabel: React.FC<Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>> = ({
-  children,
-  className,
-}) => {
+export const ContextMenuLabel: React.FC<Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>> = ({ children, className }) => {
   const size = useContextMenuSize()
   return (
-    <div
-      css={[
-        tw`px-2 text-gray-500`,
-        sizeCls(size),
-        size === 'small' && tw`px-1`,
-        size === 'large' && tw`px-3`,
-      ]}
-      className={className}
-    >
+    <div css={[tw`px-2 text-gray-500`, sizeCls(size), size === 'small' && tw`px-1`, size === 'large' && tw`px-3`]} className={className}>
       {children}
     </div>
   )
@@ -195,9 +162,7 @@ export const ContextMenu: React.FC<ContextMenu> = ({
   minWidth,
 }) => {
   const [open, setOpen] = React.useState(openProps)
-  const pointRef = React.useRef<Point>(
-    container instanceof HTMLElement ? { x: 0, y: 0 } : container,
-  )
+  const pointRef = React.useRef<Point>(container instanceof HTMLElement ? { x: 0, y: 0 } : container)
   const virtualRef = React.useRef({
     getBoundingClientRect: () =>
       DOMRect.fromRect({
@@ -212,7 +177,7 @@ export const ContextMenu: React.FC<ContextMenu> = ({
       if (onOpenChange) onOpenChange(open)
       setOpen(open)
     },
-    [onOpenChange],
+    [onOpenChange]
   )
 
   useIsomorphicLayoutEffect(() => {

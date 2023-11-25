@@ -273,17 +273,13 @@ export const List = {
         }
 
         const newLevel = List.getLevel(editor, { type, path, key, node })
-
         const newProps = props ? props(key, node, path) : {}
-
-        let element: List = { type, key, currentNumber, template, level: newLevel, ...newProps, children: [], id: key }
-
+        let element: List = { type, key, currentNumber, template, level: newLevel, ...newProps, children: [{ text: '' }], id: key }
         Transforms.wrapNodes(editor, element, { at: path, mode: 'lowest' })
-
         prevPath = path
-
         currentNumber++
       }
+
       if (prevPath) {
         List.updateStart(editor, { type, path: prevPath, key })
       }
@@ -327,6 +323,7 @@ export const List = {
       if (!hasList) return
 
       Transforms.unwrapNodes(editor, { at, match: (n) => List.isList(editor, n) && (!match || match(n)), split: true })
+
       if (!selection) return
 
       for (const [key, [list, path]] of topLists) {

@@ -41,6 +41,7 @@ import { TouchPointComponent } from './touch-point'
 import { getNativeEvent, isMouseEvent, isTouchEvent } from '../utils/event'
 import { canForceTakeFocus, isEditableDOMElement } from '../utils/dom'
 import { Locale } from '../plugin/locale'
+import { BlockSelectionArea } from '../plugin/src/components/BlockSelectionArea'
 
 const Children = (props: Omit<Parameters<typeof useChildren>[0], 'node' | 'selection'>) => {
   //props只剩一个renderPlaceholder 参数 可以对外暴露了
@@ -201,14 +202,8 @@ export const ContentEditable = (props: EditableProps) => {
             const path = Drag.toBlockPath(editor)
             if (path && fragment.length > 0) {
               const rangeRef = Editor.rangeRef(editor, {
-                anchor: {
-                  path,
-                  offset: 0,
-                },
-                focus: {
-                  path,
-                  offset: 0,
-                },
+                anchor: { path, offset: 0 },
+                focus: { path, offset: 0 },
               })
               Transforms.removeNodes(editor, { at: from })
               const at = rangeRef.unref()
@@ -579,12 +574,8 @@ export const ContentEditable = (props: EditableProps) => {
   )
 
   return (
-    <div
-      style={{
-        ...style,
-        position: 'relative',
-      }}
-    >
+    <div style={{ ...style, position: 'relative' }}>
+      {/* editor main part */}
       <Component
         role={readOnly ? undefined : 'textbox'}
         {...attributes}
