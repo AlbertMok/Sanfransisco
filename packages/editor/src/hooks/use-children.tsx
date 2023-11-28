@@ -30,7 +30,6 @@ const useChildren = (props: { node: Ancestor; selection: Range | null; renderPla
     const focused = selection && Range.includes(range, selection.anchor) && Range.includes(range, selection.focus)
 
     if (Element.isElement(n)) {
-      // 定义元素
       const element = (
         // 当前是否选中该节点
         <NodeSelectedContext.Provider key={`selected-provider-${key.id}`} value={!!sel}>

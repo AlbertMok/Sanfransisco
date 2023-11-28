@@ -31,11 +31,12 @@ export const GridCell = {
     }
     const cell = Editor.above<GridCell>(editor, {
       at,
-      match: n => editor.isGridCell(n),
+      match: (n) => editor.isGridCell(n),
     })
     return cell
   },
-  create: <C extends GridCell>(cell: Partial<C> = {}): C => {
+
+  create: <Cell extends GridCell>(cell: Partial<Cell> = {}): Cell => {
     const children = cell.children ?? [{ children: [{ text: '' }] }]
     return {
       colspan: 1,
@@ -43,7 +44,7 @@ export const GridCell = {
       type: 'grid-cell',
       ...cell,
       children,
-    } as C
+    } as Cell
   },
 
   equal: (a: CellPoint, b: CellPoint) => {
@@ -56,10 +57,7 @@ export const GridCell = {
     Transforms.select(editor, point)
   },
 
-  edges: (selection: {
-    start: CellPoint
-    end: CellPoint
-  }): { start: CellPoint; end: CellPoint } => {
+  edges: (selection: { start: CellPoint; end: CellPoint }): { start: CellPoint; end: CellPoint } => {
     const { start, end } = selection
     const startRow = Math.min(start[0], end[0])
     const endRow = Math.max(start[0], end[0])

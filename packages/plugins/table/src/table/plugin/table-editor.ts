@@ -71,6 +71,11 @@ export const TableEditor = {
     return Grid.create<Table, TableRow, TableCell>({ type: TABLE_KEY, colsWidth: tableColsWdith }, ...tableRows)
   },
 
+  /**
+   * 插入表格
+   * @param editor
+   * @param options
+   */
   insert: (editor: Editor, options?: CreateTableOptions | Table) => {
     if (TableEditor.isTableEditor(editor)) editor.insertTable(options)
   },

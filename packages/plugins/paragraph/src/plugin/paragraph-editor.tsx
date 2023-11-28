@@ -1,5 +1,5 @@
 import { Editable, generateId } from '@editablejs/editor'
-import { Editor, Element, Path, Range, Transforms } from '@editablejs/models'
+import { Editor, Element, Node, Path, Range, Transforms } from '@editablejs/models'
 import { Paragraph } from '../interfaces/paragraph'
 import cloneDeep from 'lodash.clonedeep'
 import { PARAGRAPH_KEY } from '../constants'
@@ -25,6 +25,8 @@ export const ParagraphEditor = {
 
 export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const newEditor = editor as T & ParagraphEditor
+
+  const { normalizeNode } = newEditor
 
   newEditor.createParagraphElement = () => {
     const { selection } = editor
@@ -86,8 +88,6 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const { renderElement } = newEditor
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (ParagraphEditor.isParagraph(element)) {
-      // paragraph style
-      const style = tw`my-0.5 px-0.5`
       return <div {...attributes}>{children}</div>
     }
     return renderElement({ attributes, children, element })

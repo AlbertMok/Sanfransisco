@@ -10,8 +10,7 @@ import { withShortcuts } from './with-shortcuts'
 
 const defaultHotkey: HrHotkey = 'mod+shift+e'
 
-const defaultShortcuts: string[] = ['*', '---']
-
+const defaultShortcuts: string[] = ['*', '-']
 export const withHr = <T extends Editable>(editor: T, options: HrOptions = {}) => {
   const newEditor = editor as T & HrEditor
   setOptions(newEditor, options)

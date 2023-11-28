@@ -1,10 +1,8 @@
 import React, { HTMLAttributes, useMemo } from 'react'
-import { findNodePath, getPluginOptions, queryNode } from '@udecode/plate-common'
 
-import { useBlockSelectionSelectors } from '../blockSelectionStore'
-import { BlockSelectionPlugin, KEY_BLOCK_SELECTION } from '../createBlockSelectionPlugin'
 import { Editor, Element } from '@editablejs/models'
-import { useEditableStatic } from '@editablejs/editor'
+import { useEditableStatic } from '../../../hooks/use-editable'
+import { Editable } from '../../editable'
 
 export interface BlockSelectableOptions {
   element: Element
@@ -15,18 +13,17 @@ export interface BlockSelectableOptions {
 export const useBlockSelectableState = ({ element, selectedColor, active }: BlockSelectableOptions) => {
   const editor = useEditableStatic()
 
-  const path = useMemo(() => findNodePath(editor, element), [editor, element])
+  const path = useMemo(() => Editable.findPath(editor, element), [editor, element])
 
   if (!path || Editor.isInline(editor, element)) {
     return { active: active ?? false }
   }
 
-  const { query } = getPluginOptions<BlockSelectionPlugin>(editor, KEY_BLOCK_SELECTION)
-
-  if (query && !queryNode([element, path], query)) {
+  if (!queryNode([element, path], query)) {
     return { active: active ?? false }
   }
 
+  // ?? 意思是当左边的 active 不为 null 或者 undefined 时，返回左边的值，否则返回右边的值
   return {
     active: active ?? true,
     element,
@@ -48,17 +45,4 @@ export const useBlockSelectable = ({ element, selectedColor }: ReturnType<typeof
       ...data,
     },
   }
-}
-
-export function BlockSelectable({ options, children, ...props }: { options: BlockSelectableOptions } & HTMLAttributes<HTMLDivElement>) {
-  const state = useBlockSelectableState(options)
-  const { props: rootProps } = useBlockSelectable(state)
-
-  if (!state.active) return <>{children}</>
-
-  return (
-    <div {...rootProps} {...props}>
-      {children}
-    </div>
-  )
 }

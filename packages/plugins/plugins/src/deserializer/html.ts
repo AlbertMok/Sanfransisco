@@ -23,6 +23,9 @@ import { withAlignHTMLDeserializerTransform } from '@editablejs/plugin-alignment
 import { withLeadingHTMLDeserializerTransform } from '@editablejs/plugin-leading/deserializer/html'
 import { withMentionHTMLDeserializerTransform } from '@editablejs/plugin-mention/deserializer/html'
 import { withCodeBlockHTMLDeserializerTransform } from '@editablejs/plugin-codeblock/deserializer/html'
+
+import { withTitleHTMLDeserializerTransform } from '@editablejs/plugin-title/deserializer/html'
+
 import { Editor } from '@editablejs/models'
 
 export const withHTMLDeserializerTransform = (editor: Editor) => {
@@ -47,4 +50,5 @@ export const withHTMLDeserializerTransform = (editor: Editor) => {
   withEditor(editor, withLeadingHTMLDeserializerTransform, {})
   withEditor(editor, withMentionHTMLDeserializerTransform, {})
   withEditor(editor, withCodeBlockHTMLDeserializerTransform, {})
+  withEditor(editor, withTitleHTMLDeserializerTransform, {})
 }

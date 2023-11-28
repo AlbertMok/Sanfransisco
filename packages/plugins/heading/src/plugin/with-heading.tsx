@@ -95,11 +95,9 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
     if (HeadingEditor.isHeading(editor, element)) {
       const tag = HeadingTags[element.type]
       return (
-        <div data-block-id={element.id} data-block-type={element.type}>
-          <StyledHeading {...attributes} as={tag}>
-            {children}
-          </StyledHeading>
-        </div>
+        <StyledHeading {...attributes} as={tag}>
+          {children}
+        </StyledHeading>
       )
     }
     return renderElement({ attributes, children, element })

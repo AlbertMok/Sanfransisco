@@ -38,13 +38,14 @@ export const blockSelectionStore = {
     // get store
     const store = getBlockSelectionStore(editor)
     // get current store of the selection
-    const current = useStore(store, (state) => state.selectedBlockIds)
-
+    // const current = useStore(store, (state) => state.selectedBlockIds)
+    const current = store.getState().selectedBlockIds
     extractIds(added).forEach((id) => current.add(id))
     extractIds(removed).forEach((id) => current.delete(id))
 
     // active selecting
-    useStore(store, (state) => (state.isSelecting = true))
+    store.setState({ selectedBlockIds: current })
+    store.setState({ isSelecting: true })
   },
 
   /**
@@ -53,9 +54,7 @@ export const blockSelectionStore = {
    */
   resetSelectedIds: (editor: Editor) => {
     const store = getBlockSelectionStore(editor)
-    useStore(store, (state) => {
-      state.selectedBlockIds = new Set<string>()
-    })
+    store.setState({ selectedBlockIds: new Set() })
   },
 
   /**
@@ -64,9 +63,6 @@ export const blockSelectionStore = {
    */
   unSelect: (editor: Editor) => {
     const store = getBlockSelectionStore(editor)
-    useStore(store, (state) => {
-      state.isSelecting = false
-      state.selectedBlockIds = new Set<string>()
-    })
+    store.setState({ selectedBlockIds: new Set(), isSelecting: false })
   },
 }

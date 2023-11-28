@@ -6,7 +6,13 @@ export interface TableCell extends GridCell {
 }
 
 export const TableCell = {
+  /**
+   * 创建一个 cell 元素
+   * @param cell
+   * @returns
+   */
   create: (cell: Partial<Omit<TableCell, 'type'>> = {}): TableCell => {
+    // 调用 GridCell 的create函数来创建 table cell
     return GridCell.create<TableCell>({ ...cell, type: TABLE_CELL_KEY })
   },
 

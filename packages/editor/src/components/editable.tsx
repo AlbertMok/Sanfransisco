@@ -62,6 +62,7 @@ export const EditableProvider = (props: {
       }}
     >
       <BlockSelectionArea>{children}</BlockSelectionArea>
+      {/* {children} */}
     </EditableStoreContext.Provider>
   )
 }

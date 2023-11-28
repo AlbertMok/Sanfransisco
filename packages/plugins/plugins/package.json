@@ -77,8 +77,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@editablejs/models": "workspace:*",
     "@editablejs/editor": "workspace:*",
+    "@editablejs/models": "workspace:*",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
     "eslint-config-editable": "workspace:*",
@@ -93,17 +93,16 @@
     "typescript": "^4.x"
   },
   "peerDependencies": {
-    "@editablejs/models": "workspace:*",
-    "@editablejs/editor": "workspace:*"
+    "@editablejs/editor": "workspace:*",
+    "@editablejs/models": "workspace:*"
   },
   "dependencies": {
     "@editablejs/deserializer": "workspace:*",
-    "@editablejs/serializer": "workspace:*",
     "@editablejs/plugin-alignment": "workspace:*",
-    "@editablejs/plugin-font": "workspace:*",
     "@editablejs/plugin-blockquote": "workspace:*",
     "@editablejs/plugin-codeblock": "workspace:*",
     "@editablejs/plugin-context-menu": "workspace:*",
+    "@editablejs/plugin-font": "workspace:*",
     "@editablejs/plugin-heading": "workspace:*",
     "@editablejs/plugin-hr": "workspace:*",
     "@editablejs/plugin-image": "workspace:*",
@@ -113,8 +112,10 @@
     "@editablejs/plugin-list": "workspace:*",
     "@editablejs/plugin-mark": "workspace:*",
     "@editablejs/plugin-mention": "workspace:*",
+    "@editablejs/plugin-paragraph": "workspace:*",
     "@editablejs/plugin-table": "workspace:*",
-    "@editablejs/plugin-paragraph":"workspace:*"
+    "@editablejs/plugin-title": "workspace:*",
+    "@editablejs/serializer": "workspace:*"
   },
   "lint-staged": {
     "src/**/*.{json,ts,tsx,js,jsx}": [

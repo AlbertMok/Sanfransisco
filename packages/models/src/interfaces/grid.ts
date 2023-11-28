@@ -55,17 +55,26 @@ export interface GridMoveRange {
 }
 
 export const Grid = {
+  /**
+   * 查找给定位置上方的网格节点
+   * @param editor
+   * @param at
+   * @returns
+   */
   above: (editor: Editor, at?: Location): NodeEntry<Grid> | undefined => {
     if (!at) {
       const { selection } = editor
       if (!selection) return
       at = selection
     }
+
+    // [grid] 是取出数组的第一个元素
     const [grid] = Editor.nodes<Grid>(editor, {
       at,
       match: (n) => editor.isGrid(n),
       mode: 'lowest',
     })
+
     return grid
   },
 
@@ -171,16 +180,23 @@ export const Grid = {
     return newGrid
   },
 
-  create: <G extends Grid, R extends GridRow, C extends GridCell>(
+  /**
+   * 创建一个新的表格元素
+   * @param grid
+   * @param rows
+   * @returns
+   */
+  create: <G extends Grid, Row extends GridRow, Cell extends GridCell>(
     grid: Partial<Omit<G, 'children'>>,
-    ...rows: (Omit<R, 'children'> & Record<'children', C[]>)[]
+    ...rows: (Omit<Row, 'children'> & Record<'children', Cell[]>)[]
   ): G => {
     const gridColsWdith: number[] = grid.colsWidth ?? rows[0].children.map(() => 35)
+    // 方法返回一个新的网格对象。这个对象包含以下属性
     return {
       type: 'grid',
-      children: rows,
-      ...grid,
-      colsWidth: gridColsWdith,
+      children: rows, // 包含传入的行数据
+      ...grid, // 展开并包含传入的 grid 对象的其他属性
+      colsWidth: gridColsWdith, //设置列宽度
     } as unknown as G
   },
 

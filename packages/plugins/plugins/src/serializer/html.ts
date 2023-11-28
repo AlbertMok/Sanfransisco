@@ -23,6 +23,7 @@ import { withAlignHTMLSerializerTransform } from '@editablejs/plugin-alignment/s
 import { withLeadingHTMLSerializerTransform } from '@editablejs/plugin-leading/serializer/html'
 import { withMentionHTMLSerializerTransform } from '@editablejs/plugin-mention/serializer/html'
 import { withCodeBlockHTMLSerializerTransform } from '@editablejs/plugin-codeblock/serializer/html'
+import { withTitleHTMLSerializerTransform } from '@editablejs/plugin-title/serializer/html'
 import { Editor } from '@editablejs/models'
 
 export const withHTMLSerializerTransform = (editor: Editor) => {
@@ -47,4 +48,5 @@ export const withHTMLSerializerTransform = (editor: Editor) => {
   withEditor(editor, withLeadingHTMLSerializerTransform, {})
   withEditor(editor, withMentionHTMLSerializerTransform, { editor })
   withEditor(editor, withCodeBlockHTMLSerializerTransform, { editor })
+  withEditor(editor, withTitleHTMLSerializerTransform, {})
 }

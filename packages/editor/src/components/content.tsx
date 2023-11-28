@@ -574,7 +574,7 @@ export const ContentEditable = (props: EditableProps) => {
   )
 
   return (
-    <div style={{ ...style, position: 'relative' }}>
+    <div className="textbox" style={{ ...style, position: 'relative' }}>
       {/* editor main part */}
       <Component
         role={readOnly ? undefined : 'textbox'}

@@ -27,6 +27,7 @@ import { MentionOptions, MentionEditor, withMention } from '@editablejs/plugin-m
 import { CodeBlockOptions, CodeBlockEditor, withCodeBlock } from '@editablejs/plugin-codeblock'
 import { ContextMenuEditor, ContextMenuOptions, withContextMenu } from '@editablejs/plugin-context-menu'
 import { ParagraphEditor, withParagraph } from '@editablejs/plugin-paragraph'
+import { TitleOptions, withTitle } from '@editablejs/plugin-title'
 
 export interface PluginOptions {
   contextMenu?: ContextMenuOptions
@@ -48,10 +49,12 @@ export interface PluginOptions {
   leading?: LeadingOptions
   mention?: MentionOptions
   codeBlock?: CodeBlockOptions
+  title?: TitleOptions
 }
 
 export const withPlugins = <T extends Editable>(editor: T, options: PluginOptions = {}) => {
   let newEditor = withContextMenu(editor)
+  editor = withTitle(editor, options.title)
   newEditor = withParagraph(newEditor, {})
   newEditor = withIndent(newEditor, options.indent)
   newEditor = withMark(newEditor, options.mark)
@@ -113,3 +116,4 @@ export * from '@editablejs/plugin-leading'
 export * from '@editablejs/plugin-mention'
 export * from '@editablejs/plugin-codeblock'
 export * from '@editablejs/plugin-paragraph'
+export * from '@editablejs/plugin-title'

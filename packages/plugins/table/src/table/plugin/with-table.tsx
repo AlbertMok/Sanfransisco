@@ -27,7 +27,7 @@ export const withTable = <T extends Editable>(editor: T, options: TableOptions =
   }
 
   newEditor.insertTable = (options) => {
-    // 创建表格元素
+    // 创建表格元素,如果options是一个表格,那就直接赋值给table,如果不是,则调用create
     const table = Table.isTable(options) ? options : TableEditor.create(newEditor, options)
 
     // 通过 Transforms.insertNodes来添加表格元素到文档树中

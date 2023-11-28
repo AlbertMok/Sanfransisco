@@ -113,6 +113,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
     }
     return colgroup.length > 0 ? <colgroup>{colgroup}</colgroup> : null
   }
+
   // table width
   const tableWidth = React.useMemo(() => {
     let width = 0
@@ -306,10 +307,12 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
         {!readOnly && <TableColHeader editor={editor} table={element} />}
         {!readOnly && <TableRowHeader editor={editor} table={element} rowContentHeights={rowContentHeights} />}
         {!readOnly && renderAllHeader()}
+
         <table style={{ width: !tableWidth ? '' : tableWidth }}>
           {renderColgroup()}
           <tbody>{children}</tbody>
         </table>
+
         <TableSelectionElement editor={editor} table={element} />
       </TableStyles>
       <Dragging />

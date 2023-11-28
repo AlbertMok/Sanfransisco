@@ -34,6 +34,8 @@ export const useBlockSelectionArea = (props: BlockSelectionAreaProps): Selection
     onMove,
     selectionAreaClass: 'selection-area',
     selectables: '.slate-selectable',
+    startAreas: '.edit-container',
+    excludeAreas: '.textbox',
     ...props,
   }
 }

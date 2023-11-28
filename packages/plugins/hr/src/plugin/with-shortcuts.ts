@@ -1,4 +1,4 @@
-import { Editable, Hotkey } from '@editablejs/editor'
+import { Editable, Hotkey, generateId } from '@editablejs/editor'
 import { Editor, Element, Range, Point, Transforms } from '@editablejs/models'
 import { HrEditor } from './hr-editor'
 
@@ -40,7 +40,8 @@ export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
 
   editor.onKeydown = (event) => {
     const { selection } = editor
-    if (selection && Range.isCollapsed(selection) && !Editable.isComposing(editor) && Hotkey.match('enter', event)) {
+    // && Hotkey.match('space', event)
+    if (selection && Range.isCollapsed(selection) && !Editable.isComposing(editor)) {
       const anchor = Range.start(selection)
       const match = findMatchedRange(editor, anchor, shortcuts)
       if (match) {
@@ -48,7 +49,10 @@ export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
         const { range, start } = match
         Transforms.delete(editor, { at: { anchor: start, focus: range.anchor } })
         Transforms.collapse(editor)
+        // insert divider
         HrEditor.insert(editor)
+        // insert new paragraph
+        Transforms.insertNodes(editor, { type: 'paragraph', id: generateId(), children: [{ text: '' }] })
         return
       }
     }

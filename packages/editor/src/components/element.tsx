@@ -93,7 +93,20 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
 
   const newAttributes = editor.renderElementAttributes({ attributes, element })
 
-  let content = editor.renderElement({ attributes: newAttributes, children, element })
+  let content = (
+    <div
+      data-block-id={element.id}
+      data-block-type={element.type}
+      className="slate-selectable"
+      style={{ padding: '1px ', margin: '4px 0', minHeight: 'max-content' }}
+    >
+      {editor.renderElement({ attributes: newAttributes, children, element })}
+    </div>
+  )
+
+  if (element.type === 'table' || element.type === 'table-row' || element.type === 'table-cell') {
+    content = editor.renderElement({ attributes: newAttributes, children, element })
+  }
 
   const decorates = useElementDecorations(element, path)
 

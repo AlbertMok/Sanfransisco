@@ -7,7 +7,7 @@ import { Title } from '../interfaces/title'
 import { setOptions, TitleComponentProps, TitleOptions } from '../options'
 import { TitleEditor } from './title-editor'
 
-const StyledTitle = tw.h1`font-bold text-3xl mb-6`
+const StyledTitle = tw.div`font-bold text-3xl`
 
 const DefaultTitle: FC<TitleComponentProps> = ({ attributes, children }) => {
   return (
@@ -44,7 +44,6 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
       const firstChild = node.children[0]
       if (!firstChild || Editor.isVoid(titleEditor, firstChild)) {
         Transforms.insertNodes(titleEditor, { type: TITLE_KEY, children: [{ text: '' }] }, { at: [0] })
-
         isHandled = true
       } else if (!Title.isTitle(firstChild)) {
         let block: Node = firstChild
@@ -65,7 +64,7 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
       const secondChild = node.children[1]
       if (!secondChild) {
         // if there is not a second node in the editor,then insert a new node
-        Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }], id: 'first_paragqwdiqjd' }, { at: [1] })
+        Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }] }, { at: [1] })
         isHandled = true
       } else if (Title.isTitle(secondChild)) {
         Transforms.setNodes(titleEditor, { type: 'paragraph' }, { at: [1] })
@@ -79,9 +78,7 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
           return
         }
       }
-
       const parent = Node.parent(titleEditor, path)
-
       if (!Editor.isEditor(parent)) {
         if (Editor.isList(editor, parent)) {
           const selection = editor.selection
@@ -98,6 +95,7 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
             split: true,
           })
         }
+
         return
       }
       if (!Path.equals(path, [0])) {

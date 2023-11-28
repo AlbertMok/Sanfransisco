@@ -72,12 +72,10 @@ const ListElement = ({ element, attributes, children, onRenderLabel, StyledList,
   }, [editor, element, isAutoUpdateLabelStyle])
 
   return (
-    // <div data-block-id={element.id} data-block-type={element.type}>
     <StyledComponent data-list-level={level} {...attributes}>
       <ListLabelStyles style={textStyle}>{onRenderLabel(element)}</ListLabelStyles>
       <ListContentsStyles>{children}</ListContentsStyles>
     </StyledComponent>
-    // </div>
   )
 }
 

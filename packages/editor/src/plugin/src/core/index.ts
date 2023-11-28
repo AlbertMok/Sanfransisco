@@ -65,6 +65,7 @@ export default class SelectionArea extends EventTarget<SelectionEvents> {
       document: window.document,
       startAreas: ['html'],
       boundaries: ['html'],
+      excludeAreas: ['html'],
       container: 'body',
       ...opt,
 
@@ -167,6 +168,7 @@ export default class SelectionArea extends EventTarget<SelectionEvents> {
 
     // Find start-areas and boundaries
     const startAreas = selectAll(_options.startAreas, _options.document)
+    const excludeAreas = selectAll(_options.excludeAreas, _options.document)
     const resolvedBoundaries = selectAll(_options.boundaries, _options.document)
 
     // Check in which container the user currently acts
@@ -174,7 +176,12 @@ export default class SelectionArea extends EventTarget<SelectionEvents> {
 
     // Check if area starts in one of the start areas / boundaries
     const evtPath = evt.composedPath()
-    if (!this._targetElement || !startAreas.find((el) => evtPath.includes(el)) || !resolvedBoundaries.find((el) => evtPath.includes(el))) {
+    if (
+      !this._targetElement ||
+      !startAreas.find((el) => evtPath.includes(el)) ||
+      !resolvedBoundaries.find((el) => evtPath.includes(el)) ||
+      excludeAreas.find((el) => evtPath.includes(el))
+    ) {
       return
     }
 

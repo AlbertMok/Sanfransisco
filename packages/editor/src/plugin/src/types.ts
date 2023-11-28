@@ -83,6 +83,7 @@ export interface SelectionOptions {
   document: Document
   selectables: Quantify<string>
   startAreas: Quantify<string | HTMLElement>
+  excludeAreas: Quantify<string | HTMLElement>
   boundaries: Quantify<string | HTMLElement>
   behaviour: Behaviour
   features: Features

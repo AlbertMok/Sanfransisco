@@ -276,7 +276,6 @@ export const Editable = {
    */
   findKey(editor: Editor, node: Node): Key {
     let key = NODE_TO_KEY.get(node)
-
     if (!key) {
       key = new Key()
       NODE_TO_KEY.set(node, key)
