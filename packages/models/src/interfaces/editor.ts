@@ -168,6 +168,9 @@ SlateEditor.isEmpty = (editor: Editor, node: Node): boolean => {
   else return false
 }
 
+/**
+ * an static Editor object has some common funcs
+ */
 export const Editor: EditorInterface = {
   ...SlateEditor,
 

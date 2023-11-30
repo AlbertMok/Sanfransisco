@@ -35,6 +35,7 @@ export type SelectionEvents = {
   start: (e: SelectionEvent) => void
   move: (e: SelectionEvent) => void
   stop: (e: SelectionEvent) => void
+  mousemove: (e: SelectionEvent) => void
 }
 
 export type AreaLocation = {

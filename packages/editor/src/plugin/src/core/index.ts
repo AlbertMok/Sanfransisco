@@ -175,6 +175,7 @@ export default class SelectionArea extends EventTarget<SelectionEvents> {
     this._targetElement = resolvedBoundaries.find((el) => intersects(el.getBoundingClientRect(), targetBoundingClientRect))
 
     // Check if area starts in one of the start areas / boundaries
+    // if area is in exclude area,it will be return and not to execute
     const evtPath = evt.composedPath()
     if (
       !this._targetElement ||
@@ -241,14 +242,12 @@ export default class SelectionArea extends EventTarget<SelectionEvents> {
       if (!target.parentElement) {
         return
       }
-
       target = target.parentElement
     }
 
     // Grab current store first in case it gets set back
     const { stored } = this._selection
     this._emitEvent('start', evt)
-
     if (evt.shiftKey && range && this._latestElement) {
       const reference = this._latestElement
 

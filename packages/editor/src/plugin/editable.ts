@@ -41,7 +41,6 @@ import { getLineRectsByNode, getLineRectsByRange } from '../utils/selection'
 import { Focused } from '../hooks/use-focused'
 import { EventHandler, EventType } from './event'
 import {
-  DATA_BLOCK_ID,
   DATA_EDITABLE_COMPOSITION,
   DATA_EDITABLE_INLINE,
   DATA_EDITABLE_LEAF,

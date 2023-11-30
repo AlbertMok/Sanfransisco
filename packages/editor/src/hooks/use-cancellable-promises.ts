@@ -10,8 +10,8 @@ const cancellablePromise = <T>(promise: Promise<T>) => {
 
   const wrappedPromise = new Promise((resolve, reject) => {
     promise.then(
-      value => (isCanceled ? reject({ isCanceled, value }) : resolve(value)),
-      error => reject({ isCanceled, error }),
+      (value) => (isCanceled ? reject({ isCanceled, value }) : resolve(value)),
+      (error) => reject({ isCanceled, error })
     )
   })
 
@@ -23,18 +23,16 @@ const cancellablePromise = <T>(promise: Promise<T>) => {
 
 const noop = () => {}
 
-const delay = (n: number) => new Promise(resolve => setTimeout(resolve, n))
+const delay = (n: number) => new Promise((resolve) => setTimeout(resolve, n))
 
 const useCancellablePromises = <T>() => {
   const pendingPromises = React.useRef<CellablePromise<T>[]>([])
 
-  const appendPendingPromise = (promise: CellablePromise<T>) =>
-    (pendingPromises.current = [...pendingPromises.current, promise])
+  const appendPendingPromise = (promise: CellablePromise<T>) => (pendingPromises.current = [...pendingPromises.current, promise])
 
-  const removePendingPromise = (promise: CellablePromise<T>) =>
-    (pendingPromises.current = pendingPromises.current.filter(p => p !== promise))
+  const removePendingPromise = (promise: CellablePromise<T>) => (pendingPromises.current = pendingPromises.current.filter((p) => p !== promise))
 
-  const clearPendingPromises = () => pendingPromises.current.map(p => p.cancel())
+  const clearPendingPromises = () => pendingPromises.current.map((p) => p.cancel())
 
   const api = {
     pendingPromises,

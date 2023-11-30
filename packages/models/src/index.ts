@@ -7,6 +7,7 @@ import { GridRow } from './interfaces/row'
 // BaseEditor是一个类型，不包括定义
 type BaseEditor = SlateBaseEditor & {
   id: string
+  type?: string
   isSolidVoid: (element: BaseElement) => boolean
 
   isGrid: (value: any) => value is Grid
@@ -16,11 +17,6 @@ type BaseEditor = SlateBaseEditor & {
   isList: (value: any) => value is List
   getFragment: (range?: BaseRange) => Descendant[]
   normalizeSelection: (fn: (selection: BaseSelection, options?: { grid: NodeEntry<Grid>; row: number; col: number }) => void, at?: Location) => void
-}
-
-// 自定义元素类型
-export type TElementConfig = {
-  nodeType?: 'block' | 'inline' | 'void'
 }
 
 // 自定义元素类型 T 是string类型

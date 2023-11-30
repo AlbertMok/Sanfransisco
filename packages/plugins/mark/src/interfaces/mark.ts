@@ -16,14 +16,6 @@ export const Mark = {
   isMark: (value: any): value is Mark => {
     if (!Text.isText(value)) return false
     const mark = value as Mark
-    return (
-      (mark.bold ||
-        mark.italic ||
-        mark.underline ||
-        mark.strikethrough ||
-        mark.code ||
-        mark.sub ||
-        mark.sup) !== undefined
-    )
+    return (mark.bold || mark.italic || mark.underline || mark.strikethrough || mark.code || mark.sub || mark.sup) !== undefined
   },
 }

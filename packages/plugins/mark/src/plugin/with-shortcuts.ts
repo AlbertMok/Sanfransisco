@@ -5,13 +5,13 @@ import { MarkFormat } from '../interfaces/mark'
 const findMatchedRange = (editor: Editor, at: Point, shortcuts: Record<string, MarkFormat>) => {
   const [startText] = Editor.nodes<Text>(editor, {
     at,
-    match: n => Text.isText(n),
+    match: (n) => Text.isText(n),
   })
   if (!startText) return
 
   const block = Editor.above(editor, {
     at,
-    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
   })
   const path = block ? block[1] : []
   const start = Editor.start(editor, path)
@@ -57,14 +57,9 @@ const findMatchedRange = (editor: Editor, at: Point, shortcuts: Record<string, M
 export const withShortcuts = (editor: Editable, shortcuts: Record<string, MarkFormat>) => {
   const { onKeydown } = editor
 
-  editor.onKeydown = event => {
+  editor.onKeydown = (event) => {
     const { selection } = editor
-    if (
-      selection &&
-      Range.isCollapsed(selection) &&
-      !Editable.isComposing(editor) &&
-      Hotkey.match('space', event)
-    ) {
+    if (selection && Range.isCollapsed(selection) && !Editable.isComposing(editor) && Hotkey.match('space', event)) {
       const { anchor } = selection
       const match = findMatchedRange(editor, anchor, shortcuts)
       if (match) {

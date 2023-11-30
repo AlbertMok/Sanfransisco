@@ -92,7 +92,6 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   const path = Editable.findPath(editor, element)
 
   const newAttributes = editor.renderElementAttributes({ attributes, element })
-
   let content = (
     <div
       data-block-id={element.id}

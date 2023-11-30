@@ -17,6 +17,13 @@ export const getMatchedNode = (editor: Editor, type: string) => {
 
 export const isElementActive = (editor: Editor, type: string) => !!getMatchedNode(editor, type)
 
+/**
+ * get slate node by slate path,if path is not given,the path will default to the current selection
+ * @param editor
+ * @param path
+ * @param mode
+ * @returns
+ */
 export const getElementByPath = (editor: Editor, path?: Path, mode: 'all' | 'highest' | 'lowest' = 'lowest'): any => {
   const nodeEntry = Array.from(
     Editor.nodes(editor, {

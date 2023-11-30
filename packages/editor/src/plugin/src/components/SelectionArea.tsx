@@ -3,7 +3,9 @@ import { SelectionEvents, SelectionOptions } from '../types'
 import React, { createRef, useEffect, createContext, useContext, useState } from 'react'
 
 // SelectionAreaProps扩展了 React.HTMLAttributes<HTMLDivElement> 和 Omit<Partial<SelectionOptions>, 'boundaries'>
-export interface SelectionAreaProps extends Omit<Partial<SelectionOptions>, 'boundaries'>, React.HTMLAttributes<HTMLDivElement> {
+export interface SelectionAreaProps
+  extends Omit<Partial<SelectionOptions>, 'boundaries'>,
+    Pick<React.HTMLAttributes<HTMLDivElement>, 'children' | 'style'> {
   id?: string
   className?: string
   onBeforeStart?: SelectionEvents['beforestart']
