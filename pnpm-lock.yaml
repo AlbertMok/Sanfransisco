@@ -80,40 +80,40 @@ importers:
       '@docsearch/react':
         specifier: 3.3.0
         version: 3.3.0(@algolia/client-search@4.20.0)(@types/react@18.0.25)(react-dom@18.2.0)(react@18.2.0)
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../packages/deserializer
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../packages/editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../packages/models
-      '@editablejs/plugin-codeblock':
+      '@everynote/plugin-codeblock':
         specifier: workspace:*
         version: link:../../packages/plugins/codeblock
-      '@editablejs/plugin-history':
+      '@everynote/plugin-history':
         specifier: workspace:*
         version: link:../../packages/plugins/history
-      '@editablejs/plugin-title':
+      '@everynote/plugin-title':
         specifier: workspace:*
         version: link:../../packages/plugins/title
-      '@editablejs/plugin-toolbar':
+      '@everynote/plugin-toolbar':
         specifier: workspace:*
         version: link:../../packages/plugins/toolbar
-      '@editablejs/plugin-yjs':
+      '@everynote/plugin-yjs':
         specifier: workspace:*
         version: link:../../packages/plugins/yjs
-      '@editablejs/plugins':
+      '@everynote/plugins':
         specifier: workspace:*
         version: link:../../packages/plugins/plugins
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../packages/serializer
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@editablejs/yjs-websocket':
+      '@everynote/yjs-websocket':
         specifier: workspace:*
         version: link:../../packages/yjs-websocket
       '@faker-js/faker':
@@ -263,7 +263,7 @@ importers:
         version: 4.0.0
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../packages/config/tsconfig
@@ -279,7 +279,7 @@ importers:
 
   apps/server:
     dependencies:
-      '@editablejs/yjs-websocket':
+      '@everynote/yjs-websocket':
         specifier: workspace:*
         version: link:../../packages/yjs-websocket
     devDependencies:
@@ -343,7 +343,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       typescript:
         specifier: ^4.x
         version: 4.9.5
@@ -382,7 +382,7 @@ importers:
         version: 1.10.14(eslint@8.49.0)
       eslint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(eslint-config-prettier@9.0.0)(eslint@8.49.0)(prettier@3.0.3)
+        version: 5.0.0(eslint-config-prettier@9.0.0)(eslint@8.49.0)(prettier@3.1.0)
       eslint-plugin-react:
         specifier: 7.31.0
         version: 7.31.0(eslint@8.49.0)
@@ -409,7 +409,7 @@ importers:
     dependencies:
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
 
   packages/config/tsconfig: {}
 
@@ -434,7 +434,7 @@ importers:
         specifier: 1.0.2
         version: 1.0.2
     devDependencies:
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../models
       '@types/escape-html':
@@ -469,7 +469,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -479,13 +479,13 @@ importers:
 
   packages/editor:
     dependencies:
-      '@editablejs/breaker':
+      '@everynote/breaker':
         specifier: workspace:*
         version: link:../breaker
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../serializer
       direction:
@@ -507,7 +507,7 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(react@18.2.0)
     devDependencies:
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../models
       '@types/is-hotkey':
@@ -548,7 +548,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -582,7 +582,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -592,17 +592,17 @@ importers:
 
   packages/plugins/alignment:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       eslint-config-editable:
@@ -622,13 +622,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -641,20 +641,20 @@ importers:
 
   packages/plugins/blockquote:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
       styled-components:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/mdast':
@@ -692,13 +692,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -723,19 +723,19 @@ importers:
       '@codemirror/view':
         specifier: ^6.7.2
         version: 6.7.2
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/protocols':
+      '@everynote/protocols':
         specifier: workspace:*
         version: link:../../protocols
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../ui
-      '@editablejs/yjs-protocols':
+      '@everynote/yjs-protocols':
         specifier: workspace:*
         version: link:../../yjs-protocols
       '@lezer/highlight':
@@ -751,10 +751,10 @@ importers:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/escape-html':
@@ -792,13 +792,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -814,13 +814,13 @@ importers:
 
   packages/plugins/context-menu:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../ui
       styled-components:
@@ -830,10 +830,10 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/escape-html':
@@ -871,13 +871,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -890,20 +890,20 @@ importers:
 
   packages/plugins/font:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
       colord:
         specifier: 2.9.0
         version: 2.9.0
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       eslint-config-editable:
@@ -923,7 +923,7 @@ importers:
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -933,20 +933,20 @@ importers:
 
   packages/plugins/heading:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
       styled-components:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/mdast':
@@ -984,13 +984,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1003,17 +1003,17 @@ importers:
 
   packages/plugins/history:
     dependencies:
-      '@editablejs/protocols':
+      '@everynote/protocols':
         specifier: workspace:*
         version: link:../../protocols
       is-plain-object:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/react':
@@ -1045,7 +1045,7 @@ importers:
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1055,23 +1055,23 @@ importers:
 
   packages/plugins/hr:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../ui
       styled-components:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/react':
@@ -1106,13 +1106,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1125,16 +1125,16 @@ importers:
 
   packages/plugins/image:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/protocols':
+      '@everynote/protocols':
         specifier: workspace:*
         version: link:../../protocols
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../ui
       react-image-previewer:
@@ -1147,10 +1147,10 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/react':
@@ -1185,13 +1185,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1204,20 +1204,20 @@ importers:
 
   packages/plugins/indent:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
       styled-components:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/react':
@@ -1252,13 +1252,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1271,17 +1271,17 @@ importers:
 
   packages/plugins/leading:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       eslint-config-editable:
@@ -1301,13 +1301,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1320,13 +1320,13 @@ importers:
 
   packages/plugins/link:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../ui
       mdast-util-gfm-autolink-literal:
@@ -1342,10 +1342,10 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/mdast':
@@ -1383,13 +1383,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1402,10 +1402,10 @@ importers:
 
   packages/plugins/list:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
       mdast-util-gfm-task-list-item:
@@ -1418,10 +1418,10 @@ importers:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/mdast':
@@ -1459,13 +1459,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1478,10 +1478,10 @@ importers:
 
   packages/plugins/mark:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
       mdast-util-gfm-strikethrough:
@@ -1494,10 +1494,10 @@ importers:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/mdast':
@@ -1535,13 +1535,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1554,13 +1554,13 @@ importers:
 
   packages/plugins/mention:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../ui
       lodash.debounce:
@@ -1573,10 +1573,10 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/lodash.debounce':
@@ -1611,13 +1611,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1630,16 +1630,16 @@ importers:
 
   packages/plugins/paragraph:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
       '@types/lodash.clonedeep':
@@ -1651,9 +1651,15 @@ importers:
       '@types/react-dom':
         specifier: ^18.x
         version: 18.0.9
+      autoprefixer:
+        specifier: 10.4.16
+        version: 10.4.16(postcss@8.4.31)
       lodash.clonedeep:
         specifier: 4.5.0
         version: 4.5.0
+      postcss:
+        specifier: 8.4.31
+        version: 8.4.31
       prettier-config:
         specifier: workspace:*
         version: link:../../config/prettier-config
@@ -1663,86 +1669,95 @@ importers:
       react-dom:
         specifier: ^18.x
         version: 18.2.0(react@18.2.0)
+      styled-components:
+        specifier: 5.3.6
+        version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      tailwind-config:
+        specifier: workspace:*
+        version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
+      twin.macro:
+        specifier: 3.1.0
+        version: 3.1.0(tailwindcss@3.2.4)
       typescript:
         specifier: ^4.x
         version: 4.9.5
-      workspace:
-        specifier: 0.0.1-preview.1
-        version: 0.0.1-preview.1
 
   packages/plugins/plugins:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/plugin-alignment':
+      '@everynote/plugin-alignment':
         specifier: workspace:*
         version: link:../alignment
-      '@editablejs/plugin-blockquote':
+      '@everynote/plugin-blockquote':
         specifier: workspace:*
         version: link:../blockquote
-      '@editablejs/plugin-codeblock':
+      '@everynote/plugin-codeblock':
         specifier: workspace:*
         version: link:../codeblock
-      '@editablejs/plugin-context-menu':
+      '@everynote/plugin-context-menu':
         specifier: workspace:*
         version: link:../context-menu
-      '@editablejs/plugin-font':
+      '@everynote/plugin-font':
         specifier: workspace:*
         version: link:../font
-      '@editablejs/plugin-heading':
+      '@everynote/plugin-heading':
         specifier: workspace:*
         version: link:../heading
-      '@editablejs/plugin-hr':
+      '@everynote/plugin-hr':
         specifier: workspace:*
         version: link:../hr
-      '@editablejs/plugin-image':
+      '@everynote/plugin-image':
         specifier: workspace:*
         version: link:../image
-      '@editablejs/plugin-indent':
+      '@everynote/plugin-indent':
         specifier: workspace:*
         version: link:../indent
-      '@editablejs/plugin-leading':
+      '@everynote/plugin-leading':
         specifier: workspace:*
         version: link:../leading
-      '@editablejs/plugin-link':
+      '@everynote/plugin-link':
         specifier: workspace:*
         version: link:../link
-      '@editablejs/plugin-list':
+      '@everynote/plugin-list':
         specifier: workspace:*
         version: link:../list
-      '@editablejs/plugin-mark':
+      '@everynote/plugin-mark':
         specifier: workspace:*
         version: link:../mark
-      '@editablejs/plugin-mention':
+      '@everynote/plugin-mention':
         specifier: workspace:*
         version: link:../mention
-      '@editablejs/plugin-paragraph':
+      '@everynote/plugin-paragraph':
         specifier: workspace:*
         version: link:../paragraph
-      '@editablejs/plugin-table':
+      '@everynote/plugin-table':
         specifier: workspace:*
         version: link:../table
-      '@editablejs/serializer':
+      '@everynote/plugin-title':
+        specifier: workspace:*
+        version: link:../title
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/react':
@@ -1774,7 +1789,7 @@ importers:
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1784,13 +1799,13 @@ importers:
 
   packages/plugins/table:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../ui
       mdast-util-gfm-table:
@@ -1806,10 +1821,10 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/mdast':
@@ -1847,13 +1862,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1866,20 +1881,20 @@ importers:
 
   packages/plugins/title:
     dependencies:
-      '@editablejs/deserializer':
+      '@everynote/deserializer':
         specifier: workspace:*
         version: link:../../deserializer
-      '@editablejs/serializer':
+      '@everynote/serializer':
         specifier: workspace:*
         version: link:../../serializer
       styled-components:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/mdast':
@@ -1917,13 +1932,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -1936,7 +1951,7 @@ importers:
 
   packages/plugins/toolbar:
     dependencies:
-      '@editablejs/ui':
+      '@everynote/ui':
         specifier: workspace:*
         version: link:../../ui
       lodash.debounce:
@@ -1949,10 +1964,10 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/lodash.debounce':
@@ -1990,13 +2005,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -2009,13 +2024,13 @@ importers:
 
   packages/plugins/yjs:
     dependencies:
-      '@editablejs/protocols':
+      '@everynote/protocols':
         specifier: workspace:*
         version: link:../../protocols
-      '@editablejs/yjs-protocols':
+      '@everynote/yjs-protocols':
         specifier: workspace:*
         version: link:../../yjs-protocols
-      '@editablejs/yjs-transform':
+      '@everynote/yjs-transform':
         specifier: workspace:*
         version: link:../../yjs-transform
       styled-components:
@@ -2025,10 +2040,10 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(react@18.2.0)
     devDependencies:
-      '@editablejs/editor':
+      '@everynote/editor':
         specifier: workspace:*
         version: link:../../editor
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../../models
       '@types/is-hotkey':
@@ -2069,13 +2084,13 @@ importers:
         version: link:../../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../../config/tsup-config
@@ -2095,7 +2110,7 @@ importers:
         specifier: ^0.2.52
         version: 0.2.52
     devDependencies:
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../models
       '@types/jest':
@@ -2118,7 +2133,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -2138,7 +2153,7 @@ importers:
         specifier: 1.5.0
         version: 1.5.0
     devDependencies:
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../models
       '@types/escape-html':
@@ -2173,7 +2188,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -2237,13 +2252,13 @@ importers:
         version: link:../config/tailwind-config
       tailwindcss:
         specifier: ^3.2.4
-        version: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
+        version: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -2280,7 +2295,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -2293,7 +2308,7 @@ importers:
 
   packages/yjs-transform:
     devDependencies:
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../models
       '@types/jest':
@@ -2316,7 +2331,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -2329,10 +2344,10 @@ importers:
 
   packages/yjs-websocket:
     dependencies:
-      '@editablejs/yjs-protocols':
+      '@everynote/yjs-protocols':
         specifier: workspace:*
         version: link:../yjs-protocols
-      '@editablejs/yjs-transform':
+      '@everynote/yjs-transform':
         specifier: workspace:*
         version: link:../yjs-transform
       lib0:
@@ -2352,7 +2367,7 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2(yjs@13.5.46)
     devDependencies:
-      '@editablejs/models':
+      '@everynote/models':
         specifier: workspace:*
         version: link:../models
       '@types/jest':
@@ -2384,7 +2399,7 @@ importers:
         version: link:../config/tsconfig
       tsup:
         specifier: ^6.5.0
-        version: 6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5)
+        version: 6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5)
       tsup-config:
         specifier: workspace:*
         version: link:../config/tsup-config
@@ -2666,7 +2681,7 @@ packages:
     resolution: {integrity: sha512-0NFvs3VkuSYbFi1x2Vd6tKrywq+z/cLeYC/RJNFrIX/30Bf5aiGYbtvGXolEktzJH8o5E5KJ3tT+nkxuuZFVlA==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.19.0
+      '@babel/types': 7.20.5
 
   /@babel/helper-module-transforms@7.19.0:
     resolution: {integrity: sha512-3HBZ377Fe14RbLIA+ac3sY4PTgpxHVkFrESaWhoI5PuyXPBBX8+C34qblV9G89ZtycGJCmCI/Ut+VUDK4bltNQ==}
@@ -5269,6 +5284,22 @@ packages:
   /asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
+  /autoprefixer@10.4.16(postcss@8.4.31):
+    resolution: {integrity: sha512-7vd3UC6xKp0HLfua5IjZlcXvGAGy7cBAXTg2lyQ/8WpNhd6SiZ8Be+xm3FyBSYJx5GKcpRCzBh7RH4/0dnY+uQ==}
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      browserslist: 4.22.1
+      caniuse-lite: 1.0.30001562
+      fraction.js: 4.3.7
+      normalize-range: 0.1.2
+      picocolors: 1.0.0
+      postcss: 8.4.31
+      postcss-value-parser: 4.2.0
+    dev: false
+
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
@@ -5494,6 +5525,17 @@ packages:
       node-releases: 2.0.6
       update-browserslist-db: 1.0.7(browserslist@4.21.3)
 
+  /browserslist@4.22.1:
+    resolution: {integrity: sha512-FEVc202+2iuClEhZhrWy6ZiAcRLvNMyYcxZ8raemul1DYVOVdFsbqckWLdsixQZCpJlwe77Z3UTalE7jsjnKfQ==}
+    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
+    hasBin: true
+    dependencies:
+      caniuse-lite: 1.0.30001562
+      electron-to-chromium: 1.4.585
+      node-releases: 2.0.13
+      update-browserslist-db: 1.0.13(browserslist@4.22.1)
+    dev: false
+
   /bs-logger@0.2.6:
     resolution: {integrity: sha512-pd8DCoxmbgc7hyPKOvxtqNcjYoOsABPQdcCUjGp3d42VR2CX1ORhk2A87oqqu5R1kk+76nsxZupkmyd+MVtCog==}
     engines: {node: '>= 6'}
@@ -5584,6 +5626,10 @@ packages:
 
   /caniuse-lite@1.0.30001406:
     resolution: {integrity: sha512-bWTlaXUy/rq0BBtYShc/jArYfBPjEV95euvZ8JVtO43oQExEN/WquoqpufFjNu4kSpi5cy5kMbNvzztWDfv1Jg==}
+
+  /caniuse-lite@1.0.30001562:
+    resolution: {integrity: sha512-kfte3Hym//51EdX4239i+Rmp20EsLIYGdPkERegTgU19hQWCRhsRFGKHTliUlsry53tv17K7n077Kqa0WJU4ng==}
+    dev: false
 
   /ccount@1.1.0:
     resolution: {integrity: sha512-vlNK021QdI7PNeiUh/lKkC/mNHHfV0m/Ad5JoI0TYtlBnJAslM/JIkm/tGC88bkLIwO6OQ5uV6ztS6kVAtCDlg==}
@@ -6294,6 +6340,10 @@ packages:
   /electron-to-chromium@1.4.244:
     resolution: {integrity: sha512-E21saXLt2eTDaTxgUtiJtBUqanF9A32wZasAwDZ8gvrqXoxrBrbwtDCx7c/PQTLp81wj4X0OLDeoGQg7eMo3+w==}
 
+  /electron-to-chromium@1.4.585:
+    resolution: {integrity: sha512-B4yBlX0azdA3rVMxpYwLQfDpdwOgcnLCkpvSOd68iFmeedo+WYjaBJS3/W58LVD8CB2nf+o7C4K9xz1l09RkWg==}
+    dev: false
+
   /emittery@0.8.1:
     resolution: {integrity: sha512-uDfvUjVrfGJJhymx/kz6prltenw1u7WrCg1oa94zYY8xxVpLLUu045LAT0dhDZdXG58/EpPL/5kA180fQ/qudg==}
     engines: {node: '>=10'}
@@ -6858,7 +6908,7 @@ packages:
       semver: 6.3.1
     dev: true
 
-  /eslint-plugin-prettier@5.0.0(eslint-config-prettier@9.0.0)(eslint@8.49.0)(prettier@3.0.3):
+  /eslint-plugin-prettier@5.0.0(eslint-config-prettier@9.0.0)(eslint@8.49.0)(prettier@3.1.0):
     resolution: {integrity: sha512-AgaZCVuYDXHUGxj/ZGu1u8H8CYgDY3iG6w5kUFw4AzMVXzB7VvbKgYR4nATIN+OvUrghMbiDLeimVjVY5ilq3w==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -6874,7 +6924,7 @@ packages:
     dependencies:
       eslint: 8.49.0
       eslint-config-prettier: 9.0.0(eslint@8.49.0)
-      prettier: 3.0.3
+      prettier: 3.1.0
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.5
     dev: true
@@ -7339,6 +7389,10 @@ packages:
   /forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /fraction.js@4.3.7:
+    resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: false
 
   /fresh@0.5.2:
@@ -9145,7 +9199,6 @@ packages:
 
   /lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
-    dev: true
 
   /lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
@@ -10193,6 +10246,10 @@ packages:
   /node-int64@0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
 
+  /node-releases@2.0.13:
+    resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
+    dev: false
+
   /node-releases@2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
 
@@ -10242,6 +10299,11 @@ packages:
   /normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
+
+  /normalize-range@0.1.2:
+    resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
@@ -10599,27 +10661,27 @@ packages:
     hasBin: true
     dev: false
 
-  /postcss-import@14.1.0(postcss@8.4.30):
+  /postcss-import@14.1.0(postcss@8.4.31):
     resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: 8.4.30
+      postcss: 8.4.31
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.6
 
-  /postcss-js@4.0.0(postcss@8.4.30):
+  /postcss-js@4.0.0(postcss@8.4.31):
     resolution: {integrity: sha512-77QESFBwgX4irogGVPgQ5s07vLvFqWr228qZY+w6lW599cRlK/HmnlivnnVUxkjHnCu4J16PDMHcH+e+2HbvTQ==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
       postcss: ^8.3.3
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.30
+      postcss: 8.4.31
 
-  /postcss-load-config@3.1.4(postcss@8.4.30)(ts-node@10.9.1):
+  /postcss-load-config@3.1.4(postcss@8.4.31)(ts-node@10.9.1):
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
     engines: {node: '>= 10'}
     peerDependencies:
@@ -10632,17 +10694,17 @@ packages:
         optional: true
     dependencies:
       lilconfig: 2.0.6
-      postcss: 8.4.30
+      postcss: 8.4.31
       ts-node: 10.9.1(@types/node@20.4.7)(typescript@4.9.5)
       yaml: 1.10.2
 
-  /postcss-nested@6.0.0(postcss@8.4.30):
+  /postcss-nested@6.0.0(postcss@8.4.31):
     resolution: {integrity: sha512-0DkamqrPcmkBDsLn+vQDIrtkSbNkv5AD/M322ySo9kqFkCIYklym2xEmWkwo+Y3/qZo34tzEPNUw4y7yMCdv5w==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: 8.4.30
+      postcss: 8.4.31
       postcss-selector-parser: 6.0.10
 
   /postcss-selector-parser@6.0.10:
@@ -10664,8 +10726,8 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
-  /postcss@8.4.30:
-    resolution: {integrity: sha512-7ZEao1g4kd68l97aWG/etQKPKq07us0ieSZ2TnFDk11i0ZfDW2AwKHYU8qv4MZKqN2fdBfg+7q0ES06UA73C1g==}
+  /postcss@8.4.31:
+    resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.6
@@ -10761,6 +10823,12 @@ packages:
 
   /prettier@3.0.3:
     resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
+  /prettier@3.1.0:
+    resolution: {integrity: sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -11987,7 +12055,7 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /tailwindcss@3.2.4(postcss@8.4.30)(ts-node@10.9.1):
+  /tailwindcss@3.2.4(postcss@8.4.31)(ts-node@10.9.1):
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
@@ -12008,11 +12076,11 @@ packages:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.0
-      postcss: 8.4.30
-      postcss-import: 14.1.0(postcss@8.4.30)
-      postcss-js: 4.0.0(postcss@8.4.30)
-      postcss-load-config: 3.1.4(postcss@8.4.30)(ts-node@10.9.1)
-      postcss-nested: 6.0.0(postcss@8.4.30)
+      postcss: 8.4.31
+      postcss-import: 14.1.0(postcss@8.4.31)
+      postcss-js: 4.0.0(postcss@8.4.31)
+      postcss-load-config: 3.1.4(postcss@8.4.31)(ts-node@10.9.1)
+      postcss-nested: 6.0.0(postcss@8.4.31)
       postcss-selector-parser: 6.0.10
       postcss-value-parser: 4.2.0
       quick-lru: 5.1.1
@@ -12305,7 +12373,7 @@ packages:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
 
-  /tsup@6.5.0(postcss@8.4.30)(ts-node@10.9.1)(typescript@4.9.5):
+  /tsup@6.5.0(postcss@8.4.31)(ts-node@10.9.1)(typescript@4.9.5):
     resolution: {integrity: sha512-36u82r7rYqRHFkD15R20Cd4ercPkbYmuvRkz3Q1LCm5BsiFNUgpo36zbjVhCOgvjyxNBWNKHsaD5Rl8SykfzNA==}
     engines: {node: '>=14'}
     hasBin: true
@@ -12329,8 +12397,8 @@ packages:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss: 8.4.30
-      postcss-load-config: 3.1.4(postcss@8.4.30)(ts-node@10.9.1)
+      postcss: 8.4.31
+      postcss-load-config: 3.1.4(postcss@8.4.31)(ts-node@10.9.1)
       resolve-from: 5.0.0
       rollup: 3.9.1
       source-map: 0.8.0-beta.0
@@ -12437,8 +12505,7 @@ packages:
       lodash.get: 4.4.2
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.2.4(postcss@8.4.30)(ts-node@10.9.1)
-    dev: true
+      tailwindcss: 3.2.4(postcss@8.4.31)(ts-node@10.9.1)
 
   /type-check@0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==}
@@ -12739,6 +12806,17 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /update-browserslist-db@1.0.13(browserslist@4.22.1):
+    resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
+    hasBin: true
+    peerDependencies:
+      browserslist: '>= 4.21.0'
+    dependencies:
+      browserslist: 4.22.1
+      escalade: 3.1.1
+      picocolors: 1.0.0
+    dev: false
+
   /update-browserslist-db@1.0.7(browserslist@4.21.3):
     resolution: {integrity: sha512-iN/XYesmZ2RmmWAiI4Z5rq0YqSiv0brj9Ce9CfhNE4xIW2h+MFxcgkxIzZ+ShkFPUkjU3gQ+3oypadD3RAMtrg==}
     hasBin: true
@@ -13016,10 +13094,6 @@ packages:
   /word-wrap@1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
     engines: {node: '>=0.10.0'}
-
-  /workspace@0.0.1-preview.1:
-    resolution: {integrity: sha512-oPpEvU7NIQ0MW7ReL+EigMUI2JPNp05kmqzWS6zXVUaSq5KxuQzfgxGd8wuurBulBkTaOnEcGge+2rriyDVHkw==}
-    dev: false
 
   /wrap-ansi@6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}

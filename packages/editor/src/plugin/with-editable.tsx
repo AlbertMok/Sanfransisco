@@ -1,5 +1,4 @@
-import ReactDOM from 'react-dom'
-import { Editor, Node, Path, Operation, Transforms, Range, Point, List, Key } from '@editablejs/models'
+import { Editor, Node, Path, Operation, Transforms, Range, Point, List, Key } from '@everynote/models'
 import { Editable, RenderElementProps, RenderLeafProps } from './editable'
 import { EDITOR_TO_KEY_TO_ELEMENT, NODE_TO_KEY, IS_SHIFT_PRESSED, EDITOR_TO_INPUT, EDITOR_TO_SHADOW } from '../utils/weak-maps'
 import { findCurrentLineRange } from '../utils/lines'
@@ -62,7 +61,6 @@ export const withEditable = <T extends Editor>(editor: T) => {
 
   e.deleteBackward = (unit) => {
     const { selection } = editor
-
     if (selection && Range.isCollapsed(selection)) {
       const [cell] = Editor.nodes(editor, { match: (n) => e.isGridCell(n) })
 
@@ -124,6 +122,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
       case 'insert_node':
       case 'remove_node': {
         matches.push(...getMatches(e, Path.parent(op.path)))
+
         break
       }
 
@@ -370,15 +369,18 @@ export const withEditable = <T extends Editor>(editor: T) => {
   // 插入新的block
   e.insertBreak = () => {
     const { selection } = editor
+
     if (!Editable.isEditor(editor) || !selection || Range.isExpanded(selection)) {
       insertBreak()
       return
     }
+
     const entrie = List.above(editor)
     if (!entrie) {
       insertBreak()
       return
     }
+
     List.splitList(editor)
   }
 
@@ -393,6 +395,7 @@ export const withEditable = <T extends Editor>(editor: T) => {
 
 const getMatches = (e: Editable, path: Path) => {
   const matches: [Path, Key][] = []
+
   for (const [n, p] of Editor.levels(e, { at: path })) {
     const key = Editable.findKey(e, n)
     matches.push([p, key])

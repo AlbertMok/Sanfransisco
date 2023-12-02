@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { HrLocale } from './locale/types'
 
 export type HrHotkey = string | ((e: KeyboardEvent) => boolean)

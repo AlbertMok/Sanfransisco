@@ -1,4 +1,4 @@
-import { NodeOperation } from '@editablejs/models'
+import { NodeOperation } from '@everynote/models'
 import { OpMapper } from '../types'
 import { insertNode } from './insert-node'
 import { mergeNode } from './merge-node'

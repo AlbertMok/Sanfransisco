@@ -1,4 +1,4 @@
-# `@editablejs/serializer`
+# `@everynote/serializer`
 
 > TODO: description
 
@@ -11,8 +11,8 @@
 
 ## Markdown
 
-https://www.markdownguide.org/cheat-sheet/
+<https://www.markdownguide.org/cheat-sheet/>
 
-https://github.com/syntax-tree/mdast-util-from-markdown
+<https://github.com/syntax-tree/mdast-util-from-markdown>
 
-https://github.com/syntax-tree/mdast
+<https://github.com/syntax-tree/mdast>

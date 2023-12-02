@@ -1,12 +1,8 @@
-import { MergeNodeOperation, Node, Path, Text } from '@editablejs/models'
-import { getProperties, yTextToInsertDelta, cloneInsertDeltaDeep } from '@editablejs/yjs-transform'
+import { MergeNodeOperation, Node, Path, Text } from '@everynote/models'
+import { getProperties, yTextToInsertDelta, cloneInsertDeltaDeep } from '@everynote/yjs-transform'
 import * as Y from 'yjs'
 import { Delta } from '../../types'
-import {
-  getYTarget,
-  getStoredPositionsInDeltaAbsolute,
-  restoreStoredPositionsWithDeltaAbsolute,
-} from '@editablejs/yjs-transform'
+import { getYTarget, getStoredPositionsInDeltaAbsolute, restoreStoredPositionsWithDeltaAbsolute } from '@everynote/yjs-transform'
 
 export function mergeNode(sharedRoot: Y.XmlText, editorRoot: Node, op: MergeNodeOperation): void {
   const target = getYTarget(sharedRoot, editorRoot, op.path)
@@ -24,23 +20,14 @@ export function mergeNode(sharedRoot: Y.XmlText, editorRoot: Node, op: MergeNode
       throw new Error('Path points to a y text but not a editor node')
     }
 
-    return parent.format(
-      textRange.start,
-      textRange.start - textRange.end,
-      getProperties(previousSibling),
-    )
+    return parent.format(textRange.start, textRange.start - textRange.end, getProperties(previousSibling))
   }
 
   const deltaApplyYOffset = prev.yTarget.length
   const targetDelta = yTextToInsertDelta(target.yTarget)
   const clonedDelta = cloneInsertDeltaDeep(targetDelta)
 
-  const storedPositions = getStoredPositionsInDeltaAbsolute(
-    sharedRoot,
-    target.yTarget,
-    targetDelta,
-    deltaApplyYOffset,
-  )
+  const storedPositions = getStoredPositionsInDeltaAbsolute(sharedRoot, target.yTarget, targetDelta, deltaApplyYOffset)
 
   const applyDelta: Delta = [{ retain: deltaApplyYOffset }, ...clonedDelta]
 
@@ -50,11 +37,5 @@ export function mergeNode(sharedRoot: Y.XmlText, editorRoot: Node, op: MergeNode
 
   target.yParent.delete(target.textRange.start, target.textRange.end - target.textRange.start)
 
-  restoreStoredPositionsWithDeltaAbsolute(
-    sharedRoot,
-    prev.yTarget,
-    storedPositions,
-    clonedDelta,
-    deltaApplyYOffset,
-  )
+  restoreStoredPositionsWithDeltaAbsolute(sharedRoot, prev.yTarget, storedPositions, clonedDelta, deltaApplyYOffset)
 }

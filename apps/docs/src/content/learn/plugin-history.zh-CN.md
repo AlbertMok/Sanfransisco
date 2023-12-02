@@ -12,19 +12,19 @@ title: History
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-history
+npm install @everynote/plugin-history
 
 </TerminalBlock>
 
 ## 使用 History {/*history-using*/}
 
-<Sandpack deps={['@editablejs/plugin-history']}>
+<Sandpack deps={['@everynote/plugin-history']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withHistory } from '@editablejs/plugin-history'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withHistory } from '@everynote/plugin-history'
 
 const defaultValue = [
   {
@@ -62,6 +62,7 @@ withHistory(editor, options)
 
 - 类型：`HistoryHotkey`
 - 默认值:
+
   ```js
   {
     undo: 'mod+z',

@@ -1,10 +1,12 @@
-import { Editable, generateId } from '@editablejs/editor'
-import { Editor, Element, Path, Range, Transforms } from '@editablejs/models'
+import { Editable, generateId } from '@everynote/editor'
+import { Editor, Element, Node, Path, Range, Transforms } from '@everynote/models'
 import { Paragraph } from '../interfaces/paragraph'
 import cloneDeep from 'lodash.clonedeep'
 import { PARAGRAPH_KEY } from '../constants'
+import tw from 'twin.macro'
 
 export interface ParagraphEditor extends Editor {
+  type: 'paragraph-editor'
   /** create a paragraph element in editor. */
   createParagraphElement: (type?: typeof PARAGRAPH_KEY) => void
 
@@ -25,6 +27,27 @@ export const ParagraphEditor = {
 export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const newEditor = editor as T & ParagraphEditor
 
+  const { normalizeNode } = newEditor
+  newEditor.normalizeNode = (entry) => {
+    const [node, path] = entry
+
+    let isHandled = false
+    if (Editor.isEditor(node)) {
+      // 处理第二个节点
+      const secondChild = node.children[1]
+      if (!secondChild) {
+        // if there is not a second node in the editor,then insert a new node
+        Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] }, { at: [0] })
+        isHandled = true
+      } else if (!Paragraph.isParagraph(secondChild)) {
+        Transforms.setNodes(editor, { type: 'paragraph' }, { at: [1] })
+        isHandled = true
+      }
+
+      if (isHandled) return
+    }
+    normalizeNode(entry)
+  }
   newEditor.createParagraphElement = () => {
     const { selection } = editor
     if (selection) {
@@ -47,7 +70,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
       const text = Editor.string(editor, parentPath)
 
       if (isNotParagraph && text.length === 0) {
-        Transforms.setNodes(editor, newParagraph, { at: parentPath })
+        Transforms.wrapNodes(editor, newParagraph, { at: parentPath })
         return
       }
 
@@ -85,11 +108,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const { renderElement } = newEditor
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (ParagraphEditor.isParagraph(element)) {
-      return (
-        <div data-block-type={element.type} data-block-id={element.id}>
-          <div {...attributes}>{children}</div>
-        </div>
-      )
+      return <div {...attributes}>{children}</div>
     }
     return renderElement({ attributes, children, element })
   }

@@ -1,5 +1,5 @@
-import { Editable, Hotkey, generateId } from '@editablejs/editor'
-import { Transforms, Editor, Path, Range, Node, Text } from '@editablejs/models'
+import { Editable, Hotkey, generateId } from '@everynote/editor'
+import { Transforms, Editor, Path, Range, Node, Text } from '@everynote/models'
 import { BLOCKQUOTE_KEY } from '../constants'
 import { BlockquoteHotkey, BlockquoteOptions, setOptions } from '../options'
 import { BlockquoteEditor } from './blockquote-editor'
@@ -56,10 +56,8 @@ export const withBlockquote = <T extends Editable>(editor: T, options: Blockquot
   newEditor.renderElement = ({ element, attributes, children }) => {
     if (BlockquoteEditor.isBlockquote(newEditor, element)) {
       return (
-        <div data-block-id={element.id} data-block-type={element.type}>
-          <div {...attributes} tw="before:border-solid opacity-50 pl-4 border-2 border-solid border-y-0 border-r-0 ">
-            {children}
-          </div>
+        <div {...attributes} tw="before:border-solid opacity-50 pl-4 border-2 border-solid border-y-0 border-r-0 ">
+          {children}
         </div>
       )
     }

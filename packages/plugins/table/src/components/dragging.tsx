@@ -1,4 +1,4 @@
-import { Editable, useEditableStatic, useLocaleFormat } from '@editablejs/editor'
+import { Editable, useEditableStatic, useLocaleFormat } from '@everynote/editor'
 import { TableDrag, useTableDragCount, useTableDragPoint } from '../hooks/use-drag'
 import { TableLocale } from '../locale'
 

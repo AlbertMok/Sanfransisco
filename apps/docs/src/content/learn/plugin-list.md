@@ -14,19 +14,19 @@ The package includes three plugins: `unordered-list`, `ordered-list`, and `task-
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-list
+npm install @everynote/plugin-list
 
 </TerminalBlock>
 
 ## Usage {/*list-using*/}
 
-<Sandpack deps={['@editablejs/plugin-list']}>
+<Sandpack deps={['@everynote/plugin-list']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withOrderedList, withUnorderedList, withTaskList } from '@editablejs/plugin-list'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withOrderedList, withUnorderedList, withTaskList } from '@everynote/plugin-list'
 
 const defaultValue = [
   {

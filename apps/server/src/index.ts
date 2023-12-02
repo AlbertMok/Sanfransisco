@@ -1,4 +1,4 @@
-import startServer from '@editablejs/yjs-websocket/server'
+import startServer from '@everynote/yjs-websocket/server'
 
 startServer({
   initialValue: {

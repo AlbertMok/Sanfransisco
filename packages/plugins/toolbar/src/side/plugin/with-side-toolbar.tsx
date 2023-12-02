@@ -1,4 +1,4 @@
-import { Editable, Slot, Locale } from '@editablejs/editor'
+import { Editable, Slot, Locale } from '@everynote/editor'
 import { SideToolbar } from '../components/side-toolbar'
 import locale from '../locale'
 import { getOptions, setOptions, SideToolbarOptions } from '../options'

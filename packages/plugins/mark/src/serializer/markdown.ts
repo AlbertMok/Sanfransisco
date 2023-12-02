@@ -1,17 +1,12 @@
-import {
-  MarkdownSerializerPlugin,
-  MarkdownSerializerWithTransform,
-} from '@editablejs/serializer/markdown'
+import { MarkdownSerializerPlugin, MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { Delete, Emphasis, HTML, PhrasingContent, Strong } from 'mdast'
 import { gfmStrikethroughToMarkdown } from 'mdast-util-gfm-strikethrough'
 import { Mark } from '../interfaces/mark'
 
-export const withMarkMarkdownSerializerTransform: MarkdownSerializerWithTransform = next => {
+export const withMarkMarkdownSerializerTransform: MarkdownSerializerWithTransform = (next) => {
   return (node, options = {}) => {
     if (Mark.isMark(node)) {
-      let children: PhrasingContent[] = node.code
-        ? [{ type: 'inlineCode', value: node.text }]
-        : (next(node, options) as PhrasingContent[])
+      let children: PhrasingContent[] = node.code ? [{ type: 'inlineCode', value: node.text }] : (next(node, options) as PhrasingContent[])
 
       const handleStyling = (type: 'strong' | 'emphasis' | 'delete'): void => {
         const styling: Strong | Emphasis | Delete = { type, children }

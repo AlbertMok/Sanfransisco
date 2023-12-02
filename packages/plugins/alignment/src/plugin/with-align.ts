@@ -1,5 +1,5 @@
-import { Editor, Transforms, Element, List } from '@editablejs/models'
-import { Editable, Hotkey } from '@editablejs/editor'
+import { Editor, Transforms, Element, List } from '@everynote/models'
+import { Editable, Hotkey } from '@everynote/editor'
 import { ALIGN_ATTR_KEY } from '../constants'
 import { AlignEditor } from './align-editor'
 import { Align, AlignKeys, AlignValue } from '../interfaces/align'
@@ -18,20 +18,20 @@ export const withAlign = <T extends Editable>(editor: T, options: AlignOptions =
   setOptions(newEditor, options)
 
   newEditor.toggleAlign = (value = AlignValue.Left) => {
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (!selection) return
       if (editor.selection !== selection) editor.selection = selection
       if (!AlignEditor.isAlignEditor(editor)) return
 
       const lowestBlocks = Editor.nodes<Element>(editor, {
         mode: 'lowest',
-        match: n => Editor.isBlock(editor, n),
+        match: (n) => Editor.isBlock(editor, n),
       })
 
       for (const [element, path] of lowestBlocks) {
         const entry = Editor.above<List>(editor, {
           at: path,
-          match: n => editor.isList(n),
+          match: (n) => editor.isList(n),
         })
         const el = entry ? entry[0] : element
         if (Align.isAlign(el) && el[ALIGN_ATTR_KEY] === value) continue
@@ -43,7 +43,7 @@ export const withAlign = <T extends Editable>(editor: T, options: AlignOptions =
           },
           {
             at,
-          },
+          }
         )
       }
     })

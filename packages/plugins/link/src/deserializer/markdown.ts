@@ -1,23 +1,17 @@
-import {
-  MarkdownDeserializerWithTransform,
-  MarkdownDeserializerPlugin,
-} from '@editablejs/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
 import { gfmAutolinkLiteral } from 'micromark-extension-gfm-autolink-literal'
 import { gfmAutolinkLiteralFromMarkdown } from 'mdast-util-gfm-autolink-literal'
 
 import { Link } from '../interfaces/link'
 
-export const withLinkMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (
-  next,
-  self,
-) => {
+export const withLinkMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {
   return (node, options = {}) => {
     const { type } = node
     if (type === 'link') {
       return [
         Link.create({
           href: node.url,
-          children: node.children.map(child => self.transform(child, options)).flat(),
+          children: node.children.map((child) => self.transform(child, options)).flat(),
         }),
       ]
     }

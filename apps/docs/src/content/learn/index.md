@@ -28,12 +28,12 @@ Before learning, you don't need to install anything to experiment with Editable.
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
+import { createEditor } from '@everynote/models'
 import {
   EditableProvider,
   ContentEditable,
   withEditable,
-} from '@editablejs/editor'
+} from '@everynote/editor'
 
 export default function App() {
   const editor = React.useMemo(() => {
@@ -56,4 +56,3 @@ You can edit it directly or open it in a new tab by pressing the "Fork" button i
 ## Next steps {/*next-steps*/}
 
 Go to the [Installation](/learn/installation) guide to learn how to install Editable.
-

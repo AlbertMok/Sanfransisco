@@ -1,6 +1,6 @@
 import * as React from 'react'
 import getDirection from 'direction'
-import { Editor, Node, Range, Element } from '@editablejs/models'
+import { Editor, Node, Range, Element } from '@everynote/models'
 import Text from './text'
 import useChildren from '../hooks/use-children'
 import { Editable, useEditableStatic, ElementAttributes } from '..'
@@ -16,10 +16,15 @@ import { usePlaceholder } from '../hooks/use-placeholder'
  */
 const ElementRender = (props: { element: Element; selection: Range | null; renderPlaceholder?: PlaceholderRender }) => {
   const { element, selection, renderPlaceholder } = props
+
   const ref = React.useRef<HTMLElement>(null)
+
   const editor = useEditableStatic()
+
   const isInline = editor.isInline(element)
+
   const key = Editable.findKey(editor, element)
+
   const currentRenderPlaceholder = usePlaceholder(element)
 
   let children: React.ReactNode = useChildren({
@@ -53,7 +58,6 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   // If it's a void node, wrap the children in extra void-specific elements.
   if (Editor.isVoid(editor, element)) {
     attributes[DATA_EDITABLE_VOID] = true
-
     const Tag = isInline ? 'span' : 'div'
     const [[text]] = Node.texts(element)
 
@@ -88,32 +92,26 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
   const path = Editable.findPath(editor, element)
 
   const newAttributes = editor.renderElementAttributes({ attributes, element })
-  // // 渲染元素
-  // let content = (
-  //   <div
-  //     data-block-id={element.id}
-  //     data-block-type={element.type}
-  //     style={{ marginTop: '1px', marginBottom: '1px', paddingTop: '1px', paddingBottom: '1px', minHeight: '24px' }}
-  //   >
-  //     {editor.renderElement({
-  //       attributes: newAttributes,
-  //       children,
-  //       element,
-  //     })}
-  //   </div>
-  // )
+  let content = (
+    <div
+      data-block-id={element.id}
+      data-block-type={element.type}
+      className="slate-selectable"
+      style={{ padding: '1px ', margin: '4px 0', minHeight: 'max-content' }}
+    >
+      {editor.renderElement({ attributes: newAttributes, children, element })}
+    </div>
+  )
 
-  let content = editor.renderElement({ attributes: newAttributes, children, element })
+  if (element.type === 'table' || element.type === 'table-row' || element.type === 'table-cell') {
+    content = editor.renderElement({ attributes: newAttributes, children, element })
+  }
 
   const decorates = useElementDecorations(element, path)
 
   if (decorates.length > 0) {
     content = decorates.reduceRight((children, decorate) => {
-      return decorate.renderElement({
-        node: element,
-        path,
-        children,
-      })
+      return decorate.renderElement({ node: element, path, children })
     }, content)
   }
 

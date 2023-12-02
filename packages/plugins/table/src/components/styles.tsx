@@ -1,4 +1,4 @@
-import { Icon } from '@editablejs/ui'
+import { Icon } from '@everynote/ui'
 import tw, { css, styled, theme } from 'twin.macro'
 
 export const TableStyles = styled.div(({ isHover, isSelected, isDragging }: { isHover: boolean; isSelected: boolean; isDragging: boolean }) => [

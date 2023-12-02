@@ -1,17 +1,10 @@
-import { Editable, useEditableStatic } from '@editablejs/editor'
+import { Editable, useEditableStatic } from '@everynote/editor'
 import React from 'react'
-import {
-  CursorOverlayState,
-  useRemoteCursorOverlayPositions,
-} from '../hooks/use-remote-cursor-overlay-positions'
+import { CursorOverlayState, useRemoteCursorOverlayPositions } from '../hooks/use-remote-cursor-overlay-positions'
 import { CursorData } from '../types'
 import { Caret } from './caret'
 
-const RemoteSelection = <T extends CursorData = CursorData>({
-  data,
-  selectionRects,
-  caretPosition,
-}: CursorOverlayState<T>) => {
+const RemoteSelection = <T extends CursorData = CursorData>({ data, selectionRects, caretPosition }: CursorOverlayState<T>) => {
   if (!data) {
     return null
   }
@@ -49,7 +42,7 @@ export const RemoteCursors = () => {
 
   return (
     <>
-      {cursors.map(cursor => (
+      {cursors.map((cursor) => (
         <RemoteSelection key={cursor.clientId} {...cursor} />
       ))}
     </>

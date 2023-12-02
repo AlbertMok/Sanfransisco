@@ -1,5 +1,5 @@
 import create, { StoreApi, UseBoundStore } from 'zustand'
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export interface MentionStore {
   open: boolean

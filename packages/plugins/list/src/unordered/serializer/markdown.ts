@@ -1,11 +1,8 @@
-import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
+import { MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { ListItem } from 'mdast'
 import { UnorderedList } from '../interfaces/unordered-list'
 
-export const withUnorderedListMarkdownSerializerTransform: MarkdownSerializerWithTransform = (
-  next,
-  self,
-) => {
+export const withUnorderedListMarkdownSerializerTransform: MarkdownSerializerWithTransform = (next, self) => {
   return (node, options = {}) => {
     if (UnorderedList.isUnorderedList(node)) {
       return [
@@ -15,9 +12,7 @@ export const withUnorderedListMarkdownSerializerTransform: MarkdownSerializerWit
           children: [
             {
               type: 'listItem',
-              children: node.children
-                .map(child => self.transform(child, options))
-                .flat() as ListItem['children'],
+              children: node.children.map((child) => self.transform(child, options)).flat() as ListItem['children'],
             },
           ],
         },

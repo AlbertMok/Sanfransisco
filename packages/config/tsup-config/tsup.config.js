@@ -16,7 +16,7 @@ module.exports = (options) => {
       }),
     ],
     esbuildOptions(options) {
-      options.external = ['react', 'react-dom', '@editablejs']
+      options.external = ['react', 'react-dom', '@everynote']
     },
   }
 }

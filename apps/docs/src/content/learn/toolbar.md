@@ -8,24 +8,23 @@ This page will show you how to configure and use the toolbar in Editable.
 
 </Intro>
 
-## Step 1: Install `@editablejs/plugin-toolbar` {/*step-1*/}
+## Step 1: Install `@everynote/plugin-toolbar` {/*step-1*/}
 
 <TerminalBlock>
 
-npm install @editablejs/models @editablejs/editor @editablejs/plugins @editablejs/plugin-toolbar
+npm install @everynote/models @everynote/editor @everynote/plugins @everynote/plugin-toolbar
 
 </TerminalBlock>
-
 
 ## Step 2: Import the Toolbar {/*step-2*/}
 
 ```js
 
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withPlugins } from '@editablejs/plugins'
-import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@editablejs/plugin-toolbar'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withPlugins } from '@everynote/plugins'
+import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@everynote/plugin-toolbar'
 
 ```
 
@@ -110,26 +109,26 @@ const App = () => {
 
 ```
 
-The `MarkEditor` object is provided by `@editablejs/plugin-mark` and it can help us manipulate text styles.
+The `MarkEditor` object is provided by `@everynote/plugin-mark` and it can help us manipulate text styles.
 
-Since it is also a common plugin, it is already included in the `@editablejs/plugins` package, so you can also import it from `@editablejs/plugins`.
+Since it is also a common plugin, it is already included in the `@everynote/plugins` package, so you can also import it from `@everynote/plugins`.
 
 ```js
-import { withPlugins, MarkEditor } from '@editablejs/plugins'
+import { withPlugins, MarkEditor } from '@everynote/plugins'
 ```
 
 ## Try the Toolbar {/*try-toolbar*/}
 
-The sandbox below already uses `@editablejs/plugin-toolbar` and you can try using the toolbar in it.
+The sandbox below already uses `@everynote/plugin-toolbar` and you can try using the toolbar in it.
 
-<Sandpack deps={['@editablejs/plugins', '@editablejs/plugin-toolbar']}>
+<Sandpack deps={['@everynote/plugins', '@everynote/plugin-toolbar']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withPlugins, MarkEditor } from '@editablejs/plugins'
-import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@editablejs/plugin-toolbar'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withPlugins, MarkEditor } from '@everynote/plugins'
+import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@everynote/plugin-toolbar'
 
 const marks: [] = ['bold', 'italic', 'underline', 'strikethrough', 'code', 'sub', 'sup']
 
@@ -165,9 +164,9 @@ export default function App() {
 
 除了传统的工具栏外，我们还提供了一些其他的工具栏:
 
-- `inline` - 行内工具栏 `@editablejs/plugin-toolbar/inline`
-- `side` - 侧边工具栏 `@editablejs/plugin-toolbar/side`
-- `slash` - 快捷键工具栏 `@editablejs/plugin-toolbar/slash`
+- `inline` - 行内工具栏 `@everynote/plugin-toolbar/inline`
+- `side` - 侧边工具栏 `@everynote/plugin-toolbar/side`
+- `slash` - 快捷键工具栏 `@everynote/plugin-toolbar/slash`
 
 ## 下一步 {/*next-steps*/}
 

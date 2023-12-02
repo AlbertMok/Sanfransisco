@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { ImageLocale } from './locale'
 
 export type ImageHotkey = string | ((e: KeyboardEvent) => boolean)
@@ -9,10 +9,7 @@ export interface ImageOptions {
   locale?: Record<string, ImageLocale>
   onBeforeRender?: (url: string) => Promise<string>
   onUploadBefore?: (files: (File | string)[]) => (File | string)[]
-  onUpload?: (
-    file: File | string,
-    update: (options: Record<'percentage', number>) => void,
-  ) => Promise<string>
+  onUpload?: (file: File | string, update: (options: Record<'percentage', number>) => void) => Promise<string>
   onRotate?: (file: File) => Promise<string | { url: string; rotate?: number }>
   allowRotate?: boolean
 }

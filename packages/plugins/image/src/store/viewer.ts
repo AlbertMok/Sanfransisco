@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import create, { StoreApi, UseBoundStore } from 'zustand'
 export interface ImageViewerStore {
   visible: boolean

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Editor, Range, Transforms, Point, Path, Element, DOMNode, getDefaultView, isDOMNode } from '@editablejs/models'
+import { Editor, Range, Transforms, Point, Path, Element, DOMNode, getDefaultView, isDOMNode } from '@everynote/models'
 
 import useChildren from '../hooks/use-children'
 import { useEditable, useEditableStatic } from '../hooks/use-editable'
@@ -24,14 +24,16 @@ import { Focused, useFocused } from '../hooks/use-focused'
 import ShadowContainer from './shadow'
 import { CaretComponent } from './caret'
 import { SelectionComponent } from './selection'
-import { InputComponent } from './input'
-import { useDragging, useDragMethods, useDragTo } from '../hooks/use-drag'
 import { SelectionDrawing, SelectionDrawingStyle } from '../plugin/selection-drawing'
-import { APPLICATION_FRAGMENT_TYPE, DATA_EDITABLE_NODE } from '../utils/constants'
+import { InputComponent } from './input'
+
+import { useDragging, useDragMethods, useDragTo } from '../hooks/use-drag'
+import { Drag } from '../plugin/drag'
 import { DragCaretComponent } from './drag-caret'
+
+import { APPLICATION_FRAGMENT_TYPE, DATA_EDITABLE_NODE } from '../utils/constants'
 import { parseFragmentFromString, setDataTransfer } from '../utils/data-transfer'
 import { Slots } from './slot'
-import { Drag } from '../plugin/drag'
 import { Placeholder } from '../plugin/placeholder'
 import { usePlaceholder } from '../hooks/use-placeholder'
 import { isTouchDevice } from '../utils/environment'
@@ -39,7 +41,7 @@ import { TouchPointComponent } from './touch-point'
 import { getNativeEvent, isMouseEvent, isTouchEvent } from '../utils/event'
 import { canForceTakeFocus, isEditableDOMElement } from '../utils/dom'
 import { Locale } from '../plugin/locale'
-import { generateId } from '../utils/node-id'
+import { BlockSelectionArea } from '../plugin/src/components/BlockSelectionArea'
 
 const Children = (props: Omit<Parameters<typeof useChildren>[0], 'node' | 'selection'>) => {
   //props只剩一个renderPlaceholder 参数 可以对外暴露了
@@ -80,7 +82,10 @@ export const ContentEditable = (props: EditableProps) => {
   const editor = useEditableStatic()
 
   const ref = React.useRef<HTMLDivElement>(null)
+
+  // 是否只读
   const [readOnly, setReadOnly] = useReadOnly()
+
   // 标记是否是刚拖拽完毕
   const isDragEnded = React.useRef(false)
   const dragTo = useDragTo()
@@ -197,14 +202,8 @@ export const ContentEditable = (props: EditableProps) => {
             const path = Drag.toBlockPath(editor)
             if (path && fragment.length > 0) {
               const rangeRef = Editor.rangeRef(editor, {
-                anchor: {
-                  path,
-                  offset: 0,
-                },
-                focus: {
-                  path,
-                  offset: 0,
-                },
+                anchor: { path, offset: 0 },
+                focus: { path, offset: 0 },
               })
               Transforms.removeNodes(editor, { at: from })
               const at = rangeRef.unref()
@@ -575,12 +574,8 @@ export const ContentEditable = (props: EditableProps) => {
   )
 
   return (
-    <div
-      style={{
-        ...style,
-        position: 'relative',
-      }}
-    >
+    <div className="textbox" style={{ ...style, position: 'relative' }}>
+      {/* editor main part */}
       <Component
         role={readOnly ? undefined : 'textbox'}
         {...attributes}

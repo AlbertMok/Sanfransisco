@@ -1,12 +1,8 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { TITLE_KEY } from '../constants'
 import { Title } from '../interfaces/title'
 
-export const withTitleHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withTitleHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -21,9 +17,9 @@ export const withTitleHTMLSerializerTransform: HTMLSerializerWithTransform = (
             fontSize: '32px',
             fontWeight: 'bold',
           },
-          customStyle,
+          customStyle
         ),
-        node.children.map(child => serializer.transform(child)).join(''),
+        node.children.map((child) => serializer.transform(child)).join('')
       )
     }
     return next(node, options)

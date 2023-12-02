@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Editor, Node } from '@editablejs/models'
+import { Editor, Node } from '@everynote/models'
 import { useStore } from 'zustand'
 import { Placeholder } from '../plugin/placeholder'
 import { useEditableStatic } from './use-editable'

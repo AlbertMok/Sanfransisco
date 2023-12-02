@@ -1,5 +1,5 @@
-import { Editable, Hotkey, generateId } from '@editablejs/editor'
-import { Editor, Transforms, List, Path, Element, Text, Range, NodeEntry } from '@editablejs/models'
+import { Editable, Hotkey, generateId } from '@everynote/editor'
+import { Editor, Transforms, List, Path, Element, Text, Range, NodeEntry } from '@everynote/models'
 import tw from 'twin.macro'
 import {
   HEADING_ONE_KEY,
@@ -95,11 +95,9 @@ export const withHeading = <T extends Editable>(editor: T, options: HeadingOptio
     if (HeadingEditor.isHeading(editor, element)) {
       const tag = HeadingTags[element.type]
       return (
-        <div data-block-id={element.id} data-block-type={element.type}>
-          <StyledHeading {...attributes} as={tag}>
-            {children}
-          </StyledHeading>
-        </div>
+        <StyledHeading {...attributes} as={tag}>
+          {children}
+        </StyledHeading>
       )
     }
     return renderElement({ attributes, children, element })

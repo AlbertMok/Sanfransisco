@@ -1,6 +1,6 @@
 import merge from 'lodash.merge'
 import create, { StoreApi, UseBoundStore } from 'zustand'
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 export interface Locale {
   locale: string
 }
@@ -29,7 +29,7 @@ export const Locale = {
 
   setLocale: <T extends Locale>(editor: Editor, ...locales: Record<string, T>[]) => {
     const store = getStore(editor)
-    store.setState(state => {
+    store.setState((state) => {
       const { lang, locales: prevLocales } = state
       const newLocales = Object.assign({}, prevLocales)
       for (const locale of locales) {
@@ -51,7 +51,7 @@ export const Locale = {
 
   setLang: (editor: Editor, lang: string) => {
     const store = getStore(editor)
-    store.setState(state => {
+    store.setState((state) => {
       return {
         lang,
         locales: state.locales,

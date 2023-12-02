@@ -1,8 +1,5 @@
-import {
-  HTMLDeserializerOptions,
-  HTMLDeserializerWithTransform,
-} from '@editablejs/deserializer/html'
-import { Editor, isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { Editor, isDOMHTMLElement } from '@everynote/models'
 import { TableCell } from '../../cell'
 import { TABLE_ROW_KEY } from '../constants'
 import { getOptions } from '../options'
@@ -12,9 +9,11 @@ export interface TableRowHTMLDeserializerOptions extends HTMLDeserializerOptions
   editor: Editor
 }
 
-export const withTableRowHTMLDeserializerTransform: HTMLDeserializerWithTransform<
-  TableRowHTMLDeserializerOptions
-> = (next, serializer, { editor }) => {
+export const withTableRowHTMLDeserializerTransform: HTMLDeserializerWithTransform<TableRowHTMLDeserializerOptions> = (
+  next,
+  serializer,
+  { editor }
+) => {
   return (node, options = {}) => {
     const { text } = options
     if (isDOMHTMLElement(node) && ['TR', 'TH'].includes(node.tagName)) {

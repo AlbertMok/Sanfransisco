@@ -1,11 +1,7 @@
-import { HTMLSerializerStyle, HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerStyle, HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { Indent } from '../interfaces/indent'
 
-export const withIndentHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withIndentHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -21,9 +17,9 @@ export const withIndentHTMLSerializerTransform: HTMLSerializerWithTransform = (
             height: '100%',
             width: `${node.textIndent}px`,
           },
-          customStyle,
+          customStyle
         ),
-        '&#xfeff;',
+        '&#xfeff;'
       )
     } else {
       const indent = node as Indent

@@ -1,11 +1,7 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { FontColor } from '../interfaces/font-color'
 
-export const withFontColorHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withFontColorHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -15,7 +11,7 @@ export const withFontColorHTMLSerializerTransform: HTMLSerializerWithTransform =
         'span',
         serializer.mergeOptions(node, attributes, customAttributes),
         serializer.mergeOptions(node, style, customStyle, { color: fontColor }),
-        text,
+        text
       )
     }
     return next(node, options)

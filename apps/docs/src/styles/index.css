@@ -2,13 +2,13 @@
    * Hopefully when scrollbar-color lands everywhere,
    * (and not just in FF), we'll be able to keep just this.
    */
-  html .no-bg-scrollbar {
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-  }
-  html.dark .no-bg-scrollbar {
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-  }
-  /*
+html .no-bg-scrollbar {
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+html.dark .no-bg-scrollbar {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+/*
    * Until then, we have ... this.
    * If you're changing this, make sure you've tested:
    * - Different browsers (Chrome, Safari, FF)
@@ -19,33 +19,33 @@
    * - For each combination, test overflowing and non-overflowing sidebar
    * I've spent hours picking these so I expect no less diligence from you.
    */
-  html .no-bg-scrollbar::-webkit-scrollbar,
-  html .no-bg-scrollbar::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  html .no-bg-scrollbar:hover::-webkit-scrollbar-thumb,
-  html .no-bg-scrollbar:focus::-webkit-scrollbar-thumb,
-  html .no-bg-scrollbar:focus-within::-webkit-scrollbar-thumb,
-  html .no-bg-scrollbar:active::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border: 4px solid transparent;
-    background-clip: content-box;
-    border-radius: 10px;
-  }
-  html .no-bg-scrollbar::-webkit-scrollbar-thumb:hover,
-  html .no-bg-scrollbar::-webkit-scrollbar-thumb:active {
-    background-color: rgba(0, 0, 0, 0.35) !important;
-  }
-  html.dark .no-bg-scrollbar:hover::-webkit-scrollbar-thumb,
-  html.dark .no-bg-scrollbar:focus::-webkit-scrollbar-thumb,
-  html.dark .no-bg-scrollbar:focus-within::-webkit-scrollbar-thumb,
-  html.dark .no-bg-scrollbar:active::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  html.dark .no-bg-scrollbar::-webkit-scrollbar-thumb:hover,
-  html.dark .no-bg-scrollbar::-webkit-scrollbar-thumb:active {
-    background-color: rgba(255, 255, 255, 0.35) !important;
-  }
+html .no-bg-scrollbar::-webkit-scrollbar,
+html .no-bg-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+html .no-bg-scrollbar:hover::-webkit-scrollbar-thumb,
+html .no-bg-scrollbar:focus::-webkit-scrollbar-thumb,
+html .no-bg-scrollbar:focus-within::-webkit-scrollbar-thumb,
+html .no-bg-scrollbar:active::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 4px solid transparent;
+  background-clip: content-box;
+  border-radius: 10px;
+}
+html .no-bg-scrollbar::-webkit-scrollbar-thumb:hover,
+html .no-bg-scrollbar::-webkit-scrollbar-thumb:active {
+  background-color: rgba(0, 0, 0, 0.35) !important;
+}
+html.dark .no-bg-scrollbar:hover::-webkit-scrollbar-thumb,
+html.dark .no-bg-scrollbar:focus::-webkit-scrollbar-thumb,
+html.dark .no-bg-scrollbar:focus-within::-webkit-scrollbar-thumb,
+html.dark .no-bg-scrollbar:active::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+html.dark .no-bg-scrollbar::-webkit-scrollbar-thumb:hover,
+html.dark .no-bg-scrollbar::-webkit-scrollbar-thumb:active {
+  background-color: rgba(255, 255, 255, 0.35) !important;
+}
 
 .code-step * {
   color: inherit !important;
@@ -165,4 +165,15 @@ ol.mdx-illustration-block {
     right: auto;
     transform: translateX(-50%) translateY(-100%) rotate(90deg);
   }
+}
+
+.selection-area {
+  background: rgba(46, 115, 252, 0.11);
+  border: 1px solid rgba(98, 155, 255, 0.81);
+  border-radius: 0.1em;
+}
+
+.selected {
+  border-radius: 3px;
+  background-color: rgb(235 238 253 / 1);
 }

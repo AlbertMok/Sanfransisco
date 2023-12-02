@@ -1,4 +1,4 @@
-import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
+import { MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { PhrasingContent } from 'mdast'
 import { TableCell } from '../interfaces/table-cell'
 

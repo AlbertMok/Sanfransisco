@@ -1,5 +1,5 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import { Editor, List, Transforms, Element } from '@editablejs/models'
+import { Editable, Hotkey } from '@everynote/editor'
+import { Editor, List, Transforms, Element } from '@everynote/models'
 import { LEADING_ATTR_KEY } from '../constants'
 import { Leading } from '../interfaces/leading'
 import { LeadingHotkey, LeadingOptions, setOptions } from '../options'
@@ -7,10 +7,7 @@ import { LeadingEditor } from './leading-editor'
 
 const defaultHotkeys: LeadingHotkey = {}
 
-export const withLeading = <T extends Editable>(
-  editor: T,
-  options: LeadingOptions = {}
-) => {
+export const withLeading = <T extends Editable>(editor: T, options: LeadingOptions = {}) => {
   const newEditor = editor as T & LeadingEditor
 
   setOptions(newEditor, options)
@@ -68,11 +65,7 @@ export const withLeading = <T extends Editable>(
 
   const { onKeydown } = newEditor
 
-  const hotkeys: LeadingHotkey = Object.assign(
-    {},
-    defaultHotkeys,
-    options.hotkey
-  )
+  const hotkeys: LeadingHotkey = Object.assign({}, defaultHotkeys, options.hotkey)
   newEditor.onKeydown = (e: KeyboardEvent) => {
     const value = Hotkey.match(hotkeys, e)
     if (value) {

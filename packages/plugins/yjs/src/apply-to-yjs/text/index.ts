@@ -1,4 +1,4 @@
-import { TextOperation } from '@editablejs/models'
+import { TextOperation } from '@everynote/models'
 import { OpMapper } from '../types'
 import { insertText } from './insert-text'
 import { removeText } from './remove-text'

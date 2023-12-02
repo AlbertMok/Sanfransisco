@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import create, { StoreApi, UseBoundStore, useStore } from 'zustand'
 import { Editable } from '../plugin/editable'
 import { useEditableStatic } from './use-editable'
@@ -33,7 +33,7 @@ const getStore = (editor: Editor) => {
 export const useFocused = (): [boolean, (isFocused: boolean) => void] => {
   const editor = useEditableStatic()
   const store = getStore(editor)
-  const isFocused = useStore(store, state => state.isFocused)
+  const isFocused = useStore(store, (state) => state.isFocused)
 
   return [
     isFocused,

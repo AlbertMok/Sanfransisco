@@ -1,4 +1,4 @@
-import { Editable } from '@editablejs/editor'
+import { Editable } from '@everynote/editor'
 import { forwardRef, useMemo } from 'react'
 import { useSlashToolbarSearchValue } from '../hooks/use-slash-toolbar-search'
 import { getOptions } from '../options'
@@ -8,33 +8,31 @@ export interface SlashToolbarPlaceholderProps {
   children: React.ReactElement
 }
 
-export const SlashToolbarPlaceholder = forwardRef<HTMLSpanElement, SlashToolbarPlaceholderProps>(
-  ({ editor, children }, ref) => {
-    const { placeholder } = useMemo(() => {
-      return getOptions(editor)
-    }, [editor])
+export const SlashToolbarPlaceholder = forwardRef<HTMLSpanElement, SlashToolbarPlaceholderProps>(({ editor, children }, ref) => {
+  const { placeholder } = useMemo(() => {
+    return getOptions(editor)
+  }, [editor])
 
-    const searchValue = useSlashToolbarSearchValue(editor)
-    const renderChildren = () => {
-      if (searchValue) return children
-      if (typeof placeholder === 'function') return placeholder(children)
-      if (typeof placeholder === 'string')
-        return (
-          <>
-            {children}
-            <span tw="text-gray-300 opacity-80">{placeholder}</span>
-          </>
-        )
+  const searchValue = useSlashToolbarSearchValue(editor)
+  const renderChildren = () => {
+    if (searchValue) return children
+    if (typeof placeholder === 'function') return placeholder(children)
+    if (typeof placeholder === 'string')
+      return (
+        <>
+          {children}
+          <span tw="text-gray-300 opacity-80">{placeholder}</span>
+        </>
+      )
 
-      return children
-    }
+    return children
+  }
 
-    return (
-      <span tw="inline-block" ref={ref}>
-        {renderChildren()}
-      </span>
-    )
-  },
-)
+  return (
+    <span tw="inline-block" ref={ref}>
+      {renderChildren()}
+    </span>
+  )
+})
 
 SlashToolbarPlaceholder.displayName = 'SlashToolbarPlaceholder'

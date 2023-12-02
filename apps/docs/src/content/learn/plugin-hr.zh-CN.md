@@ -12,19 +12,19 @@ title: Hr
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-hr
+npm install @everynote/plugin-hr
 
 </TerminalBlock>
 
 ## 使用 Hr {/*hr-using*/}
 
-<Sandpack deps={['@editablejs/plugin-hr']}>
+<Sandpack deps={['@everynote/plugin-hr']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withHr } from '@editablejs/plugin-hr'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withHr } from '@everynote/plugin-hr'
 
 const defaultValue = [
   {
@@ -69,6 +69,7 @@ withHr(editor, options)
 
 - 类型：`Record<string, HrLocale>`
 - 默认值：
+
   ```ts
   const defaultLocale: Record<string, HrLocale> ={
     locale: 'zh-CN',

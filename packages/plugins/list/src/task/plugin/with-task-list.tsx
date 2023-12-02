@@ -1,5 +1,5 @@
-import { RenderElementProps, ElementAttributes, Editable, Hotkey, generateId } from '@editablejs/editor'
-import { Transforms } from '@editablejs/models'
+import { RenderElementProps, ElementAttributes, Editable, Hotkey, generateId } from '@everynote/editor'
+import { Transforms } from '@everynote/models'
 import tw, { styled, css, theme } from 'twin.macro'
 import { ListStyles, ListLabelStyles, renderList } from '../../styles'
 import { DATA_TASK_CHECKED_KEY, TASK_LIST_KEY } from '../constants'

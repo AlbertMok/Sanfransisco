@@ -1,5 +1,5 @@
 import { UNORDERED_LIST_KEY } from '../constants'
-import { generateId } from '@editablejs/editor'
+import { generateId } from '@everynote/editor'
 import { List } from '../../list/list'
 
 export interface UnorderedList extends List {

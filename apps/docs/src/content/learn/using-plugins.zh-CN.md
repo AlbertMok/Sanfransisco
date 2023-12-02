@@ -8,25 +8,24 @@ title: 使用插件
 
 </Intro>
 
-## 步骤 1: 安装 `@editablejs/plugins` {/*step-1*/}
+## 步骤 1: 安装 `@everynote/plugins` {/*step-1*/}
 
 这是一个常用插件的集合包，它与其它单独的插件使用方式是一样的。
 
 <TerminalBlock>
 
-npm install @editablejs/models @editablejs/editor @editablejs/plugins
+npm install @everynote/models @everynote/editor @everynote/plugins
 
 </TerminalBlock>
-
 
 ## 步骤 2: 导入插件 {/*step-2*/}
 
 ```js
 
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withPlugins } from '@editablejs/plugins'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withPlugins } from '@everynote/plugins'
 
 ```
 
@@ -50,7 +49,7 @@ const App = () => {
 
 ## 尝试使用插件 {/*try-plugins*/}
 
-下面的沙箱已经使用了 `@editablejs/plugins`，您可以在其中尝试使用插件。
+下面的沙箱已经使用了 `@everynote/plugins`，您可以在其中尝试使用插件。
 
 插件中已经实现了`快捷键`、`markdown语法` 等相关功能，你可以这样尝试：
 
@@ -58,13 +57,13 @@ const App = () => {
 - 输入 `#` + 空格 将文本转换为标题
 - ...
 
-<Sandpack deps={['@editablejs/plugins']}>
+<Sandpack deps={['@everynote/plugins']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withPlugins } from '@editablejs/plugins'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withPlugins } from '@everynote/plugins'
 
 export default function App() {
   const editor = React.useMemo(() => {
@@ -82,7 +81,6 @@ export default function App() {
 ```
 
 </Sandpack>
-
 
 ## 下一步 {/*next-steps*/}
 

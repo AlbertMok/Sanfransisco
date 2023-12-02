@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { HR_KEY } from '../constants'
 import { Hr, HrStyle } from '../interfaces/hr'
 import { getOptions } from '../options'

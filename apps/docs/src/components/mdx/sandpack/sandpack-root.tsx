@@ -75,7 +75,7 @@ function SandpackRoot(props: SandpackProps) {
 
   let customDeps: Record<string, string> = {}
   if (Array.isArray(deps)) {
-    deps.forEach(dep => {
+    deps.forEach((dep) => {
       customDeps[dep] = 'latest'
     })
   } else {
@@ -95,8 +95,8 @@ function SandpackRoot(props: SandpackProps) {
         }}
         customSetup={{
           dependencies: {
-            '@editablejs/models': 'latest',
-            '@editablejs/editor': 'latest',
+            '@everynote/models': 'latest',
+            '@everynote/editor': 'latest',
             react: 'latest',
             'react-dom': 'latest',
             ...customDeps,

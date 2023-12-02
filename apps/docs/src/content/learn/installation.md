@@ -12,7 +12,7 @@ This page will show you how to integrate the Editable editor into your React pro
 
 <TerminalBlock>
 
-npm install @editablejs/models @editablejs/editor
+npm install @everynote/models @everynote/editor
 
 </TerminalBlock>
 
@@ -30,9 +30,9 @@ npm install react react-dom
 // Import React dependencies
 import * as React from 'react'
 // Import the Editable package
-import { createEditor } from '@editablejs/models'
+import { createEditor } from '@everynote/models'
 // Import the Editable package
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
 
 ```
 

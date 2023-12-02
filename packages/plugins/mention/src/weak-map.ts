@@ -1,4 +1,4 @@
-import { Editor, PointRef, RangeRef, Text } from '@editablejs/models'
+import { Editor, PointRef, RangeRef, Text } from '@everynote/models'
 
 interface MentionTriggerData {
   startRef: PointRef

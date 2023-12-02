@@ -1,5 +1,5 @@
-import { Editable, RenderElementProps, Locale } from '@editablejs/editor'
-import { Transforms, Node, Grid } from '@editablejs/models'
+import { Editable, RenderElementProps, Locale } from '@everynote/editor'
+import { Transforms, Node, Grid } from '@everynote/models'
 import { withTableCell } from '../../cell'
 import locale from '../../locale'
 import { setOptions, TableOptions } from '../options'
@@ -27,11 +27,12 @@ export const withTable = <T extends Editable>(editor: T, options: TableOptions =
   }
 
   newEditor.insertTable = (options) => {
+    // 创建表格元素,如果options是一个表格,那就直接赋值给table,如果不是,则调用create
     const table = Table.isTable(options) ? options : TableEditor.create(newEditor, options)
+
+    // 通过 Transforms.insertNodes来添加表格元素到文档树中
     Transforms.insertNodes(newEditor, table)
-    Grid.focus(newEditor, {
-      point: [0, 0],
-    })
+    Grid.focus(newEditor, { point: [0, 0] })
   }
 
   const { renderElement } = newEditor

@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { HeadingTags, PARAGRAPH_KEY } from '../constants'
 import { HeadingType, Heading } from '../interfaces/heading'
 import { getOptions } from '../options'

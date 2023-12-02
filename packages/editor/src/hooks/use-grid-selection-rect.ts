@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { GridCell, Grid } from '@editablejs/models'
+import { GridCell, Grid } from '@everynote/models'
 import { Editable } from '../plugin/editable'
 import { useEditableStatic } from './use-editable'
 import { useGrid } from './use-grid'
@@ -30,10 +30,7 @@ const useGridSelectionRect = () => {
     const tableRect = tableEl.getBoundingClientRect()
     const startRect = startEl.getBoundingClientRect()
     const endRect = endEl.getBoundingClientRect()
-    const width =
-      endRect.left < startRect.left
-        ? startRect.right - endRect.left
-        : endRect.right - startRect.left
+    const width = endRect.left < startRect.left ? startRect.right - endRect.left : endRect.right - startRect.left
     const height = Math.max(endRect.bottom - startRect.top, startRect.height)
     const top = startRect.top - tableRect.top
     const left = Math.min(startRect.left - tableRect.left, endRect.left - tableRect.left)

@@ -1,7 +1,7 @@
-import { Element } from '@editablejs/models'
+import { Element } from '@everynote/models'
 import { List } from '../../list/list'
 import { TASK_LIST_KEY } from '../constants'
-import { generateId } from '@editablejs/editor'
+import { generateId } from '@everynote/editor'
 
 export interface TaskList extends List {
   type: typeof TASK_LIST_KEY

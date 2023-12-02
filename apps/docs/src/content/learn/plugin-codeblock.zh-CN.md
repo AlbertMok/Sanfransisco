@@ -12,7 +12,7 @@ title: CodeBlock
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-codeblock
+npm install @everynote/plugin-codeblock
 
 </TerminalBlock>
 
@@ -20,13 +20,13 @@ npm install @editablejs/plugin-codeblock
 
 `CodeBlcok` 使用 `CodeMirror` 作为代码编辑器，因此您需要安装 `CodeMirror` 语言包。
 
-<Sandpack deps={['@editablejs/plugin-codeblock', '@codemirror/lang-javascript', '@codemirror/lang-html', '@codemirror/lang-css']}>
+<Sandpack deps={['@everynote/plugin-codeblock', '@codemirror/lang-javascript', '@codemirror/lang-html', '@codemirror/lang-css']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withCodeBlock } from '@editablejs/plugin-codeblock'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withCodeBlock } from '@everynote/plugin-codeblock'
 import { javascript } from '@codemirror/lang-javascript'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
@@ -111,6 +111,7 @@ withCodeBlock(editor, options)
 
 - 类型：`Record<string, CodeBlockLocale>`
 - 默认值：
+
   ```ts
   const defaultLocale: Record<string, CodeBlockLocale> ={
     locale: 'zh-CN',
@@ -150,15 +151,18 @@ withCodeBlock(editor, {
   hotkey: 'mod+shift+c'
 })
 ```
+
 ### shortcuts {/*heading-options-shortcuts*/}
 
 `shortcuts` 用于配置 `CodeBlock` 插件快捷方式。
 
 - 类型：`string[]`
 - 默认值：
+
   ```ts
   const defaultShortcuts: string[] = ['```']
   ```
+
 - 示例：
 
 ```ts

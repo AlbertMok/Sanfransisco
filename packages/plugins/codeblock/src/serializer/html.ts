@@ -1,6 +1,6 @@
 import escapeHtml from 'escape-html'
-import { HTMLSerializerWithOptions, HTMLSerializerWithTransform } from '@editablejs/serializer/html'
-import { Editor } from '@editablejs/models'
+import { HTMLSerializerWithOptions, HTMLSerializerWithTransform } from '@everynote/serializer/html'
+import { Editor } from '@everynote/models'
 
 import { CodeBlock } from '../interfaces/codeblock'
 import { defaultHighlightStyle, Language } from '@codemirror/language'

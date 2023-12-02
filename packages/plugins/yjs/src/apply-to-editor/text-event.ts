@@ -1,4 +1,4 @@
-import { Editor, Element, Node, Operation, Path, Text } from '@editablejs/models'
+import { Editor, Element, Node, Operation, Path, Text } from '@everynote/models'
 import {
   deepEquals,
   deltaInsertToEditorNode,
@@ -8,7 +8,7 @@ import {
   getEditorNodeYLength,
   getEditorPath,
   yOffsetToEditorOffsets,
-} from '@editablejs/yjs-transform'
+} from '@everynote/yjs-transform'
 import * as Y from 'yjs'
 import { Delta } from '../types'
 
@@ -31,10 +31,7 @@ function applyDelta(node: Element, editorPath: Path, delta: Delta): Operation[] 
   const changes = delta.reverse()
   for (const change of changes) {
     if ('attributes' in change && 'retain' in change) {
-      const [startPathOffset, startTextOffset] = yOffsetToEditorOffsets(
-        node,
-        yOffset - change.retain,
-      )
+      const [startPathOffset, startTextOffset] = yOffsetToEditorOffsets(node, yOffset - change.retain)
       const [endPathOffset, endTextOffset] = yOffsetToEditorOffsets(node, yOffset, { assoc: -1 })
 
       for (let pathOffset = endPathOffset; pathOffset >= startPathOffset; pathOffset--) {
@@ -44,10 +41,7 @@ function applyDelta(node: Element, editorPath: Path, delta: Delta): Operation[] 
         const newProperties = change.attributes
         const properties = pick(node, ...(Object.keys(change.attributes) as Array<keyof Element>))
 
-        if (
-          Text.isText(child) &&
-          (pathOffset === startPathOffset || pathOffset === endPathOffset)
-        ) {
+        if (Text.isText(child) && (pathOffset === startPathOffset || pathOffset === endPathOffset)) {
           const start = pathOffset === startPathOffset ? startTextOffset : 0
           const end = pathOffset === endPathOffset ? endTextOffset : child.text.length
 
@@ -89,24 +83,14 @@ function applyDelta(node: Element, editorPath: Path, delta: Delta): Operation[] 
     }
 
     if ('delete' in change) {
-      const [startPathOffset, startTextOffset] = yOffsetToEditorOffsets(
-        node,
-        yOffset - change.delete,
-      )
+      const [startPathOffset, startTextOffset] = yOffsetToEditorOffsets(node, yOffset - change.delete)
       const [endPathOffset, endTextOffset] = yOffsetToEditorOffsets(node, yOffset, { assoc: -1 })
 
-      for (
-        let pathOffset = endTextOffset === 0 ? endPathOffset - 1 : endPathOffset;
-        pathOffset >= startPathOffset;
-        pathOffset--
-      ) {
+      for (let pathOffset = endTextOffset === 0 ? endPathOffset - 1 : endPathOffset; pathOffset >= startPathOffset; pathOffset--) {
         const child = node.children[pathOffset]
         const childPath = [...editorPath, pathOffset]
 
-        if (
-          Text.isText(child) &&
-          (pathOffset === startPathOffset || pathOffset === endPathOffset)
-        ) {
+        if (Text.isText(child) && (pathOffset === startPathOffset || pathOffset === endPathOffset)) {
           const start = pathOffset === startPathOffset ? startTextOffset : 0
           const end = pathOffset === endPathOffset ? endTextOffset : child.text.length
 
@@ -140,10 +124,7 @@ function applyDelta(node: Element, editorPath: Path, delta: Delta): Operation[] 
       const childPath = [...editorPath, pathOffset]
 
       if (Text.isText(child)) {
-        if (
-          typeof change.insert === 'string' &&
-          deepEquals(change.attributes ?? {}, getProperties(child))
-        ) {
+        if (typeof change.insert === 'string' && deepEquals(change.attributes ?? {}, getProperties(child))) {
           ops.push({
             type: 'insert_text',
             offset: textOffset,
@@ -191,11 +172,7 @@ function applyDelta(node: Element, editorPath: Path, delta: Delta): Operation[] 
   return ops
 }
 
-export function translateYTextEvent(
-  sharedRoot: Y.XmlText,
-  editor: Editor,
-  event: Y.YTextEvent,
-): Operation[] {
+export function translateYTextEvent(sharedRoot: Y.XmlText, editor: Editor, event: Y.YTextEvent): Operation[] {
   const { target, changes } = event
   const delta = event.delta as Delta
 
@@ -213,16 +190,9 @@ export function translateYTextEvent(
 
   const keyChanges = Array.from(changes.keys.entries())
   if (editorPath.length > 0 && keyChanges.length > 0) {
-    const newProperties = Object.fromEntries(
-      keyChanges.map(([key, info]) => [
-        key,
-        info.action === 'delete' ? null : target.getAttribute(key),
-      ]),
-    )
+    const newProperties = Object.fromEntries(keyChanges.map(([key, info]) => [key, info.action === 'delete' ? null : target.getAttribute(key)]))
 
-    const properties = Object.fromEntries(
-      keyChanges.map(([key]) => [key, (targetElement as any)[key]]),
-    )
+    const properties = Object.fromEntries(keyChanges.map(([key]) => [key, (targetElement as any)[key]]))
 
     ops.push({ type: 'set_node', newProperties, properties, path: editorPath })
   }

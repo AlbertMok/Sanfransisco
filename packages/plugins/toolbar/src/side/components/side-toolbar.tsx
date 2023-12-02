@@ -12,10 +12,10 @@ import {
   DATA_EDITABLE_STRING,
   DATA_EDITABLE_ZERO_WIDTH,
   DATA_EDITABLE_NODE,
-} from '@editablejs/editor'
-import { DOMElement, Editor, Grid, GridCell, Transforms } from '@editablejs/models'
+} from '@everynote/editor'
+import { DOMElement, Editor, Grid, GridCell, Transforms } from '@everynote/models'
 import * as React from 'react'
-import { Point, Icon, Tooltip } from '@editablejs/ui'
+import { Point, Icon, Tooltip } from '@everynote/ui'
 import { useSideToolbarMenuOpen, SideToolbar as SideToolbarStore, useSideToolbarDecorateOpen } from '../store'
 import { SideToolbarLocale } from '../locale'
 import tw from 'twin.macro'

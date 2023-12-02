@@ -1,36 +1,28 @@
 import create, { StoreApi, UseBoundStore } from 'zustand'
-import { Selection, Range, Editor } from '@editablejs/models'
+import { Selection, Range, Editor } from '@everynote/models'
 import { getLineRectsByRange } from '../utils/selection'
 import { Editable } from './editable'
 
 export interface SelectionDrawingStyle {
-  /**
-   * 拖蓝聚焦颜色
-   */
+  /** 拖蓝聚焦颜色 */
   focusColor?: string
-  /**
-   * 拖蓝失焦颜色
-   */
+
+  /** 拖蓝失焦颜 */
   blurColor?: string
-  /**
-   * 光标颜色
-   */
+
+  /** 光标颜色 */
   caretColor?: string
-  /**
-   * 光标宽度
-   */
+
+  /** 光标宽度 */
   caretWidth?: number
-  /**
-   * 拖拽光标的颜色
-   */
+
+  /** 拖拽光标的颜色 */
   dragColor?: string
-  /**
-   * 触摸光标的颜色
-   */
+
+  /** 触摸光标的颜色 */
   touchColor?: string
-  /**
-   * 触摸光标的宽度
-   */
+
+  /** 触摸光标的宽度 */
   touchWidth?: number
 }
 
@@ -40,10 +32,10 @@ export interface SelectionDrawingStore {
   enabled: boolean
 }
 
-const EDITOR_TO_SELECTION_DRAWING_STORE = new WeakMap<Editor, UseBoundStore<StoreApi<SelectionDrawingStore>>>()
+const edtior_selectionDrawingStore_map = new WeakMap<Editor, UseBoundStore<StoreApi<SelectionDrawingStore>>>()
 
 const getStore = (editor: Editor) => {
-  let store = EDITOR_TO_SELECTION_DRAWING_STORE.get(editor)
+  let store = edtior_selectionDrawingStore_map.get(editor)
   if (!store) {
     store = create<SelectionDrawingStore>(() => ({
       style: {
@@ -65,7 +57,7 @@ const getStore = (editor: Editor) => {
       rects: null,
       enabled: true,
     }))
-    EDITOR_TO_SELECTION_DRAWING_STORE.set(editor, store)
+    edtior_selectionDrawingStore_map.set(editor, store)
   }
   return store
 }

@@ -30,8 +30,8 @@ title: 快速开始
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
 
 export default function App() {
   const editor = React.useMemo(() => {
@@ -54,4 +54,3 @@ export default function App() {
 ## 下一步 {/*next-steps*/}
 
 前往 [安装](/learn/installation) 指南了解如何安装 Editable。
-

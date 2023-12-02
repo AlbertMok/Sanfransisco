@@ -1,11 +1,7 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { TableRow } from '../interfaces/table-row'
 
-export const withTableRowHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withTableRowHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -23,9 +19,9 @@ export const withTableRowHTMLSerializerTransform: HTMLSerializerWithTransform = 
             margin: '0px',
             padding: '0px',
           },
-          customStyle,
+          customStyle
         ),
-        node.children.map(child => serializer.transform(child)).join(''),
+        node.children.map((child) => serializer.transform(child)).join('')
       )
     }
     return next(node, options)

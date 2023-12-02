@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { MentionStore } from './store'
 import { getMentionTriggerData, clearMentionTriggerData } from './weak-map'
 

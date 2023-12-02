@@ -1,4 +1,4 @@
-import { useEditableStatic } from '@editablejs/editor'
+import { useEditableStatic } from '@everynote/editor'
 import { useMemo } from 'react'
 import { getViewerStore } from '../store'
 

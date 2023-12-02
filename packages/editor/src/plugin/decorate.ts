@@ -1,6 +1,6 @@
-// Import necessary dependencies and models from @editablejs
+// Import necessary dependencies and models from @everynote
 import * as React from 'react'
-import { Editor, Range, Node, Path, Text, Element } from '@editablejs/models'
+import { Editor, Range, Node, Path, Text, Element } from '@everynote/models'
 
 // Import the create and StoreApi from zustand
 import create, { StoreApi, UseBoundStore } from 'zustand'
@@ -70,7 +70,7 @@ export const Decorate = {
   // Add a decoration to the decorations array of a given Editor instance
   create: (editor: Editor, decorate: Decorate) => {
     const store = getDecorateStore(editor)
-    store.setState(state => ({
+    store.setState((state) => ({
       decorations: [...state.decorations, decorate],
     }))
   },
@@ -78,8 +78,8 @@ export const Decorate = {
   // Remove
   remove: (editor: Editor, decorate: Decorate | string) => {
     const store = getDecorateStore(editor)
-    store.setState(state => ({
-      decorations: state.decorations.filter(d => !predicate(decorate)(d)),
+    store.setState((state) => ({
+      decorations: state.decorations.filter((d) => !predicate(decorate)(d)),
     }))
   },
 

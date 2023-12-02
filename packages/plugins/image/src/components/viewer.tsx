@@ -1,5 +1,5 @@
-import { isTouchDevice, SlotComponentProps } from '@editablejs/editor'
-import { Icon } from '@editablejs/ui'
+import { isTouchDevice, SlotComponentProps } from '@everynote/editor'
+import { Icon } from '@everynote/ui'
 import React, { FC, useMemo } from 'react'
 import { PhotoSlider } from 'react-image-previewer'
 import { useViewer } from '../hooks/use-viewer'
@@ -29,7 +29,7 @@ export const ImageViewer: FC<ImageViewerProps> = React.memo(() => {
       pullClosable={false}
       maskOpacity={isTouchDevice ? 1 : 0.9}
       loadingElement={<Icon tw="text-white text-2xl" name="loading" />}
-      overlayRender={props => {
+      overlayRender={(props) => {
         return <ViewerToolbar {...props} />
       }}
     />

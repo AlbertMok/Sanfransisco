@@ -1,6 +1,6 @@
 import * as React from 'react'
 import create, { StoreApi, UseBoundStore } from 'zustand'
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 interface BaseSlashToolbarItem {
   icon?: JSX.Element
@@ -22,10 +22,7 @@ export type SlashToolbarItem =
       type: 'separator'
     }
   | {
-      content:
-        | React.ReactElement
-        | string
-        | React.FC<Record<'onSelect', (event: React.MouseEvent) => void>>
+      content: React.ReactElement | string | React.FC<Record<'onSelect', (event: React.MouseEvent) => void>>
     }
 
 const EDITOR_TO_TOOLBAR_STORE = new WeakMap<Editor, UseBoundStore<StoreApi<SlashToolbarState>>>()

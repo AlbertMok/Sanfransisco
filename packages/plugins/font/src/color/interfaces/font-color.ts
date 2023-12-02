@@ -1,4 +1,4 @@
-import { Text } from '@editablejs/models'
+import { Text } from '@everynote/models'
 import { FONTCOLOR_KEY } from '../constants'
 
 export interface FontColor extends Text {

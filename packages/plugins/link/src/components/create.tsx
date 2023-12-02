@@ -1,13 +1,6 @@
-import { Range, Transforms, Text } from '@editablejs/models'
-import {
-  Editable,
-  SlotComponentProps,
-  useEditableStatic,
-  useIsomorphicLayoutEffect,
-  useSelectionDrawingRects,
-  useLocale,
-} from '@editablejs/editor'
-import { Popover, PopoverContent, PopoverPortal, PopoverAnchor, Button } from '@editablejs/ui'
+import { Range, Transforms, Text } from '@everynote/models'
+import { Editable, SlotComponentProps, useEditableStatic, useIsomorphicLayoutEffect, useSelectionDrawingRects, useLocale } from '@everynote/editor'
+import { Popover, PopoverContent, PopoverPortal, PopoverAnchor, Button } from '@everynote/ui'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { LINK_KEY } from '../constants'
 import { Link } from '../interfaces/link'
@@ -64,7 +57,7 @@ export const LinkCreateComponent: FC<LinkCreateComponentProps> = () => {
       Transforms.insertNodes(editor, link)
     } else {
       Transforms.wrapNodes(editor, link, {
-        match: n => Text.isText(n),
+        match: (n) => Text.isText(n),
         split: true,
       })
       Transforms.select(editor, Range.end(editor.selection))
@@ -82,13 +75,7 @@ export const LinkCreateComponent: FC<LinkCreateComponentProps> = () => {
           <div tw="shadow-md rounded px-4 py-2 border border-gray-300 bg-white text-base">
             <div tw="flex gap-2 items-center">
               <label>{locale.link}</label>
-              <StyledInput
-                placeholder={locale.linkPlaceholder}
-                value={url}
-                onChange={e => setUrl(e.target.value)}
-                type="url"
-                ref={inputRef}
-              />
+              <StyledInput placeholder={locale.linkPlaceholder} value={url} onChange={(e) => setUrl(e.target.value)} type="url" ref={inputRef} />
               <Button disabled={!url} type="primary" onClick={handleOk}>
                 {locale.ok}
               </Button>

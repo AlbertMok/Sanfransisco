@@ -12,19 +12,19 @@ title: Blockquote
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-blockquote
+npm install @everynote/plugin-blockquote
 
 </TerminalBlock>
 
 ## 使用 Blockquote {/*blockquote-using*/}
 
-<Sandpack deps={['@editablejs/plugin-blockquote']}>
+<Sandpack deps={['@everynote/plugin-blockquote']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withBlockquote } from '@editablejs/plugin-blockquote'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withBlockquote } from '@everynote/plugin-blockquote'
 
 const defaultValue = [
   {
@@ -66,9 +66,11 @@ withBlockquote(editor, options)
 
 - 类型：`BlockquoteHotkey`
 - 默认值:
+
   ```ts
   const defaultHotkey: BlockquoteHotkey = 'mod+shift+u'
   ```
+
 - 示例：
 
 ```ts
@@ -76,15 +78,18 @@ withBlockquote(editor, {
   hotkey: 'mod+shift+u'
 })
 ```
+
 ### shortcuts {/*heading-options-shortcuts*/}
 
 `shortcuts` 用于配置 `Blockquote` 插件快捷方式。
 
 - 类型：`string[]`
 - 默认值：
+
   ```ts
   const defaultShortcuts: string[] = ['>']
   ```
+
 - 示例：
 
 ```ts

@@ -1,6 +1,6 @@
-import { BaseElement } from '@editablejs/editor'
+import { BaseElement } from '@everynote/editor'
 
-declare module '@editablejs/editor' {
+declare module '@everynote/editor' {
   interface CustomTypes {
     Element: BaseElement & {
       type?: string

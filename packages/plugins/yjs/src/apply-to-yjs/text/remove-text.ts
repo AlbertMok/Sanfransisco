@@ -1,6 +1,6 @@
-import { Node, RemoveTextOperation } from '@editablejs/models'
+import { Node, RemoveTextOperation } from '@everynote/models'
 import type Y from 'yjs'
-import { getYTarget } from '@editablejs/yjs-transform'
+import { getYTarget } from '@everynote/yjs-transform'
 
 export function removeText(sharedRoot: Y.XmlText, editorRoot: Node, op: RemoveTextOperation): void {
   const { yParent: target, textRange } = getYTarget(sharedRoot, editorRoot, op.path)

@@ -1,16 +1,9 @@
-import { MoveNodeOperation, Node, Path, Text } from '@editablejs/models'
-import {
-  cloneInsertDeltaDeep,
-  getInsertDeltaLength,
-  yTextToInsertDelta,
-} from '@editablejs/yjs-transform'
+import { MoveNodeOperation, Node, Path, Text } from '@everynote/models'
+import { cloneInsertDeltaDeep, getInsertDeltaLength, yTextToInsertDelta } from '@everynote/yjs-transform'
 import * as Y from 'yjs'
 import { Delta } from '../../types'
-import { getYTarget } from '@editablejs/yjs-transform'
-import {
-  getStoredPositionsInDeltaAbsolute,
-  restoreStoredPositionsWithDeltaAbsolute,
-} from '@editablejs/yjs-transform'
+import { getYTarget } from '@everynote/yjs-transform'
+import { getStoredPositionsInDeltaAbsolute, restoreStoredPositionsWithDeltaAbsolute } from '@everynote/yjs-transform'
 
 export function moveNode(sharedRoot: Y.XmlText, editorRoot: Node, op: MoveNodeOperation): void {
   const newParentPath = Path.parent(op.newPath)
@@ -25,11 +18,7 @@ export function moveNode(sharedRoot: Y.XmlText, editorRoot: Node, op: MoveNodeOp
   const target = getYTarget(sharedRoot, editorRoot, normalizedNewPath)
   const insertDelta = cloneInsertDeltaDeep(origin.targetDelta)
 
-  const storedPositions = getStoredPositionsInDeltaAbsolute(
-    sharedRoot,
-    origin.yParent,
-    origin.targetDelta,
-  )
+  const storedPositions = getStoredPositionsInDeltaAbsolute(sharedRoot, origin.yParent, origin.targetDelta)
 
   origin.yParent.delete(origin.textRange.start, origin.textRange.end - origin.textRange.start)
 
@@ -39,12 +28,5 @@ export function moveNode(sharedRoot: Y.XmlText, editorRoot: Node, op: MoveNodeOp
 
   target.yParent.applyDelta(applyDelta, { sanitize: false })
 
-  restoreStoredPositionsWithDeltaAbsolute(
-    sharedRoot,
-    target.yParent,
-    storedPositions,
-    insertDelta,
-    deltaApplyYOffset,
-    origin.textRange.start,
-  )
+  restoreStoredPositionsWithDeltaAbsolute(sharedRoot, target.yParent, storedPositions, insertDelta, deltaApplyYOffset, origin.textRange.start)
 }

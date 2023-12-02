@@ -12,19 +12,19 @@ title: Title
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-title
+npm install @everynote/plugin-title
 
 </TerminalBlock>
 
 ## 使用 Title {/*title-using*/}
 
-<Sandpack deps={['@editablejs/plugin-title']}>
+<Sandpack deps={['@everynote/plugin-title']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withTitle } from '@editablejs/plugin-title'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withTitle } from '@everynote/plugin-title'
 
 const defaultValue = [
   {

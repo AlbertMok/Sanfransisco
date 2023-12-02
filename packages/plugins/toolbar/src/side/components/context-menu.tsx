@@ -6,9 +6,9 @@ import {
   ContextMenuSub,
   ContextMenuLabel,
   Portal,
-} from '@editablejs/ui'
+} from '@everynote/ui'
 import { SideToolbarItem, useSideToolbarItems } from '../store'
-import { Editable } from '@editablejs/editor'
+import { Editable } from '@everynote/editor'
 
 export interface ContextMenu extends UIContextMenu {
   onSelect?: (event: React.MouseEvent) => void

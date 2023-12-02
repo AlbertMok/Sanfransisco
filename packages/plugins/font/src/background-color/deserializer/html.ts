@@ -1,9 +1,9 @@
-import { isDOMHTMLElement } from '@editablejs/models'
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
 import { BACKGROUND_COLOR_KEY } from '../constants'
 import { BackgroundColor } from '../interfaces/background-color'
 
-export const withBackgroundColorHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withBackgroundColorHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { text } = options
     if (isDOMHTMLElement(node)) {

@@ -1,4 +1,4 @@
-import { Editable, Hotkey, generateId } from '@editablejs/editor'
+import { Editable, Hotkey, generateId } from '@everynote/editor'
 import { renderList } from '../../styles'
 import { UNORDERED_LIST_KEY } from '../constants'
 import { UnorderedListOptions, UnorderedListHotkey } from '../options'
@@ -23,10 +23,9 @@ export const withUnorderedList = <T extends Editable>(editor: T, options: Unorde
   newEditor.createUnorderedList = (options: ToggleUnorderedListOptions = {}) => {
     const activeElements = UnorderedListEditor.queryActive(editor)
     let id = generateId()
+    // 如果有多个/1个元素是列表元素
     if (activeElements) {
-      List.unwrapList(editor, {
-        match: (n) => n.type === UNORDERED_LIST_KEY,
-      })
+      List.unwrapList(editor, { match: (n) => n.type === UNORDERED_LIST_KEY })
     } else {
       const { template } = options
       const newListElement = { type: UNORDERED_LIST_KEY, template: template ?? UnorderedListTemplates[0].key, id }

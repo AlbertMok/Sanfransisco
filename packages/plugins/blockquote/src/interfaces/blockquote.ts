@@ -1,4 +1,4 @@
-import { Descendant, Element } from '@editablejs/models'
+import { Descendant, Element } from '@everynote/models'
 import { BLOCKQUOTE_KEY } from '../constants'
 
 export interface Blockquote extends Element {

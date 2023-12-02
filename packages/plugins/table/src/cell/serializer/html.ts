@@ -1,4 +1,4 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { TableCell } from '../interfaces/table-cell'
 
 export const withTableCellHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {

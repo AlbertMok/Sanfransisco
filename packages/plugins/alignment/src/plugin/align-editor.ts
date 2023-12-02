@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { Align, AlignKeys, AlignValue } from '../interfaces/align'
 import { getOptions } from '../options'
 

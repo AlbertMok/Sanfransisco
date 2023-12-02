@@ -12,19 +12,19 @@ This page will show you how to use the `Leading` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-leading
+npm install @everynote/plugin-leading
 
 </TerminalBlock>
 
 ## Usage {/*leading-using*/}
 
-<Sandpack deps={['@editablejs/plugin-leading']}>
+<Sandpack deps={['@everynote/plugin-leading']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withLeading } from '@editablejs/plugin-leading'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withLeading } from '@everynote/plugin-leading'
 
 const defaultValue = [
   {

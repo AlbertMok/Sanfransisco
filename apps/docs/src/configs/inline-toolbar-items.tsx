@@ -1,7 +1,7 @@
-import { Editable } from '@editablejs/editor'
-import { Editor, Grid, Range, Transforms } from '@editablejs/models'
-import { TitleEditor } from '@editablejs/plugin-title'
-import { ToolbarItem } from '@editablejs/plugin-toolbar'
+import { Editable } from '@everynote/editor'
+import { Editor, Grid, Range, Transforms } from '@everynote/models'
+import { TitleEditor } from '@everynote/plugin-title'
+import { ToolbarItem } from '@everynote/plugin-toolbar'
 import {
   HeadingEditor,
   OrderedListEditor,
@@ -16,8 +16,8 @@ import {
   AlignEditor,
   AlignKeys,
   LinkEditor,
-} from '@editablejs/plugins'
-import { Icon } from '@editablejs/ui'
+} from '@everynote/plugins'
+import { Icon } from '@everynote/ui'
 import { Translation } from 'react-i18next'
 import { defaultFontColor, defaultBackgroundColor, AlignDropdown } from './toolbar-items'
 
@@ -31,14 +31,14 @@ export const createInlineToolbarItems = (editor: Editable) => {
     if (isCollapsed) {
       items.push({
         type: 'button',
-        children: <Translation>{t => t('playground.editor.base.select')}</Translation>,
+        children: <Translation>{(t) => t('playground.editor.base.select')}</Translation>,
         onToggle: () => {
           editor.selectWord()
         },
       })
       items.push({
         type: 'button',
-        children: <Translation>{t => t('playground.editor.base.select-all')}</Translation>,
+        children: <Translation>{(t) => t('playground.editor.base.select-all')}</Translation>,
         onToggle: () => {
           Transforms.select(editor, Editor.range(editor, []))
         },
@@ -46,7 +46,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
     } else if (Editable.isReadOnly(editor)) {
       items.push({
         type: 'button',
-        children: <Translation>{t => t('playground.editor.base.copy')}</Translation>,
+        children: <Translation>{(t) => t('playground.editor.base.copy')}</Translation>,
         onToggle() {
           editor.copy()
         },
@@ -59,7 +59,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
       {
         type: 'button',
         icon: <Icon name="link" />,
-        title: <Translation>{t => t('playground.editor.plugin.link')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.link')}</Translation>,
         onToggle: () => {
           LinkEditor.open(editor)
         },
@@ -67,7 +67,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
       {
         type: 'button',
         icon: <Icon name="alignLeft" />,
-        title: <Translation>{t => t('playground.editor.plugin.align-left')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.align-left')}</Translation>,
         onToggle: () => {
           AlignEditor.toggle(editor, 'left')
         },
@@ -75,7 +75,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
       {
         type: 'button',
         icon: <Icon name="alignCenter" />,
-        title: <Translation>{t => t('playground.editor.plugin.align-center')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.align-center')}</Translation>,
         onToggle: () => {
           AlignEditor.toggle(editor, 'center')
         },
@@ -83,7 +83,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
       {
         type: 'button',
         icon: <Icon name="alignRight" />,
-        title: <Translation>{t => t('playground.editor.plugin.align-right')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.align-right')}</Translation>,
         onToggle: () => {
           AlignEditor.toggle(editor, 'right')
         },
@@ -91,19 +91,19 @@ export const createInlineToolbarItems = (editor: Editable) => {
       {
         type: 'button',
         icon: <Icon name="alignJustify" />,
-        title: <Translation>{t => t('playground.editor.plugin.align-justify')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.align-justify')}</Translation>,
         onToggle: () => {
           AlignEditor.toggle(editor, 'justify')
         },
-      },
+      }
     )
     return items
   }
-  const markItems: ToolbarItem[] = marks.map(mark => ({
+  const markItems: ToolbarItem[] = marks.map((mark) => ({
     type: 'button',
     active: MarkEditor.isActive(editor, mark),
     icon: <Icon name={mark} />,
-    title: <Translation>{t => t(`playground.editor.plugin.${mark}`)}</Translation>,
+    title: <Translation>{(t) => t(`playground.editor.plugin.${mark}`)}</Translation>,
     onToggle: () => {
       MarkEditor.toggle(editor, mark)
     },
@@ -115,11 +115,11 @@ export const createInlineToolbarItems = (editor: Editable) => {
       defaultValue: '#F5222D',
       defaultColor: {
         color: defaultFontColor,
-        title: <Translation>{t => t('playground.editor.plugin.color-picker.default')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.color-picker.default')}</Translation>,
       },
-      title: <Translation>{t => t('playground.editor.plugin.font-color')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.font-color')}</Translation>,
       children: <Icon name="fontColor" />,
-      onSelect: color => {
+      onSelect: (color) => {
         FontColorEditor.toggle(editor, color)
       },
     },
@@ -128,11 +128,11 @@ export const createInlineToolbarItems = (editor: Editable) => {
       defaultValue: '#FADB14',
       defaultColor: {
         color: defaultBackgroundColor,
-        title: <Translation>{t => t('playground.editor.plugin.color-picker.no')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.color-picker.no')}</Translation>,
       },
-      title: <Translation>{t => t('playground.editor.plugin.font-background')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.font-background')}</Translation>,
       children: <Icon name="backgroundColor" />,
-      onSelect: color => {
+      onSelect: (color) => {
         BackgroundColorEditor.toggle(editor, color)
       },
     },
@@ -141,7 +141,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
       type: 'button',
       active: HeadingEditor.queryActive(editor) === 'heading-one',
       icon: <Icon name="headingOne" />,
-      title: <Translation>{t => t('playground.editor.plugin.heading-one')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.heading-one')}</Translation>,
       onToggle: () => {
         HeadingEditor.toggle(editor, 'heading-one')
       },
@@ -150,7 +150,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
       type: 'button',
       active: HeadingEditor.queryActive(editor) === 'heading-two',
 
-      title: <Translation>{t => t('playground.editor.plugin.heading-two')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.heading-two')}</Translation>,
       icon: <Icon name="headingTwo" />,
       onToggle: () => {
         HeadingEditor.toggle(editor, 'heading-two')
@@ -159,19 +159,19 @@ export const createInlineToolbarItems = (editor: Editable) => {
     {
       type: 'button',
       active: HeadingEditor.queryActive(editor) === 'heading-three',
-      title: <Translation>{t => t('playground.editor.plugin.heading-three')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.heading-three')}</Translation>,
       icon: <Icon name="headingThree" />,
       onToggle: () => {
         HeadingEditor.toggle(editor, 'heading-three')
       },
-    },
+    }
   )
   items.push(
     'separator',
     {
       type: 'button',
       active: ImageEditor.isActive(editor),
-      title: <Translation>{t => t('playground.editor.plugin.image')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.image')}</Translation>,
       onToggle: () => {
         ImageEditor.open(editor)
       },
@@ -180,7 +180,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
     {
       type: 'button',
       active: !!UnorderedListEditor.queryActive(editor),
-      title: <Translation>{t => t('playground.editor.plugin.unordered-list')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.unordered-list')}</Translation>,
       onToggle: () => {
         UnorderedListEditor.toggle(editor)
       },
@@ -189,7 +189,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
     {
       type: 'button',
       active: !!OrderedListEditor.queryActive(editor),
-      title: <Translation>{t => t('playground.editor.plugin.ordered-list')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.ordered-list')}</Translation>,
       onToggle: () => {
         OrderedListEditor.toggle(editor)
       },
@@ -198,7 +198,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
     {
       type: 'button',
       active: !!TaskListEditor.queryActive(editor),
-      title: <Translation>{t => t('playground.editor.plugin.task-list')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.task-list')}</Translation>,
       onToggle: () => {
         TaskListEditor.toggle(editor)
       },
@@ -207,7 +207,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
     {
       type: 'button',
       disabled: !!TableEditor.isActive(editor),
-      title: <Translation>{t => t('playground.editor.plugin.table')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.table')}</Translation>,
       onToggle: () => {
         TableEditor.insert(editor)
       },
@@ -221,7 +221,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
           content: (
             <div className="flex items-center gap-1">
               <Icon name="alignLeft" />
-              <Translation>{t => t('playground.editor.plugin.align-left')}</Translation>
+              <Translation>{(t) => t('playground.editor.plugin.align-left')}</Translation>
             </div>
           ),
         },
@@ -230,7 +230,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
           content: (
             <div className="flex items-center gap-1">
               <Icon name="alignCenter" />
-              <Translation>{t => t('playground.editor.plugin.align-center')}</Translation>
+              <Translation>{(t) => t('playground.editor.plugin.align-center')}</Translation>
             </div>
           ),
         },
@@ -239,7 +239,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
           content: (
             <div className="flex items-center gap-1">
               <Icon name="alignRight" />
-              <Translation>{t => t('playground.editor.plugin.align-right')}</Translation>
+              <Translation>{(t) => t('playground.editor.plugin.align-right')}</Translation>
             </div>
           ),
         },
@@ -248,18 +248,18 @@ export const createInlineToolbarItems = (editor: Editable) => {
           content: (
             <div className="flex items-center gap-1">
               <Icon name="alignJustify" />
-              <Translation>{t => t('playground.editor.plugin.align-justify')}</Translation>
+              <Translation>{(t) => t('playground.editor.plugin.align-justify')}</Translation>
             </div>
           ),
         },
       ],
       children: <AlignDropdown />,
-      title: <Translation>{t => t('playground.editor.plugin.align')}</Translation>,
+      title: <Translation>{(t) => t('playground.editor.plugin.align')}</Translation>,
       value: AlignEditor.queryActive(editor),
-      onSelect: value => {
+      onSelect: (value) => {
         AlignEditor.toggle(editor, value as AlignKeys)
       },
-    },
+    }
   )
 
   const grid = Grid.above(editor)
@@ -268,7 +268,7 @@ export const createInlineToolbarItems = (editor: Editable) => {
       'separator',
       {
         type: 'button',
-        title: <Translation>{t => t('playground.editor.base.merge-cells')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.base.merge-cells')}</Translation>,
         disabled: !Grid.canMerge(editor, grid),
         onToggle: () => {
           Grid.mergeCell(editor, grid)
@@ -277,13 +277,13 @@ export const createInlineToolbarItems = (editor: Editable) => {
       },
       {
         type: 'button',
-        title: <Translation>{t => t('playground.editor.base.split-cells')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.base.split-cells')}</Translation>,
         icon: <Icon name="tableSplit" />,
         disabled: !Grid.canSplit(editor, grid),
         onToggle: () => {
           Grid.splitCell(editor, grid)
         },
-      },
+      }
     )
   }
   return items

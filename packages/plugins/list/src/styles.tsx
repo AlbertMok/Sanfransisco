@@ -1,5 +1,5 @@
-import { DATA_EDITABLE_LEAF, Editable, RenderElementProps, useEditableStatic, useIsomorphicLayoutEffect } from '@editablejs/editor'
-import { Text, Element } from '@editablejs/models'
+import { DATA_EDITABLE_LEAF, Editable, RenderElementProps, useEditableStatic, useIsomorphicLayoutEffect } from '@everynote/editor'
+import { Text, Element } from '@everynote/models'
 import React, { useState } from 'react'
 import { StyledComponent } from 'styled-components'
 import tw, { styled } from 'twin.macro'
@@ -72,12 +72,10 @@ const ListElement = ({ element, attributes, children, onRenderLabel, StyledList,
   }, [editor, element, isAutoUpdateLabelStyle])
 
   return (
-    <div data-block-id={element.id} data-block-type={element.type}>
-      <StyledComponent data-list-level={level} {...attributes}>
-        <ListLabelStyles style={textStyle}>{onRenderLabel(element)}</ListLabelStyles>
-        <ListContentsStyles>{children}</ListContentsStyles>
-      </StyledComponent>
-    </div>
+    <StyledComponent data-list-level={level} {...attributes}>
+      <ListLabelStyles style={textStyle}>{onRenderLabel(element)}</ListLabelStyles>
+      <ListContentsStyles>{children}</ListContentsStyles>
+    </StyledComponent>
   )
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/yjs-websocket",
+  "name": "@everynote/yjs-websocket",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "exports": {
@@ -45,7 +45,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@editablejs/models": "workspace:*",
+    "@everynote/models": "workspace:*",
     "@types/jest": "^26.0.22",
     "@types/lodash.debounce": "4.0.7",
     "@types/mongodb": "4.0.7",
@@ -61,13 +61,13 @@
     "yjs": "^13.5.46"
   },
   "dependencies": {
-    "@editablejs/yjs-protocols": "workspace:*",
-    "@editablejs/yjs-transform": "workspace:*",
+    "@everynote/yjs-protocols": "workspace:*",
+    "@everynote/yjs-transform": "workspace:*",
     "lib0": "^0.2.52",
     "lodash.debounce": "^4.0.8"
   },
   "peerDependencies": {
-    "@editablejs/models": "workspace:*",
+    "@everynote/models": "workspace:*",
     "yjs": "^13.5.46"
   },
   "optionalDependencies": {

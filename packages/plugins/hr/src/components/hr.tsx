@@ -1,4 +1,4 @@
-import { RenderElementProps, useNodeFocused, useReadOnly } from '@editablejs/editor'
+import { RenderElementProps, useNodeFocused, useReadOnly } from '@everynote/editor'
 import { FC } from 'react'
 import tw, { css } from 'twin.macro'
 import { HrEditor } from '../plugin/hr-editor'
@@ -24,8 +24,8 @@ export const HrComponent: FC<HrProps> = ({ children, attributes, editor, element
         <div
           css={[
             tw` rounded cursor-pointer`,
-            !readOnly && tw`hover:bg-gray-100`,
-            focused && !readOnly && tw`bg-gray-100`,
+            // !readOnly && tw`hover:bg-gray-100`,
+            // focused && !readOnly && tw`bg-gray-100`,
             css`
               display: flex;
               flex-direction: column;

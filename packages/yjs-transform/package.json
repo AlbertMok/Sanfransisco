@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/yjs-transform",
+  "name": "@everynote/yjs-transform",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "exports": {
@@ -28,7 +28,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@editablejs/models": "workspace:*",
+    "@everynote/models": "workspace:*",
     "@types/jest": "^26.0.22",
     "eslint-config-editable": "workspace:*",
     "jest": "^27.5.1",
@@ -41,7 +41,7 @@
     "yjs": "^13.5.46"
   },
   "peerDependencies": {
-    "@editablejs/models": "workspace:*",
+    "@everynote/models": "workspace:*",
     "yjs": "^13.5.46"
   },
   "lint-staged": {

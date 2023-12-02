@@ -1,6 +1,6 @@
 import { APPLICATION_FRAGMENT_TYPE, TEXT_HTML, TEXT_PLAIN } from './constants'
 import { matchFragmentStringFromHTML, parseDataTransferFiles } from './data-transfer'
-import { isDOMHTMLElement } from '@editablejs/models'
+import { isDOMHTMLElement } from '@everynote/models'
 
 const deselectCurrent = () => {
   const selection = document.getSelection()
@@ -39,7 +39,7 @@ const deselectCurrent = () => {
     }
 
     if (!selection.rangeCount) {
-      ranges.forEach(range => {
+      ranges.forEach((range) => {
         selection.addRange(range)
       })
     }
@@ -63,7 +63,7 @@ export const readClipboardDataByCommand = () => {
       textarea = document.createElement('textarea')
       textarea.style.cssText = 'position: fixed; top: -9999; left: -9999; opacity: 0;'
 
-      textarea.addEventListener('paste', e => {
+      textarea.addEventListener('paste', (e) => {
         e.preventDefault()
         e.stopPropagation()
         resolve(e.clipboardData)
@@ -149,7 +149,7 @@ export const writeClipboardDataByCommand = (data: DataTransfer) => {
       mark.ariaHidden = 'true'
       mark.textContent = 'copy content'
       mark.style.userSelect = 'text'
-      mark.addEventListener('copy', e => {
+      mark.addEventListener('copy', (e) => {
         e.stopPropagation()
         const { clipboardData } = e
         if (clipboardData) {

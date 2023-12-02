@@ -1,11 +1,7 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { Image } from '../interfaces/image'
 
-export const withImageHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withImageHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -21,9 +17,9 @@ export const withImageHTMLSerializerTransform: HTMLSerializerWithTransform = (
             width,
             height,
           },
-          customAttributes,
+          customAttributes
         ),
-        serializer.mergeOptions(node, style, customStyle),
+        serializer.mergeOptions(node, style, customStyle)
       )
     }
     return next(node, options)

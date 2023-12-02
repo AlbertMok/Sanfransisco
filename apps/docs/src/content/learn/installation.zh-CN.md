@@ -12,7 +12,7 @@ title: 安装
 
 <TerminalBlock>
 
-npm install @editablejs/models @editablejs/editor
+npm install @everynote/models @everynote/editor
 
 </TerminalBlock>
 
@@ -29,8 +29,8 @@ npm install react react-dom
 ```js
 
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
 
 ```
 

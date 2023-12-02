@@ -1,5 +1,5 @@
-import { Editable, useGridSelectionRect, useEditableStatic, useIsomorphicLayoutEffect, SelectionDrawing } from '@editablejs/editor'
-import { Editor, Grid } from '@editablejs/models'
+import { Editable, useGridSelectionRect, useEditableStatic, useIsomorphicLayoutEffect, SelectionDrawing } from '@everynote/editor'
+import { Editor, Grid } from '@everynote/models'
 import * as React from 'react'
 import { SelectionStyles } from './styles'
 

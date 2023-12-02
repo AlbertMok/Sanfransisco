@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Range } from '@editablejs/models'
+import { Range } from '@everynote/models'
 import { useFocused } from '../hooks/use-focused'
 import {
   useSelectionDrawingSelection,
@@ -12,7 +12,7 @@ import { isTouchDevice } from '../utils/environment'
 
 interface SelectionProps {}
 
-const SelectionComponent: React.FC<SelectionProps> = () => {
+export const SelectionComponent: React.FC<SelectionProps> = () => {
   const selection = useSelectionDrawingSelection()
   const rects = useSelectionDrawingRects()
   const enabled = useSelectionDrawingEnabled()
@@ -35,5 +35,3 @@ const SelectionComponent: React.FC<SelectionProps> = () => {
     </>
   )
 }
-
-export { SelectionComponent }

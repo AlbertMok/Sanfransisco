@@ -1,4 +1,4 @@
-import { Transforms, List } from '@editablejs/models'
+import { Transforms, List } from '@everynote/models'
 import { LEADING_ATTR_KEY } from './constants'
 import { Leading } from './interfaces/leading'
 import { LeadingHotkey, LeadingOptions } from './options'
@@ -19,7 +19,7 @@ List.wrapList = (editor, entry, options = {}) => {
           { [LEADING_ATTR_KEY]: undefined },
           {
             at: path,
-          },
+          }
         )
         return {
           ...p,

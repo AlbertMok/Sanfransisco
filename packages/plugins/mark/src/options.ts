@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { MarkFormat } from './interfaces/mark'
 
 export type MarkHotkey = Record<MarkFormat, string | ((e: KeyboardEvent) => boolean)>

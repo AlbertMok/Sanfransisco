@@ -1,5 +1,5 @@
-import { Editable } from '@editablejs/editor'
-import { Editor, DOMNode, isDOMElement } from '@editablejs/models'
+import { Editable, RenderElementProps } from '@everynote/editor'
+import { Editor, DOMNode, isDOMElement } from '@everynote/models'
 import { TABLE_CELL_KEY } from '../constants'
 import { TableCell } from '../interfaces/table-cell'
 
@@ -28,4 +28,6 @@ export const TableCellEditor = {
     if (TableCellEditor.isTableCell(editor, slateNode)) return slateNode
     return null
   },
+
+  renderTableCell: (props: RenderElementProps): any => {},
 }

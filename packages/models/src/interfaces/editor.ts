@@ -15,14 +15,13 @@ import {
   Range,
   Path,
   Operation,
-  BaseEditor,
 } from 'slate'
 import { GridCell } from './cell'
 import { CompositionText } from './composition-text'
 import { Grid } from './grid'
 import { List } from './list'
 import { GridRow } from './row'
-
+import { BaseEditor } from '..'
 export interface EditorElements {
   [key: string]: NodeEntry<Element>[]
 }
@@ -168,6 +167,9 @@ SlateEditor.isEmpty = (editor: Editor, node: Node): boolean => {
   else return false
 }
 
+/**
+ * an static Editor object has some common funcs
+ */
 export const Editor: EditorInterface = {
   ...SlateEditor,
 

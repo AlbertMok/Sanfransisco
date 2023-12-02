@@ -1,4 +1,4 @@
-import { Editable, Hotkey, isTouchDevice, useIsomorphicLayoutEffect } from '@editablejs/editor'
+import { Editable, Hotkey, isTouchDevice, useIsomorphicLayoutEffect } from '@everynote/editor'
 import {
   Avatar,
   AvatarFallback,
@@ -12,7 +12,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from '@editablejs/ui'
+} from '@everynote/ui'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import debounce from 'lodash.debounce'
 import tw from 'twin.macro'
@@ -30,9 +30,7 @@ export interface MentionSearchProps {
 
 const defaultSearch = () => Promise.resolve([])
 
-const defaultRenderEmpty = () => (
-  <div tw="p-6 shadow-outer rounded bg-white text-gray-300 text-center min-w-[120px]">None</div>
-)
+const defaultRenderEmpty = () => <div tw="p-6 shadow-outer rounded bg-white text-gray-300 text-center min-w-[120px]">None</div>
 
 export const MentionSearch: FC<MentionSearchProps> = ({ editor, container, children }) => {
   const value = useMentionSearchValue(editor)
@@ -72,11 +70,11 @@ export const MentionSearch: FC<MentionSearchProps> = ({ editor, container, child
       leading: true,
       trailing: false,
     }),
-    [onSearch, debounceWait, debounceMaxWait],
+    [onSearch, debounceWait, debounceMaxWait]
   )
 
   useIsomorphicLayoutEffect(() => {
-    debounceFn(value)?.then(users => {
+    debounceFn(value)?.then((users) => {
       setUsers(users as MentionUser[])
       setActive(0)
     })
@@ -101,7 +99,7 @@ export const MentionSearch: FC<MentionSearchProps> = ({ editor, container, child
         closeMentionDecorate(editor)
       }
     },
-    [editor, active, users],
+    [editor, active, users]
   )
 
   useIsomorphicLayoutEffect(() => {
@@ -112,12 +110,12 @@ export const MentionSearch: FC<MentionSearchProps> = ({ editor, container, child
         handleInsert()
       } else if (Hotkey.match(['up', 'left'], event)) {
         event.preventDefault()
-        setActive(value => {
+        setActive((value) => {
           return value === 0 ? users.length - 1 : value - 1
         })
       } else if (Hotkey.match(['down', 'right'], event)) {
         event.preventDefault()
-        setActive(value => {
+        setActive((value) => {
           return value === users.length - 1 ? 0 : value + 1
         })
       }
@@ -135,12 +133,7 @@ export const MentionSearch: FC<MentionSearchProps> = ({ editor, container, child
     if (users.length === 0) return onSearchRenderEmpty()
     return (
       <ScrollArea tw="shadow-outer rounded bg-white">
-        <ScrollAreaViewport
-          css={[
-            tw`overflow-hidden min-w-[120px] max-h-[calc(30vh)] z-50`,
-            isTouchDevice && tw`max-h-[calc(20vh)]`,
-          ]}
-        >
+        <ScrollAreaViewport css={[tw`overflow-hidden min-w-[120px] max-h-[calc(30vh)] z-50`, isTouchDevice && tw`max-h-[calc(20vh)]`]}>
           <div ref={ref} tw="text-base py-1 ">
             {users.map((user, index) => {
               if (onSearchRenderItem) return onSearchRenderItem(user)
@@ -149,7 +142,7 @@ export const MentionSearch: FC<MentionSearchProps> = ({ editor, container, child
                 <div
                   key={id}
                   onMouseEnter={() => setActive(index)}
-                  onMouseDown={e => e.preventDefault()}
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={handleInsert}
                   css={[
                     tw`flex items-center cursor-pointer py-1 gap-3 px-4`,

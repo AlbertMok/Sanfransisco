@@ -8,16 +8,13 @@ export interface GridRow extends Element {
 }
 
 export const GridRow = {
-  create: <R extends GridRow, C extends GridCell>(
-    row: Partial<Omit<R, 'children'>> = {},
-    cells: Partial<C>[],
-  ): R => {
+  create: <Row extends GridRow, C extends GridCell>(row: Partial<Omit<Row, 'children'>> = {}, cells: Partial<C>[]): Row => {
     const { height, ...rest } = row
     return {
       type: 'grid-row',
-      children: cells.map(cell => GridCell.create<C>(cell)),
+      children: cells.map((cell) => GridCell.create<C>(cell)),
       height,
       ...rest,
-    } as unknown as R
+    } as unknown as Row
   },
 }

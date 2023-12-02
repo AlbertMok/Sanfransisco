@@ -1,4 +1,4 @@
-import { Transforms, List } from '@editablejs/models'
+import { Transforms, List } from '@everynote/models'
 import { ALIGN_ATTR_KEY } from './constants'
 import { Align, AlignValue } from './interfaces/align'
 import { AlignHotkey, AlignOptions } from './options'
@@ -19,7 +19,7 @@ List.wrapList = (editor, entry, options = {}) => {
           { [ALIGN_ATTR_KEY]: AlignValue.Left },
           {
             at: path,
-          },
+          }
         )
         return {
           ...p,

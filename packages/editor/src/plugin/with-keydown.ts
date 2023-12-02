@@ -1,4 +1,4 @@
-import { Editor, Transforms, Node, Range } from '@editablejs/models'
+import { Editor, Transforms, Node, Range } from '@everynote/models'
 import getDirection from 'direction'
 import Hotkeys from '../utils/hotkeys'
 import { getWordOffsetBackward, getWordOffsetForward } from '../utils/text'
@@ -113,7 +113,6 @@ export const withKeydown = <T extends Editor>(editor: T) => {
 
     if (Hotkeys.isMoveWordBackward(event)) {
       event.preventDefault()
-
       if (selection && Range.isExpanded(selection)) {
         Transforms.collapse(editor, { edge: 'focus' })
       }
@@ -174,7 +173,6 @@ export const withKeydown = <T extends Editor>(editor: T) => {
 
     if (Hotkeys.isMoveForward(event)) {
       event.preventDefault()
-
       if (selection && Range.isCollapsed(selection)) {
         Transforms.move(e, { reverse: isRTL })
       } else {
@@ -256,7 +254,6 @@ export const withKeydown = <T extends Editor>(editor: T) => {
 
     if (Hotkeys.isDeleteLineBackward(event)) {
       event.preventDefault()
-
       if (selection && Range.isExpanded(selection)) {
         Editor.deleteFragment(editor, { direction: 'backward' })
       } else {

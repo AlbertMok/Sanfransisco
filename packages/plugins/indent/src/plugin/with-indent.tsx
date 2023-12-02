@@ -1,11 +1,5 @@
-import {
-  Editable,
-  ElementAttributes,
-  Hotkey,
-  RenderElementAttributes,
-  RenderElementProps,
-} from '@editablejs/editor'
-import { Path, Editor, List, Transforms, NodeEntry, Range, Element, Node } from '@editablejs/models'
+import { Editable, ElementAttributes, Hotkey, RenderElementAttributes, RenderElementProps } from '@everynote/editor'
+import { Path, Editor, List, Transforms, NodeEntry, Range, Element, Node } from '@everynote/models'
 import tw from 'twin.macro'
 import { INDENT_KEY, OUTDENT_KEY } from '../constants'
 import { Indent, IndentType } from '../interfaces/indent'
@@ -27,7 +21,7 @@ const getIndentSize = (editor: Editor, type: IndentType, size: number) => {
 export const renderIndentAttributes = (
   editor: Editable,
   { attributes, element }: RenderElementAttributes<Indent>,
-  next: (props: RenderElementAttributes) => ElementAttributes,
+  next: (props: RenderElementAttributes) => ElementAttributes
 ) => {
   const { textIndent, lineIndent, type } = element
   const style: React.CSSProperties = attributes.style ?? {}
@@ -44,12 +38,7 @@ export const renderIndentAttributes = (
   return next({ attributes: Object.assign({}, attributes, { style }), element })
 }
 
-const toggleListIndent = (
-  editor: Editor,
-  entry: NodeEntry<List>,
-  size: number,
-  mode: IndentMode = 'auto',
-) => {
+const toggleListIndent = (editor: Editor, entry: NodeEntry<List>, size: number, mode: IndentMode = 'auto') => {
   if (!IndentEditor.isIndentEditor(editor)) return
   if (!IndentEditor.canSetIndent(editor, 'line')) {
     IndentEditor.insertIndent(editor)
@@ -70,7 +59,7 @@ const toggleListIndent = (
     while (true) {
       next = Editor.next(editor, {
         at: path,
-        match: n => editor.isList(n) && n.type === type && n.key === key,
+        match: (n) => editor.isList(n) && n.type === type && n.key === key,
       })
       if (!next) break
       path = next[1]
@@ -82,7 +71,7 @@ const toggleListIndent = (
           { level },
           {
             at: path,
-          },
+          }
         )
       }
     }
@@ -103,7 +92,7 @@ const toggleListIndent = (
       toggleNormalIndent(editor, size, 'line')
     }
     const listEntries = Editor.nodes<List>(editor, {
-      match: n => editor.isList(n) && n.type === type,
+      match: (n) => editor.isList(n) && n.type === type,
     })
     for (const [node, p] of listEntries) {
       const level = List.getLevel(editor, {
@@ -117,7 +106,7 @@ const toggleListIndent = (
         { level },
         {
           at: p,
-        },
+        }
       )
     }
     List.updateStart(editor, {
@@ -175,13 +164,13 @@ const toggleNormalIndent = (editor: Editor, size: number, mode: IndentMode = 'au
 }
 
 const toggleIndent = (editor: IndentEditor, size: number, mode: IndentMode = 'auto') => {
-  editor.normalizeSelection(selection => {
+  editor.normalizeSelection((selection) => {
     if (!selection) return
     if (editor.selection !== selection) editor.selection = selection
     if (!IndentEditor.isIndentEditor(editor)) return
     const entry = Editor.above<List>(editor, {
       at: selection.anchor.path,
-      match: n => editor.isList(n),
+      match: (n) => editor.isList(n),
     })
     // 设置列表的缩进
     if (entry) {
@@ -197,18 +186,14 @@ const StyledIndent = tw.span`h-full inline-flex`
 const renderIndent = (
   editor: Editable,
   { attributes, element, children }: RenderElementProps<Indent>,
-  next: (props: RenderElementProps) => JSX.Element,
+  next: (props: RenderElementProps) => JSX.Element
 ) => {
   const style: React.CSSProperties = attributes.style ?? {}
 
   const { textIndent, type } = element
 
   if (textIndent && type === INDENT_KEY) {
-    children = (
-      <StyledIndent style={{ width: getIndentSize(editor, 'text', textIndent) }}>
-        {children}
-      </StyledIndent>
-    )
+    children = <StyledIndent style={{ width: getIndentSize(editor, 'text', textIndent) }}>{children}</StyledIndent>
   }
   return next({ attributes: Object.assign({}, attributes, { style }), children, element })
 }
@@ -220,7 +205,7 @@ export const withIndent = <T extends Editable>(editor: T, options: IndentOptions
 
   const size = IndentEditor.getSize(editor)
 
-  newEditor.toggleIndent = mode => {
+  newEditor.toggleIndent = (mode) => {
     toggleIndent(newEditor, size, mode)
   }
 
@@ -231,7 +216,7 @@ export const withIndent = <T extends Editable>(editor: T, options: IndentOptions
   newEditor.onIndentMatch = (n: Node, path: Path) => {
     if (editor.isList(n)) {
       return true
-    } else if (Editor.above(newEditor, { match: n => editor.isList(n), at: path })) {
+    } else if (Editor.above(newEditor, { match: (n) => editor.isList(n), at: path })) {
       return false
     }
     return Editor.isBlock(editor, n)
@@ -239,11 +224,11 @@ export const withIndent = <T extends Editable>(editor: T, options: IndentOptions
 
   const { renderElement, renderElementAttributes } = newEditor
 
-  newEditor.renderElementAttributes = props => {
+  newEditor.renderElementAttributes = (props) => {
     return renderIndentAttributes(newEditor, props, renderElementAttributes)
   }
 
-  newEditor.renderElement = props => {
+  newEditor.renderElement = (props) => {
     return renderIndent(newEditor, props, renderElement)
   }
 
@@ -277,12 +262,7 @@ export const withIndent = <T extends Editable>(editor: T, options: IndentOptions
         match: newEditor.onIndentMatch,
       })
       const active = IndentEditor.queryActive(newEditor)
-      if (
-        active &&
-        active.level > 0 &&
-        entry &&
-        Editor.isStart(editor, selection.focus, entry[1])
-      ) {
+      if (active && active.level > 0 && entry && Editor.isStart(editor, selection.focus, entry[1])) {
         newEditor.toggleOutdent()
         return
       }

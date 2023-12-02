@@ -1,5 +1,5 @@
-import { Editable } from '@editablejs/editor'
-import { Editor } from '@editablejs/models'
+import { Editable } from '@everynote/editor'
+import { Editor } from '@everynote/models'
 import { DataType } from 'react-image-previewer'
 import { DATA_IMAGE_KEY } from './constants'
 import { Image } from './interfaces/image'
@@ -13,7 +13,7 @@ const findImages = (editor: Editable, force = false) => {
   const images: DataType[] = []
   const nodes = Editor.nodes(editor, {
     at: [],
-    match: node => Image.isImage(node) && !!node.url,
+    match: (node) => Image.isImage(node) && !!node.url,
   })
 
   for (const [node] of nodes) {
@@ -48,7 +48,7 @@ const createViewer = (editor: Editable) => {
       const key = Editable.findKey(editor, image).id
       return store.setState({
         visible: true,
-        index: images.findIndex(image => image.key === key),
+        index: images.findIndex((image) => image.key === key),
       })
     },
 

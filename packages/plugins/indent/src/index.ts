@@ -1,4 +1,4 @@
-import { Editor, Transforms, List } from '@editablejs/models'
+import { Editor, Transforms, List } from '@everynote/models'
 import { Indent } from './interfaces/indent'
 import { IndentEditor } from './plugin/indent-editor'
 
@@ -18,7 +18,7 @@ List.wrapList = (editor, entry, options = {}) => {
           { lineIndent: 0, textIndent: 0 },
           {
             at: path,
-          },
+          }
         )
         return {
           ...p,
@@ -74,7 +74,7 @@ List.getLevel = (editor, options) => {
   const { path, key, type } = options
   const [element] = Editor.nodes<Indent>(editor, {
     at: path,
-    match: n => {
+    match: (n) => {
       if (!Editor.isBlock(editor, n)) return false
       const indent = n as Indent
       return indent.lineIndent !== undefined || indent.textIndent !== undefined
@@ -83,7 +83,7 @@ List.getLevel = (editor, options) => {
   })
   const prev = Editor.previous<List & Indent>(editor, {
     at: path,
-    match: n => editor.isList(n) && n.type === type && n.key === key,
+    match: (n) => editor.isList(n) && n.type === type && n.key === key,
   })
   const prevIndentLevel = prev ? IndentEditor.getLevel(editor, prev[0]) : 0
   const prefixIndentLevel = prev ? prevIndentLevel - prev[0].level : 0

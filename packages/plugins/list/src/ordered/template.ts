@@ -1,4 +1,4 @@
-import { ListTemplate } from '@editablejs/models'
+import { ListTemplate } from '@everynote/models'
 
 const toABC = (num: number): string => {
   return num <= 26 ? String.fromCharCode(num + 64).toLowerCase() : toABC(~~((num - 1) / 26)) + toABC(num % 26 || 26)

@@ -14,19 +14,19 @@ This package includes basic mark styles such as `bold`, `italic`, `underline`, `
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-mark
+npm install @everynote/plugin-mark
 
 </TerminalBlock>
 
 ## Usage {/*mark-using*/}
 
-<Sandpack deps={['@editablejs/plugin-mark']}>
+<Sandpack deps={['@everynote/plugin-mark']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withMark } from '@editablejs/plugin-mark'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withMark } from '@everynote/plugin-mark'
 
 const defaultValue = [
   {
@@ -143,6 +143,7 @@ withMark(editor, {
 
 - Type: `MarkHotkey`
 - Default:
+
   ```ts
   {
     bold: 'mod+b',
@@ -177,6 +178,7 @@ withMark(editor, {
 
 - Type: `Record<string, MarkFormat>`
 - Default:
+
   ```ts
   {
     '**': 'bold',

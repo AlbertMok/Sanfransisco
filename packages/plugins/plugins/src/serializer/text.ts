@@ -1,9 +1,9 @@
-import { Editor } from '@editablejs/models'
-import { withBlockquoteTextSerializerTransform } from '@editablejs/plugin-blockquote/serializer/text'
-import { withListTextSerializerTransform } from '@editablejs/plugin-list/serializer/text'
-import { withTableTextSerializerTransform } from '@editablejs/plugin-table/serializer/text'
-import { withMentionTextSerializerTransform } from '@editablejs/plugin-mention/serializer/text'
-import { TextSerializer } from '@editablejs/serializer/text'
+import { Editor } from '@everynote/models'
+import { withBlockquoteTextSerializerTransform } from '@everynote/plugin-blockquote/serializer/text'
+import { withListTextSerializerTransform } from '@everynote/plugin-list/serializer/text'
+import { withTableTextSerializerTransform } from '@everynote/plugin-table/serializer/text'
+import { withMentionTextSerializerTransform } from '@everynote/plugin-mention/serializer/text'
+import { TextSerializer } from '@everynote/serializer/text'
 
 export const withTextSerializerTransform = (editor: Editor) => {
   const { withEditor } = TextSerializer

@@ -16,36 +16,33 @@ import {
   Editable,
   withEditable,
   parseDataTransfer,
-} from '@editablejs/editor'
-import { Editor, createEditor, Range, Transforms } from '@editablejs/models'
-import { MarkdownDeserializer } from '@editablejs/deserializer/markdown'
-import { withPlugins, useContextMenuEffect, ContextMenu, MentionUser } from '@editablejs/plugins'
-import { withYHistory, withYjs, YjsEditor, withYCursors, CursorData, useRemoteStates } from '@editablejs/plugin-yjs'
+} from '@everynote/editor'
+import { Editor, createEditor, Range, Transforms, Element } from '@everynote/models'
+import { MarkdownDeserializer } from '@everynote/deserializer/markdown'
+import { withPlugins, useContextMenuEffect, ContextMenu, MentionUser } from '@everynote/plugins'
+import { withYHistory, withYjs, YjsEditor, withYCursors, CursorData, useRemoteStates } from '@everynote/plugin-yjs'
 
 import randomColor from 'randomcolor'
 import { faker } from '@faker-js/faker'
-import { WebsocketProvider } from '@editablejs/yjs-websocket'
+import { WebsocketProvider } from '@everynote/yjs-websocket'
 import * as Y from 'yjs'
-import { withHTMLSerializerTransform } from '@editablejs/plugins/serializer/html'
-import { withTextSerializerTransform } from '@editablejs/plugins/serializer/text'
-import { withMarkdownSerializerTransform, withMarkdownSerializerPlugin } from '@editablejs/plugins/serializer/markdown'
-import { withHTMLDeserializerTransform } from '@editablejs/plugins/deserializer/html'
-import { withMarkdownDeserializerTransform, withMarkdownDeserializerPlugin } from '@editablejs/plugins/deserializer/markdown'
-import { withTitleHTMLSerializerTransform } from '@editablejs/plugin-title/serializer/html'
-import { withTitleHTMLDeserializerTransform } from '@editablejs/plugin-title/deserializer/html'
-import { withHistory } from '@editablejs/plugin-history'
+import { withHTMLSerializerTransform } from '@everynote/plugins/serializer/html'
+import { withTextSerializerTransform } from '@everynote/plugins/serializer/text'
+import { withMarkdownSerializerTransform, withMarkdownSerializerPlugin } from '@everynote/plugins/serializer/markdown'
+import { withHTMLDeserializerTransform } from '@everynote/plugins/deserializer/html'
+import { withMarkdownDeserializerTransform, withMarkdownDeserializerPlugin } from '@everynote/plugins/deserializer/markdown'
+
+import { withHistory } from '@everynote/plugin-history'
 import { javascript as codemirrorJavascript } from '@codemirror/lang-javascript-next'
 import { html as codemirrorHtml } from '@codemirror/lang-html-next'
 import { css as codemirrorCss } from '@codemirror/lang-css-next'
-import { withYCodeBlock } from '@editablejs/plugin-codeblock/yjs'
-import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@editablejs/plugin-toolbar'
-import { withInlineToolbar, useInlineToolbarEffect, InlineToolbar } from '@editablejs/plugin-toolbar/inline'
-import { withSideToolbar, useSideToolbarMenuEffect, SideToolbar } from '@editablejs/plugin-toolbar/side'
-import { withSlashToolbar, useSlashToolbarEffect, SlashToolbar } from '@editablejs/plugin-toolbar/slash'
-import { Switch, SwitchThumb, Icon, Tooltip } from '@editablejs/ui'
-import { TitleEditor, withTitle } from '@editablejs/plugin-title'
-import { HTMLDeserializer } from '@editablejs/deserializer/html'
-import { HTMLSerializer } from '@editablejs/serializer/html'
+import { withYCodeBlock } from '@everynote/plugin-codeblock/yjs'
+import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@everynote/plugin-toolbar'
+import { withInlineToolbar, useInlineToolbarEffect, InlineToolbar } from '@everynote/plugin-toolbar/inline'
+import { withSideToolbar, useSideToolbarMenuEffect, SideToolbar } from '@everynote/plugin-toolbar/side'
+import { withSlashToolbar, useSlashToolbarEffect, SlashToolbar } from '@everynote/plugin-toolbar/slash'
+import { Switch, SwitchThumb, Icon, Tooltip } from '@everynote/ui'
+
 import { createContextMenuItems } from '../configs/context-menu-items'
 import { createToolbarItems, defaultBackgroundColor, defaultFontColor } from '../configs/toolbar-items'
 import { createSideToolbarItems } from '../configs/side-toolbar-items'
@@ -53,8 +50,9 @@ import { createInlineToolbarItems } from 'configs/inline-toolbar-items'
 import { checkMarkdownSyntax } from 'configs/check-markdown-syntax'
 import { createSlashToolbarItems } from 'configs/slash-toolbar-items'
 import { initialValue } from 'configs/initial-value'
-import { useRouter } from 'next/router'
+
 import { useTranslation } from 'react-i18next'
+import { useRouter } from 'next/dist/client/router'
 
 const CustomStyles = createGlobalStyle({
   body: {
@@ -155,7 +153,7 @@ export default function Playground() {
         data: cursorData,
       })
     }
-    editor = withTitle(editor)
+
     editor = withHistory(editor)
 
     editor = withYHistory(editor)
@@ -180,7 +178,7 @@ export default function Playground() {
         },
         match: () =>
           !Editor.above(editor, {
-            match: (n) => TitleEditor.isTitle(editor, n),
+            match: (n) => Element.isElement(n) && !!n.type && n.type === 'title',
           }),
       },
       codeBlock: {
@@ -213,13 +211,13 @@ export default function Playground() {
     // 如果不是触摸设备的话，就显示sideToolbar
     if (!isTouchDevice) {
       editor = withSideToolbar(editor, {
-        match: (n) => !TitleEditor.isTitle(editor, n),
+        match: (n) => !(Element.isElement(n) && !!n.type && n.type === 'title'),
       })
     }
 
     // slash menu
     editor = withSlashToolbar(editor, {
-      match: () => !Editor.above(editor, { match: (n) => TitleEditor.isTitle(editor, n) }),
+      match: () => !Editor.above(editor, { match: (n) => Element.isElement(n) && !!n.type && n.type === 'title' }),
     })
 
     return editor
@@ -227,7 +225,7 @@ export default function Playground() {
 
   useIsomorphicLayoutEffect(() => {
     const unsubscribe = Placeholder.subscribe(editor, ([node]) => {
-      if (Editable.isFocused(editor) && Editor.isBlock(editor, node) && !TitleEditor.isTitle(editor, node))
+      if (Editable.isFocused(editor) && Editor.isBlock(editor, node) && !(Element.isElement(node) && !!node.type && node.type === 'title'))
         return () => t('playground.editor.block-placeholder')
     })
     return () => unsubscribe()
@@ -262,8 +260,7 @@ export default function Playground() {
     withMarkdownSerializerTransform(editor) // Adds a markdown serializer transform to the editor
     withHTMLDeserializerTransform(editor) // Adds an HTML deserializer transform to the editor
     withMarkdownDeserializerTransform(editor) // Adds a markdown deserializer transform to the editor
-    HTMLDeserializer.withEditor(editor, withTitleHTMLDeserializerTransform, {})
-    HTMLSerializer.withEditor(editor, withTitleHTMLSerializerTransform, {})
+
     const { onPaste } = editor
 
     editor.onPaste = (event) => {
@@ -363,8 +360,8 @@ export default function Playground() {
                   {connecting
                     ? t('playground.connecting')
                     : connected
-                    ? t('playground.mode.collaboration') // 在locals文件夹中定义的模式
-                    : t('playground.mode.local')}
+                      ? t('playground.mode.collaboration') // 在locals文件夹中定义的模式
+                      : t('playground.mode.local')}
                 </label>
                 {connecting && <Icon name="loading" />}
                 {!connecting && (
@@ -379,9 +376,11 @@ export default function Playground() {
           <StyledToolbar editor={editor} disabled={readOnly} />
         </StyledHeader>
 
-        <StyledContainer>
-          <ContentEditable lang={local ?? 'en-US'} readOnly={readOnly} placeholder={t('playground.editor.placeholder')} />
-        </StyledContainer>
+        <div className="edit-container">
+          <StyledContainer>
+            <ContentEditable lang={local ?? 'en-US'} readOnly={readOnly} placeholder={t('playground.editor.placeholder')} />
+          </StyledContainer>
+        </div>
       </EditableProvider>
     </>
   )

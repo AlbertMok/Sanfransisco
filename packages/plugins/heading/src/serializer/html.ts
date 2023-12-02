@@ -1,4 +1,4 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { HeadingTags } from '../constants'
 import { Heading } from '../interfaces/heading'
 

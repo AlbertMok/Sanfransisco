@@ -1,9 +1,9 @@
 import * as Y from 'yjs'
 import * as cmState from '@codemirror/state'
 import * as cmView from '@codemirror/view'
-import { Awareness } from '@editablejs/yjs-protocols/awareness'
+import { Awareness } from '@everynote/yjs-protocols/awareness'
 import { createYRange, YRange } from './range'
-import { Editable } from '@editablejs/editor'
+import { Editable } from '@everynote/editor'
 
 export class YSyncConfig {
   ytext: Y.Text
@@ -53,14 +53,9 @@ export class YSyncConfig {
    */
   fromYPos(rpos: Y.RelativePosition | Object) {
     if (!this.ytext.doc) throw new Error('Document not attached')
-    const pos = Y.createAbsolutePositionFromRelativePosition(
-      Y.createRelativePositionFromJSON(rpos),
-      this.ytext.doc,
-    )
+    const pos = Y.createAbsolutePositionFromRelativePosition(Y.createRelativePositionFromJSON(rpos), this.ytext.doc)
     if (pos == null || pos.type !== this.ytext) {
-      throw new Error(
-        '[yCodeblockPlugins]] The position you want to retrieve was created by a different document',
-      )
+      throw new Error('[yCodeblockPlugins]] The position you want to retrieve was created by a different document')
     }
     return {
       pos: pos.index,
@@ -134,11 +129,7 @@ class YSyncPluginValue implements cmView.PluginValue {
   }
 
   update(update: cmView.ViewUpdate) {
-    if (
-      !update.docChanged ||
-      (update.transactions.length > 0 &&
-        update.transactions[0].annotation(ySyncAnnotation) === this.conf)
-    ) {
+    if (!update.docChanged || (update.transactions.length > 0 && update.transactions[0].annotation(ySyncAnnotation) === this.conf)) {
       return
     }
     const ytext = this.conf.ytext

@@ -12,7 +12,7 @@ export const DATA_EDITABLE_VOID = `data-ea-void`
 export const DATA_EDITABLE_PLACEHOLDER = `data-ea-placeholder`
 export const DATA_EDITABLE_LEAF = `data-block-leaf`
 export const DATA_BLOCK_ID = `data-block-id`
-
+export const DATA_BLOCK_TYPE = `data-block-type`
 export const Constants = {
   applicationType: APPLICATION_FRAGMENT_TYPE,
   htmlType: TEXT_HTML,

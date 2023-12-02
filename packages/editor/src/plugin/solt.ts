@@ -1,7 +1,7 @@
 import merge from 'lodash.merge'
 import * as React from 'react'
 import create, { StoreApi, UseBoundStore } from 'zustand'
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export interface SlotComponentProps {
   active?: boolean

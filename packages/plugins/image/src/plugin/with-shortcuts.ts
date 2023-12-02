@@ -1,17 +1,17 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import { Editor, Element, Range, Point, Transforms, Text, Path } from '@editablejs/models'
+import { Editable, Hotkey } from '@everynote/editor'
+import { Editor, Element, Range, Point, Transforms, Text, Path } from '@everynote/models'
 import { ImageEditor } from './image-editor'
 
 const findMatchedRange = (editor: Editor, at: Point) => {
   const [startText] = Editor.nodes<Text>(editor, {
     at,
-    match: n => Text.isText(n),
+    match: (n) => Text.isText(n),
   })
   if (!startText) return
 
   const block = Editor.above(editor, {
     at,
-    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
   })
 
   const path = block ? block[1] : []
@@ -51,14 +51,9 @@ const findMatchedRange = (editor: Editor, at: Point) => {
 export const withShortcuts = (editor: Editable) => {
   const { onKeydown } = editor
 
-  editor.onKeydown = event => {
+  editor.onKeydown = (event) => {
     const { selection } = editor
-    if (
-      selection &&
-      Range.isCollapsed(selection) &&
-      !Editable.isComposing(editor) &&
-      Hotkey.match('space', event)
-    ) {
+    if (selection && Range.isCollapsed(selection) && !Editable.isComposing(editor) && Hotkey.match('space', event)) {
       const anchor = Range.start(selection)
       const match = findMatchedRange(editor, anchor)
       if (match) {

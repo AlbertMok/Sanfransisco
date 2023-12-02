@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { getSlashToolbarStore } from '../store'
 
 export const useSlashToolbarStore = (editor: Editor) => {

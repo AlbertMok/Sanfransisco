@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/plugins",
+  "name": "@everynote/plugins",
   "version": "1.0.6",
   "main": "./dist/index.js",
   "exports": {
@@ -77,8 +77,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@editablejs/models": "workspace:*",
-    "@editablejs/editor": "workspace:*",
+    "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
     "eslint-config-editable": "workspace:*",
@@ -93,28 +93,29 @@
     "typescript": "^4.x"
   },
   "peerDependencies": {
-    "@editablejs/models": "workspace:*",
-    "@editablejs/editor": "workspace:*"
+    "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*"
   },
   "dependencies": {
-    "@editablejs/deserializer": "workspace:*",
-    "@editablejs/serializer": "workspace:*",
-    "@editablejs/plugin-alignment": "workspace:*",
-    "@editablejs/plugin-font": "workspace:*",
-    "@editablejs/plugin-blockquote": "workspace:*",
-    "@editablejs/plugin-codeblock": "workspace:*",
-    "@editablejs/plugin-context-menu": "workspace:*",
-    "@editablejs/plugin-heading": "workspace:*",
-    "@editablejs/plugin-hr": "workspace:*",
-    "@editablejs/plugin-image": "workspace:*",
-    "@editablejs/plugin-indent": "workspace:*",
-    "@editablejs/plugin-leading": "workspace:*",
-    "@editablejs/plugin-link": "workspace:*",
-    "@editablejs/plugin-list": "workspace:*",
-    "@editablejs/plugin-mark": "workspace:*",
-    "@editablejs/plugin-mention": "workspace:*",
-    "@editablejs/plugin-table": "workspace:*",
-    "@editablejs/plugin-paragraph":"workspace:*"
+    "@everynote/deserializer": "workspace:*",
+    "@everynote/plugin-alignment": "workspace:*",
+    "@everynote/plugin-blockquote": "workspace:*",
+    "@everynote/plugin-codeblock": "workspace:*",
+    "@everynote/plugin-context-menu": "workspace:*",
+    "@everynote/plugin-font": "workspace:*",
+    "@everynote/plugin-heading": "workspace:*",
+    "@everynote/plugin-hr": "workspace:*",
+    "@everynote/plugin-image": "workspace:*",
+    "@everynote/plugin-indent": "workspace:*",
+    "@everynote/plugin-leading": "workspace:*",
+    "@everynote/plugin-link": "workspace:*",
+    "@everynote/plugin-list": "workspace:*",
+    "@everynote/plugin-mark": "workspace:*",
+    "@everynote/plugin-mention": "workspace:*",
+    "@everynote/plugin-paragraph": "workspace:*",
+    "@everynote/plugin-table": "workspace:*",
+    "@everynote/plugin-title": "workspace:*",
+    "@everynote/serializer": "workspace:*"
   },
   "lint-staged": {
     "src/**/*.{json,ts,tsx,js,jsx}": [

@@ -1,11 +1,7 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { Link } from '../interfaces/link'
 
-export const withLinkHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withLinkHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -20,10 +16,10 @@ export const withLinkHTMLSerializerTransform: HTMLSerializerWithTransform = (
             href,
             target,
           },
-          customAttributes,
+          customAttributes
         ),
         serializer.mergeOptions(node, style, customStyle),
-        node.children.map(child => serializer.transform(child)).join(''),
+        node.children.map((child) => serializer.transform(child)).join('')
       )
     }
     return next(node, options)

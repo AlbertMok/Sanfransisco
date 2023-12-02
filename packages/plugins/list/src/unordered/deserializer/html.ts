@@ -1,5 +1,5 @@
-import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { Descendant, isDOMText, List, generateRandomKey, Editor } from '@editablejs/models'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { Descendant, isDOMText, List, generateRandomKey, Editor } from '@everynote/models'
 import { UNORDERED_LIST_KEY } from '../constants'
 
 export interface UnorderedListHTMLDeserializerOptions extends HTMLDeserializerOptions {

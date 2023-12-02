@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export type BackgroundColorHotkey = Record<string, string | ((e: KeyboardEvent) => boolean)>
 

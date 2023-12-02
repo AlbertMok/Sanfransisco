@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export interface ContextMenuOptions {}
 export const CONTEXT_MENU_OPTIONS = new WeakMap<Editor, ContextMenuOptions>()

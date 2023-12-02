@@ -1,12 +1,6 @@
-import {
-  useEditableStatic,
-  Editable,
-  useSlotActive,
-  useIsomorphicLayoutEffect,
-  Slot,
-} from '@editablejs/editor'
+import { useEditableStatic, Editable, useSlotActive, useIsomorphicLayoutEffect, Slot } from '@everynote/editor'
 
-import { Portal, Point } from '@editablejs/ui'
+import { Portal, Point } from '@everynote/ui'
 import React from 'react'
 import { ContextMenu } from './context-menu'
 import { useContextMenuOpen, useContextMenuItems } from '../store'
@@ -60,22 +54,15 @@ export const ContextMenuPortal = () => {
 
   useIsomorphicLayoutEffect(() => {
     if (open) {
-      Slot.update(editor, { active: false }, c => c !== ContextMenuPortal)
-      Slot.update(editor, { active: true }, c => c === ContextMenuPortal)
+      Slot.update(editor, { active: false }, (c) => c !== ContextMenuPortal)
+      Slot.update(editor, { active: true }, (c) => c === ContextMenuPortal)
     }
   }, [editor, open])
 
   if (containerRef.current && rootRef.current)
     return (
       <Portal container={rootRef.current}>
-        <ContextMenu
-          open={open}
-          items={items}
-          container={point}
-          onOpenChange={setOpen}
-          onSelect={() => setOpen(false)}
-          minWidth={200}
-        />
+        <ContextMenu open={open} items={items} container={point} onOpenChange={setOpen} onSelect={() => setOpen(false)} minWidth={200} />
       </Portal>
     )
   return null

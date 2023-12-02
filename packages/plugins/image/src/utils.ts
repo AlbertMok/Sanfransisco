@@ -1,4 +1,4 @@
-import { Editor, Path, Transforms } from '@editablejs/models'
+import { Editor, Path, Transforms } from '@everynote/models'
 import { IMAGE_KEY } from './constants'
 import { Image } from './interfaces/image'
 import { getOptions } from './options'
@@ -10,7 +10,7 @@ const readBase64WithFileReader = (file: File) => {
     reader.onload = () => {
       resolve(reader.result as string)
     }
-    reader.onerror = error => {
+    reader.onerror = (error) => {
       reject(error)
     }
   })
@@ -24,7 +24,7 @@ const readBase64WithFetch = (url: string) => {
       reader.onloadend = () => {
         resolve(reader.result as string)
       }
-      reader.onerror = error => {
+      reader.onerror = (error) => {
         reject(error)
       }
       reader.readAsDataURL(xhr.response)
@@ -61,10 +61,10 @@ interface ReadImageFileInfo {
 }
 
 export const readImageFileInfo = (file: File) => {
-  return new Promise<ReadImageFileInfo | null>(resolve => {
+  return new Promise<ReadImageFileInfo | null>((resolve) => {
     const url = URL.createObjectURL(file)
     readImageElement(url)
-      .then(image => {
+      .then((image) => {
         resolve({
           width: image.naturalWidth,
           height: image.naturalHeight,
@@ -101,7 +101,7 @@ export const insertImage = (editor: Editor, options: Partial<Image>) => {
 
   Transforms.insertNodes(editor, image)
   const entry = Editor.above(editor, {
-    match: n => Image.isImage(n),
+    match: (n) => Image.isImage(n),
   })
   if (!entry) throw new Error('image not found')
   return entry[1]
@@ -109,7 +109,7 @@ export const insertImage = (editor: Editor, options: Partial<Image>) => {
 
 export const uploadImage = (editor: Editor, path: Path, file: File | string) => {
   const options = getOptions(editor)
-  const promise = new Promise<void>(resolve => {
+  const promise = new Promise<void>((resolve) => {
     const pathRef = Editor.pathRef(editor, path)
 
     const { onUpload = defaultUpload } = options
@@ -117,18 +117,13 @@ export const uploadImage = (editor: Editor, path: Path, file: File | string) => 
       const path = pathRef.current
       if (path) setPercentage(editor, path, percentage)
     })
-      .then(url => {
+      .then((url) => {
         const path = pathRef.current
         if (path) Transforms.setNodes<Image>(editor, { url, state: 'done' }, { at: path })
       })
-      .catch(err => {
+      .catch((err) => {
         const path = pathRef.current
-        if (path)
-          Transforms.setNodes<Image>(
-            editor,
-            { state: 'error', errorMessage: typeof err === 'string' ? err : err.message },
-            { at: path },
-          )
+        if (path) Transforms.setNodes<Image>(editor, { state: 'error', errorMessage: typeof err === 'string' ? err : err.message }, { at: path })
       })
       .finally(() => {
         const path = pathRef.unref()
@@ -158,7 +153,7 @@ export function rotateImgWithCanvas(image: HTMLImageElement, degrees: number): P
     ctx.translate(canvas.width / 2, canvas.height / 2)
     ctx.rotate((degrees * Math.PI) / 180)
     ctx.drawImage(image, -image.naturalWidth / 2, -image.naturalHeight / 2)
-    canvas.toBlob(blob => {
+    canvas.toBlob((blob) => {
       blob ? resolve(blob) : reject('blob is null')
     }, 'image/jpeg')
   })

@@ -1,5 +1,5 @@
-import { ElementAttributes } from '@editablejs/editor'
-import { Editor } from '@editablejs/models'
+import { ElementAttributes } from '@everynote/editor'
+import { Editor } from '@everynote/models'
 import React from 'react'
 
 export interface TitleComponentProps {

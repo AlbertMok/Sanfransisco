@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/plugin-list",
+  "name": "@everynote/plugin-list",
   "version": "2.0.1",
   "main": "./dist/index.js",
   "exports": {
@@ -82,8 +82,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@editablejs/editor": "workspace:*",
-    "@editablejs/models": "workspace:*",
+    "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
     "@types/mdast": "3.0.10",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
@@ -103,12 +103,12 @@
     "typescript": "^4.x"
   },
   "peerDependencies": {
-    "@editablejs/editor": "workspace:*",
-    "@editablejs/models": "workspace:*"
+    "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*"
   },
   "dependencies": {
-    "@editablejs/deserializer": "workspace:*",
-    "@editablejs/serializer": "workspace:*",
+    "@everynote/deserializer": "workspace:*",
+    "@everynote/serializer": "workspace:*",
     "mdast-util-gfm-task-list-item": "1.0.2",
     "micromark-extension-gfm-task-list-item": "1.0.3",
     "styled-components": "5.3.6"

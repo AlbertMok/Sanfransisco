@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { GridSelected, Grid } from '@editablejs/models'
+import { GridSelected, Grid } from '@everynote/models'
 import { Editable } from '../plugin/editable'
 import { useEditableStatic } from './use-editable'
 import { useGrid } from './use-grid'

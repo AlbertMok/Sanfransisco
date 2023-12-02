@@ -1,13 +1,6 @@
 // COMPAT: This is required to prevent TypeScript aliases from doing some very
 // weird things for Slate's types with the same name as globals. (2019/11/27)
-import {
-  DOMPoint,
-  isDOMElement,
-  DOMElement,
-  DOMNode,
-  isDOMComment,
-  isDOMHTMLElement,
-} from '@editablejs/models'
+import { DOMPoint, isDOMElement, DOMElement, DOMNode, isDOMComment, isDOMHTMLElement } from '@everynote/models'
 import { Constants } from './constants'
 import { CAN_USE_DOM } from './environment'
 
@@ -55,11 +48,7 @@ export const hasShadowRoot = () => {
  * `direction`.
  */
 
-export const getEditableChildAndIndex = (
-  parent: DOMElement,
-  index: number,
-  direction: 'forward' | 'backward',
-): [DOMNode, number] => {
+export const getEditableChildAndIndex = (parent: DOMElement, index: number, direction: 'forward' | 'backward'): [DOMNode, number] => {
   const { childNodes } = parent
   let child = childNodes[index]
   let i = index
@@ -100,11 +89,7 @@ export const getEditableChildAndIndex = (
  * `direction`.
  */
 
-export const getEditableChild = (
-  parent: DOMElement,
-  index: number,
-  direction: 'forward' | 'backward',
-): DOMNode => {
+export const getEditableChild = (parent: DOMElement, index: number, direction: 'forward' | 'backward'): DOMNode => {
   const [child] = getEditableChildAndIndex(parent, index, direction)
   return child
 }
@@ -128,7 +113,7 @@ export const inAbsoluteDOMElement = (value: any): boolean => {
     let node: HTMLElement | null = value
     while (node) {
       const attributeNames = node.getAttributeNames()
-      if (attributeNames.some(name => Constants.dataNode === name)) return false
+      if (attributeNames.some((name) => Constants.dataNode === name)) return false
       const styles = getComputedStyle(node)
       if (~['absolute', 'fixed'].indexOf(styles.position)) {
         return true

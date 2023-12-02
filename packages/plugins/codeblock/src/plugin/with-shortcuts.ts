@@ -1,11 +1,11 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import { Editor, Element, Range, Point, Transforms } from '@editablejs/models'
+import { Editable, Hotkey } from '@everynote/editor'
+import { Editor, Element, Range, Point, Transforms } from '@everynote/models'
 import { CodeBlockEditor } from './editor'
 
 const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {
   const block = Editor.above(editor, {
     at,
-    match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
   })
   const path = block ? block[1] : []
 
@@ -39,7 +39,7 @@ const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {
 export const withShortcuts = (editor: Editable, shortcuts: string[]) => {
   const { onKeydown } = editor
 
-  editor.onKeydown = event => {
+  editor.onKeydown = (event) => {
     const { selection } = editor
     if (
       selection &&

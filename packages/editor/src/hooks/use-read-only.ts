@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import create, { StoreApi, UseBoundStore, useStore } from 'zustand'
 import { useEditableStatic } from './use-editable'
 
@@ -11,9 +11,7 @@ const EDITABLE_TO_FOCUSED_STORE = new WeakMap<Editor, UseBoundStore<StoreApi<Rea
 const getStore = (editor: Editor) => {
   let store = EDITABLE_TO_FOCUSED_STORE.get(editor)
   if (!store) {
-    store = create<ReadOnlyStore>(() => ({
-      isReadOnly: false,
-    }))
+    store = create<ReadOnlyStore>(() => ({ isReadOnly: false }))
     EDITABLE_TO_FOCUSED_STORE.set(editor, store)
   }
 
@@ -23,7 +21,7 @@ const getStore = (editor: Editor) => {
 export const useReadOnly = (): [boolean, (isReadOnly: boolean) => void] => {
   const editor = useEditableStatic()
   const store = getStore(editor)
-  const isReadOnly = useStore(store, state => state.isReadOnly)
+  const isReadOnly = useStore(store, (state) => state.isReadOnly)
 
   return [
     isReadOnly,

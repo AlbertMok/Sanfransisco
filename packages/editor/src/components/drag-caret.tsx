@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Editor, Element, Path, GridCell } from '@editablejs/models'
+import { Editor, Element, Path, GridCell } from '@everynote/models'
 import { useDragPosition, useDragTo, useDragType } from '../hooks/use-drag'
 import { useEditableStatic } from '../hooks/use-editable'
 import { useSelectionDrawingStyle } from '../hooks/use-selection-drawing'
@@ -12,12 +12,13 @@ export const DragCaretComponent = React.memo(() => {
   const dragTo = useDragTo()
   const dragType = useDragType()
   const dragPosition = useDragPosition()
+
   const rects = React.useMemo(() => {
     if (!dragTo || !dragPosition) return null
     if (dragType === 'block') {
       const entry = Editor.above(editor, {
         at: dragTo,
-        match: n => Element.isElement(n),
+        match: (n) => Element.isElement(n),
         mode: 'lowest',
       })
       if (!entry) return null

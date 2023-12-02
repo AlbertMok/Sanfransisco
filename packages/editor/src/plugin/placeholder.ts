@@ -1,18 +1,14 @@
 import * as React from 'react'
-import { Editor, Node, NodeEntry, Range } from '@editablejs/models'
+import { Editor, Node, NodeEntry, Range } from '@everynote/models'
 import create, { UseBoundStore, StoreApi } from 'zustand'
 import { Editable } from './editable'
 
 export interface RenderPlaceholderProps {
   node: Node
 }
-export type PlaceholderRender = (
-  props: RenderPlaceholderProps
-) => React.ReactNode
+export type PlaceholderRender = (props: RenderPlaceholderProps) => React.ReactNode
 
-export type PlaceholderSubscribe = (
-  entry: NodeEntry
-) => PlaceholderRender | void
+export type PlaceholderSubscribe = (entry: NodeEntry) => PlaceholderRender | void
 
 const PLACEHOLDER_IS_ALONE = new WeakMap<PlaceholderSubscribe, boolean>()
 export interface ActivePlaceholder {
@@ -27,10 +23,7 @@ export interface PlaceholderStore {
   actives: ActivePlaceholder[]
 }
 
-const editorToPlaceholderStore = new WeakMap<
-  Editable,
-  UseBoundStore<StoreApi<PlaceholderStore>>
->()
+const editorToPlaceholderStore = new WeakMap<Editable, UseBoundStore<StoreApi<PlaceholderStore>>>()
 
 const getPlaceholderStore = (editor: Editable) => {
   let store = editorToPlaceholderStore.get(editor)
@@ -72,9 +65,7 @@ export const Placeholder = {
     const state = store.getState()
     let render: PlaceholderRender | null = null
     let placeholder: PlaceholderSubscribe | null = null
-    const aloneActive = state.actives.find(
-      (d) => d.alone && d.entry[0] === entry[0]
-    )
+    const aloneActive = state.actives.find((d) => d.alone && d.entry[0] === entry[0])
     if (aloneActive) {
       const r = aloneActive.placeholder(entry)
       if (r) {
@@ -84,12 +75,8 @@ export const Placeholder = {
     }
     // 没有以编辑器为placeholder的情况下，才会去找其他的placeholder
     else {
-      const hasEditorPlaceholder = state.actives.some(
-        (d) => d.entry[0] === editor
-      )
-      const placeholders = state.placeholders.sort((a) =>
-        Placeholder.isAlone(a) ? 1 : 0
-      )
+      const hasEditorPlaceholder = state.actives.some((d) => d.entry[0] === editor)
+      const placeholders = state.placeholders.sort((a) => (Placeholder.isAlone(a) ? 1 : 0))
       for (let i = placeholders.length - 1; i >= 0; i--) {
         placeholder = placeholders[i]
         if (!Placeholder.isAlone(placeholder) && hasEditorPlaceholder) continue

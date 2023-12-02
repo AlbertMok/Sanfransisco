@@ -1,11 +1,18 @@
-import { Editable } from '@editablejs/editor'
-import { GridCell, Node } from '@editablejs/models'
+import { Editable } from '@everynote/editor'
+import { GridCell, Node } from '@everynote/models'
 import { setOptions, TableCellOptions } from '../options'
 import { CellInnerStyles, CellStyles } from '../../components/cell'
 import { TableCellEditor } from './table-cell-editor'
 
+/**
+ * 定义渲染 table cell的方式
+ * @param editor
+ * @param options
+ * @returns
+ */
 export const withTableCell = <T extends Editable>(editor: T, options: TableCellOptions = {}) => {
   const newEditor = editor as T & TableCellEditor
+
   const { renderElement, isGridCell } = editor
 
   setOptions(editor, options)
@@ -16,6 +23,7 @@ export const withTableCell = <T extends Editable>(editor: T, options: TableCellO
 
   newEditor.renderElement = (props) => {
     const { element, attributes, children } = props
+
     if (TableCellEditor.isTableCell(newEditor, element)) {
       const { style, ...rest } = attributes
       return (

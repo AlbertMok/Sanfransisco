@@ -1,19 +1,13 @@
-import { Editable, Hotkey, Locale, Slot } from '@editablejs/editor'
-import { Editor, Operation, Transforms } from '@editablejs/models'
-import { withHistoryProtocol } from '@editablejs/protocols/history'
-import { openFileDialog } from '@editablejs/ui'
+import { Editable, Hotkey, Locale, Slot } from '@everynote/editor'
+import { Editor, Operation, Transforms } from '@everynote/models'
+import { withHistoryProtocol } from '@everynote/protocols/history'
+import { openFileDialog } from '@everynote/ui'
 import { setOptions, ImageHotkey, ImageOptions } from '../options'
 import { Image } from '../interfaces/image'
 import { ImageComponent } from '../components/image'
 import { ImageEditor } from './image-editor'
 import locale from '../locale'
-import {
-  insertImage,
-  readImageFileInfo,
-  uploadImage,
-  rotateImgWithCanvas,
-  readImageElement,
-} from '../utils'
+import { insertImage, readImageFileInfo, uploadImage, rotateImgWithCanvas, readImageElement } from '../utils'
 import { ImageViewer } from '../components/viewer'
 import { withShortcuts } from './with-shortcuts'
 
@@ -23,10 +17,7 @@ const defaultBeforeUpload = (files: File[]) => {
   return files.filter((file) => file.type.startsWith('image/'))
 }
 
-export const withImage = <T extends Editable>(
-  editor: T,
-  options: ImageOptions = {}
-) => {
+export const withImage = <T extends Editable>(editor: T, options: ImageOptions = {}) => {
   const newEditor = editor as T & ImageEditor
 
   setOptions(newEditor, options)
@@ -65,17 +56,10 @@ export const withImage = <T extends Editable>(
   }
 
   const insertImages = (files: (File | string)[]) => {
-    Promise.all(
-      files.map((file) =>
-        typeof file === 'string'
-          ? Promise.resolve(file)
-          : readImageFileInfo(file)
-      )
-    ).then((items) => {
+    Promise.all(files.map((file) => (typeof file === 'string' ? Promise.resolve(file) : readImageFileInfo(file)))).then((items) => {
       items.forEach((item) => {
         if (!item) return
-        if (typeof item === 'string')
-          return newEditor.insertImage({ file: item })
+        if (typeof item === 'string') return newEditor.insertImage({ file: item })
         const { url, file, width, height } = item
         const path = insertImage(newEditor, {
           url,
@@ -137,8 +121,7 @@ export const withImage = <T extends Editable>(
           })
           onRotate(file).then((res) => {
             if (res) {
-              const info =
-                typeof res === 'string' ? { url: res, rotate: 0 } : res
+              const info = typeof res === 'string' ? { url: res, rotate: 0 } : res
               Transforms.setNodes<Image>(
                 editor,
                 {

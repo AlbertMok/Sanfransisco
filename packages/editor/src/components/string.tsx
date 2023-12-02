@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Editor, Text, Path, Element, Node, CompositionText } from '@editablejs/models'
+import { Editor, Text, Path, Element, Node, CompositionText } from '@everynote/models'
 
 import { Editable } from '../plugin/editable'
 import { useEditableStatic } from '../hooks/use-editable'

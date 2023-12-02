@@ -1,4 +1,4 @@
-import { Descendant, Element } from '@editablejs/models'
+import { Descendant, Element } from '@everynote/models'
 import { TITLE_KEY } from '../constants'
 
 export interface Title extends Element {

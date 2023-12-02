@@ -20,7 +20,7 @@ import {
   isDOMSelection,
   isDOMNode,
   isDOMText,
-} from '@editablejs/models'
+} from '@everynote/models'
 
 import {
   EDITOR_TO_ELEMENT,
@@ -41,7 +41,6 @@ import { getLineRectsByNode, getLineRectsByRange } from '../utils/selection'
 import { Focused } from '../hooks/use-focused'
 import { EventHandler, EventType } from './event'
 import {
-  DATA_BLOCK_ID,
   DATA_EDITABLE_COMPOSITION,
   DATA_EDITABLE_INLINE,
   DATA_EDITABLE_LEAF,
@@ -171,7 +170,7 @@ export interface Editable extends Editor {
   onDestory: () => void
   renderElementAttributes: (props: RenderElementAttributes) => ElementAttributes
   renderLeafAttributes: (props: RenderLeafAttributes) => TextAttributes
-  renderElement: (props: RenderElementProps) => JSX.Element
+  renderElement: (props: RenderElementProps) => any
   renderLeaf: (props: RenderLeafProps) => JSX.Element
   renderPlaceholder: (props: RenderPlaceholderProps) => JSX.Element | void | null
   toDataTransfer: (range?: Range) => DataTransfer | null
@@ -276,7 +275,6 @@ export const Editable = {
    */
   findKey(editor: Editor, node: Node): Key {
     let key = NODE_TO_KEY.get(node)
-
     if (!key) {
       key = new Key()
       NODE_TO_KEY.set(node, key)

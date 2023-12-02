@@ -1,10 +1,5 @@
-import { Descendant } from '@editablejs/models'
-import {
-  APPLICATION_FRAGMENT_TYPE,
-  DATA_EDITABLE_FRAGMENT,
-  TEXT_HTML,
-  TEXT_PLAIN,
-} from './constants'
+import { Descendant } from '@everynote/models'
+import { APPLICATION_FRAGMENT_TYPE, DATA_EDITABLE_FRAGMENT, TEXT_HTML, TEXT_PLAIN } from './constants'
 
 interface DataTransferFormatData {
   html: string
@@ -102,10 +97,7 @@ export const parseDataTransfer = (dataTransfer: DataTransfer): DataTransferForma
  * @param dataTransfer
  * @param data
  **/
-export const setDataTransfer = (
-  dataTransfer: DataTransfer,
-  data: Partial<DataTransferFormatData>,
-) => {
+export const setDataTransfer = (dataTransfer: DataTransfer, data: Partial<DataTransferFormatData>) => {
   const { text, html, fragment, files } = data
   if (text) dataTransfer.setData(TEXT_PLAIN, text)
   if (html) dataTransfer.setData(TEXT_HTML, html)

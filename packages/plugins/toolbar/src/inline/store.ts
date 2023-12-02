@@ -1,7 +1,7 @@
 import * as React from 'react'
 import create, { StoreApi, UseBoundStore, useStore } from 'zustand'
 import shallow from 'zustand/shallow'
-import { Editable, useIsomorphicLayoutEffect } from '@editablejs/editor'
+import { Editable, useIsomorphicLayoutEffect } from '@everynote/editor'
 
 import { ToolbarItem } from '../types'
 
@@ -30,14 +30,12 @@ export const useInlineToolbarStore = (editor: Editable) => {
 
 export const useInlineToolbarItems = (editor: Editable) => {
   const store = useInlineToolbarStore(editor)
-  return useStore(store, state => state.items, shallow)
+  return useStore(store, (state) => state.items, shallow)
 }
 
-export const useInlineToolbarOpen = (
-  editor: Editable,
-): [boolean, (open: boolean | ((value: boolean) => boolean)) => void] => {
+export const useInlineToolbarOpen = (editor: Editable): [boolean, (open: boolean | ((value: boolean) => boolean)) => void] => {
   const store = useInlineToolbarStore(editor)
-  const open = useStore(store, state => state.open)
+  const open = useStore(store, (state) => state.open)
   return React.useMemo(
     () => [
       open,
@@ -48,7 +46,7 @@ export const useInlineToolbarOpen = (
         InlineToolbar.setOpen(editor, open)
       },
     ],
-    [editor, open],
+    [editor, open]
   )
 }
 

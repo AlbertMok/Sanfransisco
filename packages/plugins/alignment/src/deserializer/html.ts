@@ -1,7 +1,7 @@
-import { isDOMHTMLElement, Element } from '@editablejs/models'
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
+import { isDOMHTMLElement, Element } from '@everynote/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
 import { Align, AlignKeys, AlignValue } from '../interfaces/align'
-export const withAlignHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withAlignHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     if (isDOMHTMLElement(node) && options.element) {
       let { textAlign, justifyContent } = node.style
@@ -13,9 +13,7 @@ export const withAlignHTMLDeserializerTransform: HTMLDeserializerWithTransform =
       if (
         textAlign &&
         textAlign.toLowerCase() !== AlignValue.Left &&
-        ~[AlignValue.Left, AlignValue.Center, AlignValue.Right, AlignValue.Justify].indexOf(
-          textAlign as AlignKeys,
-        )
+        ~[AlignValue.Left, AlignValue.Center, AlignValue.Right, AlignValue.Justify].indexOf(textAlign as AlignKeys)
       ) {
         align.textAlign = textAlign as AlignKeys
       } else if (justifyContent) {

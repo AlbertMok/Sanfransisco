@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/plugin-paragraph",
+  "name": "@everynote/plugin-paragraph",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -73,22 +73,26 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@editablejs/deserializer": "workspace:*",
-    "@editablejs/editor": "workspace:*",
-    "@editablejs/models": "workspace:*",
-    "@editablejs/serializer": "workspace:*",
+    "@everynote/deserializer": "workspace:*",
+    "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
+    "@everynote/serializer": "workspace:*",
     "@types/lodash.clonedeep": "4.5.8",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
+    "autoprefixer": "10.4.16",
     "lodash.clonedeep": "4.5.0",
+    "postcss": "8.4.31",
     "prettier-config": "workspace:*",
     "react": "^18.x",
     "react-dom": "^18.x",
+    "styled-components": "5.3.6",
+    "tailwind-config": "workspace:*",
     "tailwindcss": "^3.2.4",
     "tsconfig": "workspace:*",
     "tsup": "^6.5.0",
     "tsup-config": "workspace:*",
-    "typescript": "^4.x",
-    "workspace": "0.0.1-preview.1"
+    "twin.macro": "3.1.0",
+    "typescript": "^4.x"
   }
 }

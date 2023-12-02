@@ -1,11 +1,5 @@
-import {
-  Decorate,
-  SlotComponentProps,
-  TextDecorate,
-  useEditableStatic,
-  useIsomorphicLayoutEffect,
-} from '@editablejs/editor'
-import { Path, Transforms } from '@editablejs/models'
+import { Decorate, SlotComponentProps, TextDecorate, useEditableStatic, useIsomorphicLayoutEffect } from '@everynote/editor'
+import { Path, Transforms } from '@everynote/models'
 import { FC, useCallback, useRef } from 'react'
 import { useSlashToolbarOpen } from '../hooks/use-slash-toolbar-open'
 import { closeSlashDecorate } from '../utils'
@@ -38,16 +32,10 @@ export const SlashToolbarDecorate: FC<SlashDecorateProps> = () => {
     if (!data) return
     const decorate: TextDecorate = {
       match: (_, path) => {
-        return data.rangeRef.current && Path.equals(data.rangeRef.current.focus.path, path)
-          ? [data.rangeRef.current]
-          : []
+        return data.rangeRef.current && Path.equals(data.rangeRef.current.focus.path, path) ? [data.rangeRef.current] : []
       },
       renderText: ({ children }) => (
-        <SlashToolbarSearch
-          editor={editor}
-          container={ref.current ?? undefined}
-          onSelect={handleSelect}
-        >
+        <SlashToolbarSearch editor={editor} container={ref.current ?? undefined} onSelect={handleSelect}>
           <SlashToolbarPlaceholder editor={editor}>{children}</SlashToolbarPlaceholder>
         </SlashToolbarSearch>
       ),

@@ -1,18 +1,14 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { Table } from '../interfaces/table'
 import { TABLE_KEY } from '../constants'
 
-export const withTableHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withTableHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
     if (Table.isTable(node)) {
       const { colsWidth } = node
-      const colgroup = colsWidth?.map(w => serializer.create('col', {}, { width: `${w}px` }))
+      const colgroup = colsWidth?.map((w) => serializer.create('col', {}, { width: `${w}px` }))
 
       return serializer.create(
         TABLE_KEY,
@@ -25,11 +21,9 @@ export const withTableHTMLSerializerTransform: HTMLSerializerWithTransform = (
             borderCollapse: 'collapse',
             whiteSpace: 'nowrap',
           },
-          customStyle,
+          customStyle
         ),
-        `<colgroup>${colgroup?.join('')}</colgroup><tbody>${node.children
-          .map(child => serializer.transform(child))
-          .join('')}</tbody>`,
+        `<colgroup>${colgroup?.join('')}</colgroup><tbody>${node.children.map((child) => serializer.transform(child)).join('')}</tbody>`
       )
     }
     return next(node, options)

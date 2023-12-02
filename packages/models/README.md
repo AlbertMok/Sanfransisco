@@ -1,4 +1,4 @@
-# `@editablejs/models`
+# `@everynote/models`
 
 > TODO: description
 

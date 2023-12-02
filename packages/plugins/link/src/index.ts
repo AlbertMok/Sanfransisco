@@ -1,4 +1,4 @@
-import { Text } from '@editablejs/models'
+import { Text } from '@everynote/models'
 import { LinkHotkey, LinkOptions } from './options'
 import { Link } from './interfaces/link'
 import { LinkLocale } from './locale'

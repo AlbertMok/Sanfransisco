@@ -1,7 +1,7 @@
 import * as React from 'react'
 import create, { StoreApi, UseBoundStore, useStore } from 'zustand'
 import shallow from 'zustand/shallow'
-import { Editable, useIsomorphicLayoutEffect } from '@editablejs/editor'
+import { Editable, useIsomorphicLayoutEffect } from '@everynote/editor'
 import { ToolbarItem } from '../types'
 
 interface ToolbarState {
@@ -27,7 +27,7 @@ export const useToolbarStore = (editor: Editable) => {
 
 export const useToolbarItems = (editor: Editable) => {
   const store = useToolbarStore(editor)
-  return useStore(store, state => state.items, shallow)
+  return useStore(store, (state) => state.items, shallow)
 }
 
 type ToolbarEffectCallback = () => (() => void) | void

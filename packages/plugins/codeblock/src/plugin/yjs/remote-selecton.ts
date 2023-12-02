@@ -1,15 +1,11 @@
 import * as cmView from '@codemirror/view'
 import * as Y from 'yjs'
-import { Awareness } from '@editablejs/yjs-protocols/awareness'
-import {
-  AwarenessSelection,
-  AwarenessRelativeSelection,
-  withAwarenessSelection,
-} from '@editablejs/yjs-protocols/awareness-selection'
+import { Awareness } from '@everynote/yjs-protocols/awareness'
+import { AwarenessSelection, AwarenessRelativeSelection, withAwarenessSelection } from '@everynote/yjs-protocols/awareness-selection'
 import { YSyncConfig, ySyncFacet } from './sync'
 import { CODEBLOCK_AWARENESS_FIELD, CODEBLOCK_AWARENESS_ID } from '../../constants'
-import { Editor } from '@editablejs/models'
-import { Editable } from '@editablejs/editor'
+import { Editor } from '@everynote/models'
+import { Editable } from '@everynote/editor'
 import { CodeBlock } from '../../interfaces/codeblock'
 
 interface CodeBlockAwarenessSelection {
@@ -30,17 +26,10 @@ export class YRemoteSelectionsPluginValue {
     this._awareness = this.conf.awareness
 
     const awarenessSelection = withAwarenessSelection(this._awareness, CODEBLOCK_AWARENESS_FIELD)
-    const { relativeSelectionToNativeSelection, nativeSelectionToRelativeSelection } =
-      awarenessSelection
+    const { relativeSelectionToNativeSelection, nativeSelectionToRelativeSelection } = awarenessSelection
 
-    awarenessSelection.relativeSelectionToNativeSelection = (
-      selection: AwarenessRelativeSelection,
-      clientID,
-    ) => {
-      if (
-        isCodeBlockAwarenessSelection(selection) &&
-        selection[CODEBLOCK_AWARENESS_ID] === this.conf.id
-      ) {
+    awarenessSelection.relativeSelectionToNativeSelection = (selection: AwarenessRelativeSelection, clientID) => {
+      if (isCodeBlockAwarenessSelection(selection) && selection[CODEBLOCK_AWARENESS_ID] === this.conf.id) {
         const ytext = this.conf.ytext
         const editor = this.conf.editor
         const ydoc = ytext.doc
@@ -78,14 +67,8 @@ export class YRemoteSelectionsPluginValue {
       return relativeSelectionToNativeSelection(selection, clientID)
     }
 
-    awarenessSelection.nativeSelectionToRelativeSelection = (
-      selection: Record<'anchor' | 'focus', number>,
-      clientID,
-    ) => {
-      if (
-        isCodeBlockAwarenessSelection(selection) &&
-        selection[CODEBLOCK_AWARENESS_ID] === this.conf.id
-      ) {
+    awarenessSelection.nativeSelectionToRelativeSelection = (selection: Record<'anchor' | 'focus', number>, clientID) => {
+      if (isCodeBlockAwarenessSelection(selection) && selection[CODEBLOCK_AWARENESS_ID] === this.conf.id) {
         const ytext = this.conf.ytext
         const anchor = Y.createRelativePositionFromTypeIndex(ytext, selection.anchor)
         const focus = Y.createRelativePositionFromTypeIndex(ytext, selection.focus)
@@ -109,7 +92,7 @@ export class YRemoteSelectionsPluginValue {
     if (
       !sel &&
       Editor.above(this.conf.editor, {
-        match: node => CodeBlock.isCodeBlock(node),
+        match: (node) => CodeBlock.isCodeBlock(node),
       })
     )
       return null
@@ -120,7 +103,7 @@ export class YRemoteSelectionsPluginValue {
             focus: sel.head,
             [CODEBLOCK_AWARENESS_ID]: this.conf.id,
           }
-        : null,
+        : null
     )
   }
 }

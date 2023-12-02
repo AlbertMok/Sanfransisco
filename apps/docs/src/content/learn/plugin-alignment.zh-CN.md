@@ -12,19 +12,19 @@ title: Alignment
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-alignment
+npm install @everynote/plugin-alignment
 
 </TerminalBlock>
 
 ## 使用 Alignment {/*alignment-using*/}
 
-<Sandpack deps={['@editablejs/plugin-alignment']}>
+<Sandpack deps={['@everynote/plugin-alignment']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withAlign } from '@editablejs/plugin-alignment'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withAlign } from '@everynote/plugin-alignment'
 
 const defaultValue = [
   {
@@ -75,6 +75,7 @@ withAlign(editor, options)
 
 - 类型：`AlignmentHotkey`
 - 默认值:
+
   ```ts
   const defaultHotkeys: AlignHotkey = {
     left: 'mod+shift+l',
@@ -83,6 +84,7 @@ withAlign(editor, options)
     justify: 'mod+shift+j',
   }
   ```
+
 - 示例：
 
 ```ts

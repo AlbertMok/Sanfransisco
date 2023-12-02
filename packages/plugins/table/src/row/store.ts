@@ -1,5 +1,5 @@
-import { useIsomorphicLayoutEffect } from '@editablejs/editor'
-import { GridRow } from '@editablejs/models'
+import { useIsomorphicLayoutEffect } from '@everynote/editor'
+import { GridRow } from '@everynote/models'
 import { useCallback, useEffect, useState } from 'react'
 import create, { StoreApi, UseBoundStore } from 'zustand'
 
@@ -44,7 +44,7 @@ export const useRowContentHeight = (element: GridRow) => {
 
 export const useTableRowContentHeights = (rows: GridRow[]) => {
   const refresh = useCallback(() => {
-    return rows.map(row => {
+    return rows.map((row) => {
       const store = getRowStore(row)
       return store.getState().contentHeight || row.height || 0
     })

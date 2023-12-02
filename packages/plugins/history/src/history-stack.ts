@@ -1,5 +1,5 @@
 import { isPlainObject } from 'is-plain-object'
-import { Editor, Operation, Range } from '@editablejs/models'
+import { Editor, Operation, Range } from '@everynote/models'
 
 interface Batch {
   operations: Operation[]

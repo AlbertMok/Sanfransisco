@@ -1,4 +1,4 @@
-import { Element } from '@editablejs/models'
+import { Element } from '@everynote/models'
 import { ALIGN_ATTR_KEY } from '../constants'
 
 type ValueOf<T> = T[keyof T]
@@ -25,10 +25,6 @@ export interface Align extends Element {
 
 export const Align = {
   isAlign: (value: any): value is Align => {
-    return (
-      Element.isElement(value) &&
-      ALIGN_ATTR_KEY in value &&
-      typeof value[ALIGN_ATTR_KEY] === 'string'
-    )
+    return Element.isElement(value) && ALIGN_ATTR_KEY in value && typeof value[ALIGN_ATTR_KEY] === 'string'
   },
 }

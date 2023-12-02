@@ -1,15 +1,10 @@
-import {
-  HTMLDeserializerOptions,
-  HTMLDeserializerWithTransform,
-} from '@editablejs/deserializer/html'
-import { isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
 import { Link } from '../interfaces/link'
 
 export interface LinkHTMLDeserializerOptions extends HTMLDeserializerOptions {}
 
-export const withLinkHTMLDeserializerTransform: HTMLDeserializerWithTransform<
-  LinkHTMLDeserializerOptions
-> = (next, serializer) => {
+export const withLinkHTMLDeserializerTransform: HTMLDeserializerWithTransform<LinkHTMLDeserializerOptions> = (next, serializer) => {
   return (node, options = {}) => {
     const { element, text } = options
     if (isDOMHTMLElement(node) && node.nodeName === 'A') {

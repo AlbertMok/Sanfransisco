@@ -1,13 +1,9 @@
 import { EditorState, EditorStateConfig } from '@codemirror/state'
 import { EditorView } from '@codemirror/view'
-import { useIsomorphicLayoutEffect } from '@editablejs/editor'
+import { useIsomorphicLayoutEffect } from '@everynote/editor'
 import { useCallback, useState } from 'react'
 
-export function useEditorView(
-  initState: (() => EditorStateConfig) | EditorStateConfig = {},
-  autoFocus = true,
-  deps: any[] = [],
-) {
+export function useEditorView(initState: (() => EditorStateConfig) | EditorStateConfig = {}, autoFocus = true, deps: any[] = []) {
   const [element, setElement] = useState<HTMLElement>()
 
   const ref = useCallback((node: HTMLElement | null) => {

@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/plugin-heading",
+  "name": "@everynote/plugin-heading",
   "version": "1.0.2",
   "main": "./dist/index.js",
   "exports": {
@@ -79,8 +79,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@editablejs/editor": "workspace:*",
-    "@editablejs/models": "workspace:*",
+    "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
     "@types/mdast": "3.0.10",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
@@ -100,12 +100,12 @@
     "typescript": "^4.x"
   },
   "peerDependencies": {
-    "@editablejs/editor": "workspace:*",
-    "@editablejs/models": "workspace:*"
+    "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*"
   },
   "dependencies": {
-    "@editablejs/deserializer": "workspace:*",
-    "@editablejs/serializer": "workspace:*",
+    "@everynote/deserializer": "workspace:*",
+    "@everynote/serializer": "workspace:*",
     "styled-components": "5.3.6"
   },
   "lint-staged": {

@@ -1,5 +1,5 @@
-import { Editable } from '@editablejs/editor'
-import { Editor, Node } from '@editablejs/models'
+import { Editable } from '@everynote/editor'
+import { Editor, Node } from '@everynote/models'
 import { SideToolbarLocale } from './locale'
 
 export interface SideToolbarOptions {

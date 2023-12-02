@@ -1,4 +1,4 @@
-import { Editable, Locale } from '@editablejs/editor'
+import { Editable, Locale } from '@everynote/editor'
 import locale, { ToolbarLocale } from '../locale'
 
 export interface ToolbarOptions {

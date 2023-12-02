@@ -1,4 +1,4 @@
-import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
+import { MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { Hr } from '../interfaces/hr'
 
 export const withHrMarkdownSerializerTransform: MarkdownSerializerWithTransform = (next) => {

@@ -1,15 +1,7 @@
 import * as React from 'react'
-import {
-  Editable,
-  useEditableStatic,
-  Slot,
-  SelectionDrawing,
-  useSlotActive,
-  useIsomorphicLayoutEffect,
-  useLocale,
-} from '@editablejs/editor'
-import { Descendant, Range } from '@editablejs/models'
-import { Measurable, Popover, PopoverAnchor, PopoverContent, PopoverPortal } from '@editablejs/ui'
+import { Editable, useEditableStatic, Slot, SelectionDrawing, useSlotActive, useIsomorphicLayoutEffect, useLocale } from '@everynote/editor'
+import { Descendant, Range } from '@everynote/models'
+import { Measurable, Popover, PopoverAnchor, PopoverContent, PopoverPortal } from '@everynote/ui'
 
 import { useInlineToolbarItems, useInlineToolbarOpen } from '../store'
 import { Toolbar } from '../../components/toolbar'
@@ -68,7 +60,7 @@ export const InlineToolbar = () => {
       const { selection } = editor
       if (selection && (Range.isExpanded(selection) || force)) {
         updatePoint()
-        setOpen(value => {
+        setOpen((value) => {
           if (value) {
             document.dispatchEvent(new CustomEvent('refreshInlineToolbarPosition'))
           }
@@ -78,7 +70,7 @@ export const InlineToolbar = () => {
         setOpen(false)
       }
     },
-    [editor, setOpen, updatePoint],
+    [editor, setOpen, updatePoint]
   )
 
   const isRootMouseDown = React.useRef(false)
@@ -130,7 +122,7 @@ export const InlineToolbar = () => {
     }
 
     const handleTouchTrack = () => {
-      setOpen(value => {
+      setOpen((value) => {
         const newValue = !value
         if (newValue) {
           handleOpen(true)
@@ -169,20 +161,14 @@ export const InlineToolbar = () => {
   }, [active])
 
   useIsomorphicLayoutEffect(() => {
-    if (open) Slot.update(editor, { active: true }, c => c === InlineToolbar)
+    if (open) Slot.update(editor, { active: true }, (c) => c === InlineToolbar)
   }, [editor, open])
 
   const locale = useLocale<InlineToolbarLocale>('inlineToolbar')
 
   return (
-    <Popover
-      open={items.length > 0 && containerRef.current && rootRef.current ? open : false}
-      onOpenChange={setOpen}
-    >
-      <PopoverAnchor
-        virtualRef={virtualRef}
-        dispatchRefreshCustomEvent="refreshInlineToolbarPosition"
-      />
+    <Popover open={items.length > 0 && containerRef.current && rootRef.current ? open : false} onOpenChange={setOpen}>
+      <PopoverAnchor virtualRef={virtualRef} dispatchRefreshCustomEvent="refreshInlineToolbarPosition" />
       <PopoverPortal container={rootRef.current}>
         <PopoverContent side={side} sideOffset={10}>
           <Toolbar items={items} mode="inline" locale={locale} />

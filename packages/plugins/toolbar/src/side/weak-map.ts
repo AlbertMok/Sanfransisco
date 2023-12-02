@@ -1,5 +1,5 @@
-import { Path, Range, Element } from '@editablejs/models'
-import { Editable } from '@editablejs/editor'
+import { Path, Range, Element } from '@everynote/models'
+import { Editable } from '@everynote/editor'
 
 interface CapturedData {
   selection: Range

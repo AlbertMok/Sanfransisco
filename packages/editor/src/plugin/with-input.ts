@@ -1,4 +1,4 @@
-import { CompositionText, Editor, Transforms, Range, Text } from '@editablejs/models'
+import { CompositionText, Editor, Transforms, Range, Text } from '@everynote/models'
 import { IS_COMPOSING } from '../utils/weak-maps'
 import { Editable } from './editable'
 

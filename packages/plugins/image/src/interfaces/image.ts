@@ -1,4 +1,4 @@
-import { Element } from '@editablejs/models'
+import { Element } from '@everynote/models'
 import { IMAGE_KEY } from '../constants'
 
 export type ImageState = 'uploading' | 'waitingUpload' | 'done' | 'error'

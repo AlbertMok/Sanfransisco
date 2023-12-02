@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export type BlockquoteHotkey = string | ((e: KeyboardEvent) => boolean)
 export interface BlockquoteOptions {

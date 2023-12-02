@@ -4,7 +4,7 @@ import {
   ContextMenuSeparator,
   ContextMenuSub,
   ContextMenuLabel,
-} from '@editablejs/ui'
+} from '@everynote/ui'
 
 import { ContextMenuItem } from '../store'
 
@@ -13,12 +13,7 @@ interface ContextMenu extends UIContextMenu {
   onSelect?: (event: React.MouseEvent) => void
 }
 
-export const ContextMenu: React.FC<ContextMenu> = ({
-  container,
-  items,
-  onSelect: onSelectProps,
-  ...props
-}) => {
+export const ContextMenu: React.FC<ContextMenu> = ({ container, items, onSelect: onSelectProps, ...props }) => {
   const renderItem = (item: ContextMenuItem, index: number) => {
     if ('type' in item) {
       if (index === 0) return null

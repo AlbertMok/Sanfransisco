@@ -1,7 +1,7 @@
-import { Editor, Operation, Transforms } from '@editablejs/models'
-import { editorRangeToRelativeRange, relativeRangeToEditorRange } from '@editablejs/yjs-transform'
-import { withHistoryProtocol } from '@editablejs/protocols/history'
-import { withProviderProtocol } from '@editablejs/protocols/provider'
+import { Editor, Operation, Transforms } from '@everynote/models'
+import { editorRangeToRelativeRange, relativeRangeToEditorRange } from '@everynote/yjs-transform'
+import { withHistoryProtocol } from '@everynote/protocols/history'
+import { withProviderProtocol } from '@everynote/protocols/provider'
 import * as Y from 'yjs'
 import { HistoryStackItem, RelativeRange } from '../types'
 import { YjsEditor } from './with-yjs'
@@ -17,11 +17,7 @@ export type YHistoryEditor = YjsEditor & {
 
 export const YHistoryEditor = {
   isYHistoryEditor(value: unknown): value is YHistoryEditor {
-    return (
-      YjsEditor.isYjsEditor(value) &&
-      (value as YHistoryEditor).undoManager instanceof Y.UndoManager &&
-      'withoutSavingOrigin' in value
-    )
+    return YjsEditor.isYjsEditor(value) && (value as YHistoryEditor).undoManager instanceof Y.UndoManager && 'withoutSavingOrigin' in value
   },
 
   canUndo(editor: Editor) {
@@ -41,14 +37,12 @@ export const YHistoryEditor = {
   },
 
   isSaving(editor: Editor): boolean {
-    if (YHistoryEditor.isYHistoryEditor(editor))
-      return editor.undoManager.trackedOrigins.has(YjsEditor.origin(editor))
+    if (YHistoryEditor.isYHistoryEditor(editor)) return editor.undoManager.trackedOrigins.has(YjsEditor.origin(editor))
     return false
   },
 
   withoutSaving(editor: Editor, fn: () => void) {
-    if (YHistoryEditor.isYHistoryEditor(editor))
-      YjsEditor.withOrigin(editor, editor.withoutSavingOrigin, fn)
+    if (YHistoryEditor.isYHistoryEditor(editor)) YjsEditor.withOrigin(editor, editor.withoutSavingOrigin, fn)
   },
 }
 
@@ -58,11 +52,7 @@ export type WithYHistoryOptions = NonNullable<ConstructorParameters<typeof Y.Und
 
 export function withYHistory<T extends YjsEditor>(
   editor: T,
-  {
-    withoutSavingOrigin = DEFAULT_WITHOUT_SAVING_ORIGIN,
-    trackedOrigins = new Set([editor.localOrigin]),
-    ...options
-  }: WithYHistoryOptions = {},
+  { withoutSavingOrigin = DEFAULT_WITHOUT_SAVING_ORIGIN, trackedOrigins = new Set([editor.localOrigin]), ...options }: WithYHistoryOptions = {}
 ): T & YHistoryEditor {
   const e = editor as T & YHistoryEditor
 
@@ -89,15 +79,14 @@ export function withYHistory<T extends YjsEditor>(
   const HistoryTransactionMeta = new Map<any, Map<any, any>>()
   const undoManager = new Y.UndoManager(e.sharedRoot, {
     trackedOrigins,
-    captureTransaction: t => {
+    captureTransaction: (t) => {
       const ops: Operation[] = t.meta.get('ops') ?? []
-      if (!ops.every(op => historyProtocol.capture(op))) return false
+      if (!ops.every((op) => historyProtocol.capture(op))) return false
       // 设置捕获到的事务 meta
       // 在后面的 handleStackItemMeta 中会将事务 meta 设置到 stackItem 中
       if (
-        undoManager.scope.some(type => t.changedParentTypes.has(type)) &&
-        (undoManager.trackedOrigins.has(t.origin) ||
-          (t.origin && undoManager.trackedOrigins.has(t.origin.constructor)))
+        undoManager.scope.some((type) => t.changedParentTypes.has(type)) &&
+        (undoManager.trackedOrigins.has(t.origin) || (t.origin && undoManager.trackedOrigins.has(t.origin.constructor)))
       )
         HistoryTransactionMeta.set(t.origin, t.meta)
       return true
@@ -111,11 +100,10 @@ export function withYHistory<T extends YjsEditor>(
   const { onChange, isLocalOrigin } = e
   e.onChange = () => {
     onChange()
-    if (providerProtocol.connected())
-      LAST_SELECTION.set(e, e.selection && editorRangeToRelativeRange(e.sharedRoot, e, e.selection))
+    if (providerProtocol.connected()) LAST_SELECTION.set(e, e.selection && editorRangeToRelativeRange(e.sharedRoot, e, e.selection))
   }
 
-  e.isLocalOrigin = origin => origin === e.withoutSavingOrigin || isLocalOrigin(origin)
+  e.isLocalOrigin = (origin) => origin === e.withoutSavingOrigin || isLocalOrigin(origin)
 
   const handleStackItemMeta = (origin: unknown, stackItem: HistoryStackItem) => {
     const meta = HistoryTransactionMeta.get(origin)
@@ -127,42 +115,18 @@ export function withYHistory<T extends YjsEditor>(
     HistoryTransactionMeta.delete(origin)
   }
 
-  const handleStackItemAdded = ({
-    stackItem,
-    origin,
-  }: {
-    stackItem: HistoryStackItem
-    type: 'redo' | 'undo'
-    origin: unknown
-  }) => {
-    stackItem.meta.set(
-      'selection',
-      e.selection && editorRangeToRelativeRange(e.sharedRoot, e, e.selection),
-    )
+  const handleStackItemAdded = ({ stackItem, origin }: { stackItem: HistoryStackItem; type: 'redo' | 'undo'; origin: unknown }) => {
+    stackItem.meta.set('selection', e.selection && editorRangeToRelativeRange(e.sharedRoot, e, e.selection))
     stackItem.meta.set('selectionBefore', LAST_SELECTION.get(e))
     handleStackItemMeta(origin, stackItem)
   }
 
-  const handleStackItemUpdated = ({
-    stackItem,
-  }: {
-    stackItem: HistoryStackItem
-    type: 'redo' | 'undo'
-  }) => {
-    stackItem.meta.set(
-      'selection',
-      e.selection && editorRangeToRelativeRange(e.sharedRoot, e, e.selection),
-    )
+  const handleStackItemUpdated = ({ stackItem }: { stackItem: HistoryStackItem; type: 'redo' | 'undo' }) => {
+    stackItem.meta.set('selection', e.selection && editorRangeToRelativeRange(e.sharedRoot, e, e.selection))
     handleStackItemMeta(origin, stackItem)
   }
 
-  const handleStackItemPopped = ({
-    stackItem,
-    type,
-  }: {
-    stackItem: HistoryStackItem
-    type: 'redo' | 'undo'
-  }) => {
+  const handleStackItemPopped = ({ stackItem, type }: { stackItem: HistoryStackItem; type: 'redo' | 'undo' }) => {
     // TODO: Change once https://github.com/yjs/yjs/issues/353 is resolved
     const inverseStack = type === 'undo' ? e.undoManager.redoStack : e.undoManager.undoStack
     const inverseItem = inverseStack[inverseStack.length - 1]
@@ -199,7 +163,7 @@ export function withYHistory<T extends YjsEditor>(
     }
   }
 
-  historyProtocol.capture = op => {
+  historyProtocol.capture = (op) => {
     if (providerProtocol.connected()) return true
     return capture(op)
   }

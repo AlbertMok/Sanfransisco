@@ -12,19 +12,19 @@ This page will show you how to use the `Heading` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-heading
+npm install @everynote/plugin-heading
 
 </TerminalBlock>
 
 ## Usage {/*heading-using*/}
 
-<Sandpack deps={['@editablejs/plugin-heading']}>
+<Sandpack deps={['@everynote/plugin-heading']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withHeading } from '@editablejs/plugin-heading'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withHeading } from '@everynote/plugin-heading'
 
 const defaultValue = [
   {
@@ -99,6 +99,7 @@ Usually it needs to be used together with `textMark` and other text plugins.
 
 - Type: `Partial<Record<HeadingType, Record<HeadingFontStyleName, string>>>`
 - Default:
+
   ```ts
   const defaultStyle = {
     [HEADING_ONE_KEY]: {
@@ -127,6 +128,7 @@ Usually it needs to be used together with `textMark` and other text plugins.
     },
   }
   ```
+
 - Example:
 
 ```ts
@@ -148,15 +150,17 @@ It represents the `fontSize` and `fontWeight` properties in the `style` option t
 
 - Type: `Partial<HeadingTextMark>`
 - Default value:
+
   ```ts
   const defaultTextMark = {
     fontSize: 'fontSize',
     fontWeight: 'bold',
   }
   ```
-The `fontSize` property in the default value belongs to the `@editablejs/plugin-font/size` plugin. If you want `fontSize` to take effect, you need to install it.
 
-The `bold` property in the default value comes from the `@editablejs/plugin-mark` plugin. If you want `fontWeight` to take effect, you need to install it.
+The `fontSize` property in the default value belongs to the `@everynote/plugin-font/size` plugin. If you want `fontSize` to take effect, you need to install it.
+
+The `bold` property in the default value comes from the `@everynote/plugin-mark` plugin. If you want `fontWeight` to take effect, you need to install it.
 
 If you really don't want to install the related plugins, you can write a custom rendering plugin separately. Additionally, you can use `CSS` to directly override the styles of the `h1-h6` tags.
 
@@ -177,6 +181,7 @@ withHeading(editor, {
 
 - Type:`HeadingHotkey`
 - Default:
+
   ```ts
   const defaultHotkeys: HeadingHotkey = {
     [HEADING_ONE_KEY]: 'mod+opt+1',
@@ -187,6 +192,7 @@ withHeading(editor, {
     [HEADING_SIX_KEY]: 'mod+opt+6',
   }
   ```
+
 - Example:
 
 ```ts
@@ -203,6 +209,7 @@ withHeading(editor, {
 
 - Type:`Record<string, HeadingType>`
 - Default:
+
   ```ts
   const defaultShortcuts: Record<string, HeadingType> = {
     '#': 'heading-one',
@@ -213,6 +220,7 @@ withHeading(editor, {
     '######': 'heading-six',
   }
   ```
+
 - Example:
 
 ```ts

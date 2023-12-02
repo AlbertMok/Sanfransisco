@@ -1,5 +1,5 @@
-import { useLocale } from '@editablejs/editor'
-import { CloseIcon, Tooltip } from '@editablejs/ui'
+import { useLocale } from '@everynote/editor'
+import { CloseIcon, Tooltip } from '@everynote/ui'
 import { FC } from 'react'
 import { OverlayRenderProps } from 'react-image-previewer'
 import {
@@ -18,7 +18,7 @@ import {
 import { IMAGE_KEY } from '../constants'
 import { ImageLocale } from '../locale'
 
-export const ViewerToolbar: FC<OverlayRenderProps> = props => {
+export const ViewerToolbar: FC<OverlayRenderProps> = (props) => {
   const { mode, index, images, onClose } = props
   const count = images.length
   const isFirst = index === 0
@@ -42,7 +42,7 @@ export const ViewerToolbar: FC<OverlayRenderProps> = props => {
         items={[
           {
             key: 'arrowLeft',
-            component: props => (
+            component: (props) => (
               <Tooltip content={isFirst ? viewerLocale.arrowLeftDisabled : viewerLocale.arrowLeft}>
                 <a>
                   <DragArrowLeft {...props} />
@@ -53,7 +53,7 @@ export const ViewerToolbar: FC<OverlayRenderProps> = props => {
           'countText',
           {
             key: 'arrowRight',
-            component: props => (
+            component: (props) => (
               <Tooltip content={isLast ? viewerLocale.arrowRightDisabled : viewerLocale.arrowRight}>
                 <a>
                   <DragArrowRight {...props} />
@@ -64,7 +64,7 @@ export const ViewerToolbar: FC<OverlayRenderProps> = props => {
           'split',
           {
             key: 'zoomOut',
-            component: props => (
+            component: (props) => (
               <Tooltip content={viewerLocale.zoomOut}>
                 <a>
                   <DragZoomOut {...props} />
@@ -75,7 +75,7 @@ export const ViewerToolbar: FC<OverlayRenderProps> = props => {
           'scaleCount',
           {
             key: 'zoomIn',
-            component: props => (
+            component: (props) => (
               <Tooltip content={viewerLocale.zoomIn}>
                 <a>
                   <DragZoomIn {...props} />
@@ -85,7 +85,7 @@ export const ViewerToolbar: FC<OverlayRenderProps> = props => {
           },
           {
             key: 'oneToOne',
-            component: props => (
+            component: (props) => (
               <Tooltip content={viewerLocale.oneToOne}>
                 <a>
                   <DragOneToOne {...props} />
@@ -96,7 +96,7 @@ export const ViewerToolbar: FC<OverlayRenderProps> = props => {
           'split',
           {
             key: 'download',
-            component: props => (
+            component: (props) => (
               <Tooltip content={viewerLocale.download}>
                 <a>
                   <DragDownload {...props} />
@@ -107,7 +107,7 @@ export const ViewerToolbar: FC<OverlayRenderProps> = props => {
           'split',
           {
             key: 'rotateLeft',
-            component: props => (
+            component: (props) => (
               <Tooltip content={viewerLocale.rotateLeft}>
                 <a>
                   <DragRotateLeft {...props} />
@@ -117,7 +117,7 @@ export const ViewerToolbar: FC<OverlayRenderProps> = props => {
           },
           {
             key: 'rotateRight',
-            component: props => (
+            component: (props) => (
               <Tooltip content={viewerLocale.rotateRight}>
                 <a>
                   <DragRotateRight {...props} />

@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export type FontColorHotkey = Record<string, string | ((e: KeyboardEvent) => boolean)>
 

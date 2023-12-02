@@ -1,4 +1,4 @@
-import { Editor, Range, Element, Ancestor, Descendant } from '@editablejs/models'
+import { Editor, Range, Element, Ancestor, Descendant } from '@everynote/models'
 
 import ElementComponent from '../components/element'
 import TextComponent from '../components/text'
@@ -10,8 +10,6 @@ import { NodeFocusedContext } from './use-node-focused'
 import { GridContext } from './use-grid'
 import { PlaceholderRender } from '../plugin/placeholder'
 
-// 这段代码似乎是关于文档编辑器的一部分，特别是关于如何渲染子元素或子节点的逻辑。
-//useChildren是一个自定义的React hook，它的目的是为给定的祖先节点生成子组件
 /**
  * Render Children Element And Leaf ELement, Return the `children`:`Decesdant[]`.
  */
@@ -32,9 +30,10 @@ const useChildren = (props: { node: Ancestor; selection: Range | null; renderPla
     const focused = selection && Range.includes(range, selection.anchor) && Range.includes(range, selection.focus)
 
     if (Element.isElement(n)) {
-      // 定义元素
       const element = (
+        // 当前是否选中该节点
         <NodeSelectedContext.Provider key={`selected-provider-${key.id}`} value={!!sel}>
+          {/* 当前是否 focus 该节点 */}
           <NodeFocusedContext.Provider key={`focused-provider-${key.id}`} value={focused ?? false}>
             <ElementComponent element={n} key={key.id} selection={sel} renderPlaceholder={renderPlaceholder} />
           </NodeFocusedContext.Provider>

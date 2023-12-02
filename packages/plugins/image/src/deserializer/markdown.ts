@@ -1,10 +1,7 @@
-import {
-  MarkdownDeserializerWithTransform,
-  MarkdownDeserializerPlugin,
-} from '@editablejs/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
 import { Image } from '../interfaces/image'
 
-export const withImageMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = next => {
+export const withImageMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { type } = node
     if (type === 'image') {

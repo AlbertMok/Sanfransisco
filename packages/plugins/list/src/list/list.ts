@@ -1,5 +1,5 @@
-import { generateId } from '@editablejs/editor'
-import { Element, Editor, NodeEntry, Path, Transforms, Node, Range, Location, BaseEditor } from '@editablejs/models'
+import { generateId } from '@everynote/editor'
+import { Element, Editor, NodeEntry, Path, Transforms, Node, Range, Location, BaseEditor } from '@everynote/models'
 import { UNORDERED_LIST_KEY } from '../unordered/constants'
 import { ORDERED_LIST_KEY } from '../ordered/constants'
 import { TASK_LIST_KEY } from '../task/constants'
@@ -182,7 +182,7 @@ export const List = {
       }
     } else {
       const startList = Node.get(editor, path)
-      if (Editor.isList(editor, startList) && (!type || startList.type === type) && start === undefined) {
+      if (List.isList(editor, startList) && (!type || startList.type === type) && start === undefined) {
         startMap[startList.level] = startList.currentNumber
       }
     }
@@ -195,7 +195,7 @@ export const List = {
       // 从第二个列表元素开始算起来
       const next = Editor.next<List>(editor, {
         at: startPath,
-        match: (n) => Editor.isList(editor, n) && (!type || n.type === type) && n.key === key && (level === undefined || n.level === level),
+        match: (n) => List.isList(editor, n) && (!type || n.type === type) && n.key === key && (level === undefined || n.level === level),
       })
       if (!next) break
 
@@ -240,7 +240,7 @@ export const List = {
       const afterPath = Editor.after(editor, selection.focus.path)
 
       // 获取 前一个 列表节点
-      const [prev] = Editor.nodes<List>(editor, { at: beforePath, match: (node) => Editor.isList(editor, node) && node.type === type })
+      const [prev] = Editor.nodes<List>(editor, { at: beforePath, match: (node) => List.isList(editor, node) && node.type === type })
 
       let key = ''
 
@@ -251,7 +251,7 @@ export const List = {
         const prevListElement = prev[0]
         key = prevListElement.key
         currentNumber = prevListElement.currentNumber + 1
-      } else if (([next] = Editor.nodes<List>(editor, { at: afterPath, match: (n) => Editor.isList(editor, n) && n.type === type })) && next) {
+      } else if (([next] = Editor.nodes<List>(editor, { at: afterPath, match: (n) => List.isList(editor, n) && n.type === type })) && next) {
         const nextListElement = next[0]
         key = nextListElement.key
         currentNumber = Math.max(nextListElement.currentNumber - 1, 1)
@@ -267,23 +267,19 @@ export const List = {
         if (prevPath) {
           const prevNode = Node.get(editor, prevPath)
 
-          if (!Editor.isList(editor, prevNode)) {
+          if (!List.isList(editor, prevNode)) {
             currentNumber--
           }
         }
 
         const newLevel = List.getLevel(editor, { type, path, key, node })
-
         const newProps = props ? props(key, node, path) : {}
-
-        let element: List = { type, key, currentNumber, template, level: newLevel, ...newProps, children: [], id: key }
-
+        let element: List = { type, key, currentNumber, template, level: newLevel, ...newProps, children: [{ text: '' }], id: key }
         Transforms.wrapNodes(editor, element, { at: path, mode: 'lowest' })
-
         prevPath = path
-
         currentNumber++
       }
+
       if (prevPath) {
         List.updateStart(editor, { type, path: prevPath, key })
       }
@@ -327,6 +323,7 @@ export const List = {
       if (!hasList) return
 
       Transforms.unwrapNodes(editor, { at, match: (n) => List.isList(editor, n) && (!match || match(n)), split: true })
+
       if (!selection) return
 
       for (const [key, [list, path]] of topLists) {

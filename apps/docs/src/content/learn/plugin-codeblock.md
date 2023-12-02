@@ -12,7 +12,7 @@ This page will show you how to use the `CodeBlock` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-codeblock
+npm install @everynote/plugin-codeblock
 
 </TerminalBlock>
 
@@ -20,13 +20,13 @@ npm install @editablejs/plugin-codeblock
 
 `CodeBlock` uses `CodeMirror` as the code editor, so you need to install the `CodeMirror` language pack.
 
-<Sandpack deps={['@editablejs/plugin-codeblock', '@codemirror/lang-javascript', '@codemirror/lang-html', '@codemirror/lang-css']}>
+<Sandpack deps={['@everynote/plugin-codeblock', '@codemirror/lang-javascript', '@codemirror/lang-html', '@codemirror/lang-css']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withCodeBlock } from '@editablejs/plugin-codeblock'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withCodeBlock } from '@everynote/plugin-codeblock'
 import { javascript } from '@codemirror/lang-javascript'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
@@ -111,6 +111,7 @@ withCodeBlock(editor, options)
 
 - Type: `Record<string, CodeBlockLocale>`
 - Default:
+
   ```ts
   const defaultLocale: Record<string, CodeBlockLocale> = {
     locale: 'en-US',
@@ -150,15 +151,18 @@ withCodeBlock(editor, {
   hotkey: 'mod+shift+c'
 })
 ```
+
 ### shortcuts {/*heading-options-shortcuts*/}
 
 `shortcuts` is used to configure shortcuts for the `CodeBlock` plugin.
 
 - Type: `string[]`
 - Default:
+
   ```ts
   const defaultShortcuts: string[] = ['```']
   ```
+
 - Example:
 
 ```ts

@@ -1,5 +1,5 @@
-import { Editor } from '@editablejs/models'
-import { withHistoryProtocol } from '@editablejs/protocols/history'
+import { Editor } from '@everynote/models'
+import { withHistoryProtocol } from '@everynote/protocols/history'
 import { HistoryStack } from './history-stack'
 
 /**

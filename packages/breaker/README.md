@@ -8,10 +8,10 @@ The base project is [`grapheme-breaker`](https://github.com/foliojs/grapheme-bre
 ## for Web and Deno
 
 test page  
-https://taisukef.github.io/grapheme-breaker-mjs/
+<https://taisukef.github.io/grapheme-breaker-mjs/>
 
 ```typescript
-import { breaks } from '@editablejs/breaker';
+import { breaks } from '@everynote/breaker';
 
 console.log(breaks('😜🇺🇸👍')); // => [ '😜', '🇺🇸', '👍' ]
 ```
@@ -20,12 +20,12 @@ console.log(breaks('😜🇺🇸👍')); // => [ '😜', '🇺🇸', '👍' ]
 
 You can install via npm
 
-    npm i @editablejs/-reaker
+    npm i @everynote/-reaker
 
 ## Example
 
 ```typescript
-import { breaks, countBreaks, nextBreak, previousBreak } from '@editablejs/breaker'
+import { breaks, countBreaks, nextBreak, previousBreak } from '@everynote/breaker'
 
 // break a string into an array of grapheme clusters
 

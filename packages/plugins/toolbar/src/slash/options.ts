@@ -1,5 +1,5 @@
-import { Editable } from '@editablejs/editor'
-import { Path, Node } from '@editablejs/models'
+import { Editable } from '@everynote/editor'
+import { Path, Node } from '@everynote/models'
 import { SlashToolbarItem } from './store'
 
 export type SlashHotkey = string | string[] | ((e: KeyboardEvent) => boolean)

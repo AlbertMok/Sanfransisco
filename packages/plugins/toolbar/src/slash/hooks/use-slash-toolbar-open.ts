@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import React from 'react'
 import { useStore } from 'zustand'
 import { SlashToolbar } from '../store'
@@ -6,7 +6,7 @@ import { useSlashToolbarStore } from './use-slash-toolbar-store'
 
 export const useSlashToolbarOpen = (editor: Editor): [boolean, (open: boolean) => void] => {
   const store = useSlashToolbarStore(editor)
-  const open = useStore(store, state => state.open)
+  const open = useStore(store, (state) => state.open)
   return React.useMemo(
     () => [
       open,
@@ -14,6 +14,6 @@ export const useSlashToolbarOpen = (editor: Editor): [boolean, (open: boolean) =
         SlashToolbar.setOpen(editor, open)
       },
     ],
-    [editor, open],
+    [editor, open]
   )
 }

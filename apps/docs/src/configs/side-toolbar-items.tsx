@@ -1,19 +1,11 @@
-import { Editable } from '@editablejs/editor'
-import { Editor, Range, Element } from '@editablejs/models'
-import {
-  TableEditor,
-  BlockquoteEditor,
-  UnorderedListEditor,
-  OrderedListEditor,
-  TaskListEditor,
-  ImageEditor,
-} from '@editablejs/plugins'
-import { SideToolbarItem } from '@editablejs/plugin-toolbar/side'
-import { Icon } from '@editablejs/ui'
+import { Editable } from '@everynote/editor'
+import { Editor, Range, Element } from '@everynote/models'
+import { TableEditor, BlockquoteEditor, UnorderedListEditor, OrderedListEditor, TaskListEditor, ImageEditor } from '@everynote/plugins'
+import { SideToolbarItem } from '@everynote/plugin-toolbar/side'
+import { Icon } from '@everynote/ui'
 import { Translation } from 'react-i18next'
 
 export const createSideToolbarItems = (editor: Editable, range: Range, element: Element) => {
-
   // 侧边菜单的菜单项
   const items: SideToolbarItem[] = []
 
@@ -24,7 +16,7 @@ export const createSideToolbarItems = (editor: Editable, range: Range, element: 
       {
         key: 'image',
         icon: <Icon name="image" />,
-        title: <Translation>{t => t('playground.editor.plugin.image')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.image')}</Translation>,
         onSelect: () => {
           ImageEditor.open(editor)
         },
@@ -32,7 +24,7 @@ export const createSideToolbarItems = (editor: Editable, range: Range, element: 
       {
         key: 'table',
         icon: <Icon name="table" />,
-        title: <Translation>{t => t('playground.editor.plugin.table')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.table')}</Translation>,
         disabled: !!TableEditor.isActive(editor),
         onSelect: () => {
           TableEditor.insert(editor)
@@ -41,7 +33,7 @@ export const createSideToolbarItems = (editor: Editable, range: Range, element: 
       {
         key: 'blockquote',
         icon: <Icon name="blockquote" />,
-        title: <Translation>{t => t('playground.editor.plugin.blockquote')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.blockquote')}</Translation>,
         onSelect: () => {
           BlockquoteEditor.toggle(editor)
         },
@@ -49,7 +41,7 @@ export const createSideToolbarItems = (editor: Editable, range: Range, element: 
       {
         key: 'unorderedList',
         icon: <Icon name="unorderedList" />,
-        title: <Translation>{t => t('playground.editor.plugin.unordered-list')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.unordered-list')}</Translation>,
         onSelect: () => {
           UnorderedListEditor.toggle(editor)
         },
@@ -57,7 +49,7 @@ export const createSideToolbarItems = (editor: Editable, range: Range, element: 
       {
         key: 'orderedList',
         icon: <Icon name="orderedList" />,
-        title: <Translation>{t => t('playground.editor.plugin.ordered-list')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.ordered-list')}</Translation>,
         onSelect: () => {
           OrderedListEditor.toggle(editor)
         },
@@ -65,18 +57,18 @@ export const createSideToolbarItems = (editor: Editable, range: Range, element: 
       {
         key: 'taskList',
         icon: <Icon name="taskList" />,
-        title: <Translation>{t => t('playground.editor.plugin.task-list')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.plugin.task-list')}</Translation>,
         onSelect: () => {
           TaskListEditor.toggle(editor)
         },
-      },
+      }
     )
   } else {
     items.push(
       {
         key: 'cut',
         icon: <Icon name="cut" />,
-        title: <Translation>{t => t('playground.editor.base.cut')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.base.cut')}</Translation>,
         onSelect() {
           editor.cut(range)
         },
@@ -84,11 +76,11 @@ export const createSideToolbarItems = (editor: Editable, range: Range, element: 
       {
         key: 'copy',
         icon: <Icon name="copy" />,
-        title: <Translation>{t => t('playground.editor.base.copy')}</Translation>,
+        title: <Translation>{(t) => t('playground.editor.base.copy')}</Translation>,
         onSelect() {
           editor.copy(range)
         },
-      },
+      }
     )
   }
 

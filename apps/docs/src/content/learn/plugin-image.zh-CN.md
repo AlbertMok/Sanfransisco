@@ -12,19 +12,19 @@ title: Image
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-image
+npm install @everynote/plugin-image
 
 </TerminalBlock>
 
 ## 使用 Image {/*image-using*/}
 
-<Sandpack deps={['@editablejs/plugin-image']}>
+<Sandpack deps={['@everynote/plugin-image']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withImage } from '@editablejs/plugin-image'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withImage } from '@everynote/plugin-image'
 
 const defaultValue = [
   {
@@ -78,6 +78,7 @@ withImage(editor, options)
 
 - 类型：`Record<string, ImageLocale>`
 - 默认值：
+
   ```ts
   const defaultLocale: Record<string, ImageLocale> ={
     locale: 'zh-CN',

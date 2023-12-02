@@ -1,4 +1,4 @@
-import { Editor, Operation, PathRef, PointRef, RangeRef } from '@editablejs/models'
+import { Editor, Operation, PathRef, PointRef, RangeRef } from '@everynote/models'
 import * as Y from 'yjs'
 import { UniqueOperations } from '../constants'
 import { YjsEditor } from '../plugin'
@@ -11,11 +11,7 @@ import { translateYTextEvent } from './text-event'
  * @param sharedType
  * @param op
  */
-export function translateYjsEvent(
-  sharedRoot: Y.XmlText,
-  editor: Editor,
-  event: Y.YEvent<Y.XmlText>,
-): Operation[] {
+export function translateYjsEvent(sharedRoot: Y.XmlText, editor: Editor, event: Y.YEvent<Y.XmlText>): Operation[] {
   if (event instanceof Y.YTextEvent) {
     return translateYTextEvent(sharedRoot, editor, event)
   }
@@ -57,18 +53,14 @@ RangeRef.transform = (ref, op) => {
  * @param editor
  * @param events
  */
-export function applyYjsEvents(
-  sharedRoot: Y.XmlText,
-  editor: YjsEditor,
-  events: Y.YEvent<Y.XmlText>[],
-) {
+export function applyYjsEvents(sharedRoot: Y.XmlText, editor: YjsEditor, events: Y.YEvent<Y.XmlText>[]) {
   Editor.withoutNormalizing(editor, () => {
     const origin: any = YjsEditor.origin(editor)
     const originOps: Operation[] = origin?.meta?.ops ?? []
     // yjs中未存在的操作，会成为组的发过来。这里需要对 ref 执行更新，否则yjs的原子op会导致ref的错误
     const originOp = originOps[0]
     if (originOp && ~UniqueOperations.indexOf(originOp.type)) {
-      originOps.forEach(op => {
+      originOps.forEach((op) => {
         for (const ref of Editor.pathRefs(editor)) {
           PathRef.transform(ref, op)
         }
@@ -86,7 +78,7 @@ export function applyYjsEvents(
       return [...ops, ...translateYjsEvent(sharedRoot, editor, event)]
     }, [])
 
-    ops.forEach(op => {
+    ops.forEach((op) => {
       FLUSH_OPS.add(op)
       editor.apply(op)
       FLUSH_OPS.delete(op)

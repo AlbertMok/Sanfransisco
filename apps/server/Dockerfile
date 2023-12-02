@@ -5,7 +5,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN yarn global add turbo
 COPY . .
-RUN turbo prune --scope=@editablejs/yjs-server --docker
+RUN turbo prune --scope=@everynote/yjs-server --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM node:16-alpine AS installer

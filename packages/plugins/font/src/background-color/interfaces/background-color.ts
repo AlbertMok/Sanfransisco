@@ -1,4 +1,4 @@
-import { Text } from '@editablejs/models'
+import { Text } from '@everynote/models'
 import { BACKGROUND_COLOR_KEY } from '../constants'
 
 export interface BackgroundColor extends Text {
@@ -7,10 +7,6 @@ export interface BackgroundColor extends Text {
 
 export const BackgroundColor = {
   isBackgroundColor: (value: any): value is BackgroundColor => {
-    return (
-      Text.isText(value) &&
-      BACKGROUND_COLOR_KEY in value &&
-      typeof value[BACKGROUND_COLOR_KEY] === 'string'
-    )
+    return Text.isText(value) && BACKGROUND_COLOR_KEY in value && typeof value[BACKGROUND_COLOR_KEY] === 'string'
   },
 }

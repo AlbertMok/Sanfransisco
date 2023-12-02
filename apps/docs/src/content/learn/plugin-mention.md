@@ -12,19 +12,19 @@ This page will show you how to use the `Mention` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-mention
+npm install @everynote/plugin-mention
 
 </TerminalBlock>
 
 ## Usage {/*mention-using*/}
 
-<Sandpack deps={['@editablejs/plugin-mention']}>
+<Sandpack deps={['@everynote/plugin-mention']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withMention } from '@editablejs/plugin-mention'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withMention } from '@everynote/plugin-mention'
 
 const defaultValue = [
   {

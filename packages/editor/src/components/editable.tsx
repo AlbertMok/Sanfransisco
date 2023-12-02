@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { Descendant, Node, Editor, Scrubber } from '@editablejs/models'
+import { Descendant, Node, Editor, Scrubber } from '@everynote/models'
 import create, { StoreApi, UseBoundStore } from 'zustand'
 import { Editable } from '../plugin/editable'
 import { EditableStore, EditableStoreContext } from '../hooks/use-editable'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
 import { generateId } from '../utils/node-id'
+import { BlockSelectionArea } from '../plugin/block-selection'
+import NoSSR from '../utils/no-ssr'
 
 const EDITABLE_TO_STORE = new WeakMap<Editable, UseBoundStore<StoreApi<EditableStore>>>()
 
@@ -60,7 +62,8 @@ export const EditableProvider = (props: {
         editor,
       }}
     >
-      {children}
+      <NoSSR>{children}</NoSSR>
+      {/* {children} */}
     </EditableStoreContext.Provider>
   )
 }

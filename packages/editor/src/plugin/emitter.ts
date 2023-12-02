@@ -82,7 +82,7 @@ export class Emitter {
             String(type) +
             ' listeners ' +
             'added. Use emitter.setMaxListeners() to ' +
-            'increase limit',
+            'increase limit'
         )
         console.warn(e)
       }

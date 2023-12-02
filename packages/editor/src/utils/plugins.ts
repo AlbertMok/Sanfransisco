@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactElement } from 'react'
-import { Element, NodeEntry, Range } from '@editablejs/models'
+import { Element, NodeEntry, Range } from '@everynote/models'
 import { TEditor, RenderYooptaElementProps, TBaseElement } from '../types'
 import { EditorEventHandlers } from './eventHandlers'
 import { HOTKEYS_TYPE } from './hotkeys'

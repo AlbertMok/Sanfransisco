@@ -1,7 +1,7 @@
 import * as Y from 'yjs'
-import { Editable } from '@editablejs/editor'
-import { Awareness } from '@editablejs/yjs-protocols/awareness'
-import { withProviderProtocol } from '@editablejs/protocols/provider'
+import { Editable } from '@everynote/editor'
+import { Awareness } from '@everynote/yjs-protocols/awareness'
+import { withProviderProtocol } from '@everynote/protocols/provider'
 import { YRange } from './range'
 import { ySync, ySyncFacet, YSyncConfig } from './sync'
 import { CodeBlockEditor } from '../editor'
@@ -11,11 +11,7 @@ import { yExtension, YExtensionConfig, yExtensionnFacet } from './extension'
 
 export { YRange, ySync, ySyncFacet, YSyncConfig }
 
-export const withYCodeBlock = <T extends Editable>(
-  editor: T,
-  document: Y.Doc,
-  awareness: Awareness,
-) => {
+export const withYCodeBlock = <T extends Editable>(editor: T, document: Y.Doc, awareness: Awareness) => {
   if (!CodeBlockEditor.isCodeBlockEditor(editor)) {
     throw new Error('withYCodeBlock only support CodeBlockEditor')
   }
@@ -29,7 +25,7 @@ export const withYCodeBlock = <T extends Editable>(
     return [...getCodeMirrorExtensions(id), yExtensionnFacet.of(yExtensionConfig), yExtension]
   }
 
-  editor.apply = op => {
+  editor.apply = (op) => {
     if (!providerProtocol.connected()) return apply(op)
     switch (op.type) {
       case 'remove_node':
@@ -45,7 +41,7 @@ export const withYCodeBlock = <T extends Editable>(
     apply(op)
   }
 
-  editor.normalizeNode = entry => {
+  editor.normalizeNode = (entry) => {
     const [node] = entry
     // 插入代码块时，初始化 Y.Doc
     if (CodeBlockEditor.isCodeBlock(editor, node) && providerProtocol.connected()) {

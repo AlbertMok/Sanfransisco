@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { FONTCOLOR_KEY } from '../constants'
 import { FontColor } from '../interfaces/font-color'
 import { getOptions } from '../options'

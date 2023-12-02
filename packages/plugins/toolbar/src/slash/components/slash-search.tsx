@@ -1,4 +1,4 @@
-import { Editable, Hotkey, isTouchDevice, useIsomorphicLayoutEffect } from '@editablejs/editor'
+import { Editable, Hotkey, isTouchDevice, useIsomorphicLayoutEffect } from '@everynote/editor'
 import {
   Popover,
   PopoverContent,
@@ -9,7 +9,7 @@ import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from '@editablejs/ui'
+} from '@everynote/ui'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import debounce from 'lodash.debounce'
 import tw, { css } from 'twin.macro'
@@ -28,16 +28,9 @@ export interface SlashToolbarSearchProps {
 
 const defaultSearch = () => Promise.resolve([])
 
-const defaultRenderEmpty = () => (
-  <div tw="p-6 shadow-outer rounded bg-white text-gray-300 text-center min-w-[120px]">None</div>
-)
+const defaultRenderEmpty = () => <div tw="p-6 shadow-outer rounded bg-white text-gray-300 text-center min-w-[120px]">None</div>
 
-export const SlashToolbarSearch: FC<SlashToolbarSearchProps> = ({
-  editor,
-  container,
-  children,
-  onSelect: onContextSelect,
-}) => {
+export const SlashToolbarSearch: FC<SlashToolbarSearchProps> = ({ editor, container, children, onSelect: onContextSelect }) => {
   const value = useSlashToolbarSearchValue(editor)
   const [open, setOpen] = useState(false)
   useEffect(() => {
@@ -75,12 +68,12 @@ export const SlashToolbarSearch: FC<SlashToolbarSearchProps> = ({
       leading: true,
       trailing: false,
     }),
-    [onSearch, debounceWait, debounceMaxWait],
+    [onSearch, debounceWait, debounceMaxWait]
   )
 
   useIsomorphicLayoutEffect(() => {
     if (!onSearch) return
-    debounceFn(value).then(items => {
+    debounceFn(value).then((items) => {
       SlashToolbar.setItems(editor, items)
       setActive(0)
     })
@@ -106,7 +99,7 @@ export const SlashToolbarSearch: FC<SlashToolbarSearchProps> = ({
         closeSlashDecorate(editor)
       }
     },
-    [editor, active, items],
+    [editor, active, items]
   )
 
   useIsomorphicLayoutEffect(() => {
@@ -119,13 +112,13 @@ export const SlashToolbarSearch: FC<SlashToolbarSearchProps> = ({
       } else if (Hotkey.match(['up', 'left'], event)) {
         event.preventDefault()
         event.stopPropagation()
-        setActive(value => {
+        setActive((value) => {
           return value === 0 ? items.length - 1 : value - 1
         })
       } else if (Hotkey.match(['down', 'right'], event)) {
         event.preventDefault()
         event.stopPropagation()
-        setActive(value => {
+        setActive((value) => {
           return value === items.length - 1 ? 0 : value + 1
         })
       }
@@ -181,7 +174,7 @@ export const SlashToolbarSearch: FC<SlashToolbarSearchProps> = ({
           disabled && tw`text-gray-400 cursor-default`,
         ]}
         onMouseEnter={() => setActive(index)}
-        onMouseDown={event => {
+        onMouseDown={(event) => {
           event.preventDefault()
           if (onContextSelect) onContextSelect()
           item.onSelect?.()
@@ -189,11 +182,7 @@ export const SlashToolbarSearch: FC<SlashToolbarSearchProps> = ({
       >
         {icon && (
           <span
-            css={[
-              tw`absolute left-2 top-0 flex items-center h-full`,
-              !disabled && tw`text-gray-500`,
-              disabled && tw`text-gray-400 cursor-default`,
-            ]}
+            css={[tw`absolute left-2 top-0 flex items-center h-full`, !disabled && tw`text-gray-500`, disabled && tw`text-gray-400 cursor-default`]}
           >
             {icon}
           </span>
@@ -214,12 +203,7 @@ export const SlashToolbarSearch: FC<SlashToolbarSearchProps> = ({
     if (items.length === 0) return onSearchRenderEmpty()
     return (
       <ScrollArea tw="shadow-outer rounded bg-white">
-        <ScrollAreaViewport
-          css={[
-            tw`overflow-hidden min-w-[120px] max-h-[calc(30vh)] z-50`,
-            isTouchDevice && tw`max-h-[calc(20vh)]`,
-          ]}
-        >
+        <ScrollAreaViewport css={[tw`overflow-hidden min-w-[120px] max-h-[calc(30vh)] z-50`, isTouchDevice && tw`max-h-[calc(20vh)]`]}>
           <div ref={ref} tw="text-base py-1 ">
             {renderItems(items)}
           </div>

@@ -3,7 +3,7 @@
 
 import WebSocket from 'ws'
 import http from 'http'
-import { Element } from '@editablejs/models'
+import { Element } from '@everynote/models'
 import { setupWSConnection, UpdateCallback } from './utils'
 import { initPersistence, PersistenceOptions } from './persistence'
 
@@ -13,10 +13,7 @@ export interface ServerOptions {
   host: string
   port: number
   // 效验
-  auth?: (
-    request: http.IncomingMessage,
-    ws: WebSocket,
-  ) => Promise<void | { code: number; data: string | Buffer }>
+  auth?: (request: http.IncomingMessage, ws: WebSocket) => Promise<void | { code: number; data: string | Buffer }>
   // 持久化选项，false 为不持久化
   persistenceOptions?: PersistenceOptions | false
   // 文档内容字段，默认为 content
@@ -47,7 +44,7 @@ server.on('upgrade', (request, socket, head) => {
   // See https://github.com/websockets/ws#client-authentication
   const handleAuth = (ws: WebSocket) => {
     const { auth = () => Promise.resolve() } = SERVER_OPTIONS_WEAKMAP.get(server) ?? {}
-    auth(request, ws).then(res => {
+    auth(request, ws).then((res) => {
       if (res && res.code !== 200) {
         ws.close(res.code, res.data)
       } else {

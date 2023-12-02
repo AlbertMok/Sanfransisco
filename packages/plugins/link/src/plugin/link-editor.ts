@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { LINK_KEY } from '../constants'
 import { Link } from '../interfaces/link'
 import { getOptions } from '../options'

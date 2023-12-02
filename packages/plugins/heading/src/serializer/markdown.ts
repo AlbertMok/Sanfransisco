@@ -1,5 +1,5 @@
 import { PhrasingContent } from 'mdast'
-import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
+import { MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { Heading } from '../interfaces/heading'
 
 export const withHeadingMarkdownSerializerTransform: MarkdownSerializerWithTransform = (next, self) => {

@@ -1,5 +1,5 @@
-import { useIsomorphicLayoutEffect } from '@editablejs/editor'
-import { Editor } from '@editablejs/models'
+import { useIsomorphicLayoutEffect } from '@everynote/editor'
+import { Editor } from '@everynote/models'
 import { useSlashToolbarOpen } from './use-slash-toolbar-open'
 import { useSlashToolbarSearchValue } from './use-slash-toolbar-search'
 

@@ -1,5 +1,5 @@
 import merge from 'lodash.merge'
-import { Editor, Text, Node } from '@editablejs/models'
+import { Editor, Text, Node } from '@everynote/models'
 import { htmlAttributesToString, cssStyleToString } from './utils/dom'
 import { TextSerializer } from './text'
 

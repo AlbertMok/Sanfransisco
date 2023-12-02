@@ -1,13 +1,7 @@
-import {
-  MarkdownDeserializerWithTransform,
-  MarkdownDeserializerPlugin,
-} from '@editablejs/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
 import { CodeBlock } from '../interfaces/codeblock'
 
-export const withCodeBlockMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (
-  next,
-  self,
-) => {
+export const withCodeBlockMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {
   return (node, options = {}) => {
     const { type } = node
     if (type === 'code') {
