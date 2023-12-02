@@ -8,32 +8,30 @@ title: 配置使用上下文菜单
 
 </Intro>
 
-## 步骤 1: 安装 `@editablejs/plugin-context-menu` {/*step-1*/}
+## 步骤 1: 安装 `@everynote/plugin-context-menu` {/*step-1*/}
 
-如果您已经安装了 `@editablejs/plugins`，则可以跳过此步骤。
+如果您已经安装了 `@everynote/plugins`，则可以跳过此步骤。
 
 因为未使用原生的`contenteditbale` 属性，所以原生上下文菜单在编辑区域得不到正确的内容响应，所以我们需要使用插件来实现上下文菜单。
 
 <TerminalBlock>
 
-npm install @editablejs/models @editablejs/editor @editablejs/plugin-context-menu
+npm install @everynote/models @everynote/editor @everynote/plugin-context-menu
 
 </TerminalBlock>
 
-
-
 ## 步骤 2: 导入 withContextMenu {/*step-2*/}
 
-如果您已经安装了 `@editablejs/plugins`，则可以从 `@editablejs/plugins` 中导入 `withContextMenu`。
+如果您已经安装了 `@everynote/plugins`，则可以从 `@everynote/plugins` 中导入 `withContextMenu`。
 
 ```js
 
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withContextMenu, useContextMenuEffect, ContextMenu } from '@editablejs/plugin-context-menu'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withContextMenu, useContextMenuEffect, ContextMenu } from '@everynote/plugin-context-menu'
 
-// import { withContextMenu, useContextMenuEffect, ContextMenu } from '@editablejs/plugins'
+// import { withContextMenu, useContextMenuEffect, ContextMenu } from '@everynote/plugins'
 
 ```
 
@@ -83,15 +81,15 @@ useContextMenuEffect(() => {
 
 ## 尝试使用上下文菜单 {/*try-context-menu*/}
 
-下面的沙箱已经使用了 `@editablejs/plugin-context-menu`，您可以在编辑器中点击鼠标`右键`尝试使用。
+下面的沙箱已经使用了 `@everynote/plugin-context-menu`，您可以在编辑器中点击鼠标`右键`尝试使用。
 
-<Sandpack deps={['@editablejs/plugin-context-menu']}>
+<Sandpack deps={['@everynote/plugin-context-menu']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withContextMenu, useContextMenuEffect, ContextMenu } from '@editablejs/plugin-context-menu'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withContextMenu, useContextMenuEffect, ContextMenu } from '@everynote/plugin-context-menu'
 
 export default function App() {
   const editor = React.useMemo(() => {

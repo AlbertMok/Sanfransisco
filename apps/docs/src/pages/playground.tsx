@@ -16,32 +16,32 @@ import {
   Editable,
   withEditable,
   parseDataTransfer,
-} from '@editablejs/editor'
-import { Editor, createEditor, Range, Transforms, Element } from '@editablejs/models'
-import { MarkdownDeserializer } from '@editablejs/deserializer/markdown'
-import { withPlugins, useContextMenuEffect, ContextMenu, MentionUser } from '@editablejs/plugins'
-import { withYHistory, withYjs, YjsEditor, withYCursors, CursorData, useRemoteStates } from '@editablejs/plugin-yjs'
+} from '@everynote/editor'
+import { Editor, createEditor, Range, Transforms, Element } from '@everynote/models'
+import { MarkdownDeserializer } from '@everynote/deserializer/markdown'
+import { withPlugins, useContextMenuEffect, ContextMenu, MentionUser } from '@everynote/plugins'
+import { withYHistory, withYjs, YjsEditor, withYCursors, CursorData, useRemoteStates } from '@everynote/plugin-yjs'
 
 import randomColor from 'randomcolor'
 import { faker } from '@faker-js/faker'
-import { WebsocketProvider } from '@editablejs/yjs-websocket'
+import { WebsocketProvider } from '@everynote/yjs-websocket'
 import * as Y from 'yjs'
-import { withHTMLSerializerTransform } from '@editablejs/plugins/serializer/html'
-import { withTextSerializerTransform } from '@editablejs/plugins/serializer/text'
-import { withMarkdownSerializerTransform, withMarkdownSerializerPlugin } from '@editablejs/plugins/serializer/markdown'
-import { withHTMLDeserializerTransform } from '@editablejs/plugins/deserializer/html'
-import { withMarkdownDeserializerTransform, withMarkdownDeserializerPlugin } from '@editablejs/plugins/deserializer/markdown'
+import { withHTMLSerializerTransform } from '@everynote/plugins/serializer/html'
+import { withTextSerializerTransform } from '@everynote/plugins/serializer/text'
+import { withMarkdownSerializerTransform, withMarkdownSerializerPlugin } from '@everynote/plugins/serializer/markdown'
+import { withHTMLDeserializerTransform } from '@everynote/plugins/deserializer/html'
+import { withMarkdownDeserializerTransform, withMarkdownDeserializerPlugin } from '@everynote/plugins/deserializer/markdown'
 
-import { withHistory } from '@editablejs/plugin-history'
+import { withHistory } from '@everynote/plugin-history'
 import { javascript as codemirrorJavascript } from '@codemirror/lang-javascript-next'
 import { html as codemirrorHtml } from '@codemirror/lang-html-next'
 import { css as codemirrorCss } from '@codemirror/lang-css-next'
-import { withYCodeBlock } from '@editablejs/plugin-codeblock/yjs'
-import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@editablejs/plugin-toolbar'
-import { withInlineToolbar, useInlineToolbarEffect, InlineToolbar } from '@editablejs/plugin-toolbar/inline'
-import { withSideToolbar, useSideToolbarMenuEffect, SideToolbar } from '@editablejs/plugin-toolbar/side'
-import { withSlashToolbar, useSlashToolbarEffect, SlashToolbar } from '@editablejs/plugin-toolbar/slash'
-import { Switch, SwitchThumb, Icon, Tooltip } from '@editablejs/ui'
+import { withYCodeBlock } from '@everynote/plugin-codeblock/yjs'
+import { ToolbarComponent, useToolbarEffect, withToolbar, Toolbar } from '@everynote/plugin-toolbar'
+import { withInlineToolbar, useInlineToolbarEffect, InlineToolbar } from '@everynote/plugin-toolbar/inline'
+import { withSideToolbar, useSideToolbarMenuEffect, SideToolbar } from '@everynote/plugin-toolbar/side'
+import { withSlashToolbar, useSlashToolbarEffect, SlashToolbar } from '@everynote/plugin-toolbar/slash'
+import { Switch, SwitchThumb, Icon, Tooltip } from '@everynote/ui'
 
 import { createContextMenuItems } from '../configs/context-menu-items'
 import { createToolbarItems, defaultBackgroundColor, defaultFontColor } from '../configs/toolbar-items'
@@ -360,8 +360,8 @@ export default function Playground() {
                   {connecting
                     ? t('playground.connecting')
                     : connected
-                    ? t('playground.mode.collaboration') // 在locals文件夹中定义的模式
-                    : t('playground.mode.local')}
+                      ? t('playground.mode.collaboration') // 在locals文件夹中定义的模式
+                      : t('playground.mode.local')}
                 </label>
                 {connecting && <Icon name="loading" />}
                 {!connecting && (

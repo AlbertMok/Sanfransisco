@@ -1,5 +1,5 @@
-import { Editable, Hotkey, generateId } from '@editablejs/editor'
-import { Editor, Transforms, List, Path, Element, Text, Range, NodeEntry } from '@editablejs/models'
+import { Editable, Hotkey, generateId } from '@everynote/editor'
+import { Editor, Transforms, List, Path, Element, Text, Range, NodeEntry } from '@everynote/models'
 import tw from 'twin.macro'
 import {
   HEADING_ONE_KEY,

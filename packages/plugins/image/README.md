@@ -1,4 +1,4 @@
-# `@editablejs/plugin-link`
+# `@everynote/plugin-link`
 
 > TODO: description
 

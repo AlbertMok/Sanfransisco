@@ -1,4 +1,4 @@
-import { Grid, Element } from '@editablejs/models'
+import { Grid, Element } from '@everynote/models'
 import { TABLE_KEY } from '../constants'
 import { TableRow } from '../../row'
 

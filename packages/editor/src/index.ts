@@ -15,11 +15,7 @@ export { EditableProvider } from './components/editable'
 
 // Hooks
 export { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect'
-export {
-  useEditableStatic,
-  useEditable,
-  useEditableStore,
-} from './hooks/use-editable'
+export { useEditableStatic, useEditable, useEditableStore } from './hooks/use-editable'
 export { useFocused } from './hooks/use-focused'
 export { useReadOnly } from './hooks/use-read-only'
 export { useNodeSelected } from './hooks/use-node-selected'
@@ -44,7 +40,7 @@ export * from './plugin/locale'
 export * from './plugin/decorate'
 export * from './plugin/placeholder'
 export * from './plugin/selection-drawing'
-
+export * from './plugin/block-selection'
 // Environment
 export * from './utils/environment'
 // Dom
@@ -65,10 +61,7 @@ export type {
   PlaceholderAttributes,
 } from './plugin/editable'
 
-export {
-  useCancellablePromises,
-  cancellablePromise,
-} from './hooks/use-cancellable-promises'
+export { useCancellablePromises, cancellablePromise } from './hooks/use-cancellable-promises'
 
 export { Hotkey } from './utils/hotkeys'
 export { generateId } from './utils/node-id'

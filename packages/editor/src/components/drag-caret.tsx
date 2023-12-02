@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Editor, Element, Path, GridCell } from '@editablejs/models'
+import { Editor, Element, Path, GridCell } from '@everynote/models'
 import { useDragPosition, useDragTo, useDragType } from '../hooks/use-drag'
 import { useEditableStatic } from '../hooks/use-editable'
 import { useSelectionDrawingStyle } from '../hooks/use-selection-drawing'

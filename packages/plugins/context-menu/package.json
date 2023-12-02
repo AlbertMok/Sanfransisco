@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/plugin-context-menu",
+  "name": "@everynote/plugin-context-menu",
   "version": "1.0.2",
   "main": "./dist/index.js",
   "exports": {
@@ -33,8 +33,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@editablejs/models": "workspace:*",
-    "@editablejs/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
+    "@everynote/editor": "workspace:*",
     "@types/escape-html": "^1.0.2",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
@@ -54,8 +54,8 @@
     "typescript": "^4.x"
   },
   "peerDependencies": {
-    "@editablejs/models": "workspace:*",
-    "@editablejs/editor": "workspace:*"
+    "@everynote/models": "workspace:*",
+    "@everynote/editor": "workspace:*"
   },
   "lint-staged": {
     "src/**/*.{json,ts,tsx,js,jsx}": [
@@ -67,9 +67,9 @@
     "preset": "jest-presets/jest/node"
   },
   "dependencies": {
-    "@editablejs/deserializer": "workspace:*",
-    "@editablejs/serializer": "workspace:*",
-    "@editablejs/ui": "workspace:*",
+    "@everynote/deserializer": "workspace:*",
+    "@everynote/serializer": "workspace:*",
+    "@everynote/ui": "workspace:*",
     "styled-components": "5.3.6",
     "zustand": "4.1.4"
   }

@@ -12,19 +12,19 @@ title: Mention
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-mention
+npm install @everynote/plugin-mention
 
 </TerminalBlock>
 
 ## 使用 Mention {/*mention-using*/}
 
-<Sandpack deps={['@editablejs/plugin-mention']}>
+<Sandpack deps={['@everynote/plugin-mention']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withMention } from '@editablejs/plugin-mention'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withMention } from '@everynote/plugin-mention'
 
 const defaultValue = [
   {
@@ -66,6 +66,7 @@ export default function App() {
 ```js
 withMention(editor, options)
 ```
+
 ### placeholder {/*mention-placeholder*/}
 
 `placeholder` 用于配置 `Mention` 插件搜索时候的占位符。

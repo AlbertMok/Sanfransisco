@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { BACKGROUND_COLOR_KEY } from '../constants'
 import { BackgroundColor } from '../interfaces/background-color'
 import { getOptions } from '../options'

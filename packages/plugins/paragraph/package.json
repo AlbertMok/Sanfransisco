@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/plugin-paragraph",
+  "name": "@everynote/plugin-paragraph",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -73,10 +73,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@editablejs/deserializer": "workspace:*",
-    "@editablejs/editor": "workspace:*",
-    "@editablejs/models": "workspace:*",
-    "@editablejs/serializer": "workspace:*",
+    "@everynote/deserializer": "workspace:*",
+    "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
+    "@everynote/serializer": "workspace:*",
     "@types/lodash.clonedeep": "4.5.8",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",

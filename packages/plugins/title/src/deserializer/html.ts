@@ -1,10 +1,7 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
 import { TITLE_KEY } from '../constants'
 
-export const withTitleHTMLDeserializerTransform: HTMLDeserializerWithTransform = (
-  next,
-  serializer,
-) => {
+export const withTitleHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next, serializer) => {
   return (node, options = {}) => {
     const { element, text } = options
     if (node.nodeName.toLowerCase() === TITLE_KEY) {

@@ -1,8 +1,8 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
 import { Indent } from '../interfaces/indent'
 
-export const withIndentHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withIndentHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { element, text } = options
     if (isDOMHTMLElement(node)) {

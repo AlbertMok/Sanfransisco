@@ -9,9 +9,9 @@ import {
   useGridSelection,
   useGridSelected,
   useReadOnly,
-} from '@editablejs/editor'
-import { Grid, Editor, Range, Transforms, isDOMNode, GridCell, isDOMHTMLElement } from '@editablejs/models'
-import { useComposedRefs } from '@editablejs/ui'
+} from '@everynote/editor'
+import { Grid, Editor, Range, Transforms, isDOMNode, GridCell, isDOMHTMLElement } from '@everynote/models'
+import { useComposedRefs } from '@everynote/ui'
 import * as React from 'react'
 import { createStore } from 'zustand'
 import { TableCellEditor } from '../cell'

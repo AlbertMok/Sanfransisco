@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export type TaskListHotkey = string | ((e: KeyboardEvent) => boolean)
 

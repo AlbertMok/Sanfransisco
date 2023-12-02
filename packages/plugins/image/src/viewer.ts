@@ -1,4 +1,4 @@
-import { Editable } from '@editablejs/editor'
+import { Editable } from '@everynote/editor'
 import { Image } from './interfaces/image'
 import { getViewer } from './create-viewer'
 

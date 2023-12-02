@@ -1,4 +1,4 @@
-import { Editor, NodeEntry, Transforms } from '@editablejs/models'
+import { Editor, NodeEntry, Transforms } from '@everynote/models'
 import { Indent } from './interfaces/indent'
 
 export const setTextIndent = (editor: Editor, blockEntry: NodeEntry<Indent>, size: number) => {

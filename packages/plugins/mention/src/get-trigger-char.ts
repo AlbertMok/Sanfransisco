@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { MENTION_TRIGGER_KEY } from './constants'
 import { getOptions } from './options'
 

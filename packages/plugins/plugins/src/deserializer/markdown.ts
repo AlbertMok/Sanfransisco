@@ -1,32 +1,17 @@
-import { MarkdownDeserializer } from '@editablejs/deserializer/markdown'
-import {
-  withMarkMarkdownDeserializerTransform,
-  withMarkMarkdownDeserializerPlugin,
-} from '@editablejs/plugin-mark/deserializer/markdown'
+import { MarkdownDeserializer } from '@everynote/deserializer/markdown'
+import { withMarkMarkdownDeserializerTransform, withMarkMarkdownDeserializerPlugin } from '@everynote/plugin-mark/deserializer/markdown'
 import {
   withBlockquoteMarkdownDeserializerTransform,
   withBlockquoteMarkdownDeserializerPlugin,
-} from '@editablejs/plugin-blockquote/deserializer/markdown'
+} from '@everynote/plugin-blockquote/deserializer/markdown'
 import {
   withCodeBlockMarkdownDeserializerPlugin,
   withCodeBlockMarkdownDeserializerTransform,
-} from '@editablejs/plugin-codeblock/deserializer/markdown'
-import {
-  withHeadingMarkdownDeserializerPlugin,
-  withHeadingMarkdownDeserializerTransform,
-} from '@editablejs/plugin-heading/deserializer/markdown'
-import {
-  withHrMarkdownDeserializerPlugin,
-  withHrMarkdownDeserializerTransform,
-} from '@editablejs/plugin-hr/deserializer/markdown'
-import {
-  withImageMarkdownDeserializerPlugin,
-  withImageMarkdownDeserializerTransform,
-} from '@editablejs/plugin-image/deserializer/markdown'
-import {
-  withLinkMarkdownDeserializerPlugin,
-  withLinkMarkdownDeserializerTransform,
-} from '@editablejs/plugin-link/deserializer/markdown'
+} from '@everynote/plugin-codeblock/deserializer/markdown'
+import { withHeadingMarkdownDeserializerPlugin, withHeadingMarkdownDeserializerTransform } from '@everynote/plugin-heading/deserializer/markdown'
+import { withHrMarkdownDeserializerPlugin, withHrMarkdownDeserializerTransform } from '@everynote/plugin-hr/deserializer/markdown'
+import { withImageMarkdownDeserializerPlugin, withImageMarkdownDeserializerTransform } from '@everynote/plugin-image/deserializer/markdown'
+import { withLinkMarkdownDeserializerPlugin, withLinkMarkdownDeserializerTransform } from '@everynote/plugin-link/deserializer/markdown'
 import {
   withOrderedListMarkdownDeserializerPlugin,
   withOrderedListMarkdownDeserializerTransform,
@@ -34,15 +19,15 @@ import {
   withTaskListMarkdownDeserializerTransform,
   withUnorderedListMarkdownDeserializerPlugin,
   withUnorderedListMarkdownDeserializerTransform,
-} from '@editablejs/plugin-list/deserializer/markdown'
+} from '@everynote/plugin-list/deserializer/markdown'
 import {
   withTableCellMarkdownDeserializerTransform,
   withTableMarkdownDeserializerPlugin,
   withTableMarkdownDeserializerTransform,
   withTableRowMarkdownDeserializerTransform,
-} from '@editablejs/plugin-table/deserializer/markdown'
+} from '@everynote/plugin-table/deserializer/markdown'
 
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export const withMarkdownDeserializerPlugin = (editor: Editor) => {
   const { withEditorPlugin } = MarkdownDeserializer

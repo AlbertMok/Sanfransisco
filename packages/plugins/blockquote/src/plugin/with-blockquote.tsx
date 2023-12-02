@@ -1,5 +1,5 @@
-import { Editable, Hotkey, generateId } from '@editablejs/editor'
-import { Transforms, Editor, Path, Range, Node, Text } from '@editablejs/models'
+import { Editable, Hotkey, generateId } from '@everynote/editor'
+import { Transforms, Editor, Path, Range, Node, Text } from '@everynote/models'
 import { BLOCKQUOTE_KEY } from '../constants'
 import { BlockquoteHotkey, BlockquoteOptions, setOptions } from '../options'
 import { BlockquoteEditor } from './blockquote-editor'

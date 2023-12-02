@@ -1,7 +1,7 @@
-import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
+import { MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { Image } from '../interfaces/image'
 
-export const withImageMarkdownSerializerTransform: MarkdownSerializerWithTransform = next => {
+export const withImageMarkdownSerializerTransform: MarkdownSerializerWithTransform = (next) => {
   return (node, options = {}) => {
     if (Image.isImage(node) && node.url) {
       return [

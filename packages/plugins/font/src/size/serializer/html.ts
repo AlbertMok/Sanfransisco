@@ -1,11 +1,7 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { FontSize } from '../interfaces/font-size'
 
-export const withFontSizeHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withFontSizeHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -15,7 +11,7 @@ export const withFontSizeHTMLSerializerTransform: HTMLSerializerWithTransform = 
         'span',
         serializer.mergeOptions(node, attributes, customAttributes),
         serializer.mergeOptions(node, style, customStyle, { fontSize }),
-        text,
+        text
       )
     }
     return next(node, options)

@@ -12,19 +12,19 @@ This page will show you how to use the `Indent` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-indent
+npm install @everynote/plugin-indent
 
 </TerminalBlock>
 
 ## Usage {/*indent-using*/}
 
-<Sandpack deps={['@editablejs/plugin-indent']}>
+<Sandpack deps={['@everynote/plugin-indent']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withIndent } from '@editablejs/plugin-indent'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withIndent } from '@everynote/plugin-indent'
 
 const defaultValue = [
   {
@@ -66,12 +66,14 @@ withIndent(editor, options)
 
 - Type: `IndentHotkey`
 - Default:
+
   ```ts
   const defaultHotkeys: IndentHotkey = {
     "indent": 'tab',
     "outdent": 'shift+tab',
   }
   ```
+
 - Example:
 
 ```ts

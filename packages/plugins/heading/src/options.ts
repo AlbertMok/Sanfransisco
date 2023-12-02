@@ -1,12 +1,5 @@
-import { Editor } from '@editablejs/models'
-import {
-  HEADING_ONE_KEY,
-  HEADING_TWO_KEY,
-  HEADING_THREE_KEY,
-  HEADING_FOUR_KEY,
-  HEADING_FIVE_KEY,
-  HEADING_SIX_KEY,
-} from './constants'
+import { Editor } from '@everynote/models'
+import { HEADING_ONE_KEY, HEADING_TWO_KEY, HEADING_THREE_KEY, HEADING_FOUR_KEY, HEADING_FIVE_KEY, HEADING_SIX_KEY } from './constants'
 import { HeadingFontStyleName, HeadingTextMark, HeadingType } from './interfaces/heading'
 
 export type HeadingHotkey = Record<HeadingType, string | ((e: KeyboardEvent) => boolean)>
@@ -57,10 +50,7 @@ const defaultStyle = {
   },
 }
 
-export const getStyle = (
-  editor: Editor,
-  type: HeadingType,
-): Record<HeadingFontStyleName, string> => {
+export const getStyle = (editor: Editor, type: HeadingType): Record<HeadingFontStyleName, string> => {
   const { style = defaultStyle } = getOptions(editor)
   return style[type] ?? defaultStyle[type]
 }

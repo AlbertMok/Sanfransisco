@@ -12,19 +12,19 @@ This page will show you how to use the `Link` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-link
+npm install @everynote/plugin-link
 
 </TerminalBlock>
 
 ## Usage {/*link-using*/}
 
-<Sandpack deps={['@editablejs/plugin-link']}>
+<Sandpack deps={['@everynote/plugin-link']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withLink } from '@editablejs/plugin-link'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withLink } from '@everynote/plugin-link'
 
 const defaultValue = [
   {
@@ -70,6 +70,7 @@ withLink(editor, options)
 
 - Type: `Record<string, LinkLocale>`
 - Default:
+
   ```ts
   const defaultLocale: Record<string, LinkLocale> ={
     locale: 'en-US',

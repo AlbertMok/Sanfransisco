@@ -1,6 +1,6 @@
-import { Element } from '@editablejs/models'
+import { Element } from '@everynote/models'
 import { HR_KEY } from '../constants'
-import { generateId } from '@editablejs/editor'
+import { generateId } from '@everynote/editor'
 
 export type HrStyle = 'dashed' | 'solid' | 'dotted' | 'double'
 

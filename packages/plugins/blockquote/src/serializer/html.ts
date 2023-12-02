@@ -1,4 +1,4 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { BLOCKQUOTE_KEY } from '../constants'
 import { Blockquote } from '../interfaces/blockquote'
 

@@ -1,8 +1,8 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
 import { Mark } from '../interfaces/mark'
 
-export const withMarkHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withMarkHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { element, text } = options
     if (isDOMHTMLElement(node)) {
@@ -22,11 +22,7 @@ export const withMarkHTMLDeserializerTransform: HTMLDeserializerWithTransform = 
       if (node.nodeName === 'EM' || node.nodeName === 'I' || style.fontStyle === 'italic') {
         mark.italic = true
       }
-      if (
-        node.nodeName === 'U' ||
-        node.nodeName === 'INS' ||
-        style.textDecoration === 'underline'
-      ) {
+      if (node.nodeName === 'U' || node.nodeName === 'INS' || style.textDecoration === 'underline') {
         mark.underline = true
       }
       if (node.nodeName === 'S' || style.textDecoration === 'line-through') {

@@ -1,11 +1,7 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { TaskList } from '../interfaces/task-list'
 
-export const withTaskListHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions,
-) => {
+export const withTaskListHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -24,7 +20,7 @@ export const withTaskListHTMLSerializerTransform: HTMLSerializerWithTransform = 
             textDecorationLine: checked ? 'line-through' : 'none',
             marginLeft: pl,
           },
-          customStyle,
+          customStyle
         ),
         serializer.create(
           'li',
@@ -34,12 +30,10 @@ export const withTaskListHTMLSerializerTransform: HTMLSerializerWithTransform = 
             width: '100%',
             verticalAlign: 'baseline',
           },
-          `<input type="checkbox" ${
-            checked ? 'checked="true"' : ''
-          } style='margin-right: 0.75rem;' />${children
-            .map(child => serializer.transform(child))
-            .join('')}`,
-        ),
+          `<input type="checkbox" ${checked ? 'checked="true"' : ''} style='margin-right: 0.75rem;' />${children
+            .map((child) => serializer.transform(child))
+            .join('')}`
+        )
       )
     }
     return next(node, options)

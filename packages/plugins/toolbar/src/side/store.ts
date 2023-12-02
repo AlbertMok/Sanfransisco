@@ -1,9 +1,9 @@
 import * as React from 'react'
 import create, { StoreApi, UseBoundStore, useStore } from 'zustand'
 import shallow from 'zustand/shallow'
-import { Editable, useIsomorphicLayoutEffect } from '@editablejs/editor'
-import { Range, Element } from '@editablejs/models'
-import { ContextMenuItem as UIContextMenuItem } from '@editablejs/ui'
+import { Editable, useIsomorphicLayoutEffect } from '@everynote/editor'
+import { Range, Element } from '@everynote/models'
+import { ContextMenuItem as UIContextMenuItem } from '@everynote/ui'
 import { getCapturedData } from './weak-map'
 
 interface BaseSideToolbarItem extends Omit<UIContextMenuItem, 'children'> {

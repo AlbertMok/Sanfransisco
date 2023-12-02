@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { Observable } from 'lib0/observable'
 
 const CONNECTED: WeakSet<Editor> = new WeakSet()

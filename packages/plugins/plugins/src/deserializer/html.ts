@@ -1,32 +1,32 @@
-import { HTMLDeserializer } from '@editablejs/deserializer/html'
-import { withMarkHTMLDeserializerTransform } from '@editablejs/plugin-mark/deserializer/html'
-import { withFontSizeHTMLDeserializerTransform } from '@editablejs/plugin-font/size/deserializer/html'
-import { withFontColorHTMLDeserializerTransform } from '@editablejs/plugin-font/color/deserializer/html'
-import { withBackgroundColorHTMLDeserializerTransform } from '@editablejs/plugin-font/background-color/deserializer/html'
-import { withHeadingHTMLDeserializerTransform } from '@editablejs/plugin-heading/deserializer/html'
-import { withBlockquoteHTMLDeserializerTransform } from '@editablejs/plugin-blockquote/deserializer/html'
-import { withIndentHTMLDeserializerTransform } from '@editablejs/plugin-indent/deserializer/html'
+import { HTMLDeserializer } from '@everynote/deserializer/html'
+import { withMarkHTMLDeserializerTransform } from '@everynote/plugin-mark/deserializer/html'
+import { withFontSizeHTMLDeserializerTransform } from '@everynote/plugin-font/size/deserializer/html'
+import { withFontColorHTMLDeserializerTransform } from '@everynote/plugin-font/color/deserializer/html'
+import { withBackgroundColorHTMLDeserializerTransform } from '@everynote/plugin-font/background-color/deserializer/html'
+import { withHeadingHTMLDeserializerTransform } from '@everynote/plugin-heading/deserializer/html'
+import { withBlockquoteHTMLDeserializerTransform } from '@everynote/plugin-blockquote/deserializer/html'
+import { withIndentHTMLDeserializerTransform } from '@everynote/plugin-indent/deserializer/html'
 import {
   withOrderedListHTMLDeserializerTransform,
   withTaskListHTMLDeserializerTransform,
   withUnorderedListHTMLDeserializerTransform,
-} from '@editablejs/plugin-list/deserializer/html'
+} from '@everynote/plugin-list/deserializer/html'
 import {
   withTableCellHTMLDeserializerTransform,
   withTableHTMLDeserializerTransform,
   withTableRowHTMLDeserializerTransform,
-} from '@editablejs/plugin-table/deserializer/html'
-import { withLinkHTMLDeserializerTransform } from '@editablejs/plugin-link/deserializer/html'
-import { withImageHTMLDeserializerTransform } from '@editablejs/plugin-image/deserializer/html'
-import { withHrHTMLDeserializerTransform } from '@editablejs/plugin-hr/deserializer/html'
-import { withAlignHTMLDeserializerTransform } from '@editablejs/plugin-alignment/deserializer/html'
-import { withLeadingHTMLDeserializerTransform } from '@editablejs/plugin-leading/deserializer/html'
-import { withMentionHTMLDeserializerTransform } from '@editablejs/plugin-mention/deserializer/html'
-import { withCodeBlockHTMLDeserializerTransform } from '@editablejs/plugin-codeblock/deserializer/html'
+} from '@everynote/plugin-table/deserializer/html'
+import { withLinkHTMLDeserializerTransform } from '@everynote/plugin-link/deserializer/html'
+import { withImageHTMLDeserializerTransform } from '@everynote/plugin-image/deserializer/html'
+import { withHrHTMLDeserializerTransform } from '@everynote/plugin-hr/deserializer/html'
+import { withAlignHTMLDeserializerTransform } from '@everynote/plugin-alignment/deserializer/html'
+import { withLeadingHTMLDeserializerTransform } from '@everynote/plugin-leading/deserializer/html'
+import { withMentionHTMLDeserializerTransform } from '@everynote/plugin-mention/deserializer/html'
+import { withCodeBlockHTMLDeserializerTransform } from '@everynote/plugin-codeblock/deserializer/html'
 
-import { withTitleHTMLDeserializerTransform } from '@editablejs/plugin-title/deserializer/html'
+import { withTitleHTMLDeserializerTransform } from '@everynote/plugin-title/deserializer/html'
 
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 
 export const withHTMLDeserializerTransform = (editor: Editor) => {
   const { withEditor } = HTMLDeserializer

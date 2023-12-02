@@ -1,6 +1,6 @@
-import { Range } from '@editablejs/models'
-import { Awareness } from '@editablejs/yjs-protocols/awareness'
-import { AwarenessSelection } from '@editablejs/yjs-protocols/awareness-selection'
+import { Range } from '@everynote/models'
+import { Awareness } from '@everynote/yjs-protocols/awareness'
+import { AwarenessSelection } from '@everynote/yjs-protocols/awareness-selection'
 import { CursorData, CursorState } from '../types'
 import { YjsEditor } from './with-yjs'
 
@@ -26,10 +26,7 @@ export const YCursorEditor = {
     )
   },
 
-  sendCursorPosition<T extends CursorData>(
-    editor: YCursorEditor<T>,
-    range: Range | null = editor.selection,
-  ) {
+  sendCursorPosition<T extends CursorData>(editor: YCursorEditor<T>, range: Range | null = editor.selection) {
     editor.sendCursorPosition(range)
   },
 
@@ -37,10 +34,7 @@ export const YCursorEditor = {
     editor.sendCursorData(data)
   },
 
-  cursorState<T extends CursorData>(
-    editor: YCursorEditor<T>,
-    clientId: number,
-  ): CursorState<T> | null {
+  cursorState<T extends CursorData>(editor: YCursorEditor<T>, clientId: number): CursorState<T> | null {
     if (clientId === editor.awareness.clientID || !YjsEditor.connected(editor)) {
       return null
     }
@@ -76,7 +70,7 @@ export const YCursorEditor = {
             data: state[editor.cursorDataField],
           },
         ]
-      }).filter(Array.isArray),
+      }).filter(Array.isArray)
     )
   },
 }

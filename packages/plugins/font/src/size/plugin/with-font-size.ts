@@ -1,5 +1,5 @@
-import { Editable, RenderLeafProps, Hotkey } from '@editablejs/editor'
-import { Editor } from '@editablejs/models'
+import { Editable, RenderLeafProps, Hotkey } from '@everynote/editor'
+import { Editor } from '@everynote/models'
 import { FONTSIZE_KEY } from '../constants'
 import { FontSize } from '../interfaces/font-size'
 import { FontSizeHotkey, FontSizeOptions, setOptions } from '../options'
@@ -13,7 +13,7 @@ export const withFontSize = <T extends Editable>(editor: T, options: FontSizeOpt
   setOptions(newEditor, options)
 
   newEditor.toggleFontSize = (size: string) => {
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       const { defaultSize } = FontSizeEditor.getOptions(editor)
       if (defaultSize && size === defaultSize) {

@@ -1,5 +1,5 @@
-import { Editable, generateId } from '@editablejs/editor'
-import { Editor, Element, Node, Path, Range, Transforms } from '@editablejs/models'
+import { Editable, generateId } from '@everynote/editor'
+import { Editor, Element, Node, Path, Range, Transforms } from '@everynote/models'
 import { Paragraph } from '../interfaces/paragraph'
 import cloneDeep from 'lodash.clonedeep'
 import { PARAGRAPH_KEY } from '../constants'

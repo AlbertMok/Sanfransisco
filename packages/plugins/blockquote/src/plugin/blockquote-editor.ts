@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { BLOCKQUOTE_KEY } from '../constants'
 import { Blockquote } from '../interfaces/blockquote'
 import { getOptions } from '../options'

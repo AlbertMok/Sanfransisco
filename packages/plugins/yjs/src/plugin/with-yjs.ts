@@ -1,5 +1,5 @@
-import { Descendant, Editor, Operation, Point } from '@editablejs/models'
-import { Editable } from '@editablejs/editor'
+import { Descendant, Editor, Operation, Point } from '@everynote/models'
+import { Editable } from '@everynote/editor'
 import {
   assertDocumentAttachment,
   editorPointToRelativePosition,
@@ -9,9 +9,9 @@ import {
   removeStoredPosition,
   setStoredPosition,
   yTextToEditorElement,
-} from '@editablejs/yjs-transform'
+} from '@everynote/yjs-transform'
 
-import { withProviderProtocol } from '@editablejs/protocols/provider'
+import { withProviderProtocol } from '@everynote/protocols/provider'
 import * as Y from 'yjs'
 import { applyYjsEvents } from '../apply-to-editor'
 import { applyEditorOp } from '../apply-to-yjs'
@@ -148,7 +148,7 @@ export type WithYjsOptions = {
 export function withYjs<T extends Editor>(
   editor: T,
   sharedRoot: Y.XmlText,
-  { localOrigin, positionStorageOrigin, autoConnect = false }: WithYjsOptions = {},
+  { localOrigin, positionStorageOrigin, autoConnect = false }: WithYjsOptions = {}
 ): T & YjsEditor {
   const e = editor as T & YjsEditor
 
@@ -167,7 +167,7 @@ export function withYjs<T extends Editor>(
     })
   }
 
-  e.isLocalOrigin = origin => origin === e.localOrigin
+  e.isLocalOrigin = (origin) => origin === e.localOrigin
 
   const handleYEvents = (events: Y.YEvent<Y.XmlText>[], transaction: Y.Transaction) => {
     if (e.isLocalOrigin(transaction.origin)) {
@@ -213,11 +213,8 @@ export function withYjs<T extends Editor>(
     disconnect()
   }
 
-  e.storeLocalChange = op => {
-    LOCAL_CHANGES.set(e, [
-      ...YjsEditor.localChanges(e),
-      { op, doc: editor.children, origin: YjsEditor.origin(e) },
-    ])
+  e.storeLocalChange = (op) => {
+    LOCAL_CHANGES.set(e, [...YjsEditor.localChanges(e), { op, doc: editor.children, origin: YjsEditor.origin(e) }])
   }
 
   e.flushLocalChanges = () => {
@@ -228,13 +225,12 @@ export function withYjs<T extends Editor>(
     // Group local changes by origin so we can apply them in the correct order
     // with the correct origin with a minimal amount of transactions.
     const txGroups: LocalChange[][] = []
-    localChanges.forEach(change => {
+    localChanges.forEach((change) => {
       const currentGroup = txGroups[txGroups.length - 1]
       if (
         currentGroup &&
         // If the current group contains a unique operation, we can't group
-        (~~UniqueOperations.indexOf(change.op.type) ||
-          ~UniqueOperations.indexOf(currentGroup[0].op.type)) &&
+        (~~UniqueOperations.indexOf(change.op.type) || ~UniqueOperations.indexOf(currentGroup[0].op.type)) &&
         currentGroup[0].origin === change.origin
       ) {
         return currentGroup.push(change)
@@ -243,13 +239,13 @@ export function withYjs<T extends Editor>(
       txGroups.push([change])
     })
 
-    txGroups.forEach(txGroup => {
+    txGroups.forEach((txGroup) => {
       assertDocumentAttachment(e.sharedRoot)
 
-      e.sharedRoot.doc.transact(t => {
-        txGroup.forEach(change => {
+      e.sharedRoot.doc.transact((t) => {
+        txGroup.forEach((change) => {
           assertDocumentAttachment(e.sharedRoot)
-          // 设置 origin ops 到 meta 中，在 applyRemoteEvents 中，可以使用 origin.meta.ops 来获取操作。前提需要使用 @editablejs/yjs-websocket 插件
+          // 设置 origin ops 到 meta 中，在 applyRemoteEvents 中，可以使用 origin.meta.ops 来获取操作。前提需要使用 @everynote/yjs-websocket 插件
           const ops = t.meta.get('ops')
           if (!ops) {
             t.meta.set('ops', [{ ...change.op }])
@@ -263,7 +259,7 @@ export function withYjs<T extends Editor>(
   }
 
   const { apply, onChange } = e
-  e.apply = op => {
+  e.apply = (op) => {
     if (YjsEditor.connected(e) && YjsEditor.isLocal(e) && !Editable.isComposing(e)) {
       YjsEditor.storeLocalChange(e, op)
     }

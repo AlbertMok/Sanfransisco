@@ -1,9 +1,5 @@
-import {
-  MarkdownDeserializerWithTransform,
-  MarkdownDeserializerPlugin,
-  MarkdownDeserializerOptions,
-} from '@editablejs/deserializer/markdown'
-import { Editor } from '@editablejs/models'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin, MarkdownDeserializerOptions } from '@everynote/deserializer/markdown'
+import { Editor } from '@everynote/models'
 import { Heading, HeadingType } from '../interfaces/heading'
 import { getStyle, getTextMark } from '../options'
 
@@ -11,9 +7,11 @@ export interface HeadingMarkdownDeserializerOptions extends MarkdownDeserializer
   editor: Editor
 }
 
-export const withHeadingMarkdownDeserializerTransform: MarkdownDeserializerWithTransform<
-  HeadingMarkdownDeserializerOptions
-> = (next, self, { editor }) => {
+export const withHeadingMarkdownDeserializerTransform: MarkdownDeserializerWithTransform<HeadingMarkdownDeserializerOptions> = (
+  next,
+  self,
+  { editor }
+) => {
   return (node, options = {}) => {
     const { type } = node
     if (type === 'heading') {
@@ -42,12 +40,7 @@ export const withHeadingMarkdownDeserializerTransform: MarkdownDeserializerWithT
       const text: Record<string, string> = options.text ?? {}
       text[textMark.fontSize] = textStyle.fontSize
       text[textMark.fontWeight] = textStyle.fontWeight
-      return [
-        Heading.create(
-          type,
-          node.children.map(child => self.transform(child, { ...options, text })).flat(),
-        ),
-      ]
+      return [Heading.create(type, node.children.map((child) => self.transform(child, { ...options, text })).flat())]
     }
     return next(node, options)
   }

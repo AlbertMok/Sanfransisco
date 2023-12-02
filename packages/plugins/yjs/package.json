@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/plugin-yjs",
+  "name": "@everynote/plugin-yjs",
   "version": "1.0.2",
   "main": "./dist/index.js",
   "exports": {
@@ -33,8 +33,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@editablejs/models": "workspace:*",
-    "@editablejs/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
+    "@everynote/editor": "workspace:*",
     "@types/is-hotkey": "^0.1.7",
     "@types/jest": "^26.0.22",
     "@types/react": "^18.x",
@@ -56,8 +56,8 @@
     "yjs": "^13.5.46"
   },
   "peerDependencies": {
-    "@editablejs/models": "workspace:*",
-    "@editablejs/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
+    "@everynote/editor": "workspace:*",
     "yjs": "^13.5.46"
   },
   "lint-staged": {
@@ -70,9 +70,9 @@
     "preset": "jest-presets/jest/node"
   },
   "dependencies": {
-    "@editablejs/protocols": "workspace:*",
-    "@editablejs/yjs-transform": "workspace:*",
-    "@editablejs/yjs-protocols": "workspace:*",
+    "@everynote/protocols": "workspace:*",
+    "@everynote/yjs-transform": "workspace:*",
+    "@everynote/yjs-protocols": "workspace:*",
     "styled-components": "5.3.6",
     "zustand": "4.1.4"
   }

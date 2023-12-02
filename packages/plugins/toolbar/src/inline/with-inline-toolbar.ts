@@ -1,4 +1,4 @@
-import { Editable, Slot, Locale } from '@editablejs/editor'
+import { Editable, Slot, Locale } from '@everynote/editor'
 import { InlineToolbar } from './components/inline-toolbar'
 import locale, { InlineToolbarLocale } from './locale'
 
@@ -16,10 +16,7 @@ const InlineToolbarEditor = {
   },
 }
 
-export const withInlineToolbar = <T extends Editable>(
-  editor: T,
-  options: InlineToolbarOptions = {},
-) => {
+export const withInlineToolbar = <T extends Editable>(editor: T, options: InlineToolbarOptions = {}) => {
   const newEditor = editor as T & InlineToolbarEditor
 
   INLINE_TOOLBAR_OPTIONS.set(newEditor, options)

@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { IMAGE_KEY } from '../constants'
 import { Image, ImageStyle } from '../interfaces/image'
 import { getOptions } from '../options'

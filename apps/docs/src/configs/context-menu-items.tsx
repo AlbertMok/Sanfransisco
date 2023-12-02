@@ -1,7 +1,7 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import { Editor, Grid, Range } from '@editablejs/models'
-import { ContextMenuItem } from '@editablejs/plugins'
-import { Icon } from '@editablejs/ui'
+import { Editable, Hotkey } from '@everynote/editor'
+import { Editor, Grid, Range } from '@everynote/models'
+import { ContextMenuItem } from '@everynote/plugins'
+import { Icon } from '@everynote/ui'
 import { Translation } from 'react-i18next'
 
 export const createContextMenuItems = (editor: Editable) => {
@@ -18,9 +18,7 @@ export const createContextMenuItems = (editor: Editable) => {
     {
       key: 'cut',
       icon: <Icon name="cut" />,
-      title: (
-        <Translation>{(t) => t('playground.editor.base.cut')}</Translation>
-      ),
+      title: <Translation>{(t) => t('playground.editor.base.cut')}</Translation>,
       rightText: Hotkey.format('mod+x'),
       disabled: isDisabled,
       onSelect() {
@@ -30,9 +28,7 @@ export const createContextMenuItems = (editor: Editable) => {
     {
       key: 'copy',
       icon: <Icon name="copy" />,
-      title: (
-        <Translation>{(t) => t('playground.editor.base.copy')}</Translation>
-      ),
+      title: <Translation>{(t) => t('playground.editor.base.copy')}</Translation>,
       rightText: Hotkey.format('mod+c'),
       disabled: isDisabled,
       onSelect() {
@@ -42,9 +38,7 @@ export const createContextMenuItems = (editor: Editable) => {
     {
       key: 'paste',
       icon: <Icon name="paste" />,
-      title: (
-        <Translation>{(t) => t('playground.editor.base.paste')}</Translation>
-      ),
+      title: <Translation>{(t) => t('playground.editor.base.paste')}</Translation>,
       rightText: Hotkey.format('mod+v'),
       disabled: !selection,
       onSelect() {
@@ -54,11 +48,7 @@ export const createContextMenuItems = (editor: Editable) => {
     {
       key: 'paste-text',
       icon: <Icon name="pasteText" />,
-      title: (
-        <Translation>
-          {(t) => t('playground.editor.base.paste-text')}
-        </Translation>
-      ),
+      title: <Translation>{(t) => t('playground.editor.base.paste-text')}</Translation>,
       rightText: Hotkey.format('mod+shift+v'),
       disabled: !selection,
       onSelect() {
@@ -76,11 +66,7 @@ export const createContextMenuItems = (editor: Editable) => {
       {
         key: 'merge_cells',
         icon: <Icon name="tableMerge" />,
-        title: (
-          <Translation>
-            {(t) => t('playground.editor.base.merge-cells')}
-          </Translation>
-        ),
+        title: <Translation>{(t) => t('playground.editor.base.merge-cells')}</Translation>,
         disabled: !Grid.canMerge(editor, grid),
         onSelect: () => {
           Grid.mergeCell(editor, grid)
@@ -89,11 +75,7 @@ export const createContextMenuItems = (editor: Editable) => {
       {
         key: 'split_cells',
         icon: <Icon name="tableSplit" />,
-        title: (
-          <Translation>
-            {(t) => t('playground.editor.base.split-cells')}
-          </Translation>
-        ),
+        title: <Translation>{(t) => t('playground.editor.base.split-cells')}</Translation>,
         disabled: !Grid.canSplit(editor, grid),
         onSelect: () => {
           Grid.splitCell(editor, grid)

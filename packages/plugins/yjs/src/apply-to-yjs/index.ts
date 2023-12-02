@@ -1,4 +1,4 @@
-import { Node, Operation } from '@editablejs/models'
+import { Node, Operation } from '@everynote/models'
 import * as Y from 'yjs'
 import { NODE_MAPPER } from './node'
 import { TEXT_MAPPER } from './text'

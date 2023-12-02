@@ -1,4 +1,4 @@
-import { Editor, Text, Node, Element } from '@editablejs/models'
+import { Editor, Text, Node, Element } from '@everynote/models'
 import { Content, Paragraph } from 'mdast'
 import { Options, toMarkdown } from 'mdast-util-to-markdown'
 import { HTMLSerializer } from './html'

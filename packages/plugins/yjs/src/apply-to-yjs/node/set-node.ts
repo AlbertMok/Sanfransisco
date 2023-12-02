@@ -1,6 +1,6 @@
-import { Node, SetNodeOperation } from '@editablejs/models'
+import { Node, SetNodeOperation } from '@everynote/models'
 import * as Y from 'yjs'
-import { getYTarget } from '@editablejs/yjs-transform'
+import { getYTarget } from '@everynote/yjs-transform'
 
 export function setNode(sharedRoot: Y.XmlText, editorRoot: Node, op: SetNodeOperation): void {
   const { yTarget, textRange, yParent } = getYTarget(sharedRoot, editorRoot, op.path)
@@ -21,7 +21,7 @@ export function setNode(sharedRoot: Y.XmlText, editorRoot: Node, op: SetNodeOper
     })
   }
 
-  const unset = Object.fromEntries(Object.keys(op.properties).map(key => [key, null]))
+  const unset = Object.fromEntries(Object.keys(op.properties).map((key) => [key, null]))
   const newProperties = { ...unset, ...op.newProperties }
 
   yParent.format(textRange.start, textRange.end - textRange.start, newProperties)

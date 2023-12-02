@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/yjs-protocols",
+  "name": "@everynote/yjs-protocols",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "exports": {

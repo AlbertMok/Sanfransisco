@@ -1,5 +1,5 @@
-import { Editable } from '@editablejs/editor'
-import { GridCell, Node } from '@editablejs/models'
+import { Editable } from '@everynote/editor'
+import { GridCell, Node } from '@everynote/models'
 import { setOptions, TableCellOptions } from '../options'
 import { CellInnerStyles, CellStyles } from '../../components/cell'
 import { TableCellEditor } from './table-cell-editor'

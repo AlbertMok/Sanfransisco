@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import * as React from 'react'
 import { getCursorsStore } from '../store'
 

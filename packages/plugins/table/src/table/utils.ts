@@ -1,5 +1,5 @@
-import { Editable } from '@editablejs/editor'
-import { Editor } from '@editablejs/models'
+import { Editable } from '@everynote/editor'
+import { Editor } from '@everynote/models'
 
 interface CalculateAverageColumnWidthInContainerOptions {
   cols: number

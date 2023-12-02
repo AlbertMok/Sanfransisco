@@ -1,5 +1,5 @@
 import type Y from 'yjs'
-import type { Editor, Element, Node } from '@editablejs/models'
+import type { Editor, Element, Node } from '@everynote/models'
 export type DeltaInsert = {
   insert: string | Y.XmlText
   attributes?: Record<string, unknown>

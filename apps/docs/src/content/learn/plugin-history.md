@@ -12,19 +12,19 @@ This page will show you how to use the `History` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-history
+npm install @everynote/plugin-history
 
 </TerminalBlock>
 
 ## Usage {/*history-using*/}
 
-<Sandpack deps={['@editablejs/plugin-history']}>
+<Sandpack deps={['@everynote/plugin-history']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withHistory } from '@editablejs/plugin-history'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withHistory } from '@everynote/plugin-history'
 
 const defaultValue = [
   {
@@ -62,6 +62,7 @@ withHistory(editor, options)
 
 - Type: `HistoryHotkey`
 - Default:
+
   ```js
   {
     undo: 'mod+z',

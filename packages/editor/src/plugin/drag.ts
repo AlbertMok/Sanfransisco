@@ -1,5 +1,5 @@
 import create, { StoreApi, UseBoundStore } from 'zustand'
-import { Editor, Range, Element, Path, Selection } from '@editablejs/models'
+import { Editor, Range, Element, Path, Selection } from '@everynote/models'
 import { Editable } from './editable'
 
 export interface DragStore {

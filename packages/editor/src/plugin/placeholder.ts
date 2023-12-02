@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Editor, Node, NodeEntry, Range } from '@editablejs/models'
+import { Editor, Node, NodeEntry, Range } from '@everynote/models'
 import create, { UseBoundStore, StoreApi } from 'zustand'
 import { Editable } from './editable'
 

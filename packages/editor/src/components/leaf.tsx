@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Element, Text } from '@editablejs/models'
+import { Element, Text } from '@everynote/models'
 import String from './string'
 import { useEditableStatic } from '../hooks/use-editable'
 import { TextAttributes } from '../plugin/editable'

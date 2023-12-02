@@ -1,4 +1,4 @@
-import { Editable, Hotkey, generateId } from '@editablejs/editor'
+import { Editable, Hotkey, generateId } from '@everynote/editor'
 import React from 'react'
 import tw, { styled } from 'twin.macro'
 import { ListStyles, ListLabelStyles, renderList } from '../../styles'
@@ -8,7 +8,7 @@ import { OrderedListTemplates } from '../template'
 import { OrderedListEditor, ToggleOrderedListOptions } from './ordered-list-editor'
 import { withShortcuts } from './with-shortcuts'
 import { List, ListTemplate } from '../../list/list'
-import { Path } from '@editablejs/models'
+import { Path } from '@everynote/models'
 
 const defaultHotkey: OrderedListHotkey = 'mod+shift+7'
 

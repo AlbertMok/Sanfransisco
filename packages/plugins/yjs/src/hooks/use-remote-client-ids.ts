@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { useStore } from 'zustand'
 import shallow from 'zustand/shallow'
 import { useCursorStore } from './use-cursor-store'
@@ -12,6 +12,6 @@ export const useRemoteClientIds = (editor: Editor, isShallow = true) => {
       const ids = added.concat(removed, updated)
       return ids
     },
-    isShallow ? shallow : undefined,
+    isShallow ? shallow : undefined
   )
 }

@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { AlignKeys } from './interfaces/align'
 
 export type AlignHotkey = Record<AlignKeys, string | ((e: KeyboardEvent) => boolean)>

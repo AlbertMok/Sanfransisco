@@ -20,7 +20,7 @@ import {
   isDOMSelection,
   isDOMNode,
   isDOMText,
-} from '@editablejs/models'
+} from '@everynote/models'
 
 import {
   EDITOR_TO_ELEMENT,

@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { CODEBLOCK_KEY } from '../constants'
 import { CodeBlock } from '../interfaces/codeblock'
 import { getOptions } from '../options'

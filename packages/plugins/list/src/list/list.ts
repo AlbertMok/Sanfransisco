@@ -1,5 +1,5 @@
-import { generateId } from '@editablejs/editor'
-import { Element, Editor, NodeEntry, Path, Transforms, Node, Range, Location, BaseEditor } from '@editablejs/models'
+import { generateId } from '@everynote/editor'
+import { Element, Editor, NodeEntry, Path, Transforms, Node, Range, Location, BaseEditor } from '@everynote/models'
 import { UNORDERED_LIST_KEY } from '../unordered/constants'
 import { ORDERED_LIST_KEY } from '../ordered/constants'
 import { TASK_LIST_KEY } from '../task/constants'

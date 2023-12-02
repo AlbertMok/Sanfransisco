@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { IndentPluginType, IndentType } from './interfaces/indent'
 
 export type IndentHotkey = Record<IndentPluginType, string | ((e: KeyboardEvent) => boolean)>

@@ -1,4 +1,4 @@
-import { Editor, Range, Text, Point, Transforms } from '@editablejs/models'
+import { Editor, Range, Text, Point, Transforms } from '@everynote/models'
 import { MENTION_TRIGGER_KEY } from '../constants'
 import { MentionEditor } from './mention-editor'
 import { Mention } from '../interfaces/mention'
@@ -8,7 +8,7 @@ import { MentionStore } from '../store'
 import { getMentionTriggerData, setMentionTriggerData } from '../weak-map'
 import { MentionDecorate } from '../components/mention-decorate'
 import { closeMentionDecorate } from '../utils'
-import { Editable, Hotkey, Slot } from '@editablejs/editor'
+import { Editable, Hotkey, Slot } from '@everynote/editor'
 
 const defaultTriggerChar = MENTION_TRIGGER_KEY
 
@@ -19,19 +19,19 @@ export const withMention = <T extends Editable>(editor: T, options: MentionOptio
 
   const { isInline, isVoid, markableVoid } = newEditor
 
-  editor.isInline = element => {
+  editor.isInline = (element) => {
     return Mention.isMention(element) || isInline(element)
   }
 
-  newEditor.isVoid = element => {
+  newEditor.isVoid = (element) => {
     return Mention.isMention(element) || isVoid(element)
   }
 
-  newEditor.markableVoid = element => {
+  newEditor.markableVoid = (element) => {
     return Mention.isMention(element) || markableVoid(element)
   }
 
-  newEditor.insertMention = user => {
+  newEditor.insertMention = (user) => {
     const data = getMentionTriggerData(editor)
     if (data) {
       const at = data.rangeRef.current
@@ -41,7 +41,7 @@ export const withMention = <T extends Editable>(editor: T, options: MentionOptio
         })
     }
     closeMentionDecorate(newEditor)
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       Editor.insertNode(editor, Mention.create(user))
     })
@@ -53,7 +53,7 @@ export const withMention = <T extends Editable>(editor: T, options: MentionOptio
 
   const { renderElement } = newEditor
 
-  newEditor.renderElement = options => {
+  newEditor.renderElement = (options) => {
     const { attributes, children, element } = options
     if (Mention.isMention(element)) {
       return (
@@ -71,14 +71,14 @@ export const withMention = <T extends Editable>(editor: T, options: MentionOptio
   let isInputTrigger = false
   const { onChange, onInput, onSelectStart, onBlur, onKeydown } = newEditor
 
-  newEditor.onInput = value => {
+  newEditor.onInput = (value) => {
     onInput(value)
     if (value === triggerChar) {
       isInputTrigger = true
     }
   }
 
-  newEditor.onKeydown = event => {
+  newEditor.onKeydown = (event) => {
     if (Hotkey.match(['space', 'esc'], event)) {
       closeMentionDecorate(newEditor)
     }
@@ -98,9 +98,7 @@ export const withMention = <T extends Editable>(editor: T, options: MentionOptio
   const getBeforeText = (editor: Editable, point: Point) => {
     const wordBefore = Editor.before(editor, point, { unit: 'word' })
     const before = wordBefore && Editor.before(editor, wordBefore)
-    const beforeRange = before
-      ? Editor.range(editor, before, point)
-      : wordBefore && Editor.range(editor, wordBefore, point)
+    const beforeRange = before ? Editor.range(editor, before, point) : wordBefore && Editor.range(editor, wordBefore, point)
     const beforeText = beforeRange && Editor.string(editor, beforeRange)
     return beforeText
   }
@@ -134,8 +132,8 @@ export const withMention = <T extends Editable>(editor: T, options: MentionOptio
                 path,
                 offset: offset - 1,
               },
-              start,
-            ),
+              start
+            )
           ),
           text,
         })

@@ -1,21 +1,6 @@
-import {
-  Editor,
-  Node,
-  Range,
-  Element,
-  NodeEntry,
-  Path,
-  DOMElement,
-  DOMRange,
-  isDOMElement,
-} from '@editablejs/models'
+import { Editor, Node, Range, Element, NodeEntry, Path, DOMElement, DOMRange, isDOMElement } from '@everynote/models'
 import { Editable } from '../plugin/editable'
-import {
-  DATA_EDITABLE_COMPOSITION,
-  DATA_EDITABLE_NODE,
-  DATA_EDITABLE_STRING,
-  DATA_EDITABLE_ZERO_WIDTH,
-} from './constants'
+import { DATA_EDITABLE_COMPOSITION, DATA_EDITABLE_NODE, DATA_EDITABLE_STRING, DATA_EDITABLE_ZERO_WIDTH } from './constants'
 
 interface LineRectangle {
   top: number
@@ -47,7 +32,7 @@ const splitRectsIntoLines = (rects: DOMRect[] | DOMRectList) => {
         ? previousRects
             .concat()
             .reverse()
-            .find(p => p.width > 0) ?? previousRects[previousRects.length - 1]
+            .find((p) => p.width > 0) ?? previousRects[previousRects.length - 1]
         : null
       if (isRectInLine(rect, lineKey) && rect.left <= (lastRect ? lastRect.right : right) + 1) {
         return lineKey
@@ -168,9 +153,7 @@ const isRectInLine = (rect: DOMRect, line: Record<'top' | 'bottom' | 'height', n
         // Check if the top of the rect is above or equal to the top of the line and the bottom of the rect is within 2/3 of the line
         rect.bottom - deltaEdge > line.top)) ||
     // Check if the bottom of the rect is within 2/3 from the bottom of the line and the top of the rect is above the bottom of the line
-    (rect.bottom <= line.bottom &&
-      rect.bottom >= line.bottom - line.height / 3 &&
-      rect.top < line.bottom)
+    (rect.bottom <= line.bottom && rect.bottom >= line.bottom - line.height / 3 && rect.top < line.bottom)
   )
 }
 /**
@@ -215,10 +198,7 @@ const matchHighest = (editor: Editor, element: DOMElement, top: number, bottom: 
         if (node) {
           if (Element.isElement(node)) {
             if (editor.isVoid(node)) {
-              const rect = resetElementRect(
-                child.getBoundingClientRect(),
-                calculateElementHeight(child),
-              )
+              const rect = resetElementRect(child.getBoundingClientRect(), calculateElementHeight(child))
               compareHeight(rect)
             } else if (editor.isInline(node)) {
               const height = calculateElementHeight(child)
@@ -231,10 +211,8 @@ const matchHighest = (editor: Editor, element: DOMElement, top: number, bottom: 
               match(child)
             }
           } else {
-            const nodes = child.querySelectorAll(
-              `[${DATA_EDITABLE_STRING}], [${DATA_EDITABLE_COMPOSITION}], [${DATA_EDITABLE_ZERO_WIDTH}]`,
-            )
-            nodes.forEach(node => {
+            const nodes = child.querySelectorAll(`[${DATA_EDITABLE_STRING}], [${DATA_EDITABLE_COMPOSITION}], [${DATA_EDITABLE_ZERO_WIDTH}]`)
+            nodes.forEach((node) => {
               const height = calculateElementHeight(node)
               const rects = node.getClientRects()
               for (let r = 0; r < rects.length; r++) {
@@ -267,7 +245,7 @@ export const getLineRectsByNode = (editor: Editor, node: Node, minWidth = 4) => 
       ? [node, path]
       : Editor.above<Element>(editor, {
           at: path,
-          match: n => Editor.isBlock(editor, n),
+          match: (n) => Editor.isBlock(editor, n),
           mode: 'highest',
         })
   if (!block) return []
@@ -305,13 +283,13 @@ export const getLineRectsByRange = (editor: Editor, range: Range, minWidth = 4) 
   // 开始位置的 block节点
   const anchorEntry = Editor.above<Element>(editor, {
     at: anchor,
-    match: n => Editor.isBlock(editor, n),
+    match: (n) => Editor.isBlock(editor, n),
     mode: 'lowest',
   })
   // 结束位置的 block 节点
   const focusEntry = Editor.above<Element>(editor, {
     at: focus,
-    match: n => Editor.isBlock(editor, n),
+    match: (n) => Editor.isBlock(editor, n),
     mode: 'lowest',
   })
   if (!anchorEntry || !focusEntry) return []
@@ -350,7 +328,7 @@ export const getLineRectsByRange = (editor: Editor, range: Range, minWidth = 4) 
     }
     next = Editor.next<Element>(editor, {
       at: nextPath,
-      match: n => Editor.isBlock(editor, n),
+      match: (n) => Editor.isBlock(editor, n),
     })
   }
   if (Path.equals(startPath, endPath)) {
@@ -363,7 +341,7 @@ export const getLineRectsByRange = (editor: Editor, range: Range, minWidth = 4) 
           path: startPath,
           offset: startBlock.children.length,
         }),
-      }),
+      })
     )
     ranges.push(
       Editable.toDOMRange(editor, {
@@ -372,7 +350,7 @@ export const getLineRectsByRange = (editor: Editor, range: Range, minWidth = 4) 
           offset: 0,
         }),
         focus,
-      }),
+      })
     )
   }
 
@@ -387,10 +365,10 @@ export const getLineRectsByRange = (editor: Editor, range: Range, minWidth = 4) 
   for (const [line, rects] of lines) {
     // 找到对应行所在的 element
     const blockRect = blockRects.find(
-      r =>
+      (r) =>
         isRectInLine(r, line) &&
         (line.left >= r.left || Math.abs(line.left - r.left) < 1) &&
-        (line.right <= r.right || Math.abs(line.right - r.right) < 1),
+        (line.right <= r.right || Math.abs(line.right - r.right) < 1)
     )
     const block = blockRect ? rectMap.get(blockRect) : null
 
@@ -401,12 +379,7 @@ export const getLineRectsByRange = (editor: Editor, range: Range, minWidth = 4) 
       line.top = lineRect.top
       line.height = lineRect.height
       // 空节点的宽度给个最小值
-      if (
-        dom &&
-        Editor.isEmpty(editor, element) &&
-        width < 1 &&
-        dom.getBoundingClientRect().left === line.left
-      ) {
+      if (dom && Editor.isEmpty(editor, element) && width < 1 && dom.getBoundingClientRect().left === line.left) {
         width = minWidth
       }
     }

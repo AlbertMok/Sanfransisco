@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { SelectionArea, SelectionAreaProps, useSelection } from './SelectionArea'
 import { blockSelectionStore } from '../store/selectionStore'
-import { Transforms } from '@editablejs/models'
+import { Transforms } from '@everynote/models'
 import { useEditableStatic } from '../../../hooks/use-editable'
 import { SelectionEvent } from '../types'
 import { Editable } from '../../editable'

@@ -1,5 +1,5 @@
-import { Editable, Locale, Slot, Hotkey, generateId } from '@editablejs/editor'
-import { Transforms, Editor, Text, Range } from '@editablejs/models'
+import { Editable, Locale, Slot, Hotkey, generateId } from '@everynote/editor'
+import { Transforms, Editor, Text, Range } from '@everynote/models'
 import { LinkCreateComponent } from '../components/create'
 import { LinkComponent } from '../components/link'
 import { LINK_KEY } from '../constants'

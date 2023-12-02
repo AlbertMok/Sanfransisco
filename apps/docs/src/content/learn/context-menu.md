@@ -8,32 +8,30 @@ This page will show you how to configure the usage of context menus in Editable.
 
 </Intro>
 
-## Step 1: Install `@editablejs/plugin-context-menu` {/*step-1*/}
+## Step 1: Install `@everynote/plugin-context-menu` {/*step-1*/}
 
-If you have already installed `@editablejs/plugins`, you can skip this step.
+If you have already installed `@everynote/plugins`, you can skip this step.
 
 Since the native `contenteditable` attribute does not provide correct content response in the editing area, we need to use a plugin to achieve the context menu.
 
 <TerminalBlock>
 
-npm install @editablejs/models @editablejs/editor @editablejs/plugin-context-menu
+npm install @everynote/models @everynote/editor @everynote/plugin-context-menu
 
 </TerminalBlock>
 
-
-
 ## Step 2: Import withContextMenu {/*step-2*/}
 
-If you have already installed `@editablejs/plugins`, you can import `withContextMenu` from `@editablejs/plugins`.
+If you have already installed `@everynote/plugins`, you can import `withContextMenu` from `@everynote/plugins`.
 
 ```js
 
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withContextMenu, useContextMenuEffect, ContextMenu } from '@editablejs/plugin-context-menu'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withContextMenu, useContextMenuEffect, ContextMenu } from '@everynote/plugin-context-menu'
 
-// import { withContextMenu, useContextMenuEffect, ContextMenu } from '@editablejs/plugins'
+// import { withContextMenu, useContextMenuEffect, ContextMenu } from '@everynote/plugins'
 
 ```
 
@@ -83,15 +81,15 @@ useContextMenuEffect(() => {
 
 ## Try the Context Menu {/*try-context-menu*/}
 
-The sandbox below has already used `@editablejs/plugin-context-menu`, you can try using the context menu by right-clicking in the editor.
+The sandbox below has already used `@everynote/plugin-context-menu`, you can try using the context menu by right-clicking in the editor.
 
-<Sandpack deps={['@editablejs/plugin-context-menu']}>
+<Sandpack deps={['@everynote/plugin-context-menu']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withContextMenu, useContextMenuEffect, ContextMenu } from '@editablejs/plugin-context-menu'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withContextMenu, useContextMenuEffect, ContextMenu } from '@everynote/plugin-context-menu'
 
 export default function App() {
   const editor = React.useMemo(() => {

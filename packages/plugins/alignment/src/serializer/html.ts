@@ -1,7 +1,7 @@
-import { HTMLSerializerStyle, HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerStyle, HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { Align } from '../interfaces/align'
 
-export const withAlignHTMLSerializerTransform: HTMLSerializerWithTransform = next => {
+export const withAlignHTMLSerializerTransform: HTMLSerializerWithTransform = (next) => {
   return (node, options) => {
     if (Align.isAlign(node)) {
       const { textAlign } = node

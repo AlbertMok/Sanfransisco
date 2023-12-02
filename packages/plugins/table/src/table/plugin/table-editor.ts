@@ -1,4 +1,4 @@
-import { Grid, Editor, Node } from '@editablejs/models'
+import { Grid, Editor, Node } from '@everynote/models'
 import { TableOptions } from '../options'
 import { TableCellEditor, TableCell } from '../../cell'
 import { TableRow, TableRowEditor } from '../../row'

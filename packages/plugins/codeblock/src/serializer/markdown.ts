@@ -1,4 +1,4 @@
-import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
+import { MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { CodeBlock } from '../interfaces/codeblock'
 
 export const withCodeBlockMarkdownSerializerTransform: MarkdownSerializerWithTransform = (next, self) => {

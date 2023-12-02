@@ -12,19 +12,19 @@ This page will show you how to use the `Table` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-table
+npm install @everynote/plugin-table
 
 </TerminalBlock>
 
 ## Usage {/*table-using*/}
 
-<Sandpack deps={['@editablejs/plugin-table']}>
+<Sandpack deps={['@everynote/plugin-table']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withTable } from '@editablejs/plugin-table'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withTable } from '@everynote/plugin-table'
 
 const defaultValue = [
   {
@@ -107,6 +107,7 @@ withTable(editor, options)
 
 - Type: `Record<string, TableLocale>`
 - Default:
+
   ```ts
   const defaultLocale: Record<string, TableLocale> ={
     locale: 'en-US',

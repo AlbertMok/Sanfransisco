@@ -1,6 +1,6 @@
-// Import necessary dependencies and models from @editablejs
+// Import necessary dependencies and models from @everynote
 import * as React from 'react'
-import { Editor, Range, Node, Path, Text, Element } from '@editablejs/models'
+import { Editor, Range, Node, Path, Text, Element } from '@everynote/models'
 
 // Import the create and StoreApi from zustand
 import create, { StoreApi, UseBoundStore } from 'zustand'

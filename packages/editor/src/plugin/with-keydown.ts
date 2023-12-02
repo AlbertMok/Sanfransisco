@@ -1,4 +1,4 @@
-import { Editor, Transforms, Node, Range } from '@editablejs/models'
+import { Editor, Transforms, Node, Range } from '@everynote/models'
 import getDirection from 'direction'
 import Hotkeys from '../utils/hotkeys'
 import { getWordOffsetBackward, getWordOffsetForward } from '../utils/text'

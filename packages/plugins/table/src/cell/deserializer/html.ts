@@ -1,5 +1,5 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { Descendant, isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { Descendant, isDOMHTMLElement } from '@everynote/models'
 import { TABLE_CELL_KEY } from '../constants'
 import { TableCell } from '../interfaces/table-cell'
 

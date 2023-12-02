@@ -1,7 +1,7 @@
-import { cancellablePromise, Editable, useCancellablePromises, Slot } from '@editablejs/editor'
-import { Transforms, Grid, Editor } from '@editablejs/models'
+import { cancellablePromise, Editable, useCancellablePromises, Slot } from '@everynote/editor'
+import { Transforms, Grid, Editor } from '@everynote/models'
 import * as React from 'react'
-import { Icon } from '@editablejs/ui'
+import { Icon } from '@everynote/ui'
 import {
   ColsInsertIconStyles,
   ColsInsertLineStyles,

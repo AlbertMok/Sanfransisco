@@ -1,5 +1,5 @@
-import { Editable, generateId, Placeholder } from '@editablejs/editor'
-import { Editor, Transforms, Node, Path, List } from '@editablejs/models'
+import { Editable, generateId, Placeholder } from '@everynote/editor'
+import { Editor, Transforms, Node, Path, List } from '@everynote/models'
 import React, { FC, memo, useMemo } from 'react'
 import tw from 'twin.macro'
 import { TITLE_KEY } from '../constants'

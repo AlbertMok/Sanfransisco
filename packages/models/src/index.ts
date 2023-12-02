@@ -5,7 +5,7 @@ import { List } from './interfaces/list'
 import { GridRow } from './interfaces/row'
 
 // BaseEditor是一个类型，不包括定义
-type BaseEditor = SlateBaseEditor & {
+export type BaseEditor = SlateBaseEditor & {
   id: string
   type?: string
   isSolidVoid: (element: BaseElement) => boolean

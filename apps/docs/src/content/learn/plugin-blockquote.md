@@ -12,19 +12,19 @@ This page will show you how to use the `Blockquote` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-blockquote
+npm install @everynote/plugin-blockquote
 
 </TerminalBlock>
 
 ## Usage {/*blockquote-using*/}
 
-<Sandpack deps={['@editablejs/plugin-blockquote']}>
+<Sandpack deps={['@everynote/plugin-blockquote']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withBlockquote } from '@editablejs/plugin-blockquote'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withBlockquote } from '@everynote/plugin-blockquote'
 
 const defaultValue = [
   {
@@ -66,9 +66,11 @@ withBlockquote(editor, options)
 
 - Type: `BlockquoteHotkey`
 - Default:
+
   ```ts
   const defaultHotkey: BlockquoteHotkey = 'mod+shift+u'
   ```
+
 - Example:
 
 ```ts
@@ -76,15 +78,18 @@ withBlockquote(editor, {
   hotkey: 'mod+shift+u'
 })
 ```
+
 ### shortcuts {/*heading-options-shortcuts*/}
 
 `shortcuts` is used to configure shortcuts for the `Blockquote` plugin.
 
 - Type: `string[]`
 - Default:
+
   ```ts
   const defaultShortcuts: string[] = ['>']
   ```
+
 - Example:
 
 ```ts

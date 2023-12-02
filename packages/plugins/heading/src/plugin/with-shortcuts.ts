@@ -1,5 +1,5 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import { Editor, Element, Range, Point, Transforms } from '@editablejs/models'
+import { Editable, Hotkey } from '@everynote/editor'
+import { Editor, Element, Range, Point, Transforms } from '@everynote/models'
 import { HeadingType } from '../interfaces/heading'
 import { HeadingEditor } from './heading-editor'
 

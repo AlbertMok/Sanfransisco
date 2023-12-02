@@ -1,6 +1,6 @@
 import * as React from 'react'
 import getDirection from 'direction'
-import { Editor, Node, Range, Element } from '@editablejs/models'
+import { Editor, Node, Range, Element } from '@everynote/models'
 import Text from './text'
 import useChildren from '../hooks/use-children'
 import { Editable, useEditableStatic, ElementAttributes } from '..'

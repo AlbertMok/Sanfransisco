@@ -1,4 +1,4 @@
-import { MarkdownSerializerPlugin, MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
+import { MarkdownSerializerPlugin, MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { ListItem } from 'mdast'
 import { gfmTaskListItemToMarkdown } from 'mdast-util-gfm-task-list-item'
 import { TaskList } from '../interfaces/task-list'

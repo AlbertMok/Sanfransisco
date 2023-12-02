@@ -1,6 +1,6 @@
 import { FC, useCallback } from 'react'
-import { Editable, useEditable } from '@editablejs/editor'
-import { Grid } from '@editablejs/models'
+import { Editable, useEditable } from '@everynote/editor'
+import { Grid } from '@everynote/models'
 import {
   FontSizeEditor,
   FontColorEditor,
@@ -21,10 +21,10 @@ import {
   AlignKeys,
   LeadingEditor,
   CodeBlockEditor,
-} from '@editablejs/plugins'
-import { HistoryEditor } from '@editablejs/plugin-history'
-import { ToolbarItem } from '@editablejs/plugin-toolbar'
-import { Icon, IconMap } from '@editablejs/ui'
+} from '@everynote/plugins'
+import { HistoryEditor } from '@everynote/plugin-history'
+import { ToolbarItem } from '@everynote/plugin-toolbar'
+import { Icon, IconMap } from '@everynote/ui'
 import { Translation } from 'react-i18next'
 
 export const AlignDropdown: FC = () => {

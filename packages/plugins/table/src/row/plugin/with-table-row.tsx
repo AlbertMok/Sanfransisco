@@ -1,5 +1,5 @@
-import { Editable, RenderElementProps, useIsomorphicLayoutEffect } from '@editablejs/editor'
-import { Transforms, GridRow, Editor, Node } from '@editablejs/models'
+import { Editable, RenderElementProps, useIsomorphicLayoutEffect } from '@everynote/editor'
+import { Transforms, GridRow, Editor, Node } from '@everynote/models'
 import { useTableSize } from '../../context'
 import { RowStyles } from '../../components/row'
 import { TableRow } from '../interfaces/table-row'

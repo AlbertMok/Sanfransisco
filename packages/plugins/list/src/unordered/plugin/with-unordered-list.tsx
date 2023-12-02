@@ -1,4 +1,4 @@
-import { Editable, Hotkey, generateId } from '@editablejs/editor'
+import { Editable, Hotkey, generateId } from '@everynote/editor'
 import { renderList } from '../../styles'
 import { UNORDERED_LIST_KEY } from '../constants'
 import { UnorderedListOptions, UnorderedListHotkey } from '../options'

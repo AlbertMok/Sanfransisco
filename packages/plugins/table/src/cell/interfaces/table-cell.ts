@@ -1,4 +1,4 @@
-import { GridCell, Element } from '@editablejs/models'
+import { GridCell, Element } from '@everynote/models'
 import { TABLE_CELL_KEY } from '../constants'
 
 export interface TableCell extends GridCell {

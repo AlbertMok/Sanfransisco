@@ -1,4 +1,4 @@
-import { Editor, Range, Element, Ancestor, Descendant } from '@editablejs/models'
+import { Editor, Range, Element, Ancestor, Descendant } from '@everynote/models'
 
 import ElementComponent from '../components/element'
 import TextComponent from '../components/text'

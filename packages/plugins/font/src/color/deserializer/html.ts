@@ -1,9 +1,9 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
 import { FONTCOLOR_KEY } from '../constants'
 import { FontColor } from '../interfaces/font-color'
 
-export const withFontColorHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withFontColorHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { text } = options
     if (isDOMHTMLElement(node)) {

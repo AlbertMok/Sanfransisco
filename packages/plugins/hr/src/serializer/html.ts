@@ -1,21 +1,13 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { DEFAULT_HR_WIDTH, DEFAULT_HR_STYLE, DEFUALT_HR_COLOR, HR_KEY } from '../constants'
 import { Hr } from '../interfaces/hr'
 
-export const withHrHTMLSerializerTransform: HTMLSerializerWithTransform = (
-  next,
-  serializer,
-  customOptions = {},
-) => {
+export const withHrHTMLSerializerTransform: HTMLSerializerWithTransform = (next, serializer, customOptions = {}) => {
   const { attributes: customAttributes, style: customStyle } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
     if (Hr.isHr(node)) {
-      const {
-        color = DEFUALT_HR_COLOR,
-        width = DEFAULT_HR_WIDTH,
-        style: hrStyle = DEFAULT_HR_STYLE,
-      } = node
+      const { color = DEFUALT_HR_COLOR, width = DEFAULT_HR_WIDTH, style: hrStyle = DEFAULT_HR_STYLE } = node
       return serializer.create(
         HR_KEY,
         serializer.mergeOptions(
@@ -26,7 +18,7 @@ export const withHrHTMLSerializerTransform: HTMLSerializerWithTransform = (
             'data-width': width,
             'data-style': hrStyle,
           },
-          customAttributes,
+          customAttributes
         ),
         serializer.mergeOptions(
           node,
@@ -38,8 +30,8 @@ export const withHrHTMLSerializerTransform: HTMLSerializerWithTransform = (
             borderTopColor: color,
             borderTopStyle: hrStyle,
           },
-          customStyle,
-        ),
+          customStyle
+        )
       )
     }
     return next(node, options)

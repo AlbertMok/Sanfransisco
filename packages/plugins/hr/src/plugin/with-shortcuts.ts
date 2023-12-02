@@ -1,5 +1,5 @@
-import { Editable, Hotkey, generateId } from '@editablejs/editor'
-import { Editor, Element, Range, Point, Transforms } from '@editablejs/models'
+import { Editable, Hotkey, generateId } from '@everynote/editor'
+import { Editor, Element, Range, Point, Transforms } from '@everynote/models'
 import { HrEditor } from './hr-editor'
 
 const findMatchedRange = (editor: Editor, at: Point, shortcuts: string[]) => {

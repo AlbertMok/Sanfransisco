@@ -1,4 +1,4 @@
-import { MarkdownSerializerWithTransform } from '@editablejs/serializer/markdown'
+import { MarkdownSerializerWithTransform } from '@everynote/serializer/markdown'
 import { ListItem } from 'mdast'
 import { OrderedList } from '../interfaces/ordered-list'
 

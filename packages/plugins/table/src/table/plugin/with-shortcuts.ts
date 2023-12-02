@@ -1,5 +1,5 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import { Editor, Element, Range, Point, Transforms } from '@editablejs/models'
+import { Editable, Hotkey } from '@everynote/editor'
+import { Editor, Element, Range, Point, Transforms } from '@everynote/models'
 import { TableCellEditor } from '../../cell'
 import { TableEditor } from './table-editor'
 

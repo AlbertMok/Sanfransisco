@@ -1,5 +1,5 @@
-import { editorElementToYText } from '@editablejs/yjs-transform'
-import { Element } from '@editablejs/models'
+import { editorElementToYText } from '@everynote/yjs-transform'
+import { Element } from '@everynote/models'
 import { LeveldbPersistence } from 'y-leveldb'
 import * as Y from 'yjs'
 import { WSSharedDoc } from './types'
@@ -26,10 +26,7 @@ export interface LeveldbPersistenceOptions extends PersistenceBaseOptions {
   dir?: string
 }
 
-export interface MongodbPersistenceOptions
-  extends PersistenceBaseOptions,
-    MongoAdapterOptions,
-    MongoClientOptions {
+export interface MongodbPersistenceOptions extends PersistenceBaseOptions, MongoAdapterOptions, MongoClientOptions {
   provider: 'mongodb'
   url: string | MongoConnectionlOptions
 }
@@ -58,7 +55,7 @@ export const initPersistence = async (options: PersistenceOptions, contentField 
       ydoc,
       initialValue = {
         children: [{ text: '' }],
-      },
+      }
     ) => {
       const persistedYdoc = await ldb!.getYDoc(docName)
       const newUpdates = Y.encodeStateAsUpdate(ydoc)
@@ -67,7 +64,7 @@ export const initPersistence = async (options: PersistenceOptions, contentField 
       const updateContent = ydoc.get(contentField, Y.XmlText) as Y.XmlText
 
       Y.applyUpdate(ydoc, Y.encodeStateAsUpdate(persistedYdoc))
-      ydoc.on('update', update => {
+      ydoc.on('update', (update) => {
         ldb!.storeUpdate(docName, update)
       })
 
@@ -81,7 +78,7 @@ export const initPersistence = async (options: PersistenceOptions, contentField 
     writeState: async (docName, ydoc) => {
       // This is called when all connections to the document are closed.
       // In the future, this method might also be called in intervals or after a certain number of updates.
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         // When the returned Promise resolves, the document will be destroyed.
         // So make sure that the document really has been written to the database.
         resolve()

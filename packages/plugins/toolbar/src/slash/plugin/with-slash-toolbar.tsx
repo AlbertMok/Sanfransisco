@@ -1,5 +1,5 @@
-import { Editable, Hotkey, Slot } from '@editablejs/editor'
-import { Editor, Text, Range, Point } from '@editablejs/models'
+import { Editable, Hotkey, Slot } from '@everynote/editor'
+import { Editor, Text, Range, Point } from '@everynote/models'
 import { SlashToolbarDecorate } from '../components/slash-decorate'
 import { getOptions, setOptions, SlashHotkey, SlashToolbarOptions } from '../options'
 import { SlashToolbar } from '../store'
@@ -14,10 +14,7 @@ export const SlashToolbarEditor = {
   getOptions,
 }
 
-export const withSlashToolbar = <T extends Editable>(
-  editor: T,
-  options: SlashToolbarOptions = {},
-) => {
+export const withSlashToolbar = <T extends Editable>(editor: T, options: SlashToolbarOptions = {}) => {
   const newEditor = editor as T & SlashToolbarEditor
 
   setOptions(newEditor, options)
@@ -29,7 +26,7 @@ export const withSlashToolbar = <T extends Editable>(
   let triggerChar = ''
   const { onChange, onInput, onSelectStart, onBlur, onKeydown } = newEditor
 
-  newEditor.onInput = value => {
+  newEditor.onInput = (value) => {
     onInput(value)
     if (isMatch) {
       triggerChar = value
@@ -37,7 +34,7 @@ export const withSlashToolbar = <T extends Editable>(
     }
   }
 
-  newEditor.onKeydown = event => {
+  newEditor.onKeydown = (event) => {
     isMatch = false
     if (Hotkey.match(['space', 'esc'], event)) {
       closeSlashDecorate(newEditor)
@@ -77,9 +74,7 @@ export const withSlashToolbar = <T extends Editable>(
   const getBeforeText = (editor: Editable, point: Point) => {
     const wordBefore = Editor.before(editor, point, { unit: 'word' })
     const before = wordBefore && Editor.before(editor, wordBefore)
-    const beforeRange = before
-      ? Editor.range(editor, before, point)
-      : wordBefore && Editor.range(editor, wordBefore, point)
+    const beforeRange = before ? Editor.range(editor, before, point) : wordBefore && Editor.range(editor, wordBefore, point)
     const beforeText = beforeRange && Editor.string(editor, beforeRange)
     return beforeText
   }
@@ -113,8 +108,8 @@ export const withSlashToolbar = <T extends Editable>(
                 path,
                 offset: offset - 1,
               },
-              start,
-            ),
+              start
+            )
           ),
           text,
         })

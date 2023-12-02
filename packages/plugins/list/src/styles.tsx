@@ -1,5 +1,5 @@
-import { DATA_EDITABLE_LEAF, Editable, RenderElementProps, useEditableStatic, useIsomorphicLayoutEffect } from '@editablejs/editor'
-import { Text, Element } from '@editablejs/models'
+import { DATA_EDITABLE_LEAF, Editable, RenderElementProps, useEditableStatic, useIsomorphicLayoutEffect } from '@everynote/editor'
+import { Text, Element } from '@everynote/models'
 import React, { useState } from 'react'
 import { StyledComponent } from 'styled-components'
 import tw, { styled } from 'twin.macro'

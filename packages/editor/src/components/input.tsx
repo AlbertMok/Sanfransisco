@@ -1,4 +1,4 @@
-import { Range } from '@editablejs/models'
+import { Range } from '@everynote/models'
 import * as React from 'react'
 import { Editable } from '../plugin/editable'
 import { EDITOR_TO_INPUT, IS_COMPOSING, IS_MOUSEDOWN, IS_PASTE_TEXT, IS_TOUCHING } from '../utils/weak-maps'

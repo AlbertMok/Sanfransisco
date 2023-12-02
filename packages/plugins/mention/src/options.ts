@@ -1,4 +1,4 @@
-import { Editor, Node, Path } from '@editablejs/models'
+import { Editor, Node, Path } from '@everynote/models'
 import React from 'react'
 import { MentionUser } from './interfaces/mention'
 

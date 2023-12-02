@@ -1,4 +1,4 @@
-import { Node, SplitNodeOperation, Text } from '@editablejs/models'
+import { Node, SplitNodeOperation, Text } from '@everynote/models'
 import {
   cloneInsertDeltaDeep,
   sliceInsertDelta,
@@ -7,7 +7,7 @@ import {
   restoreStoredPositionsWithDeltaAbsolute,
   getEditorNodeYLength,
   getYTarget,
-} from '@editablejs/yjs-transform'
+} from '@everynote/yjs-transform'
 import * as Y from 'yjs'
 
 export function splitNode(sharedRoot: Y.XmlText, editorRoot: Node, op: SplitNodeOperation): void {
@@ -23,19 +23,15 @@ export function splitNode(sharedRoot: Y.XmlText, editorRoot: Node, op: SplitNode
     }
 
     const unset: Record<string, null> = {}
-    target.targetDelta.forEach(element => {
+    target.targetDelta.forEach((element) => {
       if (element.attributes) {
-        Object.keys(element.attributes).forEach(key => {
+        Object.keys(element.attributes).forEach((key) => {
           unset[key] = null
         })
       }
     })
 
-    return target.yParent.format(
-      target.textRange.start,
-      target.textRange.end - target.textRange.start,
-      { ...unset, ...op.properties },
-    )
+    return target.yParent.format(target.textRange.start, target.textRange.end - target.textRange.start, { ...unset, ...op.properties })
   }
 
   if (Text.isText(target.editorTarget)) {
@@ -44,28 +40,14 @@ export function splitNode(sharedRoot: Y.XmlText, editorRoot: Node, op: SplitNode
 
   const splitTarget = getYTarget(target.yTarget, target.editorTarget, [op.position])
 
-  const ySplitOffset = target.editorTarget.children
-    .slice(0, op.position)
-    .reduce((length, child) => length + getEditorNodeYLength(child), 0)
+  const ySplitOffset = target.editorTarget.children.slice(0, op.position).reduce((length, child) => length + getEditorNodeYLength(child), 0)
 
-  const length = target.editorTarget.children.reduce(
-    (current, child) => current + getEditorNodeYLength(child),
-    0,
-  )
+  const length = target.editorTarget.children.reduce((current, child) => current + getEditorNodeYLength(child), 0)
 
-  const splitDelta = sliceInsertDelta(
-    yTextToInsertDelta(target.yTarget),
-    ySplitOffset,
-    length - ySplitOffset,
-  )
+  const splitDelta = sliceInsertDelta(yTextToInsertDelta(target.yTarget), ySplitOffset, length - ySplitOffset)
   const clonedDelta = cloneInsertDeltaDeep(splitDelta)
 
-  const storedPositions = getStoredPositionsInDeltaAbsolute(
-    sharedRoot,
-    target.yTarget,
-    splitDelta,
-    ySplitOffset,
-  )
+  const storedPositions = getStoredPositionsInDeltaAbsolute(sharedRoot, target.yTarget, splitDelta, ySplitOffset)
 
   const toInsert = new Y.XmlText()
   toInsert.applyDelta(clonedDelta, {
@@ -76,19 +58,9 @@ export function splitNode(sharedRoot: Y.XmlText, editorRoot: Node, op: SplitNode
     toInsert.setAttribute(key, value)
   })
 
-  target.yTarget.delete(
-    splitTarget.textRange.start,
-    target.yTarget.length - splitTarget.textRange.start,
-  )
+  target.yTarget.delete(splitTarget.textRange.start, target.yTarget.length - splitTarget.textRange.start)
 
   target.yParent.insertEmbed(target.textRange.end, toInsert)
 
-  restoreStoredPositionsWithDeltaAbsolute(
-    sharedRoot,
-    toInsert,
-    storedPositions,
-    clonedDelta,
-    0,
-    ySplitOffset,
-  )
+  restoreStoredPositionsWithDeltaAbsolute(sharedRoot, toInsert, storedPositions, clonedDelta, 0, ySplitOffset)
 }

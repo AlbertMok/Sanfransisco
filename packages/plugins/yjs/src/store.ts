@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import create, { UseBoundStore, StoreApi } from 'zustand'
 import { RemoteCursorChangeState } from './plugin/with-cursors'
 

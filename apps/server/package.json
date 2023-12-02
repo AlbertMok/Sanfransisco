@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/yjs-server",
+  "name": "@everynote/yjs-server",
   "version": "0.0.0",
   "description": "Yjs Server",
   "main": "./dist/index.js",
@@ -29,7 +29,7 @@
     "yjs": "^13.5.46"
   },
   "dependencies": {
-    "@editablejs/yjs-websocket": "workspace:*"
+    "@everynote/yjs-websocket": "workspace:*"
   },
   "peerDependencies": {
     "yjs": "^13.5.46"

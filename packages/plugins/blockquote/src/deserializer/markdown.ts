@@ -1,6 +1,6 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@editablejs/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
 import { Blockquote } from '../interfaces/blockquote'
-import { generateId } from '@editablejs/editor'
+import { generateId } from '@everynote/editor'
 
 export const withBlockquoteMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {
   return (node, options = {}) => {

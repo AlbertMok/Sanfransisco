@@ -1,8 +1,8 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
 import { LEADING_ATTR_KEY } from '../constants'
 import { Leading } from '../interfaces/leading'
-export const withLeadingHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withLeadingHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { element } = options
     if (isDOMHTMLElement(node) && element) {

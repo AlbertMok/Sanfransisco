@@ -1,5 +1,5 @@
-import { Editable, RenderElementProps, Locale } from '@editablejs/editor'
-import { Transforms, Node, Grid } from '@editablejs/models'
+import { Editable, RenderElementProps, Locale } from '@everynote/editor'
+import { Transforms, Node, Grid } from '@everynote/models'
 import { withTableCell } from '../../cell'
 import locale from '../../locale'
 import { setOptions, TableOptions } from '../options'

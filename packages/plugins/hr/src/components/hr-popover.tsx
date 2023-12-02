@@ -1,19 +1,5 @@
-import {
-  useIsomorphicLayoutEffect,
-  useLocale,
-  useNodeFocused,
-  useReadOnly,
-} from '@editablejs/editor'
-import {
-  Icon,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Toolbar,
-  ToolbarColorPicker,
-  ToolbarDropdown,
-  Tooltip,
-} from '@editablejs/ui'
+import { useIsomorphicLayoutEffect, useLocale, useNodeFocused, useReadOnly } from '@everynote/editor'
+import { Icon, Popover, PopoverContent, PopoverTrigger, Toolbar, ToolbarColorPicker, ToolbarDropdown, Tooltip } from '@everynote/ui'
 import { FC, useState } from 'react'
 import { DEFAULT_HR_STYLE, DEFAULT_HR_WIDTH, DEFUALT_HR_COLOR } from '../constants'
 import { HrEditor } from '../plugin/hr-editor'
@@ -47,11 +33,7 @@ export const HrPopover: FC<HrPopoverProps> = ({ editor, element, children }) => 
   const { toolbar } = useLocale<HrLocale>('hr')
 
   return (
-    <Popover
-      open={readOnly ? false : popoverOpen}
-      onOpenChange={handlePopoverOpenChange}
-      trigger="hover"
-    >
+    <Popover open={readOnly ? false : popoverOpen} onOpenChange={handlePopoverOpenChange} trigger="hover">
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent autoUpdate={true} side="top" sideOffset={5}>
         <Toolbar mode="inline">
@@ -62,14 +44,14 @@ export const HrPopover: FC<HrPopoverProps> = ({ editor, element, children }) => 
                 color: DEFUALT_HR_COLOR,
                 title: toolbar.defaultColor,
               }}
-              onSelect={color => editor.setColorHr(color, element)}
+              onSelect={(color) => editor.setColorHr(color, element)}
             >
               <Icon name="fontColor" />
             </ToolbarColorPicker>
           </Tooltip>
           <Tooltip content={toolbar.style} side="top" sideOffset={5} arrow={false}>
             <ToolbarDropdown
-              onSelect={value => editor.setStyleHr(value as HrStyle, element)}
+              onSelect={(value) => editor.setStyleHr(value as HrStyle, element)}
               value={element.style || DEFAULT_HR_STYLE}
               items={[
                 {
@@ -111,7 +93,7 @@ export const HrPopover: FC<HrPopoverProps> = ({ editor, element, children }) => 
           </Tooltip>
           <Tooltip content={toolbar.width} side="top" sideOffset={5} arrow={false}>
             <ToolbarDropdown
-              onSelect={value => editor.setWidthHr(Number(value), element)}
+              onSelect={(value) => editor.setWidthHr(Number(value), element)}
               value={String(element.width || DEFAULT_HR_WIDTH)}
               items={[
                 {

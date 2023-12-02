@@ -1,11 +1,11 @@
-import { Editable, SelectionDrawing, Slot } from '@editablejs/editor'
-import { Editor, Range } from '@editablejs/models'
-import { Awareness } from '@editablejs/yjs-protocols/awareness'
+import { Editable, SelectionDrawing, Slot } from '@everynote/editor'
+import { Editor, Range } from '@everynote/models'
+import { Awareness } from '@everynote/yjs-protocols/awareness'
 
-import { withAwarenessSelection } from '@editablejs/yjs-protocols/awareness-selection'
+import { withAwarenessSelection } from '@everynote/yjs-protocols/awareness-selection'
 
-import { withProviderProtocol } from '@editablejs/protocols/provider'
-import { editorRangeToRelativeRange, relativeRangeToEditorRange } from '@editablejs/yjs-transform'
+import { withProviderProtocol } from '@everynote/protocols/provider'
+import { editorRangeToRelativeRange, relativeRangeToEditorRange } from '@everynote/yjs-transform'
 import { YCursorEditor } from './cursors-editor'
 import { getCursorsStore } from '../store'
 import { RemoteCursors as CursorsComponent } from '../components/selection'
@@ -34,17 +34,12 @@ export type WithCursorsOptions<T extends CursorData = CursorData> = {
 export function withYCursors<TCursorData extends CursorData, T extends Editor>(
   editor: T,
   awareness: Awareness,
-  {
-    cursorStateField: selectionStateField = 'selection',
-    cursorDataField = 'data',
-    autoSend = true,
-    data,
-  }: WithCursorsOptions<TCursorData> = {},
+  { cursorStateField: selectionStateField = 'selection', cursorDataField = 'data', autoSend = true, data }: WithCursorsOptions<TCursorData> = {}
 ): T & YCursorEditor<TCursorData> {
   const e = editor as Editor & T & YCursorEditor<TCursorData>
   const awarenessSelection = withAwarenessSelection(awareness, selectionStateField)
 
-  awarenessSelection.relativeSelectionToNativeSelection = selection => {
+  awarenessSelection.relativeSelectionToNativeSelection = (selection) => {
     if (Object.keys(selection).length !== 2) return null
     const editorRange = relativeRangeToEditorRange(e.sharedRoot, e, selection)
     if (!editorRange) return null
@@ -58,7 +53,7 @@ export function withYCursors<TCursorData extends CursorData, T extends Editor>(
     }
   }
 
-  awarenessSelection.nativeSelectionToRelativeSelection = selection => {
+  awarenessSelection.nativeSelectionToRelativeSelection = (selection) => {
     if (Range.isRange(selection)) {
       return editorRangeToRelativeRange(e.sharedRoot, e, selection)
     }
@@ -77,19 +72,15 @@ export function withYCursors<TCursorData extends CursorData, T extends Editor>(
 
   e.sendCursorPosition = awarenessSelection.sendSelection
 
-  const awarenessChangeListener: RemoteCursorChangeEventListener = yEvent => {
+  const awarenessChangeListener: RemoteCursorChangeEventListener = (yEvent) => {
     const localId = e.awareness.clientID
     const clientIds = {
-      added: yEvent.added.filter(id => id !== localId),
-      removed: yEvent.removed.filter(id => id !== localId),
-      updated: yEvent.updated.filter(id => id !== localId),
+      added: yEvent.added.filter((id) => id !== localId),
+      removed: yEvent.removed.filter((id) => id !== localId),
+      updated: yEvent.updated.filter((id) => id !== localId),
     }
 
-    if (
-      clientIds.added.length > 0 ||
-      clientIds.removed.length > 0 ||
-      clientIds.updated.length > 0
-    ) {
+    if (clientIds.added.length > 0 || clientIds.removed.length > 0 || clientIds.updated.length > 0) {
       const store = getCursorsStore(e)
       store.setState({
         clientIds,

@@ -1,4 +1,4 @@
-import { HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { HTMLSerializerWithTransform } from '@everynote/serializer/html'
 import { PARAGRAPH_KEY } from '../constants'
 import { Paragraph } from '../interfaces/paragraph'
 

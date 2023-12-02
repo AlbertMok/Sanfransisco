@@ -1,4 +1,4 @@
-import { Ancestor, Editor, Node, Key } from '@editablejs/models'
+import { Ancestor, Editor, Node, Key } from '@everynote/models'
 
 /**
  * Two weak maps that allow us rebuild a path given a node. They are populated

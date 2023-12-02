@@ -1,5 +1,5 @@
-import { BaseEditor, BaseElement } from '@editablejs/models'
-// import { ReactEditor, RenderElementProps } from '@editablejs/models'
+import { BaseEditor, BaseElement } from '@everynote/models'
+// import { ReactEditor, RenderElementProps } from '@everynote/models'
 // import { HistoryEditor } from 'slate-history'
 import { PluginType, RenderHTMLAttributes } from './utils/plugins'
 import { CSSProperties, ReactNode } from 'react'
@@ -23,20 +23,16 @@ export type TBaseElement<T> = {
   data?: any
 } & TElementConfig
 
-export type RenderYooptaElementProps<T extends BaseElement = BaseElement> =
-  RenderElementProps & {
-    element: T
-  } & RenderHTMLAttributes
+export type RenderYooptaElementProps<T extends BaseElement = BaseElement> = RenderElementProps & {
+  element: T
+} & RenderHTMLAttributes
 
 export type YooptaEditorValue<V> = V[]
 export type YooptaBaseToolEvents = {
   [x: string]: (...args: any) => void
 }
 
-export type YooptaBaseToolProps<
-  P extends PluginType = PluginType,
-  Events extends YooptaBaseToolEvents = YooptaBaseToolEvents,
-> = {
+export type YooptaBaseToolProps<P extends PluginType = PluginType, Events extends YooptaBaseToolEvents = YooptaBaseToolEvents> = {
   style?: CSSProperties
   className?: string
   plugins?: P[]
@@ -46,10 +42,7 @@ export type YooptaBaseToolProps<
 
 export interface TEditor extends BaseEditor {
   shortcuts: Record<string, PluginType>
-  plugins: Record<
-    TBaseElement<string>['type'],
-    PluginType<any, TBaseElement<string>>
-  >
+  plugins: Record<TBaseElement<string>['type'], PluginType<any, TBaseElement<string>>>
 }
 
 export type YooptaNodeElementSettings = {

@@ -12,19 +12,19 @@ title: Table
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-table
+npm install @everynote/plugin-table
 
 </TerminalBlock>
 
 ## 使用 Table {/*table-using*/}
 
-<Sandpack deps={['@editablejs/plugin-table']}>
+<Sandpack deps={['@everynote/plugin-table']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withTable } from '@editablejs/plugin-table'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withTable } from '@everynote/plugin-table'
 
 const defaultValue = [
   {
@@ -107,6 +107,7 @@ withTable(editor, options)
 
 - 类型：`Record<string, TableLocale>`
 - 默认值：
+
   ```ts
   const defaultLocale: Record<string, TableLocale> ={
     locale: 'zh-CN',

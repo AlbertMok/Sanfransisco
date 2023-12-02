@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { LinkLocale } from './locale'
 
 export type LinkHotkey = string | ((e: KeyboardEvent) => boolean)

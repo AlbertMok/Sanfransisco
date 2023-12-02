@@ -1,5 +1,5 @@
-import { Editable, Hotkey, Locale } from '@editablejs/editor'
-import { Transforms } from '@editablejs/models'
+import { Editable, Hotkey, Locale } from '@everynote/editor'
+import { Transforms } from '@everynote/models'
 import { CodeBlockComponent } from '../components/codeblock'
 import { CodeBlockEditor } from './editor'
 import { CodeBlock } from '../interfaces/codeblock'
@@ -24,20 +24,20 @@ export const withCodeBlock = <T extends Editable>(editor: T, options: CodeBlockO
     return []
   }
 
-  newEditor.isVoid = element => {
+  newEditor.isVoid = (element) => {
     return CodeBlockEditor.isCodeBlock(newEditor, element) || isVoid(element)
   }
 
   newEditor.insertCodeBlock = (options = {}) => {
     const codeblcok = CodeBlock.create(options)
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       Transforms.insertNodes(editor, codeblcok)
     })
   }
 
   newEditor.updateCodeBlock = (element, options) => {
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       Transforms.setNodes<CodeBlock>(
         editor,
@@ -47,16 +47,13 @@ export const withCodeBlock = <T extends Editable>(editor: T, options: CodeBlockO
         {
           at: Editable.findPath(editor, element),
           hanging: false,
-        },
+        }
       )
     })
   }
 
   newEditor.renderElement = ({ attributes, children, element }) => {
-    if (
-      CodeBlockEditor.isCodeBlockEditor(editor) &&
-      CodeBlockEditor.isCodeBlock(newEditor, element)
-    ) {
+    if (CodeBlockEditor.isCodeBlockEditor(editor) && CodeBlockEditor.isCodeBlock(newEditor, element)) {
       return (
         <CodeBlockComponent editor={editor} element={element} attributes={attributes}>
           {children}

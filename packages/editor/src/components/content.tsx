@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Editor, Range, Transforms, Point, Path, Element, DOMNode, getDefaultView, isDOMNode } from '@editablejs/models'
+import { Editor, Range, Transforms, Point, Path, Element, DOMNode, getDefaultView, isDOMNode } from '@everynote/models'
 
 import useChildren from '../hooks/use-children'
 import { useEditable, useEditableStatic } from '../hooks/use-editable'

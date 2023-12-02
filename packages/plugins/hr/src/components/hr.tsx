@@ -1,4 +1,4 @@
-import { RenderElementProps, useNodeFocused, useReadOnly } from '@editablejs/editor'
+import { RenderElementProps, useNodeFocused, useReadOnly } from '@everynote/editor'
 import { FC } from 'react'
 import tw, { css } from 'twin.macro'
 import { HrEditor } from '../plugin/hr-editor'

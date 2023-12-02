@@ -1,6 +1,6 @@
 import { colord } from 'colord'
-import { Editor } from '@editablejs/models'
-import { Editable, RenderLeafProps, Hotkey } from '@editablejs/editor'
+import { Editor } from '@everynote/models'
+import { Editable, RenderLeafProps, Hotkey } from '@everynote/editor'
 import { FONTCOLOR_KEY } from '../constants'
 import { FontColorEditor } from './font-color-editor'
 import { FontColor } from '../interfaces/font-color'
@@ -14,7 +14,7 @@ export const withFontColor = <T extends Editable>(editor: T, options: FontColorO
   setOptions(newEditor, options)
 
   newEditor.toggleFontColor = (color: string) => {
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       const { defaultColor } = FontColorEditor.getOptions(editor)
       if (defaultColor && colord(color).toRgbString() === colord(defaultColor).toRgbString()) {

@@ -1,4 +1,4 @@
-import { Editor, Range } from '@editablejs/models'
+import { Editor, Range } from '@everynote/models'
 import { Title } from '../interfaces/title'
 
 export interface TitleEditor extends Editor {}

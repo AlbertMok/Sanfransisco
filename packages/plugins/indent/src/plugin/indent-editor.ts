@@ -1,5 +1,5 @@
-import { Editable } from '@editablejs/editor'
-import { Editor, Path, Transforms, Node, Element, Range } from '@editablejs/models'
+import { Editable } from '@everynote/editor'
+import { Editor, Path, Transforms, Node, Element, Range } from '@everynote/models'
 import { DEFAULT_SIZE, INDENT_KEY } from '../constants'
 import { Indent } from '../interfaces/indent'
 import { INDENT_OPTIONS, IndentOptions } from '../options'
@@ -11,9 +11,7 @@ export interface IndentEditor extends Editor {
 
   toggleOutdent: () => void
 
-  onIndentMatch:
-    | (<T extends Node>(node: Node, path: Path) => node is T)
-    | ((node: Node, path: Path) => boolean)
+  onIndentMatch: (<T extends Node>(node: Node, path: Path) => node is T) | ((node: Node, path: Path) => boolean)
 }
 
 export const IndentEditor = {
@@ -136,7 +134,7 @@ export const IndentEditor = {
       } as Indent,
       {
         at: selection,
-      },
+      }
     )
     const { focus } = selection
     const path = focus.path.concat()

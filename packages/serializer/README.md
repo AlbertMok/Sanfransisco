@@ -1,4 +1,4 @@
-# `@editablejs/serializer`
+# `@everynote/serializer`
 
 > TODO: description
 

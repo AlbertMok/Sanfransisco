@@ -1,4 +1,4 @@
-import { Editor, List } from '@editablejs/models'
+import { Editor, List } from '@everynote/models'
 import { UnorderedList } from '../interfaces/unordered-list'
 import { UNORDERED_LIST_KEY } from '../constants'
 import { getOptions } from '../options'

@@ -1,11 +1,5 @@
-import { Transforms } from '@editablejs/models'
-import {
-  Editable,
-  RenderElementProps,
-  useIsomorphicLayoutEffect,
-  useNodeFocused,
-  useReadOnly as useEditableReadOnly,
-} from '@editablejs/editor'
+import { Transforms } from '@everynote/models'
+import { Editable, RenderElementProps, useIsomorphicLayoutEffect, useNodeFocused, useReadOnly as useEditableReadOnly } from '@everynote/editor'
 import { FC, useRef } from 'react'
 import tw from 'twin.macro'
 
@@ -21,18 +15,13 @@ import {
   keymap,
 } from '@codemirror/view'
 import { EditorState } from '@codemirror/state'
-import {
-  foldGutter,
-  indentOnInput,
-  bracketMatching,
-  foldKeymap,
-} from '@codemirror/language'
+import { foldGutter, indentOnInput, bracketMatching, foldKeymap } from '@codemirror/language'
 import { history, defaultKeymap, historyKeymap } from '@codemirror/commands'
 import { CodeBlock } from '../interfaces/codeblock'
 import { CodeBlockEditor } from '../plugin/editor'
 import { CodeBlockPopover } from './popover'
 import { createRoot } from 'react-dom/client'
-import { Icon } from '@editablejs/ui'
+import { Icon } from '@everynote/ui'
 import { getOptions } from '../options'
 import { useIndent } from '../hooks/use-indent'
 import { useLineWrapping } from '../hooks/use-line-wrapping'
@@ -49,12 +38,7 @@ const basicSetup = (() => [
   foldGutter({
     markerDOM: (open) => {
       const marker = document.createElement('span')
-      createRoot(marker).render(
-        <Icon
-          name="arrowCaretDown"
-          css={[tw`text-xxs align-[0px]`, !open && tw`-rotate-90`]}
-        />
-      )
+      createRoot(marker).render(<Icon name="arrowCaretDown" css={[tw`text-xxs align-[0px]`, !open && tw`-rotate-90`]} />)
       return marker
     },
   }),
@@ -72,12 +56,7 @@ export interface CodeBlockProps extends RenderElementProps<CodeBlock> {
   editor: CodeBlockEditor
 }
 
-export const CodeBlockComponent: FC<CodeBlockProps> = ({
-  editor,
-  children,
-  attributes,
-  element,
-}) => {
+export const CodeBlockComponent: FC<CodeBlockProps> = ({ editor, children, attributes, element }) => {
   const focused = useNodeFocused()
 
   const elementRef = useRef(element)
@@ -92,10 +71,7 @@ export const CodeBlockComponent: FC<CodeBlockProps> = ({
         keymap.of([indentWithTab]),
         EditorView.domEventHandlers({
           focus: () => {
-            Transforms.select(
-              editor,
-              Editable.findPath(editor, elementRef.current)
-            )
+            Transforms.select(editor, Editable.findPath(editor, elementRef.current))
           },
         }),
         EditorView.updateListener.of((update) => {
@@ -134,13 +110,7 @@ export const CodeBlockComponent: FC<CodeBlockProps> = ({
     <CodeBlockPopover editor={editor} element={element} view={view}>
       <div {...attributes}>
         <div tw="hidden absolute">{children}</div>
-        <div
-          ref={ref}
-          css={[
-            tw`rounded-md border border-[#e5e7eb] overflow-hidden w-full`,
-            focused && tw`border-primary`,
-          ]}
-        />
+        <div ref={ref} css={[tw`rounded-md border border-[#e5e7eb] overflow-hidden w-full`, focused && tw`border-primary`]} />
       </div>
     </CodeBlockPopover>
   )

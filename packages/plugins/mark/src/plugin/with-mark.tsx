@@ -1,5 +1,5 @@
-import { Editable, RenderLeafProps, Hotkey } from '@editablejs/editor'
-import { Editor } from '@editablejs/models'
+import { Editable, RenderLeafProps, Hotkey } from '@everynote/editor'
+import { Editor } from '@everynote/models'
 import tw, { styled, css } from 'twin.macro'
 import { MarkFormat, Mark } from '../interfaces/mark'
 import { MarkHotkey, MarkOptions, setOptions } from '../options'

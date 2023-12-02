@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { useStore } from 'zustand'
 import shallow from 'zustand/shallow'
 import { YCursorEditor } from '../plugin/cursors-editor'
@@ -9,7 +9,7 @@ export const useRemoteStates = <T extends CursorData>(editor: Editor) => {
   const store = useCursorStore(editor)
   return useStore(
     store,
-    state => {
+    (state) => {
       if (!YCursorEditor.isYCursorEditor(editor)) {
         return {} as Record<string, CursorState<T>>
       }
@@ -19,14 +19,10 @@ export const useRemoteStates = <T extends CursorData>(editor: Editor) => {
         return YCursorEditor.cursorStates<T>(editor)
       }
 
-      const updatedStates = Object.fromEntries(
-        clientIds.map(id => [id, YCursorEditor.cursorState<T>(editor, id)]),
-      )
+      const updatedStates = Object.fromEntries(clientIds.map((id) => [id, YCursorEditor.cursorState<T>(editor, id)]))
 
-      return Object.fromEntries(
-        Object.entries(updatedStates).filter(([, value]) => value !== null),
-      ) as Record<string, CursorState<T>>
+      return Object.fromEntries(Object.entries(updatedStates).filter(([, value]) => value !== null)) as Record<string, CursorState<T>>
     },
-    shallow,
+    shallow
   )
 }

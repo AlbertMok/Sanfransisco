@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { FONTSIZE_KEY } from '../constants'
 import { FontSize } from '../interfaces/font-size'
 import { getOptions } from '../options'

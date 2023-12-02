@@ -1,12 +1,6 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { isDOMHTMLElement } from '@editablejs/models'
-import {
-  CODEBLOCK_DATA_LINE_WRAPPING,
-  CODEBLOCK_DATA_SYNTAX,
-  CODEBLOCK_DATA_TABSIZE,
-  CODEBLOCK_DATA_THEME,
-  CODEBLOCK_LANGUAGE,
-} from '../constants'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
+import { CODEBLOCK_DATA_LINE_WRAPPING, CODEBLOCK_DATA_SYNTAX, CODEBLOCK_DATA_TABSIZE, CODEBLOCK_DATA_THEME, CODEBLOCK_LANGUAGE } from '../constants'
 import { CodeBlock } from '../interfaces/codeblock'
 
 const isPreElement = (node: HTMLElement) => {
@@ -26,7 +20,7 @@ const findSyntax = (node: HTMLElement) => {
   return null
 }
 
-export const withCodeBlockHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withCodeBlockHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { element } = options
     if (isDOMHTMLElement(node)) {
@@ -43,9 +37,7 @@ export const withCodeBlockHTMLDeserializerTransform: HTMLDeserializerWithTransfo
         }
         const codeElement = node.querySelector('code')
         if (!syntax && codeElement) {
-          syntax =
-            codeElement.getAttribute(CODEBLOCK_DATA_SYNTAX) ||
-            codeElement.getAttribute(CODEBLOCK_LANGUAGE)
+          syntax = codeElement.getAttribute(CODEBLOCK_DATA_SYNTAX) || codeElement.getAttribute(CODEBLOCK_LANGUAGE)
           if (!syntax) {
             syntax = findSyntax(codeElement)
           }

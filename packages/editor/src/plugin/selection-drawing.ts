@@ -1,5 +1,5 @@
 import create, { StoreApi, UseBoundStore } from 'zustand'
-import { Selection, Range, Editor } from '@editablejs/models'
+import { Selection, Range, Editor } from '@everynote/models'
 import { getLineRectsByRange } from '../utils/selection'
 import { Editable } from './editable'
 

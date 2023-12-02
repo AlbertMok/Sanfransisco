@@ -1,5 +1,5 @@
-import { Editable, Hotkey } from '@editablejs/editor'
-import { Editor, Element, Text, Range, Path, Point, Transforms } from '@editablejs/models'
+import { Editable, Hotkey } from '@everynote/editor'
+import { Editor, Element, Text, Range, Path, Point, Transforms } from '@everynote/models'
 import { MarkFormat } from '../interfaces/mark'
 
 const findMatchedRange = (editor: Editor, at: Point, shortcuts: Record<string, MarkFormat>) => {

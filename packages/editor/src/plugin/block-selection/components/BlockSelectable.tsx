@@ -1,9 +1,8 @@
-import { Element } from '@editablejs/models'
+import { Element } from '@everynote/models'
 import { useEditableStatic } from '../../../hooks/use-editable'
 import { blockSelectionStore, isBlockSelecting } from '../store/selectionStore'
 import { DATA_BLOCK_ID, DATA_BLOCK_TYPE } from '../../../utils/constants'
 import { useStore } from 'zustand'
-import { useFocused } from '../../../hooks/use-focused'
 
 export interface BlockSelectableOptions {
   element: Element

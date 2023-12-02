@@ -1,5 +1,5 @@
 {
-  "name": "@editablejs/deserializer",
+  "name": "@everynote/deserializer",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "exports": {
@@ -54,7 +54,7 @@
     "micromark-util-types": "1.0.2"
   },
   "devDependencies": {
-    "@editablejs/models": "workspace:*",
+    "@everynote/models": "workspace:*",
     "@types/escape-html": "^1.0.2",
     "@types/jest": "^26.0.22",
     "@types/lodash.merge": "^4.6.7",
@@ -70,7 +70,7 @@
     "typescript": "^4.x"
   },
   "peerDependencies": {
-    "@editablejs/models": "workspace:*"
+    "@everynote/models": "workspace:*"
   },
   "lint-staged": {
     "src/**/*.{json,ts,tsx,js,jsx}": [

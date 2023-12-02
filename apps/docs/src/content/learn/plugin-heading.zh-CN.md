@@ -12,19 +12,19 @@ title: Heading
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-heading
+npm install @everynote/plugin-heading
 
 </TerminalBlock>
 
 ## 使用 Heading {/*heading-using*/}
 
-<Sandpack deps={['@editablejs/plugin-heading']}>
+<Sandpack deps={['@everynote/plugin-heading']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withHeading } from '@editablejs/plugin-heading'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withHeading } from '@everynote/plugin-heading'
 
 const defaultValue = [
   {
@@ -99,6 +99,7 @@ withHeading(editor, {
 
 - 类型：`Partial<Record<HeadingType, Record<HeadingFontStyleName, string>>>`
 - 默认值：
+
   ```ts
   const defaultStyle = {
     [HEADING_ONE_KEY]: {
@@ -127,6 +128,7 @@ withHeading(editor, {
     },
   }
   ```
+
 - 示例：
 
 ```ts
@@ -148,15 +150,17 @@ withHeading(editor, {
 
 - 类型：`Partial<HeadingTextMark>`
 - 默认值：
+
   ```ts
   const defaultTextMark = {
     fontSize: 'fontSize',
     fontWeight: 'bold',
   }
   ```
-默认值中的 `fontSize` 属性属于 `@editablejs/plugin-font/size` 插件，如果您需要使用 `fontSize` 属性，您需要先安装该插件。
 
-默认值中的 `bold` 属性来自 @editablejs/plugin-mark 插件，如果您需要使用 `fontWeight` 属性，您需要先安装该插件。
+默认值中的 `fontSize` 属性属于 `@everynote/plugin-font/size` 插件，如果您需要使用 `fontSize` 属性，您需要先安装该插件。
+
+默认值中的 `bold` 属性来自 @everynote/plugin-mark 插件，如果您需要使用 `fontWeight` 属性，您需要先安装该插件。
 
 如果您确实不想安装相关插件，您可以编写一个自定义的插件来进行渲染。此外，您也可以使用 `CSS` 直接覆盖 `h1 - h6` 标签的样式来实现这一目的。
 
@@ -177,6 +181,7 @@ withHeading(editor, {
 
 - 类型：`HeadingHotkey`
 - 默认值:
+
   ```ts
   const defaultHotkeys: HeadingHotkey = {
     [HEADING_ONE_KEY]: 'mod+opt+1',
@@ -187,6 +192,7 @@ withHeading(editor, {
     [HEADING_SIX_KEY]: 'mod+opt+6',
   }
   ```
+
 - 示例：
 
 ```ts
@@ -203,6 +209,7 @@ withHeading(editor, {
 
 - 类型：`Record<string, HeadingType>`
 - 默认值：
+
   ```ts
   const defaultShortcuts: Record<string, HeadingType> = {
     '#': 'heading-one',
@@ -213,6 +220,7 @@ withHeading(editor, {
     '######': 'heading-six',
   }
   ```
+
 - 示例：
 
 ```ts

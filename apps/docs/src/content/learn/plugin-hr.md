@@ -12,19 +12,19 @@ This page will show you how to use the `Hr` plugin.
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-hr
+npm install @everynote/plugin-hr
 
 </TerminalBlock>
 
 ## Usage {/*hr-using*/}
 
-<Sandpack deps={['@editablejs/plugin-hr']}>
+<Sandpack deps={['@everynote/plugin-hr']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withHr } from '@editablejs/plugin-hr'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withHr } from '@everynote/plugin-hr'
 
 const defaultValue = [
   {
@@ -69,6 +69,7 @@ withHr(editor, options)
 
 - Type: `Record<string, HrLocale>`
 - Default:
+
   ```ts
   const defaultLocale: Record<string, HrLocale> ={
     locale: 'en-US',

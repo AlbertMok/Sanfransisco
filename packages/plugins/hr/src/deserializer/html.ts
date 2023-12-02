@@ -1,8 +1,8 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
 import { DEFAULT_HR_STYLE, DEFUALT_HR_COLOR, DEFAULT_HR_WIDTH, HR_KEY } from '../constants'
 
-export const withHrHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withHrHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { element } = options
     if (isDOMHTMLElement(node) && node.nodeName.toLowerCase() === HR_KEY) {

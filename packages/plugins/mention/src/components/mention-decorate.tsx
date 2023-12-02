@@ -1,11 +1,5 @@
-import {
-  Decorate,
-  SlotComponentProps,
-  TextDecorate,
-  useEditableStatic,
-  useIsomorphicLayoutEffect,
-} from '@editablejs/editor'
-import { Path } from '@editablejs/models'
+import { Decorate, SlotComponentProps, TextDecorate, useEditableStatic, useIsomorphicLayoutEffect } from '@everynote/editor'
+import { Path } from '@everynote/models'
 import { FC, useRef } from 'react'
 import { useMentionOpen } from '../hooks/use-mention-open'
 import { MentionEditor } from '../plugin/mention-editor'
@@ -25,9 +19,7 @@ export const MentionDecorate: FC<MentionDecorateProps> = () => {
     if (!data) return
     const decorate: TextDecorate = {
       match: (_, path) => {
-        return data.rangeRef.current && Path.equals(data.rangeRef.current.focus.path, path)
-          ? [data.rangeRef.current]
-          : []
+        return data.rangeRef.current && Path.equals(data.rangeRef.current.focus.path, path) ? [data.rangeRef.current] : []
       },
       renderText: ({ children }) => (
         <MentionSearch editor={editor} container={ref.current ?? undefined}>

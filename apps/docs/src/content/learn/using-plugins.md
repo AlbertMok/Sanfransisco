@@ -8,25 +8,24 @@ This page will show you how to integrate the Editable plugins into your editor.
 
 </Intro>
 
-## Step 1: Install `@editablejs/plugins` {/*step-1*/}
+## Step 1: Install `@everynote/plugins` {/*step-1*/}
 
 This is a collection of commonly used plugins that can be used in the same way as other individual plugins.
 
 <TerminalBlock>
 
-npm install @editablejs/models @editablejs/editor @editablejs/plugins
+npm install @everynote/models @everynote/editor @everynote/plugins
 
 </TerminalBlock>
-
 
 ## Step 2: Import the plugin {/*step-2*/}
 
 ```js
 
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withPlugins } from '@editablejs/plugins'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withPlugins } from '@everynote/plugins'
 
 ```
 
@@ -50,7 +49,7 @@ const App = () => {
 
 ## Try using plugins {/*try-plugins*/}
 
-The following sandbox has already used `@editablejs/plugins`. You can try using the plugins in it.
+The following sandbox has already used `@everynote/plugins`. You can try using the plugins in it.
 
 The plugin has implemented related functions such as `keyboard shortcuts`, `markdown syntax`, etc. You can try:
 
@@ -58,13 +57,13 @@ The plugin has implemented related functions such as `keyboard shortcuts`, `mark
 - Input `#` + `space` to convert the text to a heading
 - ...
 
-<Sandpack deps={['@editablejs/plugins']}>
+<Sandpack deps={['@everynote/plugins']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withPlugins } from '@editablejs/plugins'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withPlugins } from '@everynote/plugins'
 
 export default function App() {
   const editor = React.useMemo(() => {
@@ -82,7 +81,6 @@ export default function App() {
 ```
 
 </Sandpack>
-
 
 ## Next Steps {/*next-steps*/}
 

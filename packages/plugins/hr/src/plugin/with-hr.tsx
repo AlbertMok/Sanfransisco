@@ -1,11 +1,11 @@
-import { Editable, Hotkey, Locale, generateId } from '@editablejs/editor'
+import { Editable, Hotkey, Locale, generateId } from '@everynote/editor'
 import { HrComponent } from '../components/hr'
 import { DEFAULT_HR_WIDTH, DEFAULT_HR_STYLE, DEFUALT_HR_COLOR, HR_KEY } from '../constants'
 import { HrEditor } from './hr-editor'
 import { Hr } from '../interfaces/hr'
 import locale from '../locale'
 import { HrHotkey, HrOptions, setOptions } from '../options'
-import { Transforms } from '@editablejs/models'
+import { Transforms } from '@everynote/models'
 import { withShortcuts } from './with-shortcuts'
 
 const defaultHotkey: HrHotkey = 'mod+shift+e'

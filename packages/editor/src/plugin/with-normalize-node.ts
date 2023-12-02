@@ -1,4 +1,4 @@
-import { Editor, Transforms, Node, Path } from '@editablejs/models'
+import { Editor, Transforms, Node, Path } from '@everynote/models'
 import { Editable } from './editable'
 
 export const withNormalizeNode = <T extends Editor>(editor: T) => {

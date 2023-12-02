@@ -1,4 +1,4 @@
-import { Editor, Descendant, Element, Text, DOMNode, isDOMText } from '@editablejs/models'
+import { Editor, Descendant, Element, Text, DOMNode, isDOMText } from '@everynote/models'
 
 /**
  * 存储与特定编辑器关联的反序列化转换函数

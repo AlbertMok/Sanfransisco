@@ -14,19 +14,19 @@ title: Mark
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-mark
+npm install @everynote/plugin-mark
 
 </TerminalBlock>
 
 ## 使用 Mark {/*mark-using*/}
 
-<Sandpack deps={['@editablejs/plugin-mark']}>
+<Sandpack deps={['@everynote/plugin-mark']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withMark } from '@editablejs/plugin-mark'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withMark } from '@everynote/plugin-mark'
 
 const defaultValue = [
   {
@@ -143,6 +143,7 @@ withMark(editor, {
 
 - 类型：`MarkHotkey`
 - 默认值:
+
   ```ts
   {
     bold: 'mod+b',
@@ -177,6 +178,7 @@ withMark(editor, {
 
 - 类型：`Record<string, MarkFormat>`
 - 默认值：
+
   ```ts
   {
     '**': 'bold',

@@ -1,4 +1,4 @@
-import { Element } from '@editablejs/models'
+import { Element } from '@everynote/models'
 import { TableCell } from '../../cell'
 import { TABLE_ROW_KEY } from '../constants'
 

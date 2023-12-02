@@ -2,7 +2,7 @@
  * Utilities for single-line deletion
  */
 
-import { Range, Editor } from '@editablejs/models'
+import { Range, Editor } from '@everynote/models'
 import { Editable } from '../plugin/editable'
 
 const doRectsIntersect = (rect: DOMRect, compareRect: DOMRect) => {

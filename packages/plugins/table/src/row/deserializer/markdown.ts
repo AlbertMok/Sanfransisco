@@ -1,17 +1,14 @@
-import { MarkdownDeserializerWithTransform } from '@editablejs/deserializer/markdown'
+import { MarkdownDeserializerWithTransform } from '@everynote/deserializer/markdown'
 import { TABLE_ROW_KEY } from '../constants'
 
-export const withTableRowMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (
-  next,
-  self,
-) => {
+export const withTableRowMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {
   return (node, options = {}) => {
     const { type } = node
     if (type === 'tableRow') {
       return [
         {
           type: TABLE_ROW_KEY,
-          children: node.children.map(child => self.transform(child, options)).flat(),
+          children: node.children.map((child) => self.transform(child, options)).flat(),
         },
       ]
     }

@@ -1,5 +1,5 @@
-import { HTMLSerializerWithOptions, HTMLSerializerWithTransform } from '@editablejs/serializer/html'
-import { List, Editor } from '@editablejs/models'
+import { HTMLSerializerWithOptions, HTMLSerializerWithTransform } from '@everynote/serializer/html'
+import { List, Editor } from '@everynote/models'
 import { UNORDERED_LIST_KEY } from '../constants'
 import { UnorderedListTemplates } from '../template'
 import { UnorderedList } from '../interfaces/unordered-list'

@@ -1,4 +1,4 @@
-import { Editor, Node, Path, Operation, Transforms, Range, Point, List, Key } from '@editablejs/models'
+import { Editor, Node, Path, Operation, Transforms, Range, Point, List, Key } from '@everynote/models'
 import { Editable, RenderElementProps, RenderLeafProps } from './editable'
 import { EDITOR_TO_KEY_TO_ELEMENT, NODE_TO_KEY, IS_SHIFT_PRESSED, EDITOR_TO_INPUT, EDITOR_TO_SHADOW } from '../utils/weak-maps'
 import { findCurrentLineRange } from '../utils/lines'

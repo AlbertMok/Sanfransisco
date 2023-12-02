@@ -6,7 +6,7 @@ import {
   ToolbarColorPicker as UIToolbarColorPicker,
   ToolbarSeparator,
   ColorPickerLocale,
-} from '@editablejs/ui'
+} from '@everynote/ui'
 import { ToolbarButtonItem, ToolbarColorPickerItem, ToolbarDropdownItem, ToolbarItem } from '../types'
 
 export const ToolbarButtonDefault: React.FC<ToolbarButtonItem> = ({ type, ...props }) => {

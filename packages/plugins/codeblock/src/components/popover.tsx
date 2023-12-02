@@ -1,18 +1,5 @@
-import {
-  useIsomorphicLayoutEffect,
-  useLocale,
-  useNodeFocused,
-  useReadOnly,
-} from '@editablejs/editor'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Toolbar,
-  Tooltip,
-  ToolbarSelect,
-  ToolbarDropdown,
-} from '@editablejs/ui'
+import { useIsomorphicLayoutEffect, useLocale, useNodeFocused, useReadOnly } from '@everynote/editor'
+import { Popover, PopoverContent, PopoverTrigger, Toolbar, Tooltip, ToolbarSelect, ToolbarDropdown } from '@everynote/ui'
 import { FC, useMemo, useState } from 'react'
 import { CodeBlockEditor } from '../plugin/editor'
 import { CodeBlockLocale } from '../locale/types'
@@ -30,12 +17,7 @@ export interface CodeBlockPopoverProps {
   view: EditorView | null
 }
 
-export const CodeBlockPopover: FC<CodeBlockPopoverProps> = ({
-  editor,
-  element,
-  children,
-  view,
-}) => {
+export const CodeBlockPopover: FC<CodeBlockPopoverProps> = ({ editor, element, children, view }) => {
   const focused = useNodeFocused()
   const [readOnly] = useReadOnly()
   const [popoverOpen, setPopoverOpen] = useState(false)
@@ -72,18 +54,14 @@ export const CodeBlockPopover: FC<CodeBlockPopoverProps> = ({
   const language = languages.find(({ value }) => value === element.language)
 
   return (
-    <Popover
-      open={readOnly ? false : popoverOpen}
-      onOpenChange={handlePopoverOpenChange}
-      trigger="hover"
-    >
+    <Popover open={readOnly ? false : popoverOpen} onOpenChange={handlePopoverOpenChange} trigger="hover">
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent autoUpdate={true} side="top" sideOffset={5}>
         <Toolbar mode="inline">
           <Tooltip content={toolbar.theme.title} side="top" sideOffset={5} arrow={false}>
             <ToolbarDropdown
               value={element.theme}
-              onSelect={value => {
+              onSelect={(value) => {
                 CodeBlockEditor.updateCodeBlock(editor, element, {
                   theme: value as 'light' | 'dark',
                 })
@@ -91,22 +69,12 @@ export const CodeBlockPopover: FC<CodeBlockPopoverProps> = ({
               items={[
                 {
                   value: 'light',
-                  icon: (
-                    <span
-                      tw="w-4 h-4 flex border border-zinc-200 rounded"
-                      style={{ backgroundColor: baseLightColors.background }}
-                    ></span>
-                  ),
+                  icon: <span tw="w-4 h-4 flex border border-zinc-200 rounded" style={{ backgroundColor: baseLightColors.background }}></span>,
                   content: toolbar.theme.light,
                 },
                 {
                   value: 'dark',
-                  icon: (
-                    <span
-                      tw="w-4 h-4 flex border border-zinc-200 rounded"
-                      style={{ backgroundColor: oneDarkColors.background }}
-                    ></span>
-                  ),
+                  icon: <span tw="w-4 h-4 flex border border-zinc-200 rounded" style={{ backgroundColor: oneDarkColors.background }}></span>,
                   content: toolbar.theme.dark,
                 },
               ]}
@@ -118,7 +86,7 @@ export const CodeBlockPopover: FC<CodeBlockPopoverProps> = ({
           </Tooltip>
           <Tooltip content={toolbar.language.title} side="top" sideOffset={5} arrow={false}>
             <ToolbarSelect
-              onSelect={value => {
+              onSelect={(value) => {
                 CodeBlockEditor.updateCodeBlock(editor, element, { language: value })
                 view?.focus()
               }}
@@ -131,7 +99,7 @@ export const CodeBlockPopover: FC<CodeBlockPopoverProps> = ({
           <Tooltip content={toolbar.lineWrapping.title} side="top" sideOffset={5} arrow={false}>
             <ToolbarDropdown
               value={element.lineWrapping ? 'autoWrap' : 'overflow'}
-              onSelect={value => {
+              onSelect={(value) => {
                 CodeBlockEditor.updateCodeBlock(editor, element, {
                   lineWrapping: value === 'autoWrap',
                 })
@@ -155,7 +123,7 @@ export const CodeBlockPopover: FC<CodeBlockPopoverProps> = ({
           <Tooltip content={toolbar.tabSize} side="top" sideOffset={5} arrow={false}>
             <ToolbarDropdown
               value={String(element.tabSize ?? 2)}
-              onSelect={value => {
+              onSelect={(value) => {
                 CodeBlockEditor.updateCodeBlock(editor, element, { tabSize: Number(value) })
               }}
               items={[

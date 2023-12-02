@@ -1,17 +1,14 @@
 import * as React from 'react'
-import { Editable, useEditable, useIsomorphicLayoutEffect } from '@editablejs/editor'
-import { CursorRect, AwarenessNativeSelection } from '@editablejs/yjs-protocols/awareness-selection'
-import { Descendant } from '@editablejs/models'
+import { Editable, useEditable, useIsomorphicLayoutEffect } from '@everynote/editor'
+import { CursorRect, AwarenessNativeSelection } from '@everynote/yjs-protocols/awareness-selection'
+import { Descendant } from '@everynote/models'
 import { useRequestReRender } from './use-request-re-render'
 import { getCaretPosition } from '../utils/selection'
 import { CaretPosition, CursorData, CursorState, RelativeRange } from '../types'
 import { useRemoteStates } from './use-remote-states'
 import { YCursorEditor } from '../plugin/cursors-editor'
 
-const RANGE_CACHE: WeakMap<
-  Descendant[],
-  WeakMap<RelativeRange, AwarenessNativeSelection | null>
-> = new WeakMap()
+const RANGE_CACHE: WeakMap<Descendant[], WeakMap<RelativeRange, AwarenessNativeSelection | null>> = new WeakMap()
 
 const FROZEN_EMPTY_ARRAY = Object.freeze([])
 
@@ -44,10 +41,7 @@ function getRange<T extends CursorData>(editor: YCursorEditor<T>, state: CursorS
     return cachedRange
   }
 
-  const range = editor.awarenessSelection.relativeSelectionToNativeSelection(
-    relativeRange,
-    state.clientId,
-  )
+  const range = editor.awarenessSelection.relativeSelectionToNativeSelection(relativeRange, state.clientId)
   if (!range) return null
   cache.set(relativeRange, range)
   return range
@@ -60,9 +54,7 @@ export function useRemoteCursorOverlayPositions<TCursorData extends CursorData>(
   const editor = useEditable() as YCursorEditor<TCursorData> & Editable
 
   const requestReRender = useRequestReRender()
-  const selectionRectCache = React.useRef<WeakMap<AwarenessNativeSelection, CursorRect[]>>(
-    new WeakMap(),
-  )
+  const selectionRectCache = React.useRef<WeakMap<AwarenessNativeSelection, CursorRect[]>>(new WeakMap())
 
   const [selectionRects, setSelectionRects] = React.useState<Record<string, CursorRect[]>>({})
 
@@ -76,8 +68,7 @@ export function useRemoteCursorOverlayPositions<TCursorData extends CursorData>(
   // Update selection rects after paint
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useIsomorphicLayoutEffect(() => {
-    let selectionRectsChanged =
-      Object.keys(selectionRects).length !== Object.keys(cursorStates).length
+    let selectionRectsChanged = Object.keys(selectionRects).length !== Object.keys(cursorStates).length
 
     const updated = Object.fromEntries(
       Object.entries(cursorStates).map(([key, state]) => {
@@ -95,7 +86,7 @@ export function useRemoteCursorOverlayPositions<TCursorData extends CursorData>(
         selectionRectsChanged = true
         selectionRectCache.current.set(range, rects)
         return [key, rects]
-      }),
+      })
     )
 
     if (selectionRectsChanged) {
@@ -108,8 +99,7 @@ export function useRemoteCursorOverlayPositions<TCursorData extends CursorData>(
       Object.entries(cursorStates).map(([clientId, state]) => {
         const range = getRange(editor, state)
         const rects = selectionRects[clientId] ?? FROZEN_EMPTY_ARRAY
-        const caretPosition =
-          range && getCaretPosition(rects, range.isBackward(), range.isCollapsed())
+        const caretPosition = range && getCaretPosition(rects, range.isBackward(), range.isCollapsed())
 
         return {
           ...state,
@@ -117,7 +107,7 @@ export function useRemoteCursorOverlayPositions<TCursorData extends CursorData>(
           selectionRects: rects,
         }
       }),
-    [cursorStates, editor, selectionRects],
+    [cursorStates, editor, selectionRects]
   )
 
   const refresh = React.useCallback(
@@ -125,7 +115,7 @@ export function useRemoteCursorOverlayPositions<TCursorData extends CursorData>(
       selectionRectCache.current = new WeakMap()
       requestReRender(sync)
     },
-    [requestReRender],
+    [requestReRender]
   )
 
   // Refresh on container resize

@@ -1,14 +1,6 @@
-import {
-  Editor,
-  InsertNodeOperation,
-  Operation,
-  Path,
-  Node,
-  Transforms,
-  CompositionText,
-} from '@editablejs/models'
-import { Editable, Hotkey } from '@editablejs/editor'
-import { withHistoryProtocol } from '@editablejs/protocols/history'
+import { Editor, InsertNodeOperation, Operation, Path, Node, Transforms, CompositionText } from '@everynote/models'
+import { Editable, Hotkey } from '@everynote/editor'
+import { withHistoryProtocol } from '@everynote/protocols/history'
 
 import { HistoryEditor } from './history-editor'
 import { HistoryStack } from './history-stack'
@@ -98,7 +90,7 @@ export const withHistory = <T extends Editable>(editor: T, options: HistoryOptio
     return HistoryStack.hasUndos(e)
   }
 
-  historyProtocol.capture = op => {
+  historyProtocol.capture = (op) => {
     if (!HistoryEditor.isHistoryEditor(e)) return capture(op)
     return op.type !== 'set_selection'
   }
@@ -157,8 +149,7 @@ export const withHistory = <T extends Editable>(editor: T, options: HistoryOptio
     ) {
       const { path, newProperties } = op
       for (const undo of undos) {
-        const predicate = (op: Operation): op is InsertNodeOperation =>
-          op.type === 'insert_node' && Path.equals(op.path, path)
+        const predicate = (op: Operation): op is InsertNodeOperation => op.type === 'insert_node' && Path.equals(op.path, path)
         const op: InsertNodeOperation | undefined = undo.operations.find(predicate)
         if (op) {
           for (const k in newProperties) {

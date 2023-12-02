@@ -14,21 +14,21 @@ This package contains the basic font styles `font-color`, `font-size`, and `back
 
 <TerminalBlock>
 
-npm install @editablejs/plugin-font
+npm install @everynote/plugin-font
 
 </TerminalBlock>
 
 ## Usage {/*font-using*/}
 
-<Sandpack deps={['@editablejs/plugin-font']}>
+<Sandpack deps={['@everynote/plugin-font']}>
 
 ```js
 import * as React from 'react'
-import { createEditor } from '@editablejs/models'
-import { EditableProvider, ContentEditable, withEditable } from '@editablejs/editor'
-import { withFontColor } from '@editablejs/plugin-font/color'
-import { withFontSize } from '@editablejs/plugin-font/size'
-import { withBackgroundColor } from '@editablejs/plugin-font/background-color'
+import { createEditor } from '@everynote/models'
+import { EditableProvider, ContentEditable, withEditable } from '@everynote/editor'
+import { withFontColor } from '@everynote/plugin-font/color'
+import { withFontSize } from '@everynote/plugin-font/size'
+import { withBackgroundColor } from '@everynote/plugin-font/background-color'
 
 const defaultValue = [
   {
@@ -89,6 +89,7 @@ export default function App() {
 withFontColor(editor, options)
 withBackgroundColor(editor, options)
 ```
+
 ### defaultColor {/*font-options-defaultcolor*/}
 
 `defaultColor` is used to configure the default color.
@@ -136,6 +137,7 @@ withBackgroundColor(editor, {
 ```js
 withFontSize(editor, options)
 ```
+
 ### defaultSize {/*font-options-defaultsize*/}
 
 `defaultSize` is used to configure the default font size.

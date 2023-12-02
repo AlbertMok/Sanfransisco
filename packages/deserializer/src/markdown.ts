@@ -1,4 +1,4 @@
-import { Editor, Descendant, Element, Text } from '@editablejs/models'
+import { Editor, Descendant, Element, Text } from '@everynote/models'
 import { Root, HTML, Content } from 'mdast'
 import { fromMarkdown, Value } from 'mdast-util-from-markdown'
 import { Extension } from 'micromark-util-types'

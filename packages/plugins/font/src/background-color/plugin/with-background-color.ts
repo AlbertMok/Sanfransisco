@@ -1,6 +1,6 @@
 import { colord } from 'colord'
-import { Editor } from '@editablejs/models'
-import { Editable, RenderLeafProps, Hotkey } from '@editablejs/editor'
+import { Editor } from '@everynote/models'
+import { Editable, RenderLeafProps, Hotkey } from '@everynote/editor'
 import { BACKGROUND_COLOR_KEY } from '../constants'
 import { BackgroundColorEditor } from './background-color-editor'
 import { BackgroundColor } from '../interfaces/background-color'
@@ -8,16 +8,13 @@ import { BackgroundColorHotkey, BackgroundColorOptions, setOptions } from '../op
 
 const defaultHotkeys: BackgroundColorHotkey = {}
 
-export const withBackgroundColor = <T extends Editable>(
-  editor: T,
-  options: BackgroundColorOptions = {},
-) => {
+export const withBackgroundColor = <T extends Editable>(editor: T, options: BackgroundColorOptions = {}) => {
   const newEditor = editor as T & BackgroundColorEditor
 
   setOptions(newEditor, options)
 
   newEditor.toggleBackgroundColor = (color: string) => {
-    editor.normalizeSelection(selection => {
+    editor.normalizeSelection((selection) => {
       if (editor.selection !== selection) editor.selection = selection
       const { defaultColor } = BackgroundColorEditor.getOptions(editor)
       if (defaultColor && colord(color).toRgbString() === colord(defaultColor).toRgbString()) {

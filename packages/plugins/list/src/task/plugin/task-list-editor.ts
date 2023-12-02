@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { TASK_LIST_KEY } from '../constants'
 import { TaskList } from '../interfaces/task-list'
 import { List } from '../../list/list'

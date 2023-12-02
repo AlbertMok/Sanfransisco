@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Range } from '@editablejs/models'
+import { Range } from '@everynote/models'
 import { useFocused } from '../hooks/use-focused'
 import {
   useSelectionDrawingSelection,

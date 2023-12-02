@@ -1,4 +1,4 @@
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { Leading } from '../interfaces/leading'
 import { getOptions } from '../options'
 

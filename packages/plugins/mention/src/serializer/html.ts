@@ -1,5 +1,5 @@
-import { Editor } from '@editablejs/models'
-import { HTMLSerializerWithOptions, HTMLSerializerWithTransform } from '@editablejs/serializer/html'
+import { Editor } from '@everynote/models'
+import { HTMLSerializerWithOptions, HTMLSerializerWithTransform } from '@everynote/serializer/html'
 
 import { MENTION_DATA_USER_PREFIX } from '../constants'
 import { getTriggerChar } from '../get-trigger-char'
@@ -9,9 +9,11 @@ export interface MentionHTMLSerializerWithOptions extends HTMLSerializerWithOpti
   editor: Editor
 }
 
-export const withMentionHTMLSerializerTransform: HTMLSerializerWithTransform<
-  MentionHTMLSerializerWithOptions
-> = (next, serializer, customOptions) => {
+export const withMentionHTMLSerializerTransform: HTMLSerializerWithTransform<MentionHTMLSerializerWithOptions> = (
+  next,
+  serializer,
+  customOptions
+) => {
   const { attributes: customAttributes, style: customStyle, editor } = customOptions
   return (node, options) => {
     const { attributes, style } = options ?? {}
@@ -19,15 +21,13 @@ export const withMentionHTMLSerializerTransform: HTMLSerializerWithTransform<
       const { user } = node
       const mentionAttributes: Record<string, string | undefined> = {}
       for (const key in Object.keys(user)) {
-        mentionAttributes[`${MENTION_DATA_USER_PREFIX}${key}`] = String(
-          user[key as keyof typeof user],
-        )
+        mentionAttributes[`${MENTION_DATA_USER_PREFIX}${key}`] = String(user[key as keyof typeof user])
       }
       return serializer.create(
         'span',
         serializer.mergeOptions(node, attributes, customAttributes, mentionAttributes),
         serializer.mergeOptions(node, style, customStyle),
-        `${getTriggerChar(editor)}${user.name}`,
+        `${getTriggerChar(editor)}${user.name}`
       )
     }
     return next(node, options)

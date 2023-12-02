@@ -1,6 +1,6 @@
 import { LanguageSupport } from '@codemirror/language'
 import { Extension } from '@codemirror/state'
-import { Editor } from '@editablejs/models'
+import { Editor } from '@everynote/models'
 import { CodeBlockLocale } from './locale/types'
 
 export type CodeBlockHotkey = string | ((e: KeyboardEvent) => boolean)

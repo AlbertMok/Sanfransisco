@@ -1,4 +1,4 @@
-import { Element, Node, Path, Text } from '@editablejs/models'
+import { Element, Node, Path, Text } from '@everynote/models'
 import * as Y from 'yjs'
 import { sliceInsertDelta, yTextToInsertDelta } from './delta'
 import { YTarget } from './types'
@@ -12,9 +12,7 @@ export function getEditorNodeYLength(node: Node | undefined): number {
 }
 
 export function editorPathOffsetToYOffset(element: Element, pathOffset: number) {
-  return element.children
-    .slice(0, pathOffset)
-    .reduce((yOffset, node) => yOffset + getEditorNodeYLength(node), 0)
+  return element.children.slice(0, pathOffset).reduce((yOffset, node) => yOffset + getEditorNodeYLength(node), 0)
 }
 
 export function getYTarget(yRoot: Y.XmlText, editorRoot: Node, path: Path): YTarget {
@@ -58,11 +56,7 @@ export function getYTarget(yRoot: Y.XmlText, editorRoot: Node, path: Path): YTar
   }
 }
 
-export function yOffsetToEditorOffsets(
-  parent: Element,
-  yOffset: number,
-  opts: { assoc?: number; insert?: boolean } = {},
-): [number, number] {
+export function yOffsetToEditorOffsets(parent: Element, yOffset: number, opts: { assoc?: number; insert?: boolean } = {}): [number, number] {
   const { assoc = 0, insert = false } = opts
 
   let currentOffset = 0

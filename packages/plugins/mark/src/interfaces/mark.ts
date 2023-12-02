@@ -1,4 +1,4 @@
-import { Text } from '@editablejs/models'
+import { Text } from '@everynote/models'
 
 export type MarkFormat = 'bold' | 'italic' | 'underline' | 'strikethrough' | 'code' | 'sub' | 'sup'
 

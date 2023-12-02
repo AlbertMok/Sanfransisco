@@ -1,4 +1,4 @@
-import { Descendant, Element } from '@editablejs/models'
+import { Descendant, Element } from '@everynote/models'
 import { HeadingTags } from '../constants'
 
 export type HeadingType = keyof typeof HeadingTags

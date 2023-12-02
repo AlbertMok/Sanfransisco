@@ -1,4 +1,4 @@
-import { Editable, useEditableStatic } from '@editablejs/editor'
+import { Editable, useEditableStatic } from '@everynote/editor'
 import * as React from 'react'
 import create, { StoreApi, UseBoundStore, useStore } from 'zustand'
 
@@ -42,7 +42,7 @@ export const useLinkStore = () => {
 
 export const useLinkOpen = (): [boolean, (open: boolean) => void] => {
   const store = useLinkStore()
-  const open = useStore(store, state => state.open)
+  const open = useStore(store, (state) => state.open)
   return React.useMemo(
     () => [
       open,
@@ -52,6 +52,6 @@ export const useLinkOpen = (): [boolean, (open: boolean) => void] => {
         })
       },
     ],
-    [store, open],
+    [store, open]
   )
 }

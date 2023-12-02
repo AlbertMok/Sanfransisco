@@ -1,4 +1,4 @@
-import { Element } from '@editablejs/models'
+import { Element } from '@everynote/models'
 import { INDENT_KEY, OUTDENT_KEY } from '../constants'
 
 export interface Indent extends Element {

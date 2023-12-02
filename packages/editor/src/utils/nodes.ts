@@ -1,4 +1,4 @@
-import { Editor, Element, Path } from '@editablejs/models'
+import { Editor, Element, Path } from '@everynote/models'
 import { TEditor } from '../types'
 
 export const getMatchedNode = (editor: Editor, type: string) => {

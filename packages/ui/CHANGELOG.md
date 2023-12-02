@@ -1,4 +1,4 @@
-# @editablejs/plugin-ui
+# @everynote/plugin-ui
 
 ## 1.0.0
 
@@ -6,28 +6,28 @@
 
 - [`94cbf51`](https://github.com/editablejs/editable/commit/94cbf5117612174c0ecb2b536ac6695d1bfcf360) Thanks [@big-camel](https://github.com/big-camel)! - fix deps
 
-* [`3855f3f`](https://github.com/editablejs/editable/commit/3855f3fdef0869e2057f18b18d2fd2b903ff4287) Thanks [@big-camel](https://github.com/big-camel)! - Add markdown paste demo
+- [`3855f3f`](https://github.com/editablejs/editable/commit/3855f3fdef0869e2057f18b18d2fd2b903ff4287) Thanks [@big-camel](https://github.com/big-camel)! - Add markdown paste demo
 
 - [`5420964`](https://github.com/editablejs/editable/commit/5420964753edb470ae94572e5272980ea82ae3fd) Thanks [@big-camel](https://github.com/big-camel)! - Refactor read-only
 
-* [`7cc05f1`](https://github.com/editablejs/editable/commit/7cc05f185659f56f77d9a7ad16fb78bf317d51fe) Thanks [@big-camel](https://github.com/big-camel)! - - Fix yjs and slate execution split-node, move-node, merge_node cannot update PointRef RangeRef PathRef related reference issues. Use @editablejs/plugin-yjs-websocket to pass meta additional messages
+- [`7cc05f1`](https://github.com/editablejs/editable/commit/7cc05f185659f56f77d9a7ad16fb78bf317d51fe) Thanks [@big-camel](https://github.com/big-camel)! - - Fix yjs and slate execution split-node, move-node, merge_node cannot update PointRef RangeRef PathRef related reference issues. Use @everynote/plugin-yjs-websocket to pass meta additional messages
   - Improve metion plugin
 
 - [`66365e8`](https://github.com/editablejs/editable/commit/66365e8de879e66ab1717735c2e1ad410cfd2a85) Thanks [@big-camel](https://github.com/big-camel)! - Unable to select on Android + Chrome browser
 
-* [`a644a5a`](https://github.com/editablejs/editable/commit/a644a5aa29ac1b28f95b49225d049c73ecd4ead5) Thanks [@big-camel](https://github.com/big-camel)! - add title plugin
+- [`a644a5a`](https://github.com/editablejs/editable/commit/a644a5aa29ac1b28f95b49225d049c73ecd4ead5) Thanks [@big-camel](https://github.com/big-camel)! - add title plugin
 
 - [`ccc95d2`](https://github.com/editablejs/editable/commit/ccc95d24072285824d2d93d443374175085457e9) Thanks [@big-camel](https://github.com/big-camel)! - Fix the issue of context-menu not displaying in Mac.
 
-* [`437dc00`](https://github.com/editablejs/editable/commit/437dc008d72a88d73160ce13e12dc334f7b33248) Thanks [@big-camel](https://github.com/big-camel)! - add plugin shortcuts for codeblock & mark & blockquote
+- [`437dc00`](https://github.com/editablejs/editable/commit/437dc008d72a88d73160ce13e12dc334f7b33248) Thanks [@big-camel](https://github.com/big-camel)! - add plugin shortcuts for codeblock & mark & blockquote
 
 - [`cce1f0a`](https://github.com/editablejs/editable/commit/cce1f0a8fffb12e2adc7d65aa7960ed99236c5ed) Thanks [@big-camel](https://github.com/big-camel)! - reactor all
 
-* [`b14a6dd`](https://github.com/editablejs/editable/commit/b14a6ddbcdc499a1233003b76ea45c86b3dc2fba) Thanks [@big-camel](https://github.com/big-camel)! - add dispatchRefreshCustomEvent for popper ui
+- [`b14a6dd`](https://github.com/editablejs/editable/commit/b14a6ddbcdc499a1233003b76ea45c86b3dc2fba) Thanks [@big-camel](https://github.com/big-camel)! - add dispatchRefreshCustomEvent for popper ui
 
 - [`63fb6ec`](https://github.com/editablejs/editable/commit/63fb6ec7ad7818a275f7b64c4ec09d4934dfd533) Thanks [@big-camel](https://github.com/big-camel)! - impl codeblock yjs
 
-* [`6f627f3`](https://github.com/editablejs/editable/commit/6f627f3646694cc3399ce7466eb17818ea20d2e3) Thanks [@big-camel](https://github.com/big-camel)! - add font-color & background-color plugin
+- [`6f627f3`](https://github.com/editablejs/editable/commit/6f627f3646694cc3399ce7466eb17818ea20d2e3) Thanks [@big-camel](https://github.com/big-camel)! - add font-color & background-color plugin
 
 ## 1.0.0-beta.11
 
@@ -83,13 +83,13 @@
 
 - [`cce1f0a`](https://github.com/editablejs/editable/commit/cce1f0a8fffb12e2adc7d65aa7960ed99236c5ed) Thanks [@big-camel](https://github.com/big-camel)! - reactor all
 
-* [`63fb6ec`](https://github.com/editablejs/editable/commit/63fb6ec7ad7818a275f7b64c4ec09d4934dfd533) Thanks [@big-camel](https://github.com/big-camel)! - impl codeblock yjs
+- [`63fb6ec`](https://github.com/editablejs/editable/commit/63fb6ec7ad7818a275f7b64c4ec09d4934dfd533) Thanks [@big-camel](https://github.com/big-camel)! - impl codeblock yjs
 
 ## 1.0.0-beta.2
 
 ### Patch Changes
 
-- [`7cc05f1`](https://github.com/editablejs/editable/commit/7cc05f185659f56f77d9a7ad16fb78bf317d51fe) Thanks [@big-camel](https://github.com/big-camel)! - - Fix yjs and slate execution split-node, move-node, merge_node cannot update PointRef RangeRef PathRef related reference issues. Use @editablejs/plugin-yjs-websocket to pass meta additional messages
+- [`7cc05f1`](https://github.com/editablejs/editable/commit/7cc05f185659f56f77d9a7ad16fb78bf317d51fe) Thanks [@big-camel](https://github.com/big-camel)! - - Fix yjs and slate execution split-node, move-node, merge_node cannot update PointRef RangeRef PathRef related reference issues. Use @everynote/plugin-yjs-websocket to pass meta additional messages
   - Improve metion plugin
 
 ## 1.0.0-beta.1
@@ -110,7 +110,7 @@
 
 - [`1bca53d`](https://github.com/editablejs/editable/commit/1bca53d995a2c6166481e33b858ec09217b3d7f7) Thanks [@big-camel](https://github.com/big-camel)! - add aling plugin
 
-* [`1bca53d`](https://github.com/editablejs/editable/commit/1bca53d995a2c6166481e33b858ec09217b3d7f7) Thanks [@big-camel](https://github.com/big-camel)! - add align plugin
+- [`1bca53d`](https://github.com/editablejs/editable/commit/1bca53d995a2c6166481e33b858ec09217b3d7f7) Thanks [@big-camel](https://github.com/big-camel)! - add align plugin
 
 ## 1.0.0-beta.12
 
@@ -136,7 +136,7 @@
 
 - [#34](https://github.com/editablejs/editable/pull/34) [`d7a7387`](https://github.com/editablejs/editable/commit/d7a7387c23f740cecb38177df2878bb6f2e6ec1d) Thanks [@yanmao-cc](https://github.com/yanmao-cc)! - add link plugin
 
-* [#34](https://github.com/editablejs/editable/pull/34) [`885101f`](https://github.com/editablejs/editable/commit/885101f1a8d02ac388eb02bba884479f224a53ff) Thanks [@yanmao-cc](https://github.com/yanmao-cc)! - update ui
+- [#34](https://github.com/editablejs/editable/pull/34) [`885101f`](https://github.com/editablejs/editable/commit/885101f1a8d02ac388eb02bba884479f224a53ff) Thanks [@yanmao-cc](https://github.com/yanmao-cc)! - update ui
 
 ## 1.0.0-beta.9
 

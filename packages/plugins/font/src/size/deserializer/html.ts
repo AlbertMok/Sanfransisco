@@ -1,8 +1,8 @@
-import { HTMLDeserializerWithTransform } from '@editablejs/deserializer/html'
-import { isDOMHTMLElement } from '@editablejs/models'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { isDOMHTMLElement } from '@everynote/models'
 import { FontSize } from '../interfaces/font-size'
 
-export const withFontSizeHTMLDeserializerTransform: HTMLDeserializerWithTransform = next => {
+export const withFontSizeHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {
     const { text } = options
     if (isDOMHTMLElement(node)) {
