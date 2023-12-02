@@ -12,6 +12,7 @@ import {
   DATA_EDITABLE_STRING,
   DATA_EDITABLE_ZERO_WIDTH,
   DATA_EDITABLE_NODE,
+  isBlockSelecting,
 } from '@everynote/editor'
 import { DOMElement, Editor, Grid, GridCell, Transforms } from '@everynote/models'
 import * as React from 'react'
@@ -309,9 +310,11 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
       const domElement = Editable.toDOMNode(editor, data.element)
       const prevCssText = domElement.style.cssText
       // 选中的元素的背景
-      domElement.style.cssText = ` border-radius: 3px; background-color: rgb(235 238 253 / 1); ${prevCssText}`
+      // domElement.style.cssText = ` border-radius: 3px; background-color: rgb(235 238 253 / 1); ${prevCssText}`
+      domElement.classList.add('selected')
       return () => {
-        domElement.style.cssText = prevCssText
+        // domElement.style.cssText = prevCssText
+        domElement.classList.remove('selected')
       }
     }
   }, [editor, decorateOpen])
@@ -468,6 +471,8 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
     )
   }
 
+  const is_selecting = isBlockSelecting(editor)
+
   // 渲染悬浮按钮
   const renderSideBtn = () => {
     return (
@@ -475,7 +480,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
         ref={containerRef}
         tw="absolute left-0 top-0 z-10 flex "
         style={{
-          opacity: visible ? 1 : 0,
+          opacity: !is_selecting && visible ? 1 : 0,
           visibility: visible ? 'visible' : 'hidden',
           left: transformPosition?.x,
           top: transformPosition?.y,

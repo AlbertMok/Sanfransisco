@@ -41,7 +41,6 @@ import { TouchPointComponent } from './touch-point'
 import { getNativeEvent, isMouseEvent, isTouchEvent } from '../utils/event'
 import { canForceTakeFocus, isEditableDOMElement } from '../utils/dom'
 import { Locale } from '../plugin/locale'
-import { BlockSelectionArea } from '../plugin/src/components/BlockSelectionArea'
 
 const Children = (props: Omit<Parameters<typeof useChildren>[0], 'node' | 'selection'>) => {
   //props只剩一个renderPlaceholder 参数 可以对外暴露了
