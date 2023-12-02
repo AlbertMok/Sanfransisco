@@ -1,10 +1,9 @@
 import { Element } from '@everynote/models'
 import { useEditableStatic } from '../../../hooks/use-editable'
 import { blockSelectionStore } from '../store/selectionStore'
-import { DATA_BLOCK_ID, DATA_BLOCK_TYPE } from '../../../utils/constants'
 import { useStore } from 'zustand'
 import { useEffect } from 'react'
-import { useFocused } from '../../../hooks/use-focused'
+import { useFocused } from '../../../hooks'
 
 export interface BlockSelectableOptions {
   element: Element
@@ -29,8 +28,6 @@ export const useBlockSelectable = ({ element }: BlockSelectableOptions) => {
   const isSelected = element.id ? useStore(store).selectedBlockIds.has(element.id) : false
 
   return {
-    [DATA_BLOCK_ID]: element.id,
-    [DATA_BLOCK_TYPE]: element.type,
     className: isSelected && element.type != 'title' ? 'selected slate-selectable' : 'slate-selectable',
   }
 }
