@@ -1,5 +1,5 @@
 import * as React from 'react'
-import NextLink from 'next/link'
+
 import { Seo } from 'components/seo'
 import { createGlobalStyle } from 'styled-components'
 import { ExternalLink } from 'components/external-link'
@@ -372,7 +372,6 @@ export default function Playground() {
                 )}
               </div>
             </div>
-            2.0版本
           </div>
           <StyledToolbar editor={editor} disabled={readOnly} />
         </StyledHeader>

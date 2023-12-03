@@ -6,7 +6,7 @@ import useChildren from '../hooks/use-children'
 import { Editable, useEditableStatic, ElementAttributes, useBlockSelectable } from '..'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
 import { NODE_TO_ELEMENT, ELEMENT_TO_NODE, NODE_TO_PARENT, NODE_TO_INDEX, EDITOR_TO_KEY_TO_ELEMENT } from '../utils/weak-maps'
-import { DATA_BLOCK_ID, DATA_EDITABLE_INLINE, DATA_EDITABLE_NODE, DATA_EDITABLE_VOID } from '../utils/constants'
+import { DATA_BLOCK_ID, DATA_BLOCK_TYPE, DATA_EDITABLE_INLINE, DATA_EDITABLE_NODE, DATA_EDITABLE_VOID } from '../utils/constants'
 import { useElementDecorations } from '../hooks/use-decorate'
 import { PlaceholderRender } from '../plugin/placeholder'
 import { usePlaceholder } from '../hooks/use-placeholder'
@@ -93,10 +93,15 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
 
   const newAttributes = editor.renderElementAttributes({ attributes, element })
 
-  let _props = useBlockSelectable({ element })
+  const _props = useBlockSelectable({ element })
+
+  const attrProps = {
+    [DATA_BLOCK_ID]: element.id,
+    [DATA_BLOCK_TYPE]: element.type,
+  }
 
   let content = (
-    <div {..._props} style={{ padding: '1px ', margin: '4px 0', minHeight: 'max-content' }}>
+    <div {...attrProps} {..._props} style={{ padding: '1px ', margin: '4px 0', minHeight: 'max-content' }}>
       {editor.renderElement({ attributes: newAttributes, children, element })}
     </div>
   )

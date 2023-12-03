@@ -27,27 +27,28 @@ export const ParagraphEditor = {
 export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const newEditor = editor as T & ParagraphEditor
 
-  const { normalizeNode } = newEditor
-  newEditor.normalizeNode = (entry) => {
-    const [node, path] = entry
+  // const { normalizeNode } = newEditor
+  // newEditor.normalizeNode = (entry) => {
+  //   const [node, path] = entry
 
-    let isHandled = false
-    if (Editor.isEditor(node)) {
-      // 处理第二个节点
-      const secondChild = node.children[1]
-      if (!secondChild) {
-        // if there is not a second node in the editor,then insert a new node
-        Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] }, { at: [0] })
-        isHandled = true
-      } else if (!Paragraph.isParagraph(secondChild)) {
-        Transforms.setNodes(editor, { type: 'paragraph' }, { at: [1] })
-        isHandled = true
-      }
+  //   let isHandled = false
 
-      if (isHandled) return
-    }
-    normalizeNode(entry)
-  }
+  //   if (Editor.isEditor(node)) {
+  //     // 处理第二个节点
+  //     const secondChild = node.children[1]
+  //     if (!secondChild) {
+  //       // if there is not a second node in the editor,then insert a new node
+  //       Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] })
+  //       isHandled = true
+  //     } else if (!Paragraph.isParagraph(secondChild)) {
+  //       Transforms.setNodes(editor, { type: 'paragraph' }, { at: [1] })
+  //       isHandled = true
+  //     }
+
+  //     if (isHandled) return
+  //   }
+  //   normalizeNode(entry)
+  // }
   newEditor.createParagraphElement = () => {
     const { selection } = editor
     if (selection) {

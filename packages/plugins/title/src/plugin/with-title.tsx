@@ -1,6 +1,6 @@
 import { Editable, generateId, Placeholder } from '@everynote/editor'
 import { Editor, Transforms, Node, Path, List } from '@everynote/models'
-import React, { FC, memo, useMemo } from 'react'
+import React, { FC, memo, useEffect, useMemo } from 'react'
 import tw from 'twin.macro'
 import { TITLE_KEY } from '../constants'
 import { Title } from '../interfaces/title'
@@ -42,9 +42,10 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
 
       // 处理编辑器的第一个节点
       const firstChild = node.children[0]
+
       if (!firstChild || Editor.isVoid(titleEditor, firstChild)) {
         // 如果第一个节点不存在或是一个“void”节点（即不可编辑的节点），则在编辑器的开始处插入一个新的标题节点
-        Transforms.insertNodes(titleEditor, { type: TITLE_KEY, children: [{ text: '' }] }, { at: [0] })
+        Transforms.insertNodes(titleEditor, { type: TITLE_KEY, children: [{ text: '' }], id: generateId() }, { at: [0] })
         isHandled = true
       } else if (!Title.isTitle(firstChild)) {
         // 如果第一个节点不是标题节点，则遍历该节点的子节点，直到找到一个不是块级元素的节点，然后将其转换为标题节点
@@ -60,8 +61,10 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
           }
         }
         Transforms.setNodes(titleEditor, { type: TITLE_KEY }, { at: path })
+
         isHandled = true
       }
+      // console.log(Editable.findPath(titleEditor, firstChild))
       // // 处理第二个节点
       // const secondChild = node.children[1]
       // if (!secondChild) {
@@ -72,6 +75,7 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
       //   Transforms.setNodes(titleEditor, { type: 'paragraph' }, { at: [1] })
       //   isHandled = true
       // }
+
       if (isHandled) return
     } else if (Title.isTitle(node)) {
       for (const [child, childPath] of Node.children(titleEditor, path)) {

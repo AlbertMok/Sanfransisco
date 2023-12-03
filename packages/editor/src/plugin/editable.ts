@@ -56,7 +56,7 @@ import { ReadOnly } from '../hooks/use-read-only'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 // BaseAttributes是HTMLElement元素的所有属性去除了children这个属性后的集合
-export type BaseAttributes = Omit<React.HTMLAttributes<HTMLElement>, 'children'>
+type BaseAttributes = Omit<React.HTMLAttributes<HTMLElement>, 'children'>
 
 // 元素属性
 export interface ElementAttributes<T extends any = any> extends BaseAttributes {
@@ -89,11 +89,9 @@ export interface RenderLeafAttributes<T extends Text = Text> {
 
 /**
  * `RenderElementProps` are passed to the `renderElement` handler.
+ * R是DOM的标签类型
  */
-export interface RenderElementProps<
-  T extends Element = Element,
-  R extends any = any, // R是DOM的标签类型
-> {
+export interface RenderElementProps<T extends Element = Element, R extends any = any> {
   children: any
   element: T
   attributes: ElementAttributes<R> //元素属性
@@ -1085,8 +1083,6 @@ export const Editable = {
     if (!range) return
     const domRange = Editable.toDOMRange(editor, range)
     const focusEl = domRange.endContainer.parentElement!
-    scrollIntoView(focusEl, {
-      scrollMode: 'if-needed',
-    })
+    scrollIntoView(focusEl, { scrollMode: 'if-needed' })
   },
 }
