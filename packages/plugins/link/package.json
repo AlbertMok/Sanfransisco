@@ -2,6 +2,9 @@
   "name": "@everynote/plugin-link",
   "version": "2.0.1",
   "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "import": {

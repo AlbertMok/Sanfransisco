@@ -2,6 +2,9 @@
   "name": "@everynote/plugin-alignment",
   "version": "1.0.3",
   "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "import": {
