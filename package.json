@@ -1,6 +1,6 @@
 {
-  "name": "edtiablejs-packages",
-  "private": true,
+  "name": "everynote-packages",
+  "private": false,
   "workspaces": [
     "packages/*",
     "packages/plugins/*"
