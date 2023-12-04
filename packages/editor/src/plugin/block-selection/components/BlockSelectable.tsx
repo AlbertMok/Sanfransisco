@@ -21,10 +21,8 @@ export const useBlockSelectable = ({ element }: BlockSelectableOptions) => {
   useEffect(() => {
     // using isEditorFocused to make editor whenever focus or blur the current selection will be reset
     if (isEditorFocused) {
-      console.log('shi')
       blockSelectionStore.unSelect(editor)
     } else {
-      console.log('fei')
       blockSelectionStore.unSelect(editor)
     }
   }, [isEditorFocused])

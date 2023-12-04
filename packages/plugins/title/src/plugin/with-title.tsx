@@ -60,22 +60,20 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
             break
           }
         }
-        Transforms.setNodes(titleEditor, { type: TITLE_KEY }, { at: path })
+        Transforms.setNodes(titleEditor, { type: TITLE_KEY, children: [{ text: '' }], id: generateId() }, { at: path })
 
         isHandled = true
       }
-      // console.log(Editable.findPath(titleEditor, firstChild))
-      // // 处理第二个节点
-      // const secondChild = node.children[1]
-      // if (!secondChild) {
-      //   // if there is not a second node in the editor,then insert a new node
-      //   Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }] }, { at: [1] })
-      //   isHandled = true
-      // } else if (Title.isTitle(secondChild)) {
-      //   Transforms.setNodes(titleEditor, { type: 'paragraph' }, { at: [1] })
-      //   isHandled = true
-      // }
-
+      // 处理第二个节点
+      const secondChild = node.children[1]
+      if (!secondChild) {
+        // if there is not a second node in the editor,then insert a new node
+        Transforms.insertNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }], id: generateId() }, { at: [1] })
+        isHandled = true
+      } else if (Title.isTitle(secondChild)) {
+        Transforms.setNodes(titleEditor, { type: 'paragraph', children: [{ text: '' }] }, { at: [1] })
+        isHandled = true
+      }
       if (isHandled) return
     } else if (Title.isTitle(node)) {
       for (const [child, childPath] of Node.children(titleEditor, path)) {
@@ -84,7 +82,9 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
           return
         }
       }
+
       const parent = Node.parent(titleEditor, path)
+
       if (!Editor.isEditor(parent)) {
         if (Editor.isList(editor, parent)) {
           const selection = editor.selection
@@ -104,11 +104,13 @@ export const withTitle = <T extends Editable>(editor: T, options: TitleOptions =
 
         return
       }
+
       if (!Path.equals(path, [0])) {
         Transforms.setNodes(titleEditor, { type: 'paragraph' }, { at: path })
         return
       }
     }
+
     normalizeNode(entry)
   }
 
