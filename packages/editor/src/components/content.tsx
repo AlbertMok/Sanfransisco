@@ -41,6 +41,12 @@ import { TouchPointComponent } from './touch-point'
 import { getNativeEvent, isMouseEvent, isTouchEvent } from '../utils/event'
 import { canForceTakeFocus, isEditableDOMElement } from '../utils/dom'
 import { Locale } from '../plugin/locale'
+import { useBlockSelectionHooks } from '../plugin/block-selection/use-blockseletion-hook'
+import { blockSelectionStore, isBlockSelecting } from '../plugin/block-selection'
+import { useStore } from 'zustand'
+import Hotkeys from '../utils/hotkeys'
+import { getMatchedNode } from '../utils/nodes'
+import { focusEditor } from '../utils/focus'
 
 const Children = (props: Omit<Parameters<typeof useChildren>[0], 'node' | 'selection'>) => {
   //props只剩一个renderPlaceholder 参数 可以对外暴露了

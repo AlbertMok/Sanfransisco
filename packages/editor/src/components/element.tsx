@@ -3,7 +3,7 @@ import getDirection from 'direction'
 import { Editor, Node, Range, Element } from '@everynote/models'
 import Text from './text'
 import useChildren from '../hooks/use-children'
-import { Editable, useEditableStatic, ElementAttributes, useBlockSelectable } from '..'
+import { Editable, useEditableStatic, ElementAttributes, useBlockSelectable, useBlockSelectionHooks } from '..'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
 import { NODE_TO_ELEMENT, ELEMENT_TO_NODE, NODE_TO_PARENT, NODE_TO_INDEX, EDITOR_TO_KEY_TO_ELEMENT } from '../utils/weak-maps'
 import { DATA_BLOCK_ID, DATA_BLOCK_TYPE, DATA_EDITABLE_INLINE, DATA_EDITABLE_NODE, DATA_EDITABLE_VOID } from '../utils/constants'
@@ -77,6 +77,7 @@ const ElementRender = (props: { element: Element; selection: Range | null; rende
     NODE_TO_PARENT.set(text, element)
   }
 
+  useBlockSelectionHooks(editor)
   // Update element-related weak maps with the DOM element ref.
   useIsomorphicLayoutEffect(() => {
     const KEY_TO_ELEMENT = EDITOR_TO_KEY_TO_ELEMENT.get(editor)

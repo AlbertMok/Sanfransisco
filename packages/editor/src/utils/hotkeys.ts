@@ -25,8 +25,9 @@ const HOTKEYS: Record<string, string | string[]> = {
   extendBackward: 'shift+left',
   extendForward: 'shift+right',
   insertSoftBreak: 'shift+enter',
-  splitBlock: 'enter',
+  enter: 'enter',
   undo: 'mod+z',
+  escape: 'escape',
 }
 
 const APPLE_HOTKEYS: Record<string, string | string[]> = {
@@ -112,9 +113,10 @@ const Hotkeys = {
   isShift: create('shift'),
   isRedo: create('redo'),
   isSoftBreak: create('insertSoftBreak'),
-  isSplitBlock: create('splitBlock'),
+  isEnter: create('enter'),
   isTransposeCharacter: create('transposeCharacter'),
   isUndo: create('undo'),
+  isEscape: create('escape'),
 }
 
 export default Hotkeys

@@ -493,7 +493,7 @@ export const SideToolbar: React.FC<SideToolbar> = () => {
       >
         {/* 侧边栏按钮图标 */}
         <div
-          tw="flex items-center justify-center rounded-md text-xs text-gray-600 cursor-grab hover:bg-gray-200"
+          tw="flex items-center justify-center border rounded-md text-xs  text-gray-600 cursor-grab hover:bg-gray-200"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onDragStart={(e) => e.preventDefault()}

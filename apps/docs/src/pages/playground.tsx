@@ -17,6 +17,7 @@ import {
   withEditable,
   parseDataTransfer,
   BlockSelectionArea,
+  useBlockSelectionHooks,
 } from '@everynote/editor'
 import { Editor, createEditor, Range, Transforms, Element } from '@everynote/models'
 import { MarkdownDeserializer } from '@everynote/deserializer/markdown'

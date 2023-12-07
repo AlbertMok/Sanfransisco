@@ -16,7 +16,7 @@ export const checkMarkdownSyntax = (text: string, html: string) => {
   const root = new DOMParser().parseFromString(html, 'text/html')
   const lis = root.querySelectorAll('li')
   const orderTexts: string[] = []
-  lis.forEach(li => {
+  lis.forEach((li) => {
     const text = li.textContent ?? ''
     if (li.parentElement?.nodeName === 'OL' || /\d\.\s+/.test(text)) {
       orderTexts.push(text)
@@ -44,10 +44,7 @@ export const checkMarkdownSyntax = (text: string, html: string) => {
     if (/^(#|\*|-|\+|\[ \]|\[x\]|>){1,}\s+/.test(rowText)) {
       validCount++
     } else if (/^\d\.\s+/.test(rowText)) {
-      if (
-        !orderTexts.includes(rowText) &&
-        !orderTexts.includes(rowText.replace(/^\d\./, '').trim())
-      ) {
+      if (!orderTexts.includes(rowText) && !orderTexts.includes(rowText.replace(/^\d\./, '').trim())) {
         validCount++
       }
     } else if (/^(---|\*\*\*|\+\+\+)/.test(rowText)) {

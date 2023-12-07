@@ -51,10 +51,12 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
     if (selection && nodeSelected && !nodeFocused) {
       let { anchor, focus } = selection
       const isBackward = Range.isBackward(selection)
+
       const [startRow] = Editor.nodes<TableRow>(editor, {
         at: anchor.path,
         match: (n) => TableRowEditor.isTableRow(editor, n),
       })
+
       if (startRow) {
         const [row, path] = startRow
         const { children: cells } = row
@@ -75,10 +77,12 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
           }
         }
       }
+
       const [endRow] = Editor.nodes<TableRow>(editor, {
         at: focus.path,
         match: (n) => TableRowEditor.isTableRow(editor, n),
       })
+
       if (endRow) {
         const [row, path] = endRow
         const { children: cells } = row
@@ -99,6 +103,7 @@ const TableComponent: React.FC<TableProps> = ({ editor, element, attributes, chi
           }
         }
       }
+
       const range = { anchor, focus }
       if (!Range.equals(selection, range)) Transforms.select(editor, range)
     }
