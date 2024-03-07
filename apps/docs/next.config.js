@@ -30,9 +30,7 @@ const baseConfig = {
   images: {
     domains: ['cloudflare-ipfs.com'],
   },
-  async redirects() {
-    return redirects
-  },
+
 }
 
 /**
