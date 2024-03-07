@@ -1,21 +1,29 @@
-import { Editor, Element, Path } from '@everynote/models'
-import { TEditor } from '../types'
+import { Editor, EditorNodesOptions, Element, Path } from '@everynote/models'
 
-export const getMatchedNode = (editor: Editor, type: string) => {
+/**
+ * get slate node by the match condition
+ * @param editor
+ * @param type
+ * @returns
+ */
+export const getMatchedNode = (editor: Editor, options?: EditorNodesOptions<Element>) => {
   const { selection } = editor
   if (!selection) return false
 
-  const [match] = Array.from(
-    Editor.nodes(editor, {
-      at: Editor.unhangRange(editor, selection),
-      match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === type,
-    })
-  )
-
-  return match
+  // get the first element of the nodeEntries from the result of query
+  const nodes = Editor.nodes(editor, options)
+  const [matchedEntry] = Array.from(nodes)
+  return matchedEntry
 }
 
-export const isElementActive = (editor: Editor, type: string) => !!getMatchedNode(editor, type)
+/**
+ * check if an element is the active type
+ * @param editor
+ * @param type
+ * @returns
+ */
+export const isElementActive = (editor: Editor, type: string) =>
+  !!getMatchedNode(editor, { match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === type })
 
 /**
  * get slate node by slate path,if path is not given,the path will default to the current selection

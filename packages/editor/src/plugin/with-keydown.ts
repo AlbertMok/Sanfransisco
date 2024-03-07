@@ -224,7 +224,7 @@ export const withKeydown = <T extends Editor>(editor: T) => {
       return
     }
 
-    if (Hotkeys.isSplitBlock(event)) {
+    if (Hotkeys.isEnter(event)) {
       event.preventDefault()
       Editor.insertBreak(editor)
       return

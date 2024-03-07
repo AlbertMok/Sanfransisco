@@ -39,7 +39,11 @@ export interface TableActionProps {
   width?: number
 }
 
-// insert action
+/**
+ * insert action default component
+ * @param param0
+ * @returns
+ */
 const InsertActionDefault: React.FC<TableActionProps> = ({ editor, table, left, top, height, width, index }) => {
   if (left !== undefined) {
     left -= 1

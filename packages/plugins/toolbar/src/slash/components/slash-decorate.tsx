@@ -18,10 +18,7 @@ export const SlashToolbarDecorate: FC<SlashDecorateProps> = () => {
     const data = getSlashTriggerData(editor)
     if (data) {
       const at = data.rangeRef.current
-      if (at)
-        Transforms.delete(editor, {
-          at,
-        })
+      if (at) Transforms.delete(editor, { at })
     }
     closeSlashDecorate(editor)
   }, [editor])

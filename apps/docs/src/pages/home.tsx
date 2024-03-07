@@ -1,5 +1,5 @@
 import * as React from 'react'
-import NextLink from 'next/link'
+
 import { Seo } from 'components/seo'
 import { createGlobalStyle } from 'styled-components'
 import { ExternalLink } from 'components/external-link'
@@ -16,6 +16,8 @@ import {
   Editable,
   withEditable,
   parseDataTransfer,
+  BlockSelectionArea,
+  useBlockSelectionHooks,
 } from '@everynote/editor'
 import { Editor, createEditor, Range, Transforms, Element } from '@everynote/models'
 import { MarkdownDeserializer } from '@everynote/deserializer/markdown'
@@ -360,8 +362,8 @@ export default function Playground() {
                   {connecting
                     ? t('playground.connecting')
                     : connected
-                      ? t('playground.mode.collaboration') // 在locals文件夹中定义的模式
-                      : t('playground.mode.local')}
+                    ? t('playground.mode.collaboration') // 在locals文件夹中定义的模式
+                    : t('playground.mode.local')}
                 </label>
                 {connecting && <Icon name="loading" />}
                 {!connecting && (
@@ -371,16 +373,14 @@ export default function Playground() {
                 )}
               </div>
             </div>
-            2.0版本
           </div>
           <StyledToolbar editor={editor} disabled={readOnly} />
         </StyledHeader>
-
-        <div className="edit-container">
+        <BlockSelectionArea className="text-container" startAreas={'.text-container'}>
           <StyledContainer>
             <ContentEditable lang={local ?? 'en-US'} readOnly={readOnly} placeholder={t('playground.editor.placeholder')} />
-          </StyledContainer>
-        </div>
+          </StyledContainer>{' '}
+        </BlockSelectionArea>
       </EditableProvider>
     </>
   )

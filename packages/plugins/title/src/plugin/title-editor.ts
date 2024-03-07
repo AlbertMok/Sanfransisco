@@ -4,10 +4,6 @@ import { Title } from '../interfaces/title'
 export interface TitleEditor extends Editor {}
 
 export const TitleEditor = {
-  isTitleEditor: (value: any): value is TitleEditor => {
-    return Editor.isEditor(value)
-  },
-
   isTitle: (editor: Editor, value: any): value is Title => {
     return Title.isTitle(value)
   },

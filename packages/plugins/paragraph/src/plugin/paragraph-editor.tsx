@@ -27,27 +27,6 @@ export const ParagraphEditor = {
 export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
   const newEditor = editor as T & ParagraphEditor
 
-  const { normalizeNode } = newEditor
-  newEditor.normalizeNode = (entry) => {
-    const [node, path] = entry
-
-    let isHandled = false
-    if (Editor.isEditor(node)) {
-      // 处理第二个节点
-      const secondChild = node.children[1]
-      if (!secondChild) {
-        // if there is not a second node in the editor,then insert a new node
-        Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] }, { at: [0] })
-        isHandled = true
-      } else if (!Paragraph.isParagraph(secondChild)) {
-        Transforms.setNodes(editor, { type: 'paragraph' }, { at: [1] })
-        isHandled = true
-      }
-
-      if (isHandled) return
-    }
-    normalizeNode(entry)
-  }
   newEditor.createParagraphElement = () => {
     const { selection } = editor
     if (selection) {
@@ -78,6 +57,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
       const isStart = Editor.isStart(editor, selection.anchor, parentPath)
       if (isNotParagraph && isStart) {
         const [currentNode] = nodeEntry
+
         Transforms.setNodes(editor, newParagraph, { at: parentPath })
         Transforms.delete(editor, { unit: 'block' })
         Transforms.insertNodes(editor, cloneDeep(currentNode), { at: Path.next(parentPath) })
@@ -85,6 +65,7 @@ export const withParagraph = <T extends Editable>(editor: T, options = {}) => {
         Transforms.select(editor, { path: [Path.next(selection.anchor.path)[0] + 1, 0], offset: 0 })
         return
       }
+
       Transforms.splitNodes(editor, { always: true })
       Transforms.setNodes(editor, newParagraph)
 

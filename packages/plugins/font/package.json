@@ -1,5 +1,8 @@
 {
   "name": "@everynote/plugin-font",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.2",
   "exports": {
     "./background-color": {

@@ -45,9 +45,7 @@ export const EditableProvider = (props: {
       if (onChange) {
         onChange(editor.children)
       }
-      store.setState({
-        editor: [editor],
-      })
+      store.setState({ editor: [editor] })
     }
     editor.on('change', handleChange)
     return () => {

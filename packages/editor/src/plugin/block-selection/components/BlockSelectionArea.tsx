@@ -28,17 +28,12 @@ export const useBlockSelectionArea = (props: BlockSelectionAreaProps): Selection
     blockSelectionStore.setSelectedIds(changed, editor)
   }
 
-  const onStop = ({ event, store, selection }: SelectionEvent) => {
-    const selectedStore = blockSelectionStore.getBlockSelectionStore(editor)
-    selectedStore.setState({ isSelecting: false })
-  }
-
   return {
     className: 'editor',
     style: { position: 'relative', width: '100%' },
     onStart,
     onMove,
-    onStop,
+
     // Class for the selection-area itself (the element).
     selectionAreaClass: 'selection-area',
 

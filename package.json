@@ -1,6 +1,5 @@
 {
-  "name": "edtiablejs-packages",
-  "private": true,
+  "name": "everynote-packages",
   "workspaces": [
     "packages/*",
     "packages/plugins/*"
@@ -48,5 +47,8 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "pnpm@7.18.0"
+  "packageManager": "pnpm@7.18.0",
+  "publishConfig": {
+    "access": "public"
+  }
 }

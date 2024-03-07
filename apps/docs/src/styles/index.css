@@ -176,4 +176,5 @@ ol.mdx-illustration-block {
 .selected {
   border-radius: 3px;
   background-color: rgb(235 238 253 / 1);
+  transition: background-color 0.3s ease-in-out;
 }

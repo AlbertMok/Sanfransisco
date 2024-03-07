@@ -13,9 +13,7 @@ const useMultipleClick = (options: {
 
   const isSamePoint = (event: React.MouseEvent | MouseEvent | Touch) => {
     const point = pointRef.current
-    return point
-      ? Math.abs(event.clientY - point.y) < 10 && Math.abs(event.clientX - point.x) < 10
-      : false
+    return point ? Math.abs(event.clientY - point.y) < 10 && Math.abs(event.clientX - point.x) < 10 : false
   }
 
   const clear = () => {
@@ -55,7 +53,7 @@ const useMultipleClick = (options: {
           if (onClick) onClick(event)
           pointRef.current = undefined
         })
-        .catch(errorInfo => {
+        .catch((errorInfo) => {
           api.removePendingPromise(waitForClick)
           if (!errorInfo.isCanceled) {
             throw errorInfo.error

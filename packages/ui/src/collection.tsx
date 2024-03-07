@@ -30,7 +30,7 @@ function createCollection<ItemElement extends HTMLElement, ItemData = {}>(name: 
 
   const useCollectionContext = () => React.useContext(CollectionContext)
 
-  const CollectionProvider: React.FC<{ children?: React.ReactNode }> = props => {
+  const CollectionProvider: React.FC<{ children?: React.ReactNode }> = (props) => {
     const { children } = props
     const ref = React.useRef<CollectionElement>(null)
     const itemMap = React.useRef<ContextValue['itemMap']>(new Map()).current
@@ -54,21 +54,18 @@ function createCollection<ItemElement extends HTMLElement, ItemData = {}>(name: 
 
   const COLLECTION_SLOT_NAME = name + 'CollectionSlot'
 
-  const CollectionSlot = React.forwardRef<CollectionElement, CollectionProps>(
-    (props, forwardedRef) => {
-      const { children } = props
-      const context = useCollectionContext()
-      const composedRefs = useComposedRefs(forwardedRef, context.collectionRef)
-      return <Slot ref={composedRefs}>{children}</Slot>
-    },
-  )
+  const CollectionSlot = React.forwardRef<CollectionElement, CollectionProps>((props, forwardedRef) => {
+    const { children } = props
+    const context = useCollectionContext()
+    const composedRefs = useComposedRefs(forwardedRef, context.collectionRef)
+    return <Slot ref={composedRefs}>{children}</Slot>
+  })
 
   CollectionSlot.displayName = COLLECTION_SLOT_NAME
 
   /* -----------------------------------------------------------------------------------------------
    * CollectionItem
    * ---------------------------------------------------------------------------------------------*/
-
   const ITEM_SLOT_NAME = name + 'CollectionItemSlot'
   const ITEM_DATA_ATTR = 'data-collection-item'
 
@@ -76,25 +73,23 @@ function createCollection<ItemElement extends HTMLElement, ItemData = {}>(name: 
     children: React.ReactNode
   }
 
-  const CollectionItemSlot = React.forwardRef<ItemElement, CollectionItemSlotProps>(
-    (props, forwardedRef) => {
-      const { children, ...itemData } = props
-      const ref = React.useRef<ItemElement>(null)
-      const composedRefs = useComposedRefs(forwardedRef, ref)
-      const context = useCollectionContext()
+  const CollectionItemSlot = React.forwardRef<ItemElement, CollectionItemSlotProps>((props, forwardedRef) => {
+    const { children, ...itemData } = props
+    const ref = React.useRef<ItemElement>(null)
+    const composedRefs = useComposedRefs(forwardedRef, ref)
+    const context = useCollectionContext()
 
-      React.useEffect(() => {
-        context.itemMap.set(ref, { ref, ...(itemData as unknown as ItemData) })
-        return () => void context.itemMap.delete(ref)
-      })
+    React.useEffect(() => {
+      context.itemMap.set(ref, { ref, ...(itemData as unknown as ItemData) })
+      return () => void context.itemMap.delete(ref)
+    })
 
-      return (
-        <Slot {...{ [ITEM_DATA_ATTR]: '' }} ref={composedRefs}>
-          {children}
-        </Slot>
-      )
-    },
-  )
+    return (
+      <Slot {...{ [ITEM_DATA_ATTR]: '' }} ref={composedRefs}>
+        {children}
+      </Slot>
+    )
+  })
 
   CollectionItemSlot.displayName = ITEM_SLOT_NAME
 
@@ -110,19 +105,14 @@ function createCollection<ItemElement extends HTMLElement, ItemData = {}>(name: 
       if (!collectionNode) return []
       const orderedNodes = Array.from(collectionNode.querySelectorAll(`[${ITEM_DATA_ATTR}]`))
       const items = Array.from(context.itemMap.values())
-      const orderedItems = items.sort(
-        (a, b) => orderedNodes.indexOf(a.ref.current!) - orderedNodes.indexOf(b.ref.current!),
-      )
+      const orderedItems = items.sort((a, b) => orderedNodes.indexOf(a.ref.current!) - orderedNodes.indexOf(b.ref.current!))
       return orderedItems
     }, [context.collectionRef, context.itemMap])
 
     return getItems
   }
 
-  return [
-    { Provider: CollectionProvider, Slot: CollectionSlot, ItemSlot: CollectionItemSlot },
-    useCollection,
-  ] as const
+  return [{ Provider: CollectionProvider, Slot: CollectionSlot, ItemSlot: CollectionItemSlot }, useCollection] as const
 }
 
 export { createCollection }

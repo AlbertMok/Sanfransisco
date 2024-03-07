@@ -18,23 +18,15 @@ export interface SlashToolbarState {
 
 export type SlashToolbarItem =
   | BaseSlashToolbarItem
-  | {
-      type: 'separator'
-    }
-  | {
-      content: React.ReactElement | string | React.FC<Record<'onSelect', (event: React.MouseEvent) => void>>
-    }
+  | { type: 'separator' }
+  | { content: React.ReactElement | string | React.FC<Record<'onSelect', (event: React.MouseEvent) => void>> }
 
 const EDITOR_TO_TOOLBAR_STORE = new WeakMap<Editor, UseBoundStore<StoreApi<SlashToolbarState>>>()
 
 export const getSlashToolbarStore = (editor: Editor) => {
   let store = EDITOR_TO_TOOLBAR_STORE.get(editor)
   if (!store) {
-    store = create<SlashToolbarState>(() => ({
-      items: [],
-      open: false,
-      searchValue: '',
-    }))
+    store = create<SlashToolbarState>(() => ({ items: [], open: false, searchValue: '' }))
     EDITOR_TO_TOOLBAR_STORE.set(editor, store)
   }
   return store

@@ -2,6 +2,9 @@
   "name": "@everynote/serializer",
   "version": "1.0.1",
   "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "import": {

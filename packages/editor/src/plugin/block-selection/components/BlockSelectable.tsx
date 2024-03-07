@@ -1,8 +1,9 @@
 import { Element } from '@everynote/models'
 import { useEditableStatic } from '../../../hooks/use-editable'
-import { blockSelectionStore, isBlockSelecting } from '../store/selectionStore'
-import { DATA_BLOCK_ID, DATA_BLOCK_TYPE } from '../../../utils/constants'
+import { blockSelectionStore } from '../store/selectionStore'
 import { useStore } from 'zustand'
+import { useEffect } from 'react'
+import { useFocused } from '../../../hooks'
 
 export interface BlockSelectableOptions {
   element: Element
@@ -14,14 +15,21 @@ export interface BlockSelectableOptions {
 export const useBlockSelectable = ({ element }: BlockSelectableOptions) => {
   const editor = useEditableStatic()
   const store = blockSelectionStore.getBlockSelectionStore(editor)
-  const id = element.id
-  const isSelected = id ? useStore(store).selectedBlockIds.has(id) : false
+
+  const [isEditorFocused, setEditorFocused] = useFocused()
+
+  useEffect(() => {
+    // using isEditorFocused to make editor whenever focus or blur the current selection will be reset
+    if (isEditorFocused) {
+      blockSelectionStore.unSelect(editor)
+    } else {
+      blockSelectionStore.unSelect(editor)
+    }
+  }, [isEditorFocused])
+
+  const isSelected = element.id ? useStore(store).selectedBlockIds.has(element.id) : false
 
   return {
-    props: {
-      [DATA_BLOCK_ID]: element.id,
-      [DATA_BLOCK_TYPE]: element.type,
-      className: isSelected && element.type != 'title' ? 'selected slate-selectable' : 'slate-selectable',
-    },
+    className: isSelected && element.type != 'title' ? 'selected slate-selectable' : 'slate-selectable',
   }
 }

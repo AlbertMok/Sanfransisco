@@ -34,7 +34,7 @@ const defaultShortcuts: Record<string, HeadingType> = {
   '######': 'heading-six',
 }
 
-const StyledHeading = tw.h1`font-semibold mb-2 mt-0`
+const StyledHeading = tw.h1`font-semibold mb-2 mt-0 [min-height: fit-content]`
 
 export const withHeading = <T extends Editable>(editor: T, options: HeadingOptions = {}) => {
   const newEditor = editor as T & HeadingEditor

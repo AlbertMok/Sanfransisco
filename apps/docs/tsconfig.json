@@ -6,6 +6,6 @@
     "incremental": true,
     "baseUrl": "src"
   },
-  "include": ["src", "next-env.d.ts"],
+  "include": ["src", "next-env.d.ts", "src/pages/docs/[...markdownPath].js"],
   "exclude": ["node_modules"]
 }

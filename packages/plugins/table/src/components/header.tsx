@@ -6,16 +6,13 @@ import { Editor, Grid } from '@everynote/models'
 import { ColsHeaderItemStyles, ColsHeaderStyles, HeaderDragStyles, RowsHeaderItemStyles, RowsHeaderStyles } from './styles'
 import { TableDrag } from '../hooks/use-drag'
 import { useTableRowContentHeights } from '../row/store'
+
 export interface TableHeaderProps {
   editor: Editor
   table: Grid
 }
 
-const TableRowHeaderDefault: React.FC<
-  TableHeaderProps & {
-    rowContentHeights: number[]
-  }
-> = ({ editor, table, rowContentHeights }) => {
+const TableRowHeaderDefault: React.FC<TableHeaderProps & { rowContentHeights: number[] }> = ({ editor, table, rowContentHeights }) => {
   const { width, selected, cols } = useTableStore()
 
   const selectRow = React.useCallback(
