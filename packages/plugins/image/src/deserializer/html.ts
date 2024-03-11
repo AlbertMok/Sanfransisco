@@ -1,4 +1,4 @@
-import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { Editor, isDOMHTMLElement } from '@everynote/models'
 import { IMAGE_KEY } from '../constants'
 import { getOptions } from '../options'

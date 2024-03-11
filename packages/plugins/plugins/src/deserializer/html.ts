@@ -1,4 +1,4 @@
-import { HTMLDeserializer } from '@everynote/deserializer/html'
+import { HTMLDeserializer } from '@everynote/deserializer'
 import { withMarkHTMLDeserializerTransform } from '@everynote/plugin-mark/deserializer/html'
 import { withFontSizeHTMLDeserializerTransform } from '@everynote/plugin-font/size/deserializer/html'
 import { withFontColorHTMLDeserializerTransform } from '@everynote/plugin-font/color/deserializer/html'
@@ -22,7 +22,7 @@ import { withHrHTMLDeserializerTransform } from '@everynote/plugin-hr/deserializ
 import { withAlignHTMLDeserializerTransform } from '@everynote/plugin-alignment/deserializer/html'
 import { withLeadingHTMLDeserializerTransform } from '@everynote/plugin-leading/deserializer/html'
 import { withMentionHTMLDeserializerTransform } from '@everynote/plugin-mention/deserializer/html'
-import { withCodeBlockHTMLDeserializerTransform } from '@everynote/plugin-codeblock/deserializer/html'
+import { withCodeBlockHTMLDeserializerTransform } from '@everynote/plugin-codeblock'
 
 import { withTitleHTMLDeserializerTransform } from '@everynote/plugin-title/deserializer/html'
 

@@ -1,4 +1,4 @@
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { isDOMHTMLElement } from '@everynote/models'
 import { Mark } from '../interfaces/mark'
 

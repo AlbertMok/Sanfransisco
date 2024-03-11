@@ -1,13 +1,10 @@
-import { MarkdownDeserializer } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializer } from '@everynote/deserializer'
 import { withMarkMarkdownDeserializerTransform, withMarkMarkdownDeserializerPlugin } from '@everynote/plugin-mark/deserializer/markdown'
 import {
   withBlockquoteMarkdownDeserializerTransform,
   withBlockquoteMarkdownDeserializerPlugin,
 } from '@everynote/plugin-blockquote/deserializer/markdown'
-import {
-  withCodeBlockMarkdownDeserializerPlugin,
-  withCodeBlockMarkdownDeserializerTransform,
-} from '@everynote/plugin-codeblock/deserializer/markdown'
+import { withCodeBlockMarkdownDeserializerPlugin, withCodeBlockMarkdownDeserializerTransform } from '@everynote/plugin-codeblock'
 import { withHeadingMarkdownDeserializerPlugin, withHeadingMarkdownDeserializerTransform } from '@everynote/plugin-heading/deserializer/markdown'
 import { withHrMarkdownDeserializerPlugin, withHrMarkdownDeserializerTransform } from '@everynote/plugin-hr/deserializer/markdown'
 import { withImageMarkdownDeserializerPlugin, withImageMarkdownDeserializerTransform } from '@everynote/plugin-image/deserializer/markdown'

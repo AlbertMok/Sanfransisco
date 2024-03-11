@@ -1,4 +1,4 @@
-import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { Editor } from '@everynote/models'
 import { HeadingTags, HEADING_FIVE_KEY, HEADING_FOUR_KEY, HEADING_ONE_KEY, HEADING_SIX_KEY, HEADING_THREE_KEY, HEADING_TWO_KEY } from '../constants'
 import { HeadingType } from '../interfaces/heading'

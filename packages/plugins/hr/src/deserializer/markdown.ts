@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer'
 import { Hr } from '../interfaces/hr'
 
 export const withHrMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {

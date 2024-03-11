@@ -22,7 +22,7 @@ import { withHrHTMLSerializerTransform } from '@everynote/plugin-hr/serializer/h
 import { withAlignHTMLSerializerTransform } from '@everynote/plugin-alignment/serializer/html'
 import { withLeadingHTMLSerializerTransform } from '@everynote/plugin-leading/serializer/html'
 import { withMentionHTMLSerializerTransform } from '@everynote/plugin-mention/serializer/html'
-import { withCodeBlockHTMLSerializerTransform } from '@everynote/plugin-codeblock/serializer/html'
+import { withCodeBlockHTMLSerializerTransform } from '@everynote/plugin-codeblock'
 import { withTitleHTMLSerializerTransform } from '@everynote/plugin-title/serializer/html'
 import { Editor } from '@everynote/models'
 

@@ -15,58 +15,6 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
       }
-    },
-    "./*": {
-      "import": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/*.mjs"
-      },
-      "require": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/*.js"
-      }
-    },
-    "./serializer/*": {
-      "import": {
-        "types": "./dist/serializer/*.d.ts",
-        "default": "./dist/serializer/*.mjs"
-      },
-      "require": {
-        "types": "./dist/serializer/*.d.ts",
-        "default": "./dist/serializer/*.js"
-      }
-    },
-    "./deserializer/*": {
-      "import": {
-        "types": "./dist/deserializer/*.d.ts",
-        "default": "./dist/deserializer/*.mjs"
-      },
-      "require": {
-        "types": "./dist/deserializer/*.d.ts",
-        "default": "./dist/deserializer/*.js"
-      }
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "serializer/html": [
-        "dist/serializer/html.d.ts"
-      ],
-      "serializer/markdown": [
-        "dist/serializer/markdown.d.ts"
-      ],
-      "serializer/text": [
-        "dist/serializer/text.d.ts"
-      ],
-      "deserializer/html": [
-        "dist/deserializer/html.d.ts"
-      ],
-      "deserializer/markdown": [
-        "dist/deserializer/markdown.d.ts"
-      ],
-      "yjs": [
-        "dist/yjs.d.ts"
-      ]
     }
   },
   "sideEffects": false,
@@ -88,8 +36,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@everynote/models": "workspace:*",
     "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
     "@types/escape-html": "^1.0.2",
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
@@ -110,8 +58,8 @@
     "yjs": "^13.5.46"
   },
   "peerDependencies": {
-    "@everynote/models": "workspace:*",
     "@everynote/editor": "workspace:*",
+    "@everynote/models": "workspace:*",
     "yjs": "^13.5.46"
   },
   "peerDependenciesMeta": {
@@ -125,8 +73,8 @@
     "@codemirror/state": "^6.2.0",
     "@codemirror/view": "^6.7.2",
     "@everynote/deserializer": "workspace:*",
-    "@everynote/serializer": "workspace:*",
     "@everynote/protocols": "workspace:*",
+    "@everynote/serializer": "workspace:*",
     "@everynote/ui": "workspace:*",
     "@everynote/yjs-protocols": "workspace:*",
     "@lezer/highlight": "1.1.3",

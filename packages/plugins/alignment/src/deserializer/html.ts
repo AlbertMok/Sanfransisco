@@ -1,5 +1,5 @@
 import { isDOMHTMLElement, Element } from '@everynote/models'
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { Align, AlignKeys, AlignValue } from '../interfaces/align'
 export const withAlignHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next) => {
   return (node, options = {}) => {

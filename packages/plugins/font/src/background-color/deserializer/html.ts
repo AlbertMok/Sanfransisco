@@ -1,5 +1,5 @@
 import { isDOMHTMLElement } from '@everynote/models'
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { BACKGROUND_COLOR_KEY } from '../constants'
 import { BackgroundColor } from '../interfaces/background-color'
 

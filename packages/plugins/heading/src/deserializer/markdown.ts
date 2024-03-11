@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin, MarkdownDeserializerOptions } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin, MarkdownDeserializerOptions } from '@everynote/deserializer'
 import { Editor } from '@everynote/models'
 import { Heading, HeadingType } from '../interfaces/heading'
 import { getStyle, getTextMark } from '../options'

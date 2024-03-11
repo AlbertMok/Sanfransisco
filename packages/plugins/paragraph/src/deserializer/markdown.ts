@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer'
 import { Paragraph } from '../interfaces/paragraph'
 import { generateId } from '@everynote/editor'
 

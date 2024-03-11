@@ -1,6 +1,7 @@
 {
   "name": "everynote-packages",
   "workspaces": [
+    "apps/*",
     "packages/*",
     "packages/plugins/*"
   ],
@@ -10,7 +11,8 @@
     "lint": "turbo run lint",
     "format": "turbo run format",
     "test": "turbo run test",
-    "clean": "turbo run clean && rm -rf node_modules",
+    "clean": "turbo run clean",
+    "clean-all": "turbo run clean && rm -rf node_modules",
     "prepare": "husky install",
     "changeset": "changeset",
     "version-packages": "changeset version",

@@ -1,4 +1,4 @@
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { isDOMHTMLElement } from '@everynote/models'
 import { CODEBLOCK_DATA_LINE_WRAPPING, CODEBLOCK_DATA_SYNTAX, CODEBLOCK_DATA_TABSIZE, CODEBLOCK_DATA_THEME, CODEBLOCK_LANGUAGE } from '../constants'
 import { CodeBlock } from '../interfaces/codeblock'

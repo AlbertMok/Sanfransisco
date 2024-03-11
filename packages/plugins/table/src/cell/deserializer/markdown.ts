@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform } from '@everynote/deserializer'
 import { TableCell } from '../interfaces/table-cell'
 
 export const withTableCellMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {

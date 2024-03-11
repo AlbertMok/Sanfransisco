@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer'
 import { Descendant, generateRandomKey } from '@everynote/models'
 import { ListItem } from 'mdast'
 import { UnorderedList } from '../interfaces/unordered-list'

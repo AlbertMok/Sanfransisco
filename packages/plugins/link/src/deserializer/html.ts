@@ -1,4 +1,4 @@
-import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { isDOMHTMLElement } from '@everynote/models'
 import { Link } from '../interfaces/link'
 

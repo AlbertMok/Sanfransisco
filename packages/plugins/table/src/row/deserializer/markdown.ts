@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform } from '@everynote/deserializer'
 import { TABLE_ROW_KEY } from '../constants'
 
 export const withTableRowMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {

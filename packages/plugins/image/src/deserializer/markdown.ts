@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer'
 import { Image } from '../interfaces/image'
 
 export const withImageMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next) => {

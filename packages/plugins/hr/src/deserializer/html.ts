@@ -1,4 +1,4 @@
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { isDOMHTMLElement } from '@everynote/models'
 import { DEFAULT_HR_STYLE, DEFUALT_HR_COLOR, DEFAULT_HR_WIDTH, HR_KEY } from '../constants'
 

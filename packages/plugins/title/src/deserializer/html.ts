@@ -1,4 +1,4 @@
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { TITLE_KEY } from '../constants'
 
 export const withTitleHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next, serializer) => {

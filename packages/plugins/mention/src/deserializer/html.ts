@@ -1,4 +1,4 @@
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { isDOMHTMLElement } from '@everynote/models'
 import { MENTION_DATA_USER_PREFIX } from '../constants'
 import { Mention, MentionUser } from '../interfaces/mention'

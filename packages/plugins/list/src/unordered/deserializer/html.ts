@@ -1,4 +1,4 @@
-import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { Descendant, isDOMText, List, generateRandomKey, Editor } from '@everynote/models'
 import { UNORDERED_LIST_KEY } from '../constants'
 

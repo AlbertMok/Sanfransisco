@@ -1,4 +1,4 @@
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { Descendant, isDOMHTMLElement } from '@everynote/models'
 import { TABLE_CELL_KEY } from '../constants'
 import { TableCell } from '../interfaces/table-cell'

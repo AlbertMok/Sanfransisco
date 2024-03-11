@@ -1,4 +1,4 @@
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { PARAGRAPH_KEY } from '../constants'
 
 export const withParagraphHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next, serializer) => {

@@ -1,4 +1,4 @@
-import { HTMLDeserializer } from '@everynote/deserializer/html'
+import { HTMLDeserializer } from '@everynote/deserializer'
 import { Editor, Transforms, Range, Node } from '@everynote/models'
 import { HTMLSerializer } from '@everynote/serializer/html'
 import { TextSerializer } from '@everynote/serializer/text'

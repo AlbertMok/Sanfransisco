@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer'
 import { Descendant, generateRandomKey } from '@everynote/models'
 import { gfmTaskListItem } from 'micromark-extension-gfm-task-list-item'
 import { gfmTaskListItemFromMarkdown } from 'mdast-util-gfm-task-list-item'

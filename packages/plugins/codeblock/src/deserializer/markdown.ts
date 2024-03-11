@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer'
 import { CodeBlock } from '../interfaces/codeblock'
 
 export const withCodeBlockMarkdownDeserializerTransform: MarkdownDeserializerWithTransform = (next, self) => {

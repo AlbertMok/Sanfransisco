@@ -1,4 +1,4 @@
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer'
 import { gfmAutolinkLiteral } from 'micromark-extension-gfm-autolink-literal'
 import { gfmAutolinkLiteralFromMarkdown } from 'mdast-util-gfm-autolink-literal'
 

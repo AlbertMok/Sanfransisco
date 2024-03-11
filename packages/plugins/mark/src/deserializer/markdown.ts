@@ -1,6 +1,6 @@
 import { gfmStrikethrough } from 'micromark-extension-gfm-strikethrough'
 import { gfmStrikethroughFromMarkdown } from 'mdast-util-gfm-strikethrough'
-import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer/markdown'
+import { MarkdownDeserializerWithTransform, MarkdownDeserializerPlugin } from '@everynote/deserializer'
 import { Mark } from '../interfaces/mark'
 
 const htmlMarkMap: Record<string, Omit<Mark, 'text'>> = {

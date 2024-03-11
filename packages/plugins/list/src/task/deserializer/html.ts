@@ -1,4 +1,4 @@
-import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerOptions, HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { Descendant, DOMNode, Editor, isDOMText, List, generateRandomKey } from '@everynote/models'
 import { TASK_LIST_KEY } from '../constants'
 import { TaskList } from '../interfaces/task-list'

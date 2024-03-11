@@ -27,16 +27,7 @@
       }
     }
   },
-  "typesVersions": {
-    "*": {
-      "html": [
-        "dist/html.d.ts"
-      ],
-      "markdown": [
-        "dist/markdown.d.ts"
-      ]
-    }
-  },
+
   "sideEffects": false,
   "license": "MIT",
   "files": [

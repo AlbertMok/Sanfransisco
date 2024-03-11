@@ -1,4 +1,4 @@
-import { HTMLDeserializerWithTransform } from '@everynote/deserializer/html'
+import { HTMLDeserializerWithTransform } from '@everynote/deserializer'
 import { BLOCKQUOTE_KEY } from '../constants'
 
 export const withBlockquoteHTMLDeserializerTransform: HTMLDeserializerWithTransform = (next, serializer) => {
