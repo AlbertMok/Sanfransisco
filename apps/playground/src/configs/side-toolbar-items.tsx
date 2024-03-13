@@ -11,6 +11,7 @@ export const createSideToolbarItems = (editor: Editable, range: Range, element: 
 
   // 当前选择的元素是否为空
   const isEmpty = Editor.isEmpty(editor, element)
+
   if (isEmpty) {
     items.push(
       {

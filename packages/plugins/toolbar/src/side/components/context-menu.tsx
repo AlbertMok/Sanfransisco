@@ -32,6 +32,7 @@ export const ContextMenu: React.FC<ContextMenu> = ({ editor, container, onSelect
       if (index === 0) return null
       return <ContextMenuSeparator key={`${item}-${index}`} />
     }
+
     if ('content' in item) {
       if (typeof item.content === 'function') {
         const Content = item.content
@@ -41,6 +42,7 @@ export const ContextMenu: React.FC<ContextMenu> = ({ editor, container, onSelect
           </ContextMenuLabel>
         )
       }
+
       return <ContextMenuLabel key={`label-${index}`}>{item.content}</ContextMenuLabel>
     }
     const { children, title, onSelect, href, ...rest } = item
