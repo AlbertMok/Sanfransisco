@@ -3,6 +3,10 @@ import { Selection, Range, Editor } from '@everynote/models'
 import { getLineRectsByRange } from '../utils/selection'
 import { Editable } from './editable'
 
+/**
+ * 基于文本的选择，而非基于块的选择
+ * 选择绘制样式
+ */
 export interface SelectionDrawingStyle {
   /** 拖蓝聚焦颜色 */
   focusColor?: string
