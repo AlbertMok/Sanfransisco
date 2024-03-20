@@ -9,10 +9,19 @@ import {
 } from '@everynote/ui'
 import { ToolbarButtonItem, ToolbarColorPickerItem, ToolbarDropdownItem, ToolbarItem } from '../types'
 
+/**
+ * default ToolBarButton component
+ * @param param0
+ * @returns
+ */
 export const ToolbarButtonDefault: React.FC<ToolbarButtonItem> = ({ type, ...props }) => {
   return <UIToolbarButton {...props} />
 }
 
+/**
+ * memoized ToolBarButton component
+ * it will only re-render if the active, disabled, onToggle, children, and title props change
+ */
 export const ToolbarButton = React.memo(ToolbarButtonDefault, (prev, next) => {
   return (
     prev.active === next.active &&
@@ -52,6 +61,7 @@ export const ToolbarColorPickerDefault: React.FC<
 export const ToolbarColorPicker = React.memo(ToolbarColorPickerDefault, (prev, next) => {
   return prev.disabled === next.disabled && prev.value === next.value && prev.onSelect === next.onSelect && prev.colors === next.colors
 })
+
 export interface ToolbarProps extends UIToolbar {
   items: ToolbarItem[]
   locale?: Record<'colorPicker', ColorPickerLocale>
