@@ -1,27 +1,32 @@
 export const initialValue = [
   {
     type: 'title',
+    id: '1',
     children: [
       {
-        text: 'Editable`s Playground',
+        text: 'EveryNote',
       },
     ],
   },
   {
+    type: 'paragraph',
+    id: '2',
     children: [
       {
         text: 'Welcome to ',
       },
       {
-        text: 'Editable',
+        text: 'EveryNote',
         bold: true,
       },
       {
-        text: '! Editable is an extensible rich text editing framework that focuses on stability, controllability, and performance.',
+        text: '! EveryNote is an extensible rich text editing framework that focuses on stability, controllability, and performance.',
       },
     ],
   },
   {
+    type: 'paragraph',
+    id: '3',
     children: [
       {
         text: '',
@@ -29,6 +34,8 @@ export const initialValue = [
     ],
   },
   {
+    type: 'paragraph',
+    id: '4',
     children: [
       {
         text: 'Currently, it is still in beta version and the API may undergo significant changes, so related documents are not yet complete.',
@@ -37,6 +44,7 @@ export const initialValue = [
   },
   {
     type: 'hr',
+    id: '5',
     children: [
       {
         text: '',
@@ -44,6 +52,8 @@ export const initialValue = [
     ],
   },
   {
+    type: 'paragraph',
+    id: '6',
     children: [
       {
         text: "Here's what you can do with the note editor:",
@@ -52,6 +62,7 @@ export const initialValue = [
   },
   {
     type: 'heading-one',
+    id: '7',
     children: [
       {
         text: 'H1 Heading',
@@ -62,6 +73,7 @@ export const initialValue = [
   },
   {
     type: 'heading-two',
+    id: '8',
     children: [
       {
         text: 'H2 Heading',
@@ -72,6 +84,7 @@ export const initialValue = [
   },
   {
     type: 'heading-three',
+    id: '9',
     children: [
       {
         text: 'H3 Heading',
@@ -82,6 +95,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '10',
     children: [
       {
         text: '',
@@ -90,6 +104,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '11',
     children: [
       {
         text: 'You can write in ',
@@ -123,6 +138,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '12',
     children: [
       {
         text: '',
@@ -132,6 +148,7 @@ export const initialValue = [
   {
     key: 'lrlclhsxrds',
     type: 'unordered-list',
+    id: '13',
     start: 1,
     children: [
       {
@@ -148,6 +165,7 @@ export const initialValue = [
   {
     key: 'lrlclhsxrds',
     type: 'unordered-list',
+    id: '14',
     start: 2,
     children: [
       {
@@ -164,6 +182,7 @@ export const initialValue = [
   {
     key: 'lrlclhsxrds',
     type: 'unordered-list',
+    id: '15',
     start: 1,
     children: [
       {
@@ -180,6 +199,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '16',
     children: [
       {
         text: '',
@@ -189,6 +209,7 @@ export const initialValue = [
   {
     key: 'r8118yz79wg',
     type: 'task-list',
+    id: '17',
     checked: false,
     start: 1,
     children: [
@@ -206,6 +227,7 @@ export const initialValue = [
   {
     key: 'r8118yz79wg',
     type: 'task-list',
+    id: '18',
     checked: true,
     start: 2,
     children: [
@@ -222,6 +244,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '19',
     children: [
       {
         text: '',
@@ -230,6 +253,7 @@ export const initialValue = [
   },
   {
     type: 'blockquote',
+    id: '20',
     children: [
       {
         children: [
@@ -242,6 +266,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '21',
     children: [
       {
         text: '',
@@ -250,6 +275,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '22',
     children: [
       {
         text: 'Use ',
@@ -265,6 +291,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '23',
     children: [
       {
         text: 'Create links to ',
@@ -283,6 +310,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '24',
     children: [
       {
         text: 'Insert ',
@@ -298,6 +326,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '25',
     children: [
       {
         text: '',
@@ -306,6 +335,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: '26',
     children: [
       {
         text: '',
@@ -489,6 +519,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: 'qwofnenelremflerkjfergeh',
     children: [
       {
         text: '',
@@ -497,6 +528,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: 'adoqwjdioqwjdnqwoid',
     children: [
       {
         text: 'Press ',
@@ -512,6 +544,7 @@ export const initialValue = [
   },
   {
     type: 'paragraph',
+    id: 'dqwoidoqwjenfoweweomew',
     children: [
       {
         text: 'Press ',

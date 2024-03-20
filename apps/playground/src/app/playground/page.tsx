@@ -47,7 +47,8 @@ import { createSideToolbarItems } from '@/configs/side-toolbar-items'
 import { createInlineToolbarItems } from '@/configs/inline-toolbar-items'
 import { checkMarkdownSyntax } from '@/configs/check-markdown-syntax'
 import { createSlashToolbarItems } from '@/configs/slash-toolbar-items'
-import { initialValue } from '@/configs/initial-value'
+// import { initialValue } from '@/configs/initial-value'
+import { initialValue } from '@/configs/default-content'
 
 import { useTranslation } from 'react-i18next'
 
@@ -338,9 +339,9 @@ export default function Playground() {
       >
         {/* 头部 */}
         <StyledHeader id="header">
-          <button onClick={() => console.log(content)}>显示</button>
+          {/* <button onClick={() => console.log(content)}>显示</button> */}
           <div className="flex justify-between py-3 px-6 text-base">
-            <div className="flex text-2xl text-link flex-1 gap-3">
+            <div className="flex text-2x flex-1 gap-3">
               <ExternalLink aria-label="Editable on Github" href="https://github.com/AlbertMok/Sanfransisco">
                 <IconGitHub />
               </ExternalLink>
@@ -390,7 +391,7 @@ export default function Playground() {
         <BlockSelectionArea className="text-container" startAreas={'.text-container'}>
           <StyledContainer className="mt-2 md:mt-5 min-h-[80vh] bg-white w-full md:w-[800px] m-auto px-4 py-4 md:px-10 md:py-16 text-base">
             <ContentEditable lang={local ?? 'en-US'} readOnly={readOnly} placeholder={t('playground.editor.placeholder')} />
-          </StyledContainer>{' '}
+          </StyledContainer>
         </BlockSelectionArea>
       </EditableProvider>
     </>

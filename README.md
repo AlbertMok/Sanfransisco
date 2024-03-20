@@ -4,4 +4,4 @@
 
 ## preview
 
-![preview](/assets/preview.png)
+![preview](/assets/quickshot.png)
