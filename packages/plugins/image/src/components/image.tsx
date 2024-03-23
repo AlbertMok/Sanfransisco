@@ -93,6 +93,7 @@ export const ImageComponent = forwardRef<HTMLImageElement, ImageComponentProps>(
   useEffect(() => {
     return () => {
       if (rotatedUrl) {
+        // URL.revokeObjectURL() 静态方法用来释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象
         URL.revokeObjectURL(rotatedUrl)
       }
     }

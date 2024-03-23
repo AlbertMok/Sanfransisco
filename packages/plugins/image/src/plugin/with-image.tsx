@@ -55,11 +55,16 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
     return ImageEditor.isImage(newEditor, element) || isVoid(element)
   }
 
+  /**
+   * 插入图片
+   * @param files
+   */
   const insertImages = (files: (File | string)[]) => {
     Promise.all(files.map((file) => (typeof file === 'string' ? Promise.resolve(file) : readImageFileInfo(file)))).then((items) => {
       items.forEach((item) => {
         if (!item) return
         if (typeof item === 'string') return newEditor.insertImage({ file: item })
+        console.log('insertImages')
         const { url, file, width, height } = item
         const path = insertImage(newEditor, {
           url,
@@ -69,18 +74,21 @@ export const withImage = <T extends Editable>(editor: T, options: ImageOptions =
           state: 'uploading',
         })
         uploadImage(editor, path, file).then(() => {
+          console.log('uploadImage')
           URL.revokeObjectURL(url)
         })
       })
     })
   }
+
   const { onUploadBefore = defaultBeforeUpload } = options
 
+  // 定义插入图片方法
   newEditor.openImage = ({ accept = 'image/*', multiple = false } = {}) => {
     if (!newEditor.selection) {
       newEditor.focus(false)
     }
-
+    console.log('openImage')
     openFileDialog({
       accept,
       multiple,

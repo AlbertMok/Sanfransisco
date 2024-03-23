@@ -107,8 +107,18 @@ export const insertImage = (editor: Editor, options: Partial<Image>) => {
   return entry[1]
 }
 
+/**
+ * 上传图片
+ * @param editor
+ * @param path
+ * @param file
+ * @returns
+ */
 export const uploadImage = (editor: Editor, path: Path, file: File | string) => {
+  // 获取编辑器配置
   const options = getOptions(editor)
+
+  // 创建一个 Promise
   const promise = new Promise<void>((resolve) => {
     const pathRef = Editor.pathRef(editor, path)
 
