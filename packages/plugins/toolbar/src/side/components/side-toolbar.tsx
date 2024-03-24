@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   Editable,
   useEditableStatic,
@@ -15,20 +16,19 @@ import {
   isBlockSelecting,
 } from '@everynote/editor'
 import { DOMElement, Editor, Grid, GridCell, Transforms } from '@everynote/models'
-import * as React from 'react'
 import { Point, Icon, Tooltip } from '@everynote/ui'
 import { useSideToolbarMenuOpen, SideToolbar as SideToolbarStore, useSideToolbarDecorateOpen } from '../store'
 import { SideToolbarLocale } from '../locale'
-import tw from 'twin.macro'
 import { ContextMenu } from './context-menu'
 import { clearCapturedData, getCapturedData, setCapturedData } from '../weak-map'
 import { getOptions } from '../options'
+import styled from 'styled-components'
 
 export interface SideToolbar extends SlotComponentProps {}
 
-const StyledTooltipContent = tw.div`text-gray-400 text-xs text-left`
+const StyledTooltipContent = styled.div`text-gray-400 text-xs text-left`
 
-const StyledTooltipContentAction = tw.span`text-white mr-1`
+const StyledTooltipContentAction = styled.span`text-white mr-1`
 
 // 递归找出第一个元素
 const findFirstElementChild = (el: DOMElement): DOMElement => {

@@ -1,12 +1,13 @@
 import { Editable } from '@everynote/editor'
 import { TableEditor, BlockquoteEditor, UnorderedListEditor, OrderedListEditor, TaskListEditor, ImageEditor } from '@everynote/plugins'
-import { SlashToolbarItem } from '@everynote/plugin-toolbar/slash'
+import { SlashToolbarItem as BaseSlashToolbarItem } from '@everynote/plugin-toolbar/slash'
 import { Icon } from '@everynote/ui'
 import { Translation } from 'react-i18next'
 
+type SlashToolbarItem = BaseSlashToolbarItem & { search?: string }
+
 export const createSlashToolbarItems = (editor: Editable, value: string) => {
-  const items: (SlashToolbarItem & { search?: string })[] = []
-  items.push(
+  const items: SlashToolbarItem[] = [
     {
       key: 'image',
       icon: <Icon name="image" />,
@@ -61,8 +62,8 @@ export const createSlashToolbarItems = (editor: Editable, value: string) => {
       onSelect: () => {
         TaskListEditor.toggle(editor)
       },
-    }
-  )
+    },
+  ]
 
   return items.filter((item) => {
     if ('content' in item || 'type' in item) return true

@@ -15,6 +15,7 @@ export const withSideToolbar = <T extends Editable>(editor: T, options: SideTool
   setOptions(newEditor, options)
 
   const { locale: localeOptions = {} } = options
+
   Locale.setLocale(newEditor, locale, localeOptions)
 
   // 挂载 SideToolbar组件

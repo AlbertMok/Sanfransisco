@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStore } from 'zustand'
 import shallow from 'zustand/shallow'
-import { Slot } from '../plugin/solt'
+import { Slot } from '../plugin/slot'
 import { useEditableStatic } from './use-editable'
 
 const useSlotStore = () => {

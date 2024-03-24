@@ -17,6 +17,7 @@ export interface ContextMenu extends UIContextMenu {
 
 export const ContextMenu: React.FC<ContextMenu> = ({ editor, container, onSelect: onContextSelect, ...props }) => {
   const rootRef = React.useRef<HTMLDivElement | null>(null)
+
   React.useEffect(() => {
     const root = document.createElement('div')
     rootRef.current = root
@@ -45,6 +46,7 @@ export const ContextMenu: React.FC<ContextMenu> = ({ editor, container, onSelect
 
       return <ContextMenuLabel key={`label-${index}`}>{item.content}</ContextMenuLabel>
     }
+
     const { children, title, onSelect, href, ...rest } = item
     if (children && children.length > 0) {
       return (
@@ -53,6 +55,7 @@ export const ContextMenu: React.FC<ContextMenu> = ({ editor, container, onSelect
         </ContextMenuSub>
       )
     }
+
     return (
       <UIContextMenuItem
         onSelect={(event) => {
